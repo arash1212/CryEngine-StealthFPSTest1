@@ -1,0 +1,15 @@
+<AssetMetadata version="0" type="SkinnedMesh" guid="41735f05-d5b5-510b-865f-fcae3e584cfb" source="pistol_glock.fbx">
+ <Files>
+  <File path="pistol_glock_Mesh.skin"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">5</Detail>
+  <Detail name="triangleCount">14422</Detail>
+  <Detail name="vertexCount">9809</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+  <Detail name="bonesCount">12</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">./pistol_glock.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

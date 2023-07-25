@@ -1,0 +1,24 @@
+{
+    "AssetFolderModel": {
+        "AddedFolders": [
+            "Objects/Weapons/glock",
+            "Objects/Weapons/glock/1p",
+            "Objects/Weapons/glock/3p"
+        ]
+    },
+    "EngineFileDialog": {
+        "favorites": [
+        ],
+        "history": [
+            "/Animations/Mannequin/Preview"
+        ]
+    },
+    "FavoritesHelper": {
+        "Asset Browser": null
+    },
+    "Level Editor": {
+        "Recent Files": [
+            "assets/Levels/example/example.level"
+        ]
+    }
+}
