@@ -5,6 +5,7 @@
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
 #include <DefaultComponents/Physics/CapsulePrimitiveComponent.h>
 
+class ActorStateComponent;
 class IWeaponComponent;
 
 static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 4.f;
@@ -22,7 +23,6 @@ public:
 	PlayerComponent() = default;
 	virtual ~PlayerComponent() = default;
 
-	// IEntityComponent
 	virtual void Initialize() override;
 
 	virtual Cry::Entity::EventFlags GetEventMask() const override;
@@ -51,6 +51,9 @@ private:
 	//weapons
 	IWeaponComponent* m_currentlySelectedWeapon;
 	IWeaponComponent* m_primaryWeapon;
+
+	//State
+	ActorStateComponent* m_stateComp;
 
 private:
 	//movement infos

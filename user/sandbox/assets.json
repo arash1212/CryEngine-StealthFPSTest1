@@ -6349,9 +6349,9 @@
 		},
 		{
 			"type": "Texture",
-			"guid": "95b0eb48-9315-d2d9-a47b-289d06e3c679",
+			"guid": "0485880c-a1a8-0680-e145-54c8758eeaf6",
 			"name": "glock_glock_albedotransparency",
-			"timestamp": 1690207313,
+			"timestamp": 1690299163,
 			"files": [ "Objects/Weapons/glock/1p/glock_glock_albedotransparency.dds" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/glock_glock_albedotransparency.tif",
@@ -6365,41 +6365,9 @@
 		},
 		{
 			"type": "Texture",
-			"guid": "e40d751b-abf2-f9d9-764d-d14a0822f6bb",
-			"name": "glock_glock_normal",
-			"timestamp": 1690207321,
-			"files": [ "Objects/Weapons/glock/1p/glock_glock_normal.dds" ],
-			"workFiles": [ ],
-			"source": "Objects/Weapons/glock/1p/glock_glock_normal.tif",
-			"metadata": "Objects/Weapons/glock/1p/glock_glock_normal.dds.cryasset",
-			"details": [
-				{ "key": "height", "value": "2048" },
-				{ "key": "mipCount", "value": "10" },
-				{ "key": "width", "value": "2048" }
-			],
-			"dependencies": [ ]
-		},
-		{
-			"type": "Texture",
-			"guid": "7928d108-fdab-7730-ef2c-96c9786c677e",
-			"name": "hand_texture_1",
-			"timestamp": 1690207323,
-			"files": [ "Objects/Weapons/glock/1p/hand_texture_1.dds" ],
-			"workFiles": [ ],
-			"source": "Objects/Weapons/glock/1p/hand_texture_1.tif",
-			"metadata": "Objects/Weapons/glock/1p/hand_texture_1.dds.cryasset",
-			"details": [
-				{ "key": "height", "value": "408" },
-				{ "key": "mipCount", "value": "1" },
-				{ "key": "width", "value": "612" }
-			],
-			"dependencies": [ ]
-		},
-		{
-			"type": "Texture",
-			"guid": "094bd54e-5fbc-9733-9cc3-c41ff80cb87f",
+			"guid": "765153be-17c1-71bd-df08-778cde25d82f",
 			"name": "hand_texture_2",
-			"timestamp": 1690207322,
+			"timestamp": 1690299164,
 			"files": [ "Objects/Weapons/glock/1p/hand_texture_2.dds" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/hand_texture_2.tif",
@@ -6413,9 +6381,9 @@
 		},
 		{
 			"type": "Character",
-			"guid": "b48bbc10-87af-4b4f-8b7e-ee31e76fd215",
+			"guid": "14131216-a02c-727b-6577-3a828c579652",
 			"name": "pistol_glock",
-			"timestamp": 1690207324,
+			"timestamp": 1690299165,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6434,9 +6402,9 @@
 		},
 		{
 			"type": "Mesh",
-			"guid": "95e66efd-f294-43eb-f9fd-ef2514634f4f",
+			"guid": "79253584-e7a5-cf63-d3ad-0541a4efdf66",
 			"name": "pistol_glock",
-			"timestamp": 1690207285,
+			"timestamp": 1690299129,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.cgf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6456,9 +6424,9 @@
 		},
 		{
 			"type": "Skeleton",
-			"guid": "27bb6d56-054f-c033-5e31-8da6421dcece",
+			"guid": "4d262ada-61b9-9886-08af-48b8a90e724c",
 			"name": "pistol_glock",
-			"timestamp": 1690207312,
+			"timestamp": 1690299156,
 			"files": [
 				"Objects/Weapons/glock/1p/pistol_glock.chr",
 				"Objects/Weapons/glock/1p/pistol_glock.chrparams"
@@ -6471,16 +6439,16 @@
 		},
 		{
 			"type": "Material",
-			"guid": "48ce3307-bedd-7c80-784f-00d7f72cf806",
+			"guid": "ca0db6e7-579b-619c-1dde-182edd60c71c",
 			"name": "pistol_glock",
-			"timestamp": 1690207311,
+			"timestamp": 1690299156,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.mtl" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
 			"details": [
 				{ "key": "subMaterialCount", "value": "5" },
-				{ "key": "textureCount", "value": "6" }
+				{ "key": "textureCount", "value": "7" }
 			],
 			"dependencies": [
 				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 },
@@ -6498,19 +6466,23 @@
 				},
 				{
 					"path": "Objects/Weapons/glock/1p/GLOCK_glock_AlbedoTransparency.dds",
-					"usageCount": 2
+					"usageCount": 1
 				},
 				{
 					"path": "Objects/Weapons/glock/1p/GLOCK_glock_Normal.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/Weapons/glock/1p/pistol_glock_green_texture.dds",
 					"usageCount": 1
 				}
 			]
 		},
 		{
 			"type": "Animation",
-			"guid": "175adc53-7ef3-72a5-b631-a3182062172a",
+			"guid": "ee3fc73d-eb94-b16f-9855-f64884f3afc1",
 			"name": "pistol_glock_Armature_Fire",
-			"timestamp": 1690207290,
+			"timestamp": 1690299137,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Armature_Fire.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6520,9 +6492,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "0d27eb78-5699-198f-7f14-f5c39d5ec295",
+			"guid": "5e4e5084-c7bd-9469-f197-de479f4cf6aa",
 			"name": "pistol_glock_Armature_Idle",
-			"timestamp": 1690207292,
+			"timestamp": 1690299139,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Armature_Idle.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6532,9 +6504,21 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "0aad40aa-4814-5d5f-8c89-0b220da862fa",
+			"guid": "bd4a5788-2fb4-484d-a5e2-bccccd9078ea",
+			"name": "pistol_glock_Armature_Run",
+			"timestamp": 1690299141,
+			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Armature_Run.caf" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
+			"metadata": "Objects/Weapons/glock/1p/pistol_glock_Armature_Run.caf.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Animation",
+			"guid": "d22bd3b0-e96d-04ef-4bfc-acdef7aa7f0f",
 			"name": "pistol_glock_Armature_Walk",
-			"timestamp": 1690207293,
+			"timestamp": 1690299142,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Armature_Walk.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6544,9 +6528,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "9586b419-2811-9d6e-2a0a-25b312503881",
+			"guid": "0cc859f4-56c9-2001-8b43-622e5d57f17f",
 			"name": "pistol_glock_Fire",
-			"timestamp": 1690207294,
+			"timestamp": 1690299144,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Fire.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6555,10 +6539,26 @@
 			"dependencies": [ ]
 		},
 		{
+			"type": "Texture",
+			"guid": "b9da3577-9540-888c-cba8-7182a5833853",
+			"name": "pistol_glock_green_texture",
+			"timestamp": 1690299157,
+			"files": [ "Objects/Weapons/glock/1p/pistol_glock_green_texture.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/glock/1p/pistol_glock_green_texture.tif",
+			"metadata": "Objects/Weapons/glock/1p/pistol_glock_green_texture.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "648" },
+				{ "key": "mipCount", "value": "1" },
+				{ "key": "width", "value": "1152" }
+			],
+			"dependencies": [ ]
+		},
+		{
 			"type": "Animation",
-			"guid": "baf3eb6a-63c0-b1dd-b529-a6e0c4555814",
+			"guid": "378c7b0e-85ba-5001-31f6-918fd6eb61e8",
 			"name": "pistol_glock_Idle",
-			"timestamp": 1690207296,
+			"timestamp": 1690299146,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Idle.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6568,9 +6568,9 @@
 		},
 		{
 			"type": "SkinnedMesh",
-			"guid": "9036f41b-7881-5c8a-c649-6fe3925b3d76",
+			"guid": "29e42de3-7d8a-567d-cefb-8143fd8278a7",
 			"name": "pistol_glock_Mesh",
-			"timestamp": 1690207288,
+			"timestamp": 1690299135,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Mesh.skin" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
@@ -6591,9 +6591,21 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "baff5f46-81e4-2c94-47fb-f248f19d4d2f",
+			"guid": "07839e66-8b31-eeeb-1d68-7bf27827209f",
+			"name": "pistol_glock_Run",
+			"timestamp": 1690299148,
+			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Run.caf" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",
+			"metadata": "Objects/Weapons/glock/1p/pistol_glock_Run.caf.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Animation",
+			"guid": "ff65c7d8-a2c3-c71d-f439-a72a269b0868",
 			"name": "pistol_glock_Walk",
-			"timestamp": 1690207297,
+			"timestamp": 1690299150,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock_Walk.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/pistol_glock.fbx",

@@ -45,6 +45,13 @@ void PlayerComponent::Initialize()
 	//todo
 	m_currentlySelectedWeapon = m_primaryWeapon;
 
+	//state
+	m_stateComp = m_pEntity->GetOrCreateComponent<ActorStateComponent>();
+	m_stateComp->SetCharacterController(m_characterControllerComp);
+	m_stateComp->SetWalkSpeed(m_walkSpeed);
+	m_stateComp->SetRunSpeed(m_runSpeed);
+	m_stateComp->SetCurrentSpeed(m_currentSpeed);
+
 	//Set player Entity name.
 	m_pEntity->SetName("playerEntity");
 }
@@ -162,9 +169,11 @@ void PlayerComponent::InitInputs()
 		{
 			if (activationMode == eAAM_OnHold && m_characterControllerComp->IsWalking()) {
 				m_currentSpeed = m_runSpeed;
+				m_stateComp->SetCurrentSpeed(m_currentSpeed);
 			}
 			else {
 				m_currentSpeed = m_walkSpeed;
+				m_stateComp->SetCurrentSpeed(m_currentSpeed);
 			}
 		}
 	);

@@ -13,7 +13,6 @@ public:
 	IWeaponComponent() = default;
 	virtual ~IWeaponComponent() = default;
 
-	// IEntityComponent
 	virtual void Initialize() override;
 
 	virtual Cry::Entity::EventFlags GetEventMask() const override;
@@ -55,6 +54,7 @@ protected:
 	//animations
 	FragmentID m_walkFragmentId;
 	FragmentID m_idleFragmentId;
+	FragmentID m_runFragmentId;
 	FragmentID m_fireFragmentId;
 	FragmentID m_activeFragmentId;
 

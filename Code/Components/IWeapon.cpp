@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "Player.h"
+#include "ActorState.h"
 #include "IWeapon.h"
 #include "GamePlugin.h"
 
@@ -38,6 +39,7 @@ void IWeaponComponent::Initialize()
 	m_idleFragmentId = m_animationComp->GetFragmentId("Idle");
 	m_walkFragmentId = m_animationComp->GetFragmentId("Walk");
 	m_fireFragmentId = m_animationComp->GetFragmentId("Fire");
+	m_runFragmentId = m_animationComp->GetFragmentId("Run");
 
 	m_fireAction = new TAction<SAnimationContext>(30U, m_fireFragmentId);
 
@@ -192,10 +194,16 @@ void IWeaponComponent::UpdateAnimation()
 	if (!m_characteControllerrComp) {
 		return;
 	}
+	if (!m_ownerEntity) {
+		return;
+	}
 
 	FragmentID currentFragmentId;
-	if (m_characteControllerrComp->IsWalking()) {
+	if (m_ownerEntity->GetComponent<ActorStateComponent>()->GetState() == EActorState::WALKING) {
 		currentFragmentId = m_walkFragmentId;
+	}
+	else if (m_ownerEntity->GetComponent<ActorStateComponent>()->GetState() == EActorState::RUNNING) {
+		currentFragmentId = m_runFragmentId;
 	}
 	else {
 		currentFragmentId = m_idleFragmentId;
