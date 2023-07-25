@@ -4,6 +4,7 @@
 #include <DefaultComponents/Input/InputComponent.h>
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
 #include <DefaultComponents/Physics/CapsulePrimitiveComponent.h>
+#include <DefaultComponents/Audio/ListenerComponent.h>
 
 class ActorStateComponent;
 class IWeaponComponent;
@@ -46,6 +47,7 @@ private:
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characterControllerComp = nullptr;
 	Cry::DefaultComponents::CInputComponent* m_inputComp = nullptr;
 	Cry::DefaultComponents::CCapsulePrimitiveComponent* m_capsuleComp = nullptr;
+	Cry::Audio::DefaultComponents::CListenerComponent* m_listenerComp = nullptr;
 
 
 	//weapons

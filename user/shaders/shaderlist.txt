@@ -1,3 +1,7 @@
 <2>Illum@IlluminationPS(%NORMAL_MAP|%SUBSURFACE_SCATTERING)(%_RT_SECONDARY_VIEW|%_RT_NO_TESSELLATION)(0)(0)(0)(0)(PS)
 <2>Illum@IlluminationPS(%NORMAL_MAP|%SPECULAR_MAP|%SUBSURFACE_SCATTERING)(%_RT_SECONDARY_VIEW|%_RT_NO_TESSELLATION)(0)(0)(0)(0)(PS)
 <2>Illum@IlluminationPS(%SUBSURFACE_SCATTERING)(%_RT_SECONDARY_VIEW|%_RT_NO_TESSELLATION)(0)(0)(0)(0)(PS)
+<2>DeferredShading@SSDO_Sampling_PS()(%_RT_SAMPLE0)(0)(0)(0)(0)(PS)
+<2>PostAA@PostAAComposites_PS()()(0)(0)(0)(0)(PS)
+<2>MobileComposition@TonemappingMobileVS()()(0)(0)(0)(0)(VS)
+<2>MobileComposition@TonemappingMobilePS()()(0)(0)(0)(0)(PS)

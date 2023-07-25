@@ -45,6 +45,9 @@ void IWeaponComponent::Initialize()
 
 	m_defaultAnimationCompRotation = m_animationComp->GetTransform().get()->GetRotation().ToQuat();
 	m_defaultAnimationCompPosition = m_animationComp->GetTransform().get()->GetTranslation();
+
+	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
+	m_shootSound = CryAudio::StringToId("glock_fire_sound_1");
 }
 
 Cry::Entity::EventFlags IWeaponComponent::GetEventMask() const
@@ -141,6 +144,8 @@ void IWeaponComponent::Fire()
 		else {
 			//ye kar dige bokon ?
 		}
+
+		m_audioComp->ExecuteTrigger(m_shootSound);
 
 		m_shotTimePassed = 0;
 		m_activeFragmentId = m_fireFragmentId;

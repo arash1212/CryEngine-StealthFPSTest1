@@ -33,6 +33,8 @@ void PlayerComponent::Initialize()
 
 	m_inputComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CInputComponent>();
 
+	m_listenerComp = m_pEntity->GetOrCreateComponent<Cry::Audio::DefaultComponents::CListenerComponent>();
+
 	InitCamera();
 	InitInputs();
 

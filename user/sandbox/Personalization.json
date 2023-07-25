@@ -1,6 +1,6 @@
 {
     "Asset Browser": {
-        "RecentImportPath": "C:/Users/Arash/Desktop/"
+        "RecentImportPath": "C:/Users/Arash/Desktop/StealthFPS Assets/Weapons/glock/"
     },
     "AssetFolderModel": {
         "AddedFolders": [
@@ -201,6 +201,11 @@
     },
     "FavoritesHelper": {
         "Asset Browser": null
+    },
+    "Import Mesh": {
+        "Recent Files": [
+            "Objects/Weapons/glock/1p/pistol_glock.cgf.cryasset"
+        ]
     },
     "Level Editor": {
         "Recent Files": [

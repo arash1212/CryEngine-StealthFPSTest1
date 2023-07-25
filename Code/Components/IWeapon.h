@@ -30,6 +30,7 @@ private:
 	Cry::DefaultComponents::CAdvancedAnimationComponent* m_animationComp = nullptr;
 	Cry::DefaultComponents::CCameraComponent* m_cameraComp = nullptr;
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characteControllerrComp = nullptr;
+	IEntityAudioComponent* m_audioComp = nullptr;
 	IAttachment* m_muzzleAttachment = nullptr;
 	IEntity* m_ownerEntity = nullptr;
 
@@ -68,6 +69,9 @@ protected:
 	//kickback
 	Vec3 m_kickBackAmount = Vec3(0.f, 0.f, 0.f);
 	float m_kickBackSpeed = 17.f;
+
+	//sounds
+	CryAudio::ControlId m_shootSound;
 
 protected:
 	f32 GetRandomValue(f32 min, f32 max);
