@@ -35,6 +35,10 @@ void IWeaponComponent::Initialize()
 	m_animationComp->LoadFromDisk();
 	m_animationComp->ResetCharacter();
 
+	//recoil
+	m_meshefaultRotaion = m_defaultRotation;
+	m_targetRotation = m_defaultRotation;
+
 	//Fragments
 	m_idleFragmentId = m_animationComp->GetFragmentId("Idle");
 	m_walkFragmentId = m_animationComp->GetFragmentId("Walk");
@@ -74,6 +78,7 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 
 		UpdateAnimation();
 		KickBack();
+		Recoil();
 
 		//apply sway if owner is player
 		if (m_ownerEntity->GetComponent<PlayerComponent>()) {
@@ -135,7 +140,7 @@ void IWeaponComponent::Fire()
 		//if owner is player
 		if (m_cameraComp) {
 			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir());
-			m_ownerEntity->GetComponent<PlayerComponent>()->AddRecoil(GetRecoilAmount());
+			m_ownerEntity->GetComponent<PlayerComponent>()->AddRecoil(GetCameraRecoilAmount());
 
 			//apply kickback
 			AddKickBack(Vec3(0, -0.12f, -0.05f));
@@ -151,6 +156,9 @@ void IWeaponComponent::Fire()
 		m_activeFragmentId = m_fireFragmentId;
 		m_animationComp->GetActionController()->Flush();
 		m_animationComp->QueueCustomFragment(*m_fireAction);
+
+		//apply recoil to weapon model after shot
+		m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
 	}
 }
 
@@ -179,12 +187,18 @@ float IWeaponComponent::GetDamage()
 	return m_damage;
 }
 
-Vec3 IWeaponComponent::GetRecoilAmount()
+Vec3 IWeaponComponent::GetCameraRecoilAmount()
 {
-	f32 x = GetRandomValue(0.1f, 0.2f);
+	f32 x = GetRandomValue(0.1f, 0.3f);
 	f32 y = GetRandomValue(-0.02f, 0.02f);
 	f32 z = GetRandomValue(-0.02f, 0.02f);
 	return Vec3(x, y, z);
+}
+
+Vec3 IWeaponComponent::GetMeshRecoilAmount()
+{
+	recoilInv *= -1;
+	return Vec3(GetRandomValue(-0.07f, -0.05f), recoilInv * 0.02f, recoilInv * 0.02f);
 }
 
 f32 IWeaponComponent::GetRandomValue(f32 min, f32 max)
@@ -274,4 +288,11 @@ void IWeaponComponent::KickBack()
 void IWeaponComponent::AddKickBack(Vec3 amount)
 {
 	m_kickBackAmount = amount;
+}
+
+void IWeaponComponent::Recoil()
+{
+	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_meshefaultRotaion, m_returnSpeed * gEnv->pTimer->GetFrameTime());
+	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, m_snapiness * gEnv->pTimer->GetFrameTime());
+	m_animationComp->SetTransformMatrix(Matrix34::Create(m_animationComp->GetTransform().get()->GetScale(), m_currentRotation, m_animationComp->GetTransform().get()->GetTranslation()));
 }

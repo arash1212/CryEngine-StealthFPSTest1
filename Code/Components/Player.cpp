@@ -234,5 +234,5 @@ Vec2 PlayerComponent::GetRotationDelta()
 
 void PlayerComponent::AddRecoil(Vec3 Amount)
 {
-	m_targetRotation += Quat::CreateRotationXYZ(m_primaryWeapon->GetRecoilAmount());
+	m_targetRotation += Quat::CreateRotationXYZ(Amount);
 }

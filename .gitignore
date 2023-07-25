@@ -37,6 +37,7 @@ build/
 Assets/*
 solutions/
 logbackups/*
+bin/win_x64/Game.pdb
 assets.rar
 assets.zip
 Assets.rar

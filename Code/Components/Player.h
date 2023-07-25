@@ -95,8 +95,6 @@ private:
 
 	void RecoilUpdate();
 
-	void UpdateState();
-
 public:
 	Vec2 GetRotationDelta();
 	void AddRecoil(Vec3 Amount);
