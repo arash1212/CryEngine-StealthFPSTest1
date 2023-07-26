@@ -210,7 +210,7 @@ f32 IWeaponComponent::GetShootError()
 
 Vec3 IWeaponComponent::GetCameraRecoilAmount()
 {
-	f32 x = GetRandomValue(0.013f, 0.2f);
+	f32 x = GetRandomValue(0.013f, 0.17f);
 	f32 y = GetRandomValue(-0.02f, 0.02f);
 	f32 z = GetRandomValue(-0.02f, 0.02f);
 	//CryLog("x : %f, y : %f , z : %f", x, y, z);

@@ -27,11 +27,11 @@ namespace
 void PlayerComponent::Initialize()
 {
 	m_characterControllerComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CCharacterControllerComponent>();
-	m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1), IDENTITY, Vec3(0, 0, 0.7f)));
+	m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.f)));
 	m_characterControllerComp->Physicalize();
 
 	m_capsuleComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CCapsulePrimitiveComponent>();
-	m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.2f, 1.1f), IDENTITY, Vec3(0, 0, 1)));
+	m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
 
 	m_inputComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CInputComponent>();
 
