@@ -82,7 +82,7 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 		Recoil();
 
 		//apply sway if owner is player
-		if (m_ownerEntity->GetComponent<PlayerComponent>()) {
+		if (m_ownerEntity && m_ownerEntity->GetComponent<PlayerComponent>()) {
 			Vec2 rotationDelta = m_ownerEntity->GetComponent<PlayerComponent>()->GetRotationDelta();
 			Sway(rotationDelta.y, rotationDelta.x);
 		}
@@ -104,9 +104,9 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, f32 error)
 {
 	//apply error
-	dir.x += error;
-	dir.y += error;
-	dir.z += error;
+	dir.x += GetShootError(error);
+	dir.y += GetShootError(error);
+	dir.z += GetShootError(error);
 
 	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
 	std::array<ray_hit, 2> hits;
@@ -148,6 +148,7 @@ void IWeaponComponent::Fire()
 		return;
 	}
 	//apply shootError to owner
+	//CryLog("error : %f", shootAccuracyComp->GetShootError());
 	shootAccuracyComp->AddShootError(GetShootError());
 
 	if (m_shotTimePassed >= m_timeBetweenShots) {
@@ -209,9 +210,10 @@ f32 IWeaponComponent::GetShootError()
 
 Vec3 IWeaponComponent::GetCameraRecoilAmount()
 {
-	f32 x = GetRandomValue(0.1f, 0.3f);
+	f32 x = GetRandomValue(0.013f, 0.2f);
 	f32 y = GetRandomValue(-0.02f, 0.02f);
 	f32 z = GetRandomValue(-0.02f, 0.02f);
+	//CryLog("x : %f, y : %f , z : %f", x, y, z);
 	return Vec3(x, y, z);
 }
 
@@ -223,9 +225,7 @@ Vec3 IWeaponComponent::GetMeshRecoilAmount()
 
 f32 IWeaponComponent::GetRandomValue(f32 min, f32 max)
 {
-	float range = max - min + 1;
-	float randomNum = rand() % (int)range + min;
-	return randomNum;
+	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min));
 }
 
 void IWeaponComponent::UpdateAnimation()
@@ -256,18 +256,18 @@ void IWeaponComponent::UpdateAnimation()
 
 void IWeaponComponent::Sway(f32 mouseX, f32 mouseY)
 {
-	mouseX *= -0.008f;
-	mouseY *= 0.004f;
+	mouseX *= 0.04f;
+	mouseY *= -0.035f;
 
-	Quat rotationX = Quat::CreateRotationX(mouseX);
-	Quat rotationY = Quat::CreateRotationY(mouseY);
+	Quat rotationX = Quat::CreateRotationY(mouseX);
+	Quat rotationY = Quat::CreateRotationX(mouseY);
 
 	Quat targetRotation = rotationX * rotationY;
 
 	m_animationComp->SetTransformMatrix(Matrix34::Create(m_animationComp->GetTransformMatrix().GetScale(),
 		Quat::CreateSlerp(
 			m_animationComp->GetTransform().get()->GetRotation().ToQuat(),
-			m_defaultAnimationCompRotation * targetRotation, m_swaySpeed * gEnv->pTimer->GetFrameTime()),
+			m_defaultAnimationCompRotation + targetRotation, 0.3f * m_swaySpeed * gEnv->pTimer->GetFrameTime()),
 		m_animationComp->GetTransformMatrix().GetTranslation()
 	));
 }
@@ -312,12 +312,12 @@ void IWeaponComponent::AddKickBack(Vec3 amount)
 
 void IWeaponComponent::Recoil()
 {
-	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_meshefaultRotaion, m_returnSpeed * gEnv->pTimer->GetFrameTime());
-	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, m_snapiness * gEnv->pTimer->GetFrameTime());
+	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_meshefaultRotaion, 0.5f * m_returnSpeed * gEnv->pTimer->GetFrameTime());
+	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, 0.4f * m_snapiness * gEnv->pTimer->GetFrameTime());
 	m_animationComp->SetTransformMatrix(Matrix34::Create(m_animationComp->GetTransform().get()->GetScale(), m_currentRotation, m_animationComp->GetTransform().get()->GetTranslation()));
 }
 
 f32 IWeaponComponent::GetShootError(f32 error)
 {
-	return GetRandomValue(-error, error);;
+	return GetRandomValue(-error, error);
 }

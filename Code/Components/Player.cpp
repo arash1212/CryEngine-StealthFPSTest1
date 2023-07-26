@@ -234,8 +234,8 @@ void PlayerComponent::HeadBob(float deltatime)
 
 void PlayerComponent::RecoilUpdate()
 {
-	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_cameraDefaultRotaion, m_returnSpeed * gEnv->pTimer->GetFrameTime());
-	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, m_snapiness * gEnv->pTimer->GetFrameTime());
+	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_cameraDefaultRotaion, 0.5f *  m_returnSpeed * gEnv->pTimer->GetFrameTime());
+	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, 0.4f * m_snapiness * gEnv->pTimer->GetFrameTime());
 	m_cameraBase->SetRotation(m_currentRotation);
 }
 

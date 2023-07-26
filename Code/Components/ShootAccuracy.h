@@ -2,6 +2,8 @@
 
 class ActorStateComponent;
 
+static constexpr f32 MAX_SHOOT_ACCURACY_ERROR = 0.05f;
+
 class ShootAccuracyComponent final : public IEntityComponent
 {
 public:
@@ -18,6 +20,7 @@ public:
 	static void ReflectType(Schematyc::CTypeDesc<ShootAccuracyComponent>& desc)
 	{
 		desc.SetGUID("{6CF0B78B-64A9-4F8C-9DA0-F0FEDB0D5288}"_cry_guid);
+		desc.AddMember(&ShootAccuracyComponent::m_maxError, 'msae', "maxshootaccuracyerror", "Max Shoot Accuracy Error", "Set Max Shoot Accuracy Error", MAX_SHOOT_ACCURACY_ERROR);
 	}
 
 private:
@@ -26,6 +29,7 @@ private:
 
 private :
 	f32 m_shootError = 0.f;
+	f32 m_maxError = MAX_SHOOT_ACCURACY_ERROR;
 
 private:
 	void UpdateShootError(f32 deltatime);

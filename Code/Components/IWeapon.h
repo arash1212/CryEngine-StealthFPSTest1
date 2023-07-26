@@ -62,13 +62,13 @@ protected:
 	IActionPtr m_fireAction;
 
 	//sway
-	float m_swaySpeed = 1.6f;
+	float m_swaySpeed = 2.4f;
 	Quat m_defaultAnimationCompRotation = IDENTITY;
 	Vec3 m_defaultAnimationCompPosition = ZERO;
 
 	//kickback
 	Vec3 m_kickBackAmount = Vec3(0.f, 0.f, 0.f);
-	float m_kickBackSpeed = 22.f;
+	float m_kickBackSpeed = 15.f;
 
 	//sounds
 	CryAudio::ControlId m_shootSound;

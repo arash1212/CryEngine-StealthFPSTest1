@@ -63,24 +63,28 @@ void ShootAccuracyComponent::UpdateShootError(f32 deltatime)
 		return;
 	}
 
-	f32 maxError = 0.01f;
 	//add to m_shootError if condition exist
 	if (m_stateComp->GetState() == EActorState::WALKING || m_stateComp->GetState() == EActorState::RUNNING || m_stateComp->GetState() == EActorState::FALLING) {
-		if (m_shootError <= maxError) {
-			m_shootError = CLAMP(m_shootError += deltatime, 0, maxError);
+		if (m_shootError <= m_maxError) {
+			m_shootError = CLAMP(m_shootError += deltatime, 0, m_maxError);
+		}
+		else {
+			m_shootError = m_maxError;
 		}
 	}
 	//otherwise return m_shootError back to zero
 	else {
 		if (m_shootError > 0) {
-			m_shootError = CLAMP(m_shootError -= deltatime, 0, maxError);
+			m_shootError = CLAMP(m_shootError -= deltatime, 0, m_maxError);
 		}
 	}
+
+	//CryLog("m_error : %f", m_shootError);
 }
 
 void ShootAccuracyComponent::AddShootError(f32 amount)
 {
-	m_shootError += amount;
+	m_shootError += CLAMP(amount, 0, m_maxError);
 }
 
 void ShootAccuracyComponent::SetOwnerEntity(IEntity* ownerEntity)
