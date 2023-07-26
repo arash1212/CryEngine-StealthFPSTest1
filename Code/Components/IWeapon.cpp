@@ -159,7 +159,7 @@ void IWeaponComponent::Fire()
 			playerComp->AddRecoil(GetCameraRecoilAmount());
 
 			//apply kickback
-			AddKickBack(Vec3(0, -0.12f, -0.05f));
+			AddKickBack(Vec3(0, -0.07f, -0.05f));
 		}
 		//else
 		else {

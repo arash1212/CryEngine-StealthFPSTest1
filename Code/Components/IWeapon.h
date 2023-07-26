@@ -68,7 +68,7 @@ protected:
 
 	//kickback
 	Vec3 m_kickBackAmount = Vec3(0.f, 0.f, 0.f);
-	float m_kickBackSpeed = 15.f;
+	float m_kickBackSpeed = 45.f;
 
 	//sounds
 	CryAudio::ControlId m_shootSound;
