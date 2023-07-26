@@ -1,7 +1,9 @@
 #include "StdAfx.h"
 #include "Player.h"
 #include "IWeapon.h"
+#include "Crosshair.h"
 #include "SpawnPoint.h"
+#include "ShootAccuracy.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -54,6 +56,14 @@ void PlayerComponent::Initialize()
 	m_stateComp->SetRunSpeed(m_runSpeed);
 	m_stateComp->SetCurrentSpeed(m_currentSpeed);
 
+	//crosshair
+	m_crosshairComp = m_pEntity->GetOrCreateComponent<CrosshairComponent>();
+
+	//shootError
+	m_shootAccuracyComp = m_pEntity->GetOrCreateComponent<ShootAccuracyComponent>();
+	m_shootAccuracyComp->SetOwnerEntity(m_pEntity);
+	m_shootAccuracyComp->SetStateComponent(m_stateComp);
+
 	//Set player Entity name.
 	m_pEntity->SetName("playerEntity");
 }
@@ -78,7 +88,7 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
-		float deltatime = event.fParam[0];
+		f32 deltatime = event.fParam[0];
 
 		Move();
 		Rotate();
@@ -86,6 +96,8 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 		HeadBob(deltatime);
 
 		RecoilUpdate();
+
+		UpdateCrosshair();
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
@@ -225,6 +237,26 @@ void PlayerComponent::RecoilUpdate()
 	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_cameraDefaultRotaion, m_returnSpeed * gEnv->pTimer->GetFrameTime());
 	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, m_snapiness * gEnv->pTimer->GetFrameTime());
 	m_cameraBase->SetRotation(m_currentRotation);
+}
+
+void PlayerComponent::UpdateCrosshair()
+{
+	if (!m_crosshairComp) {
+		return;
+	}
+	if (!m_shootAccuracyComp) {
+		return;
+	}
+
+
+	//spread crosshair if m_shootError is bigger than zero
+	if (m_shootAccuracyComp->GetShootError() > 0) {
+		m_crosshairComp->Spread();
+	}
+	//return back crosshair to normal if m_shootError is zero
+	else {
+		m_crosshairComp->BackToNormal();
+	}
 }
 
 Vec2 PlayerComponent::GetRotationDelta()

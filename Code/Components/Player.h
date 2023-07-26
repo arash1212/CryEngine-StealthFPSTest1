@@ -8,6 +8,8 @@
 
 class ActorStateComponent;
 class IWeaponComponent;
+class CrosshairComponent;
+class ShootAccuracyComponent;
 
 static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 4.f;
 static constexpr f32 DEFAULT_PLAYER_RUN_SPEED = 6.f;
@@ -53,9 +55,13 @@ private:
 	//weapons
 	IWeaponComponent* m_currentlySelectedWeapon;
 	IWeaponComponent* m_primaryWeapon;
+	ShootAccuracyComponent* m_shootAccuracyComp;
 
 	//State
 	ActorStateComponent* m_stateComp;
+
+	//crosshair
+	CrosshairComponent* m_crosshairComp;
 
 private:
 	//movement infos
@@ -82,6 +88,7 @@ private:
 	Quat m_currentRotation = IDENTITY;
 	Quat m_targetRotation = IDENTITY;
 
+
 private:
 	//inits
 	void InitCamera();
@@ -95,8 +102,9 @@ private:
 
 	void RecoilUpdate();
 
+	void UpdateCrosshair();
+
 public:
 	Vec2 GetRotationDelta();
 	void AddRecoil(Vec3 Amount);
-
 };

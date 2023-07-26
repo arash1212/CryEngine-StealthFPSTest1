@@ -38,6 +38,8 @@ Assets/*
 solutions/
 logbackups/*
 bin/win_x64/Game.pdb
+StealthFPSTest1_package/*
+rc_out_PC_pure/*
 assets.rar
 assets.zip
 Assets.rar

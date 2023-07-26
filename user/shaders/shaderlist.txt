@@ -5,3 +5,5 @@
 <2>PostAA@PostAAComposites_PS()()(0)(0)(0)(0)(PS)
 <2>MobileComposition@TonemappingMobileVS()()(0)(0)(0)(0)(VS)
 <2>MobileComposition@TonemappingMobilePS()()(0)(0)(0)(0)(PS)
+<2>Scaleform3@VS_XY_C()()(0)(0)(0)(0)(VS)
+<2>Scaleform3@PS_CxformGouraudNoAddAlpha()()(0)(0)(0)(0)(PS)

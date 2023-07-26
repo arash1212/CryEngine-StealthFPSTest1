@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Player.h"
 #include "ActorState.h"
+#include "ShootAccuracy.h"
 #include "IWeapon.h"
 #include "GamePlugin.h"
 
@@ -100,8 +101,13 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir)
+IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, f32 error)
 {
+	//apply error
+	dir.x += error;
+	dir.y += error;
+	dir.z += error;
+
 	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
 	std::array<ray_hit, 2> hits;
 	static IPhysicalEntity* pSkippedEntities[10];
@@ -136,11 +142,20 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir)
 
 void IWeaponComponent::Fire()
 {
+	ShootAccuracyComponent* shootAccuracyComp = m_ownerEntity->GetComponent<ShootAccuracyComponent>();
+	if (!shootAccuracyComp) {
+		CryLog("IWeaponComponent : Owner have no shootAccuracy assigned !");
+		return;
+	}
+	//apply shootError to owner
+	shootAccuracyComp->AddShootError(GetShootError());
+
 	if (m_shotTimePassed >= m_timeBetweenShots) {
 		//if owner is player
 		if (m_cameraComp) {
-			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir());
-			m_ownerEntity->GetComponent<PlayerComponent>()->AddRecoil(GetCameraRecoilAmount());
+			PlayerComponent* playerComp = m_ownerEntity->GetComponent<PlayerComponent>();
+			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shootAccuracyComp->GetShootError());
+			playerComp->AddRecoil(GetCameraRecoilAmount());
 
 			//apply kickback
 			AddKickBack(Vec3(0, -0.12f, -0.05f));
@@ -185,6 +200,11 @@ void IWeaponComponent::SetCharacterController(Cry::DefaultComponents::CCharacter
 float IWeaponComponent::GetDamage()
 {
 	return m_damage;
+}
+
+f32 IWeaponComponent::GetShootError()
+{
+	return m_shootError;
 }
 
 Vec3 IWeaponComponent::GetCameraRecoilAmount()
@@ -295,4 +315,9 @@ void IWeaponComponent::Recoil()
 	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_meshefaultRotaion, m_returnSpeed * gEnv->pTimer->GetFrameTime());
 	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, m_snapiness * gEnv->pTimer->GetFrameTime());
 	m_animationComp->SetTransformMatrix(Matrix34::Create(m_animationComp->GetTransform().get()->GetScale(), m_currentRotation, m_animationComp->GetTransform().get()->GetTranslation()));
+}
+
+f32 IWeaponComponent::GetShootError(f32 error)
+{
+	return GetRandomValue(-error, error);;
 }

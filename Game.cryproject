@@ -28,7 +28,8 @@
 				"type": "EType::Native",
 				"path": "CryGamePlatform",
 				"platforms": [ "PS4" ]
-			}
+			},
+			{ "guid": "", "type": "EType::Native", "path": "CryScaleform" }
 		]
 	},
 	"console_variables": {

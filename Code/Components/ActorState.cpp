@@ -58,7 +58,10 @@ void ActorStateComponent::ProcessEvent(const SEntityEvent& event)
 
 void ActorStateComponent::UpdateState()
 {
-	if (m_characterController->IsWalking() && m_currentSpeed == m_walkSpeed) {
+	if (!m_characterController->IsOnGround()) {
+		m_state = EActorState::FALLING;
+	}
+	else if (m_characterController->IsWalking() && m_currentSpeed == m_walkSpeed) {
 		m_state = EActorState::WALKING;
 	}else if (m_characterController->IsWalking() && m_currentSpeed == m_runSpeed) {
 		m_state = EActorState::RUNNING;

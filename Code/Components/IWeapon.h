@@ -68,27 +68,31 @@ protected:
 
 	//kickback
 	Vec3 m_kickBackAmount = Vec3(0.f, 0.f, 0.f);
-	float m_kickBackSpeed = 17.f;
+	float m_kickBackSpeed = 22.f;
 
 	//sounds
 	CryAudio::ControlId m_shootSound;
 
 	//recoil
-	f32 m_snapiness = 15.2f;
-	f32 m_returnSpeed = 5.1f;
+	f32 m_snapiness = 50.2f;
+	f32 m_returnSpeed = 9.1f;
 	Quat m_meshefaultRotaion = IDENTITY;
 	Quat m_currentRotation = IDENTITY;
 	Quat m_targetRotation = IDENTITY;
 	int32 recoilInv = 1;
+
+	//shootError
+	f32 m_shootError = 0.01f;
 
 protected:
 	f32 GetRandomValue(f32 min, f32 max);
 	virtual void UpdateAnimation();
 	virtual void KickBack();
 	virtual void Recoil();
+	virtual f32 GetShootError(f32 error);
 
 public :
-	IEntity* Raycast(Vec3 from, Vec3 to);
+	IEntity* Raycast(Vec3 from, Vec3 to, f32 error);
 	virtual void Fire();
 	virtual void Sway(f32 mouseX, f32 mouseY);
 
@@ -101,6 +105,8 @@ public :
 	void SetOwnerEntity(IEntity* ownerEntity);
 	void SetCharacterController(Cry::DefaultComponents::CCharacterControllerComponent* characterControllerComp);
 	f32 GetDamage();
+	f32 GetShootError();
 	virtual Vec3 GetCameraRecoilAmount();
 	virtual Vec3 GetMeshRecoilAmount();
+
 };

@@ -25,11 +25,17 @@ add_sources("Code_uber.cpp"
 add_sources("Components_uber.cpp"
     PROJECTS Game
     SOURCE_GROUP "Components"
+		"Components/ActorState.cpp"
+		"Components/Crosshair.cpp"
 		"Components/IWeapon.cpp"
 		"Components/Player.cpp"
+		"Components/ShootAccuracy.cpp"
 		"Components/SpawnPoint.cpp"
+		"Components/ActorState.h"
+		"Components/Crosshair.h"
 		"Components/IWeapon.h"
 		"Components/Player.h"
+		"Components/ShootAccuracy.h"
 		"Components/SpawnPoint.h"
 )
 

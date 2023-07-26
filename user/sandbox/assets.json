@@ -5811,17 +5811,18 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1690299603,
+			"timestamp": 1690367231,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Levels/example.level.cryasset",
 			"details": [ ],
 			"dependencies": [
-				{ "path": "%editor%/materials/shaderlist.xml", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.cgf", "usageCount": 0 },
-				{ "path": "%editor%/objects/envcube.mtl", "usageCount": 0 },
-				{ "path": "%editor%/objects/mtlplane.cgf", "usageCount": 0 },
+				{
+					"path": "%engine%/config/defaultscripts/compressionpolicy.xml",
+					"usageCount": 0
+				},
 				{
 					"path": "%engine%/engineassets/icons/averagememoryusage.dds",
 					"usageCount": 0
@@ -5839,39 +5840,7 @@
 					"usageCount": 0
 				},
 				{
-					"path": "%engine%/engineassets/materials/fog/fogvolumebox.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/fog/fogvolumeellipsoid.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/fog/oceaninto.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/fog/oceanintolowspec.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/fog/oceanoutof.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/fog/oceanoutoflowspec.mtl",
-					"usageCount": 0
-				},
-				{
 					"path": "%engine%/engineassets/materials/material_default.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/material_terrain_default.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/water/wateroceanbottom.mtl",
 					"usageCount": 0
 				},
 				{
@@ -5879,117 +5848,12 @@
 					"usageCount": 0
 				},
 				{
-					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
-					"usageCount": 0
-				},
-				{
 					"path": "%engine%/engineassets/texturemsg/defaultsolids.mtl",
 					"usageCount": 0
 				},
-				{
-					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
-					"usageCount": 0
-				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
-				{
-					"path": "animations/mannequin/adb/playerfragmentids.xml",
-					"usageCount": 0
-				},
-				{ "path": "animations/mannequin/adb/playertags.xml", "usageCount": 0 },
-				{
-					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
-					"usageCount": 0
-				},
-				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/hand_texture_2.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "engineassets/materials/water/ocean_default.mtl",
-					"usageCount": 0
-				},
 				{ "path": "libs/environmentpresets/example.env", "usageCount": 1 },
-				{
-					"path": "objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/glock_glock_normal.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/hand_texture_2.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.cdf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.cdf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.chr",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_armature_fire.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_armature_idle.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_armature_run.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_armature_walk.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_fire.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_idle.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_mesh.skin",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_run.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_walk.caf",
-					"usageCount": 0
-				},
-				{ "path": "scripts/ai/factions.xml", "usageCount": 0 },
-				{
-					"path": "textures/cubemaps/example/environmentprobe1_cm.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "textures/cubemaps/example/environmentprobe1_cm_diff.dds",
-					"usageCount": 0
-				}
+				{ "path": "scripts/network/compressionpolicy.xml", "usageCount": 0 }
 			]
 		},
 		{
@@ -6399,6 +6263,22 @@
 		},
 		{
 			"type": "Texture",
+			"guid": "ec97535d-6ebd-764a-27d5-44fb9bad28e8",
+			"name": "hand_texture_1",
+			"timestamp": 1690355021,
+			"files": [ "Objects/Weapons/glock/1p/hand_texture_1.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/glock/1p/hand_texture_1.tif",
+			"metadata": "Objects/Weapons/glock/1p/hand_texture_1.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "408" },
+				{ "key": "mipCount", "value": "1" },
+				{ "key": "width", "value": "612" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
 			"guid": "d1e39e3d-5092-6196-ba40-dfdb61721892",
 			"name": "hand_texture_2",
 			"timestamp": 1690301840,
@@ -6475,7 +6355,7 @@
 			"type": "Material",
 			"guid": "8cebde28-02ff-ce5d-b719-93aa6377c97e",
 			"name": "pistol_glock",
-			"timestamp": 1690305798,
+			"timestamp": 1690355064,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.mtl" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6506,7 +6386,7 @@
 					"usageCount": 1
 				},
 				{
-					"path": "Objects/Weapons/glock/1p/Hand_texture_1.dds",
+					"path": "Objects/Weapons/glock/1p/hand_texture_1.dds",
 					"usageCount": 1
 				},
 				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 }
