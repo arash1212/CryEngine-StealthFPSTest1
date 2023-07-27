@@ -5247,8 +5247,8 @@
 			"type": "Animation",
 			"guid": "127507fd-d79c-1091-33fb-38eac631da57",
 			"name": "jog_bck_3p",
-			"timestamp": 132973673600170000,
-			"files": [ "animations/motusanims/jog_bck_3p.caf" ],
+			"timestamp": 1652897360,
+			"files": [ "Animations/motusAnims/jog_bck_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/jog_bck_3p.caf.cryasset",
@@ -5427,8 +5427,8 @@
 			"type": "Animation",
 			"guid": "d5861a50-6837-d6bc-7dac-4037d73a76f0",
 			"name": "stepRotate_lft_180_3p",
-			"timestamp": 132973673610360000,
-			"files": [ "animations/motusanims/steprotate/stepRotate_lft_180_3p.caf" ],
+			"timestamp": 1652897361,
+			"files": [ "Animations/motusAnims/stepRotate/stepRotate_lft_180_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/stepRotate/stepRotate_lft_180_3p.caf.cryasset",
@@ -5655,8 +5655,8 @@
 			"type": "Animation",
 			"guid": "74df591e-f47c-51be-1f3c-2131e18bc49c",
 			"name": "walkcross_fwd_lft_3p",
-			"timestamp": 132973673629920000,
-			"files": [ "animations/motusanims/strafe/walkcross_fwd_lft_3p.caf" ],
+			"timestamp": 1652897362,
+			"files": [ "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf.cryasset",
@@ -5787,8 +5787,8 @@
 			"type": "Animation",
 			"guid": "a41303bf-bc0f-6509-b7c3-a8f3744539d9",
 			"name": "walk_fwd_3p",
-			"timestamp": 132973673640740000,
-			"files": [ "animations/motusanims/walk_fwd_3p.caf" ],
+			"timestamp": 1652897364,
+			"files": [ "Animations/motusAnims/walk_fwd_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/walk_fwd_3p.caf.cryasset",
@@ -6388,69 +6388,6 @@
 		},
 		{
 			"type": "Texture",
-			"guid": "058c3855-7f55-008a-5a4e-d5290f6dd6c1",
-			"name": "muzzleflash",
-			"timestamp": 1690473759,
-			"files": [ "Objects/effects/muzzleflash/muzzleflash.dds" ],
-			"workFiles": [ ],
-			"source": "Objects/effects/muzzleflash/muzzleflash.tif",
-			"metadata": "Objects/effects/muzzleflash/muzzleflash.dds.cryasset",
-			"details": [
-				{ "key": "height", "value": "512" },
-				{ "key": "mipCount", "value": "8" },
-				{ "key": "width", "value": "512" }
-			],
-			"dependencies": [ ]
-		},
-		{
-			"type": "Mesh",
-			"guid": "c05120e3-41fe-8eb9-526b-5deb3b52c250",
-			"name": "muzzleflash1",
-			"timestamp": 1690473751,
-			"files": [ "Objects/effects/muzzleflash/muzzleflash1.cgf" ],
-			"workFiles": [ ],
-			"source": "Objects/effects/muzzleflash/muzzleflash1.fbx",
-			"metadata": "Objects/effects/muzzleflash/muzzleflash1.cgf.cryasset",
-			"details": [
-				{ "key": "16BitPrecision", "value": "false" },
-				{ "key": "materialCount", "value": "3" },
-				{ "key": "triangleCount", "value": "22" },
-				{ "key": "vertexCount", "value": "26" }
-			],
-			"dependencies": [
-				{
-					"path": "Objects/effects/muzzleflash/muzzleflash1.mtl",
-					"usageCount": 1
-				}
-			]
-		},
-		{
-			"type": "Material",
-			"guid": "2a60e98b-a8b7-192e-ba87-79642dd6148d",
-			"name": "muzzleflash1",
-			"timestamp": 1690473757,
-			"files": [ "Objects/effects/muzzleflash/muzzleflash1.mtl" ],
-			"workFiles": [ ],
-			"source": "",
-			"metadata": "Objects/effects/muzzleflash/muzzleflash1.mtl.cryasset",
-			"details": [
-				{ "key": "subMaterialCount", "value": "3" },
-				{ "key": "textureCount", "value": "3" }
-			],
-			"dependencies": [
-				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 },
-				{
-					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
-					"usageCount": 3
-				},
-				{
-					"path": "Objects/effects/muzzleflash/muzzleflash.dds",
-					"usageCount": 2
-				}
-			]
-		},
-		{
-			"type": "Texture",
 			"guid": "f3eae5b1-e145-bac1-bb4a-f4071278b774",
 			"name": "glock_glock_albedotransparency",
 			"timestamp": 1690400456,
@@ -6533,7 +6470,7 @@
 			"type": "Character",
 			"guid": "f2d1911b-8810-7acb-d09c-0b17fdcdaacd",
 			"name": "pistol_glock",
-			"timestamp": 1690473882,
+			"timestamp": 1690483060,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.cdf" ],
 			"workFiles": [ ],
 			"source": "",

@@ -169,15 +169,12 @@ void IWeaponComponent::Fire()
 			//apply kickback
 			AddKickBack(Vec3(0, -0.07f, -0.05f));
 
-			//CryLog("muzzle world x : %f", m_muzzleAttachment->GetAttWorldAbsolute().t.x);
-			//CryLog("entity x : %f", m_pEntity->GetWorldPos().x);
 			Vec3 shooterror = Vec3(GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()));
 			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shooterror);
-			//todo :attachment estefade beshe (felan tofmal shod)
-			Vec3 forward = m_pEntity->GetForwardDir();
-			//forward.x += 0.28f;
-			forward.z -= 0.04f;
-			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + forward * 2, Quat::CreateRotationVDir(m_cameraComp->GetCamera().GetViewdir()));
+
+			//spawn bullet tracer
+			Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
+			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(m_cameraComp->GetCamera().GetViewdir()));
 		}
 		//else
 		else {
@@ -349,9 +346,9 @@ void IWeaponComponent::SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir)
 {
 	Vec3 spawnPos = pos;
 	Quat rotation = dir;
-	rotation.v.x += error.x;
-	rotation.v.y += error.y;
-	rotation.v.z += error.z;
+	//rotation.v.x += error.x;
+	//rotation.v.y += error.y;
+	//rotation.v.z += error.z;
 
 	SEntitySpawnParams bulletTracerSpawnParams;
 	bulletTracerSpawnParams.vPosition = spawnPos;

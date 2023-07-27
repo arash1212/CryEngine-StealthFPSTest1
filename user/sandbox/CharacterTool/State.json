@@ -140,8 +140,8 @@
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
 		"propertyTree": {
-			"focusedRow": [ 6 ],
-			"selection": [ [ 6 ] ],
+			"focusedRow": [ 6, 1 ],
+			"selection": [ [ 6, 1 ] ],
 			"expanded": [ 1, 1, 1, 1, 1, 1, 1, 0, 0, 1 ]
 		},
 		"outlineMode": "oneTree"
