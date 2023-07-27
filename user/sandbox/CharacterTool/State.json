@@ -1,0 +1,186 @@
+{
+	"system": {
+		"document": {
+			"playbackOptions": {
+				"loopAnimation": true,
+				"restartOnAnimationSelection": true,
+				"playFromTheStart": false,
+				"firstFrameAtEndOfTimeline": false,
+				"wrapTimelineSlider": false,
+				"smoothTimelineSlider": false,
+				"playbackSpeed": 1.0
+			},
+			"displayOptions": {
+				"attachmentGizmos": true,
+				"poseModifierGizmos": true,
+				"animation": {
+					"movement": "inplace",
+					"compressionPreview": "compressed",
+					"animationEventGizmos": true,
+					"showTrail": true,
+					"showLocator": false,
+					"showDccToolOrigin": false
+				},
+				"showEdges": false,
+				"wireframe": false,
+				"fps": true,
+				"skeleton": {
+					"jointFilter": "",
+					"showJoints": false,
+					"showJointNames": false,
+					"showJointNamesFontSize": 1.0,
+					"showSkeletonBoundingBox": false
+				},
+				"showViewportOrientation": true,
+				"fov": 60.0,
+				"nearClip": 0.01,
+				"moveSpeed": 1.0,
+				"transformRestraint": 0,
+				"rotationSpeed": 2.0,
+				"smoothPos": 0.07,
+				"smoothRot": 0.05,
+				"followJoint": {
+					"jointName": "",
+					"lockAlign": false,
+					"usePosition": true,
+					"useRotation": false
+				},
+				"secondaryAnimation": {
+					"showDynamicProxies": false,
+					"showAuxiliaryProxies": false,
+					"showClothProxies": false
+				},
+				"physics": {
+					"showPhysicalProxies": "none",
+					"showRagdollJointLimits": "none"
+				},
+				"grid": {
+					"showGrid": true,
+					"circular": true,
+					"mainColor": { "r": 255, "g": 255, "b": 255, "a": 50 },
+					"middleColor": { "r": 255, "g": 255, "b": 255, "a": 10 },
+					"alphaFalloff": 100,
+					"spacing": 1.0,
+					"count": 10,
+					"interCount": 10,
+					"origin": false,
+					"originColor": { "r": 10, "g": 10, "b": 10, "a": 255 }
+				},
+				"lighting": {
+					"cubemapName": "%ENGINE%/EngineAssets/Textures/default_probe_cm.dds",
+					"cubemapMultiplier": 3.0,
+					"cubemapColor": { "r": 255, "g": 255, "b": 255, "a": 255 },
+					"rotatelight": false,
+					"lightMultiplier": 3.0,
+					"directionalLightColor": { "r": 255, "g": 255, "b": 255, "a": 255 }
+				},
+				"background": {
+					"useGradient": true,
+					"topColor": { "r": 128, "g": 128, "b": 128, "a": 255 },
+					"bottomColor": { "r": 32, "g": 32, "b": 32, "a": 255 }
+				}
+			},
+			"playbackTime": 0.0
+		}
+	},
+	"dockWidgetManager": {
+		"openWidgets": [
+			{
+				"name": "ExplorerPanel-0",
+				"type": "ExplorerPanel",
+				"widget": {
+					"explorerRootIndex": 0,
+					"filterMode": false,
+					"filterOptions": {
+						"Infolder": true,
+						"Inpak": true,
+						"Infolderpak": true,
+						"Noaudio": true,
+						"Hasaudio": true,
+						"no": true,
+						"yes": true
+					},
+					"filter": "",
+					"treeView": {
+						"expandedItems": [
+							"Characters",
+							"Skeletons",
+							"Animations (objects/weapons/glock/1p/)",
+							"Compression (Animations/)",
+							"Compression (Animations/)|Compression Presets",
+							"Compression (Animations/)|DBA Table",
+							"Animations (objects/weapons/glock/1p/)|pistol_glock_Fire",
+							"Animations (objects/weapons/glock/1p/)|pistol_glock_Idle",
+							"Animations (objects/weapons/glock/1p/)|pistol_glock_Run",
+							"Animations (objects/weapons/glock/1p/)|pistol_glock_Walk",
+							"Skeletons|Objects",
+							"Characters|Objects",
+							"Characters|Objects|Weapons",
+							"Characters|Objects|Weapons|glock",
+							"Characters|Objects|Weapons|glock|1p"
+						],
+						"selectedItems": [ "Characters|Objects|Weapons|glock|1p|pistol_glock.cdf" ],
+						"currentItem": "Characters|Objects|Weapons|glock|1p|pistol_glock.cdf",
+						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
+						"sectionsVisible": [ 0 ]
+					}
+				}
+			}
+		]
+	},
+	"displayPanel": {
+		"propertyTree": {
+			"focusedRow": [ ],
+			"selection": [ ],
+			"expanded": [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+		}
+	},
+	"displayParameterSplittersWidths": [ 400, 200 ],
+	"displayOptionsVisible": false,
+	"playbackPanel": { "timeUnits": "seconds" },
+	"propertiesPanel": {
+		"propertyTree": {
+			"focusedRow": [ 6 ],
+			"selection": [ [ 6 ] ],
+			"expanded": [ 1, 1, 1, 1, 1, 1, 1, 0, 0, 1 ]
+		},
+		"outlineMode": "oneTree"
+	},
+	"blendSpacePreview": {
+		"viewport": {
+			"cameraTarget": {
+				"q": { "x": 0.02034, "y": -0.1018, "z": 0.97532, "w": -0.19487 },
+				"t": { "x": -0.88123, "y": 2.19696, "z": 1.58522 }
+			}
+		},
+		"characterScale": 0.5,
+		"showGrid": true
+	},
+	"animEventPresetPanel": {
+		"palette": { "addWithSingleClick": false, "hotkeys": [ ] }
+	},
+	"recentCharacters": [
+		"Objects/Weapons/glock/1p/pistol_glock.cdf",
+		"Objects/Characters/SampleCharacter/thirdperson.cdf"
+	],
+	"windowGeometry": [
+		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 22, 0, 0, 2, 250, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 5, 22, 0, 0, 2, 250, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 22, 0, 0,
+		2, 250
+	],
+	"windowState": [
+		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 2, 148, 252, 2, 0, 0, 0, 1, 251,
+		0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108, 0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45,
+		0, 48, 1, 0, 0, 0, 0, 0, 0, 2, 148, 0, 0, 0, 107, 0, 255, 255, 255, 0, 0, 0, 1, 0, 0, 1, 95, 0, 0, 2, 148, 252,
+		2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115, 0, 99, 0, 101, 0, 110, 0, 101, 0, 95, 0, 112, 0, 97, 0, 114, 0, 97, 0, 109,
+		0, 101, 0, 116, 0, 101, 0, 114, 0, 115, 1, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20,
+		0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114, 0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 42, 0, 0, 2, 106, 0, 0, 0,
+		81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98, 0, 108, 0, 101, 0, 110, 0, 100, 0, 95, 0, 115, 0, 112, 0, 97, 0, 99, 0, 101,
+		0, 95, 0, 112, 0, 114, 0, 101, 0, 118, 0, 105, 0, 101, 0, 119, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 223, 0, 255, 255,
+		255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105, 0, 109, 0, 95, 0, 101, 0, 118, 0, 101, 0, 110, 0, 116, 0, 95, 0, 112, 0, 114,
+		0, 101, 0, 115, 0, 101, 0, 116, 0, 115, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0,
+		0, 5, 23, 0, 0, 0, 97, 252, 1, 0, 0, 0, 1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99,
+		0, 107, 1, 0, 0, 0, 0, 0, 0, 5, 23, 0, 0, 1, 176, 0, 255, 255, 255, 0, 0, 2, 167, 0, 0, 2, 148, 0, 0, 0, 4, 0,
+		0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252, 0, 0, 0, 0
+	]
+}

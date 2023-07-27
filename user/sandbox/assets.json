@@ -5247,8 +5247,8 @@
 			"type": "Animation",
 			"guid": "127507fd-d79c-1091-33fb-38eac631da57",
 			"name": "jog_bck_3p",
-			"timestamp": 1652897360,
-			"files": [ "Animations/motusAnims/jog_bck_3p.caf" ],
+			"timestamp": 132973673600170000,
+			"files": [ "animations/motusanims/jog_bck_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/jog_bck_3p.caf.cryasset",
@@ -5811,7 +5811,7 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1690367231,
+			"timestamp": 1690400722,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5819,10 +5819,7 @@
 			"details": [ ],
 			"dependencies": [
 				{ "path": "%editor%/objects/envcube.cgf", "usageCount": 0 },
-				{
-					"path": "%engine%/config/defaultscripts/compressionpolicy.xml",
-					"usageCount": 0
-				},
+				{ "path": "%editor%/objects/envcube.mtl", "usageCount": 0 },
 				{
 					"path": "%engine%/engineassets/icons/averagememoryusage.dds",
 					"usageCount": 0
@@ -5840,7 +5837,39 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/materials/fog/fogvolumebox.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/fogvolumeellipsoid.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceaninto.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceanintolowspec.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceanoutof.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/fog/oceanoutoflowspec.mtl",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/materials/material_default.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/material_terrain_default.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/water/wateroceanbottom.mtl",
 					"usageCount": 0
 				},
 				{
@@ -5848,12 +5877,93 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/texturemsg/defaultsolids.mtl",
 					"usageCount": 0
 				},
+				{
+					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
+					"usageCount": 0
+				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
+				{
+					"path": "animations/mannequin/adb/playerfragmentids.xml",
+					"usageCount": 0
+				},
+				{ "path": "animations/mannequin/adb/playertags.xml", "usageCount": 0 },
+				{
+					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/weapons/glock/1p/glock_glock_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "engineassets/materials/water/ocean_default.mtl",
+					"usageCount": 0
+				},
 				{ "path": "libs/environmentpresets/example.env", "usageCount": 1 },
-				{ "path": "scripts/network/compressionpolicy.xml", "usageCount": 0 }
+				{
+					"path": "objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/glock_glock_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/glock_glock_normal2.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.cdf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.chr",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_fire.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_idle.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_mesh.skin",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_run.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_walk.caf",
+					"usageCount": 0
+				},
+				{ "path": "scripts/ai/factions.xml", "usageCount": 0 },
+				{
+					"path": "textures/cubemaps/example/environmentprobe1_cm.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/cubemaps/example/environmentprobe1_cm_diff.dds",
+					"usageCount": 0
+				}
 			]
 		},
 		{
@@ -6214,10 +6324,136 @@
 			]
 		},
 		{
+			"type": "Mesh",
+			"guid": "2ce4f78b-8796-6bde-46d0-97dc87de0e1e",
+			"name": "bullet_tracer_1",
+			"timestamp": 1690447309,
+			"files": [ "Objects/effects/bullettracer/bullet_tracer_1.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/effects/bullettracer/bullet_tracer_1.fbx",
+			"metadata": "Objects/effects/bullettracer/bullet_tracer_1.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "24" },
+				{ "key": "vertexCount", "value": "48" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/effects/bullettracer/bullet_tracer_1.mtl",
+					"usageCount": 1
+				}
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "2773cc55-83ae-91d1-1366-b62983860d9d",
+			"name": "bullet_tracer_1",
+			"timestamp": 1690460951,
+			"files": [ "Objects/effects/bullettracer/bullet_tracer_1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "3" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/effects/bullettracer/tracer_standard02.dds",
+					"usageCount": 2
+				},
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 3
+				},
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Texture",
+			"guid": "33e244a1-f4b8-33c0-2c66-360e93019487",
+			"name": "tracer_standard02",
+			"timestamp": 1690447315,
+			"files": [ "Objects/effects/bullettracer/tracer_standard02.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/effects/bullettracer/tracer_standard02.tif",
+			"metadata": "Objects/effects/bullettracer/tracer_standard02.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "32" },
+				{ "key": "mipCount", "value": "4" },
+				{ "key": "width", "value": "128" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "058c3855-7f55-008a-5a4e-d5290f6dd6c1",
+			"name": "muzzleflash",
+			"timestamp": 1690473759,
+			"files": [ "Objects/effects/muzzleflash/muzzleflash.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/effects/muzzleflash/muzzleflash.tif",
+			"metadata": "Objects/effects/muzzleflash/muzzleflash.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "512" },
+				{ "key": "mipCount", "value": "8" },
+				{ "key": "width", "value": "512" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Mesh",
+			"guid": "c05120e3-41fe-8eb9-526b-5deb3b52c250",
+			"name": "muzzleflash1",
+			"timestamp": 1690473751,
+			"files": [ "Objects/effects/muzzleflash/muzzleflash1.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/effects/muzzleflash/muzzleflash1.fbx",
+			"metadata": "Objects/effects/muzzleflash/muzzleflash1.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "22" },
+				{ "key": "vertexCount", "value": "26" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/effects/muzzleflash/muzzleflash1.mtl",
+					"usageCount": 1
+				}
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "2a60e98b-a8b7-192e-ba87-79642dd6148d",
+			"name": "muzzleflash1",
+			"timestamp": 1690473757,
+			"files": [ "Objects/effects/muzzleflash/muzzleflash1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/effects/muzzleflash/muzzleflash1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "3" }
+			],
+			"dependencies": [
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 3
+				},
+				{
+					"path": "Objects/effects/muzzleflash/muzzleflash.dds",
+					"usageCount": 2
+				}
+			]
+		},
+		{
 			"type": "Texture",
 			"guid": "f3eae5b1-e145-bac1-bb4a-f4071278b774",
 			"name": "glock_glock_albedotransparency",
-			"timestamp": 1690301820,
+			"timestamp": 1690400456,
 			"files": [ "Objects/Weapons/glock/1p/glock_glock_albedotransparency.dds" ],
 			"workFiles": [ ],
 			"source": "Objects/Weapons/glock/1p/glock_glock_albedotransparency.tif",
@@ -6297,7 +6533,7 @@
 			"type": "Character",
 			"guid": "f2d1911b-8810-7acb-d09c-0b17fdcdaacd",
 			"name": "pistol_glock",
-			"timestamp": 1690301842,
+			"timestamp": 1690473882,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6355,7 +6591,7 @@
 			"type": "Material",
 			"guid": "8cebde28-02ff-ce5d-b719-93aa6377c97e",
 			"name": "pistol_glock",
-			"timestamp": 1690355064,
+			"timestamp": 1690400703,
 			"files": [ "Objects/Weapons/glock/1p/pistol_glock.mtl" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6378,7 +6614,7 @@
 					"usageCount": 1
 				},
 				{
-					"path": "Objects/Weapons/glock/1p/glock_glock_normal2.dds",
+					"path": "Objects/Weapons/glock/1p/glock_glock_normal.dds",
 					"usageCount": 1
 				},
 				{

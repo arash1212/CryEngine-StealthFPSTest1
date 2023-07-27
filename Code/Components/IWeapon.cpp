@@ -3,6 +3,7 @@
 #include "ActorState.h"
 #include "ShootAccuracy.h"
 #include "IWeapon.h"
+#include "BulletTracer.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -76,7 +77,6 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 	}break;
 	case Cry::Entity::EEvent::Update: {
 		float deltatime = event.fParam[0];
-
 		UpdateAnimation();
 		KickBack();
 		Recoil();
@@ -101,12 +101,13 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, f32 error)
+IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 {
 	//apply error
-	dir.x += GetShootError(error);
-	dir.y += GetShootError(error);
-	dir.z += GetShootError(error);
+	Vec3 finalDir = Vec3(dir.x, dir.y, dir.z);
+	finalDir.x += error.x;
+	finalDir.y += error.y;
+	finalDir.z += error.z;
 
 	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
 	std::array<ray_hit, 2> hits;
@@ -115,7 +116,7 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, f32 error)
 	pSkippedEntities[1] = m_pEntity->GetPhysics();
 
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
-	if (gEnv->pPhysicalWorld->RayWorldIntersection(from, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(from, finalDir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
 		if (hits[0].pCollider) {
 
 			//Debug
@@ -134,7 +135,7 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, f32 error)
 		}
 	}
 	else {
-		CryLog("Weapon hit nothing");
+		//CryLog("Weapon hit nothing");
 	}
 
 	return nullptr;
@@ -142,11 +143,19 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, f32 error)
 
 void IWeaponComponent::Fire()
 {
+	//Get Muzzle Attachment
+	m_muzzleAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzle");
+
 	ShootAccuracyComponent* shootAccuracyComp = m_ownerEntity->GetComponent<ShootAccuracyComponent>();
 	if (!shootAccuracyComp) {
 		CryLog("IWeaponComponent : Owner have no shootAccuracy assigned !");
 		return;
 	}
+	if (!m_muzzleAttachment) {
+		CryLog("IWeaponComponent : Weapon muzzle attachment not found !");
+		return;
+	}
+
 	//apply shootError to owner
 	//CryLog("error : %f", shootAccuracyComp->GetShootError());
 	shootAccuracyComp->AddShootError(GetShootError());
@@ -155,11 +164,20 @@ void IWeaponComponent::Fire()
 		//if owner is player
 		if (m_cameraComp) {
 			PlayerComponent* playerComp = m_ownerEntity->GetComponent<PlayerComponent>();
-			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shootAccuracyComp->GetShootError());
 			playerComp->AddRecoil(GetCameraRecoilAmount());
 
 			//apply kickback
 			AddKickBack(Vec3(0, -0.07f, -0.05f));
+
+			//CryLog("muzzle world x : %f", m_muzzleAttachment->GetAttWorldAbsolute().t.x);
+			//CryLog("entity x : %f", m_pEntity->GetWorldPos().x);
+			Vec3 shooterror = Vec3(GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()));
+			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shooterror);
+			//todo :attachment estefade beshe (felan tofmal shod)
+			Vec3 forward = m_pEntity->GetForwardDir();
+			//forward.x += 0.28f;
+			forward.z -= 0.04f;
+			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + forward * 2, Quat::CreateRotationVDir(m_cameraComp->GetCamera().GetViewdir()));
 		}
 		//else
 		else {
@@ -196,6 +214,11 @@ void IWeaponComponent::SetOwnerEntity(IEntity* ownerEntity)
 void IWeaponComponent::SetCharacterController(Cry::DefaultComponents::CCharacterControllerComponent* characterControllerComp)
 {
 	this->m_characteControllerrComp = characterControllerComp;
+}
+
+void IWeaponComponent::SetCameraBaseEntity(IEntity* cameraBaseEntity)
+{
+	m_cameraBaseEntity = cameraBaseEntity;
 }
 
 float IWeaponComponent::GetDamage()
@@ -320,4 +343,22 @@ void IWeaponComponent::Recoil()
 f32 IWeaponComponent::GetShootError(f32 error)
 {
 	return GetRandomValue(-error, error);
+}
+
+void IWeaponComponent::SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir)
+{
+	Vec3 spawnPos = pos;
+	Quat rotation = dir;
+	rotation.v.x += error.x;
+	rotation.v.y += error.y;
+	rotation.v.z += error.z;
+
+	SEntitySpawnParams bulletTracerSpawnParams;
+	bulletTracerSpawnParams.vPosition = spawnPos;
+	bulletTracerSpawnParams.qRotation = rotation;
+	IEntity* spawnedBulletTracerEntity = gEnv->pEntitySystem->SpawnEntity(bulletTracerSpawnParams);
+
+	spawnedBulletTracerEntity->GetOrCreateComponent<BulletTracerComponent>();
+
+	CryLog("IWeaponComponent : Bullet Spawned !");
 }

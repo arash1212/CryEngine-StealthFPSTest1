@@ -31,8 +31,8 @@ private:
 	Cry::DefaultComponents::CCameraComponent* m_cameraComp = nullptr;
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characteControllerrComp = nullptr;
 	IEntityAudioComponent* m_audioComp = nullptr;
-	IAttachment* m_muzzleAttachment = nullptr;
 	IEntity* m_ownerEntity = nullptr;
+	IEntity* m_cameraBaseEntity = nullptr;
 
 private:
 	Vec3 m_muzzlePos = ZERO;
@@ -84,15 +84,21 @@ protected:
 	//shootError
 	f32 m_shootError = 0.01f;
 
+	//Attachments
+	IAttachment* m_muzzleAttachment;
+
+	bool bIsInitMeshDone = false;
+
 protected:
 	f32 GetRandomValue(f32 min, f32 max);
 	virtual void UpdateAnimation();
 	virtual void KickBack();
 	virtual void Recoil();
 	virtual f32 GetShootError(f32 error);
+	virtual void SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir);
 
 public :
-	IEntity* Raycast(Vec3 from, Vec3 to, f32 error);
+	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);
 	virtual void Fire();
 	virtual void Sway(f32 mouseX, f32 mouseY);
 
@@ -104,6 +110,7 @@ public :
 	void SetMuzzlePos(Vec3 muzzlePos);
 	void SetOwnerEntity(IEntity* ownerEntity);
 	void SetCharacterController(Cry::DefaultComponents::CCharacterControllerComponent* characterControllerComp);
+	void SetCameraBaseEntity(IEntity* cameraBaseEntity);
 	f32 GetDamage();
 	f32 GetShootError();
 	virtual Vec3 GetCameraRecoilAmount();

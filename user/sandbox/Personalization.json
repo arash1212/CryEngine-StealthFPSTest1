@@ -6,7 +6,9 @@
         "AddedFolders": [
             "Objects/Weapons/glock",
             "Objects/Weapons/glock/1p",
-            "Objects/Weapons/glock/3p"
+            "Objects/Weapons/glock/3p",
+            "Objects/effects",
+            "Objects/effects/bullettracer"
         ]
     },
     "CAssetPicker": {
@@ -196,7 +198,13 @@
         "favorites": [
         ],
         "history": [
-            "/Animations/Mannequin/Preview"
+            "/Animations/Mannequin/Preview",
+            "/Objects/effects/muzzleflash"
+        ]
+    },
+    "Environment Editor": {
+        "Recent Files": [
+            "Libs/environmentpresets/example.env.cryasset"
         ]
     },
     "FavoritesHelper": {
@@ -207,6 +215,11 @@
             "Objects/Weapons/glock/1p/pistol_glock.cgf.cryasset"
         ]
     },
+    "Import Skeleton": {
+        "Recent Files": [
+            "Objects/Weapons/glock/1p/pistol_glock.chr.cryasset"
+        ]
+    },
     "Level Editor": {
         "Recent Files": [
             "assets/Levels/example/example.level"
@@ -214,6 +227,7 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset"
         ]
     }

@@ -45,6 +45,7 @@ void PlayerComponent::Initialize()
 	m_primaryWeapon->SetCharacterController(m_characterControllerComp);
 	m_primaryWeapon->SetCameraComponent(m_cameraComp);
 	m_primaryWeapon->SetOwnerEntity(m_pEntity);
+	m_primaryWeapon->SetCameraBaseEntity(m_cameraRoot);
 
 	//todo
 	m_currentlySelectedWeapon = m_primaryWeapon;
