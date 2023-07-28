@@ -119,7 +119,14 @@
 							"Characters|Objects|Weapons|glock",
 							"Characters|Objects|Weapons|glock|1p"
 						],
-						"selectedItems": [ "Characters|Objects|Weapons|glock|1p|pistol_glock.cdf" ],
+						"selectedItems": [
+							"Characters|Objects|Weapons|glock|1p|pistol_glock.cdf",
+							"Characters|Objects|Weapons|glock|1p",
+							"Characters|Objects|Weapons|glock|1p",
+							"Characters|Objects|Weapons|glock|1p",
+							"Characters|Objects|Weapons|glock|1p",
+							"Characters|Objects|Weapons|glock|1p"
+						],
 						"currentItem": "Characters|Objects|Weapons|glock|1p|pistol_glock.cdf",
 						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
 						"sectionsVisible": [ 0 ]
@@ -140,9 +147,9 @@
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
 		"propertyTree": {
-			"focusedRow": [ 6, 1 ],
-			"selection": [ [ 6, 1 ] ],
-			"expanded": [ 1, 1, 1, 1, 1, 1, 1, 0, 0, 1 ]
+			"focusedRow": [ 6, 4 ],
+			"selection": [ ],
+			"expanded": [ 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1 ]
 		},
 		"outlineMode": "oneTree"
 	},

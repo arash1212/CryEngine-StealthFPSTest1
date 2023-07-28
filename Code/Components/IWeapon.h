@@ -3,6 +3,7 @@
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
 #include <DefaultComponents/Cameras/CameraComponent.h>
+#include <DefaultComponents/Geometry/StaticMeshComponent.h>
 
 static constexpr f32 WEAPON_DEFAULT_DAMAGE = 20.f;
 static constexpr f32 WEAPON_DEFAULT_TIME_BETWEEN_SHOTS = 0.1f;
@@ -33,6 +34,7 @@ private:
 	IEntityAudioComponent* m_audioComp = nullptr;
 	IEntity* m_ownerEntity = nullptr;
 	IEntity* m_cameraBaseEntity = nullptr;
+
 
 private:
 	Vec3 m_muzzlePos = ZERO;
@@ -87,15 +89,25 @@ protected:
 	//Attachments
 	IAttachment* m_muzzleAttachment;
 
+	//muzzleflash
+	f32 m_timeBetweenMuzzleFlashDeActivation = 0.04f;
+	f32 m_MuzzleFlashDeActivationTimePassed = 0.f;
+	IAttachment* m_muzzleFlash1Attachment;
+	IAttachment* m_muzzleFlash2Attachment;
+	IAttachment* m_muzzleFlash3Attachment;
+	bool bCanChangeMuzzleFlash = false;
+
 	bool bIsInitMeshDone = false;
 
 protected:
 	f32 GetRandomValue(f32 min, f32 max);
+	int32 GetRandomInt(int32 min, int32 max);
 	virtual void UpdateAnimation();
 	virtual void KickBack();
 	virtual void Recoil();
 	virtual f32 GetShootError(f32 error);
 	virtual void SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir);
+	virtual void UpdateMuzzleFlashes();
 
 public :
 	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);

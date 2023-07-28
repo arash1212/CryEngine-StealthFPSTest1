@@ -54,6 +54,23 @@ void IWeaponComponent::Initialize()
 
 	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 	m_shootSound = CryAudio::StringToId("glock_fire_sound_1");
+
+	//Get Muzzle Attachment
+	m_muzzleAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzle");
+
+	//muzzleflashes
+	m_muzzleFlash1Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash1");
+	m_muzzleFlash1Attachment->HideAttachment(1);
+	m_muzzleFlash2Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash2");
+	m_muzzleFlash2Attachment->HideAttachment(1);
+	m_muzzleFlash3Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash3");
+	m_muzzleFlash3Attachment->HideAttachment(1);
+
+	//m_muzzleFlashMesh = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CStaticMeshComponent>();
+	//m_muzzleFlashMesh->SetTransformMatrix(Matrix34::Create(Vec3(0.1f), Quat::CreateRotationZ(RAD2DEG(90)), m_muzzleAttachment->GetAttAbsoluteDefault().t + m_pEntity->GetForwardDir() * 2.5f));
+	//m_muzzleFlashMesh->SetFilePath("Objects/effects/muzzleflash/muzzleflash1.cgf");
+	//m_muzzleFlashMesh->LoadFromDisk();
+	//m_muzzleFlashMesh->ResetObject();
 }
 
 Cry::Entity::EventFlags IWeaponComponent::GetEventMask() const
@@ -80,6 +97,7 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 		UpdateAnimation();
 		KickBack();
 		Recoil();
+		UpdateMuzzleFlashes();
 
 		//apply sway if owner is player
 		if (m_ownerEntity && m_ownerEntity->GetComponent<PlayerComponent>()) {
@@ -90,6 +108,9 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 		//timers 
 		if (m_shotTimePassed < m_timeBetweenShots) {
 			m_shotTimePassed += 0.5f * deltatime;
+		}
+		if (m_MuzzleFlashDeActivationTimePassed < m_timeBetweenMuzzleFlashDeActivation) {
+			m_MuzzleFlashDeActivationTimePassed += 0.5f * deltatime;
 		}
 
 	}break;
@@ -143,9 +164,6 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 
 void IWeaponComponent::Fire()
 {
-	//Get Muzzle Attachment
-	m_muzzleAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzle");
-
 	ShootAccuracyComponent* shootAccuracyComp = m_ownerEntity->GetComponent<ShootAccuracyComponent>();
 	if (!shootAccuracyComp) {
 		CryLog("IWeaponComponent : Owner have no shootAccuracy assigned !");
@@ -182,6 +200,10 @@ void IWeaponComponent::Fire()
 		}
 
 		m_audioComp->ExecuteTrigger(m_shootSound);
+
+
+		//muzzleflashes
+		m_MuzzleFlashDeActivationTimePassed = 0;
 
 		m_shotTimePassed = 0;
 		m_activeFragmentId = m_fireFragmentId;
@@ -246,6 +268,12 @@ Vec3 IWeaponComponent::GetMeshRecoilAmount()
 f32 IWeaponComponent::GetRandomValue(f32 min, f32 max)
 {
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min));
+}
+
+int32 IWeaponComponent::GetRandomInt(int32 min, int32 max)
+{
+	int32 range = max - min + 1;
+	return rand() % range + min;
 }
 
 void IWeaponComponent::UpdateAnimation()
@@ -356,6 +384,27 @@ void IWeaponComponent::SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir)
 	IEntity* spawnedBulletTracerEntity = gEnv->pEntitySystem->SpawnEntity(bulletTracerSpawnParams);
 
 	spawnedBulletTracerEntity->GetOrCreateComponent<BulletTracerComponent>();
+}
 
-	CryLog("IWeaponComponent : Bullet Spawned !");
+void IWeaponComponent::UpdateMuzzleFlashes()
+{
+	if (m_MuzzleFlashDeActivationTimePassed >= m_timeBetweenMuzzleFlashDeActivation) {
+		m_muzzleFlash1Attachment->HideAttachment(1);
+		m_muzzleFlash2Attachment->HideAttachment(1);
+		m_muzzleFlash3Attachment->HideAttachment(1);
+		bCanChangeMuzzleFlash = true;
+	}
+	else if (bCanChangeMuzzleFlash) {
+		int32 randomInt = GetRandomInt(1, 3);
+		bCanChangeMuzzleFlash = false;
+		if (randomInt == 1) {
+			m_muzzleFlash1Attachment->HideAttachment(0);
+		}
+		else if (randomInt == 2) {
+			m_muzzleFlash2Attachment->HideAttachment(0);
+		}
+		else if (randomInt == 3) {
+			m_muzzleFlash3Attachment->HideAttachment(0);
+		}
+	}
 }
