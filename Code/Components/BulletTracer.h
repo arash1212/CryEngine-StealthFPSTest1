@@ -25,6 +25,10 @@ private :
 	Cry::DefaultComponents::CStaticMeshComponent* m_meshComp;
 
 private :
+	float m_maxTimeActive = 0.3f;
+	float m_timePassed = 0.f;
+private :
 
 	void Move(float deltaTime);
+	void Destroy();
 };

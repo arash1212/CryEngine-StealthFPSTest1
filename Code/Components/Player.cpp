@@ -100,6 +100,8 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 
 		UpdateCrosshair();
 
+		UpdateFOV();
+
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 		m_movementOffset = ZERO;
@@ -193,6 +195,21 @@ void PlayerComponent::InitInputs()
 		}
 	);
 	m_inputComp->BindAction("player", "run", eAID_KeyboardMouse, eKI_LShift);
+
+
+	m_inputComp->RegisterAction("player", "aim", [this](int activationMode, float value)
+		{
+			if (activationMode == eAAM_OnPress) {
+				bIsAiming = true;
+				m_currentlySelectedWeapon->SetIsAiming(true);
+			}
+			else if (activationMode == eAAM_OnRelease) {
+				bIsAiming = false;
+				m_currentlySelectedWeapon->SetIsAiming(false);
+			}
+		}
+	);
+	m_inputComp->BindAction("player", "aim", eAID_KeyboardMouse, eKI_Mouse2);
 }
 
 void PlayerComponent::Move()
@@ -258,6 +275,14 @@ void PlayerComponent::UpdateCrosshair()
 	else {
 		m_crosshairComp->BackToNormal();
 	}
+
+	//show / hide crosshair if play is aiming
+	if (bIsAiming) {
+		m_crosshairComp->Hide();
+	}
+	else {
+		m_crosshairComp->Show();
+	}
 }
 
 Vec2 PlayerComponent::GetRotationDelta()
@@ -268,4 +293,18 @@ Vec2 PlayerComponent::GetRotationDelta()
 void PlayerComponent::AddRecoil(Vec3 Amount)
 {
 	m_targetRotation += Quat::CreateRotationXYZ(Amount);
+}
+
+void PlayerComponent::UpdateFOV()
+{
+	if (bIsAiming) {
+		//TODO 5 => az weawpon begire
+		m_currentFov = CLAMP(m_currentFov - m_fovChangeSpeed * gEnv->pTimer->GetFrameTime(), m_deafultFov - 5, m_deafultFov);
+	}
+	else {
+		m_currentFov = CLAMP(m_currentFov + m_fovChangeSpeed * gEnv->pTimer->GetFrameTime(), 0, m_deafultFov);
+	}
+
+	//perfom update 
+	m_cameraComp->SetFieldOfView(CryTransform::CAngle::FromDegrees(m_currentFov));
 }

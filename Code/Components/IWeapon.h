@@ -27,7 +27,7 @@ public:
 		desc.AddMember(&IWeaponComponent::m_timeBetweenShots, 'tbs', "weapontimebetweenshots", "Weapon Time Between Shots", "Set Weapon Time Between Shots", WEAPON_DEFAULT_TIME_BETWEEN_SHOTS);
 	}
 
-private:
+protected:
 	Cry::DefaultComponents::CAdvancedAnimationComponent* m_animationComp = nullptr;
 	Cry::DefaultComponents::CCameraComponent* m_cameraComp = nullptr;
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characteControllerrComp = nullptr;
@@ -35,12 +35,10 @@ private:
 	IEntity* m_ownerEntity = nullptr;
 	IEntity* m_cameraBaseEntity = nullptr;
 
-
-private:
+protected:
 	Vec3 m_muzzlePos = ZERO;
 	Vec3 m_attackDir = ZERO;
 
-protected:
 	f32 m_damage = WEAPON_DEFAULT_DAMAGE;
 
 	//timers
@@ -51,8 +49,6 @@ protected:
 	Vec3 m_defaultSize = Vec3(1);
 	Quat m_defaultRotation = Quat::CreateRotationXYZ(Ang3(0.12f, 0, 160.11f));
 	Vec3 m_defaultPosition = Vec3(0, 0, -0.6f);
-	Vec3 m_aimPosition = Vec3(-1.69f, -0.05f, 0.26f);
-	Quat m_aimRotation = Quat::CreateRotationZ(160.225f);
 
 	//animations
 	FragmentID m_walkFragmentId;
@@ -64,7 +60,7 @@ protected:
 	IActionPtr m_fireAction;
 
 	//sway
-	float m_swaySpeed = 2.4f;
+	float m_swaySpeed = 1.4f;
 	Quat m_defaultAnimationCompRotation = IDENTITY;
 	Vec3 m_defaultAnimationCompPosition = ZERO;
 
@@ -99,6 +95,11 @@ protected:
 
 	bool bIsInitMeshDone = false;
 
+	//aiming
+	bool bIsAiming = false;
+	Vec3 m_aimPosition = Vec3(-0.842f, -0.05f, -0.09f);
+	Quat m_aimRotation = Quat::CreateRotationZ(160.234f);
+
 protected:
 	f32 GetRandomValue(f32 min, f32 max);
 	int32 GetRandomInt(int32 min, int32 max);
@@ -108,6 +109,7 @@ protected:
 	virtual f32 GetShootError(f32 error);
 	virtual void SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir);
 	virtual void UpdateMuzzleFlashes();
+	virtual void Aim();
 
 public :
 	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);
@@ -123,6 +125,7 @@ public :
 	void SetOwnerEntity(IEntity* ownerEntity);
 	void SetCharacterController(Cry::DefaultComponents::CCharacterControllerComponent* characterControllerComp);
 	void SetCameraBaseEntity(IEntity* cameraBaseEntity);
+	void SetIsAiming(bool isAiming);
 	f32 GetDamage();
 	f32 GetShootError();
 	virtual Vec3 GetCameraRecoilAmount();

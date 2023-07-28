@@ -57,6 +57,15 @@ void BulletTracerComponent::ProcessEvent(const SEntityEvent& event)
 		float deltatime = event.fParam[0];
 
 		Move(deltatime);
+
+		//destroy bullet
+		if (m_timePassed < m_maxTimeActive) {
+			m_timePassed += 0.1f * deltatime;
+		}
+		else {
+			Destroy();
+		}
+
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 
@@ -78,4 +87,9 @@ void BulletTracerComponent::Move(float DeltaTime)
 		Vec3 moveToPos = m_pEntity->GetPos();
 		m_pEntity->SetPos(m_pEntity->GetPos() + m_pEntity->GetForwardDir() * DeltaTime * 50.1f);
 	}
+}
+
+void BulletTracerComponent::Destroy()
+{
+	gEnv->pEntitySystem->RemoveEntity(m_pEntity->GetId());
 }

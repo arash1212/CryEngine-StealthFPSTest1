@@ -98,6 +98,7 @@ void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
 		KickBack();
 		Recoil();
 		UpdateMuzzleFlashes();
+		Aim();
 
 		//apply sway if owner is player
 		if (m_ownerEntity && m_ownerEntity->GetComponent<PlayerComponent>()) {
@@ -126,9 +127,11 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 {
 	//apply error
 	Vec3 finalDir = Vec3(dir.x, dir.y, dir.z);
-	finalDir.x += error.x;
-	finalDir.y += error.y;
-	finalDir.z += error.z;
+	if (!bIsAiming) {
+		finalDir.x += error.x;
+		finalDir.y += error.y;
+		finalDir.z += error.z;
+	}
 
 	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
 	std::array<ray_hit, 2> hits;
@@ -151,6 +154,12 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
 			if (hitEntity) {
 				CryLog("Weapon hit %s", hitEntity->GetName());
+
+				//apply impluse on entity at hit point
+				pe_action_impulse impulse;
+				impulse.impulse = m_pEntity->GetForwardDir() * 50;
+				hits[0].pCollider->Action(&impulse);
+
 				return hitEntity;
 			}
 		}
@@ -240,6 +249,11 @@ void IWeaponComponent::SetCameraBaseEntity(IEntity* cameraBaseEntity)
 	m_cameraBaseEntity = cameraBaseEntity;
 }
 
+void IWeaponComponent::SetIsAiming(bool isAiming)
+{
+	bIsAiming = isAiming;
+}
+
 float IWeaponComponent::GetDamage()
 {
 	return m_damage;
@@ -252,7 +266,7 @@ f32 IWeaponComponent::GetShootError()
 
 Vec3 IWeaponComponent::GetCameraRecoilAmount()
 {
-	f32 x = GetRandomValue(0.013f, 0.17f);
+	f32 x = 0.19f;
 	f32 y = GetRandomValue(-0.02f, 0.02f);
 	f32 z = GetRandomValue(-0.02f, 0.02f);
 	//CryLog("x : %f, y : %f , z : %f", x, y, z);
@@ -407,4 +421,13 @@ void IWeaponComponent::UpdateMuzzleFlashes()
 			m_muzzleFlash3Attachment->HideAttachment(0);
 		}
 	}
+}
+
+void IWeaponComponent::Aim()
+{
+	if (bIsAiming) {
+		m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_aimRotation,
+			Vec3::CreateLerp(m_animationComp->GetTransform().get()->GetTranslation(), m_aimPosition, 0.5f * 8.f * gEnv->pTimer->GetFrameTime())));
+	}
+
 }

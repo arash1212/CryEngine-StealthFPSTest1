@@ -75,7 +75,7 @@ private:
 	f32 m_headBobTimer = 0.f;
 	f32 m_defaultPosZ = 0;
 
-	//
+	//rotation (camera/body)
 	f32 m_rotationX = 0.f;
 	f32 m_rotationY = 0.f;
 	f32 m_minRoationX = -1000;
@@ -88,6 +88,11 @@ private:
 	Quat m_currentRotation = IDENTITY;
 	Quat m_targetRotation = IDENTITY;
 
+	//aiming
+	bool bIsAiming = false;
+	float m_deafultFov = 70.f;
+	float m_currentFov = m_deafultFov;
+	float m_fovChangeSpeed = 20.f;
 
 private:
 	//inits
@@ -103,6 +108,8 @@ private:
 	void RecoilUpdate();
 
 	void UpdateCrosshair();
+
+	void UpdateFOV();
 
 public:
 	Vec2 GetRotationDelta();
