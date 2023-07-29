@@ -58,6 +58,10 @@ void ActorStateComponent::ProcessEvent(const SEntityEvent& event)
 
 void ActorStateComponent::UpdateState()
 {
+	if (!m_characterController) {
+		return;
+	}
+
 	if (!m_characterController->IsOnGround()) {
 		m_state = EActorState::FALLING;
 	}

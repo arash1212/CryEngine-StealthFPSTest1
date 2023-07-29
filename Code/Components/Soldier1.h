@@ -3,6 +3,10 @@
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 
 class AIControllerComponent;
+class ActorStateComponent;
+
+static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 2.f;
+static constexpr f32 DEFAULT_PLAYER_RUN_SPEED = 3.1f;
 
 class Soldier1Component final : public IEntityComponent
 {
@@ -25,5 +29,16 @@ private:
 
 	Cry::DefaultComponents::CAdvancedAnimationComponent* m_animationComp = nullptr;
 
-	AIControllerComponent* m_aiController;
+	AIControllerComponent* m_aiControllerComp = nullptr;
+	ActorStateComponent* m_stateComp = nullptr;
+
+private:
+	f32 m_walkSpeed = DEFAULT_PLAYER_WALK_SPEED;
+	f32 m_runSpeed = DEFAULT_PLAYER_RUN_SPEED;
+	f32 m_currentSpeed = DEFAULT_PLAYER_WALK_SPEED;
+
+private:
+	void UpdateAnimation();
+
+	void MoveTo(Vec3 pos);
 };

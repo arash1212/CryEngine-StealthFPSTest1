@@ -22,8 +22,16 @@ public:
 private:
 
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characterControllerComp = nullptr;
+	struct IEntityNavigationComponent* m_navigationComp = nullptr;
 
 public:
-
+	
 	Vec3 GetVelocity();
+	bool IsWalking();
+	bool IsOnGround();
+	Cry::DefaultComponents::CCharacterControllerComponent* GetCharacterController();
+
+	void LookAt(Vec3 position);
+	void NavigateTo(Vec3 position);
+	void MoveTo(Vec3 position);
 };

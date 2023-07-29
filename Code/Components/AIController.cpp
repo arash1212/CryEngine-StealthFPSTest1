@@ -2,6 +2,7 @@
 #include "AIController.h"
 #include "GamePlugin.h"
 
+#include <CryAISystem/Components/IEntityNavigationComponent.h>
 #include <CryRenderer/IRenderAuxGeom.h>
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
 #include <CrySchematyc/Env/IEnvRegistrar.h>
@@ -24,6 +25,8 @@ namespace
 void AIControllerComponent::Initialize()
 {
 	m_characterControllerComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CCharacterControllerComponent>();
+
+	m_navigationComp = m_pEntity->GetOrCreateComponent<IEntityNavigationComponent>();
 }
 
 Cry::Entity::EventFlags AIControllerComponent::GetEventMask() const
@@ -59,4 +62,36 @@ void AIControllerComponent::ProcessEvent(const SEntityEvent& event)
 Vec3 AIControllerComponent::GetVelocity()
 {
 	return m_characterControllerComp->GetVelocity();
+}
+
+bool AIControllerComponent::IsWalking()
+{
+	return m_characterControllerComp != nullptr ? m_characterControllerComp->IsOnGround() : false;
+}
+
+bool AIControllerComponent::IsOnGround()
+{
+	return m_characterControllerComp != nullptr ? m_characterControllerComp->IsOnGround() : true;
+}
+
+Cry::DefaultComponents::CCharacterControllerComponent* AIControllerComponent::GetCharacterController()
+{
+	return m_characterControllerComp;
+}
+
+void AIControllerComponent::LookAt(Vec3 position)
+{
+	Vec3 dir = position - m_pEntity->GetWorldPos();
+	m_pEntity->SetRotation(Quat::CreateRotationVDir(dir));
+}
+
+void AIControllerComponent::NavigateTo(Vec3 position)
+{
+	m_navigationComp->NavigateTo(position);
+}
+
+void AIControllerComponent::MoveTo(Vec3 position)
+{
+	NavigateTo(position);
+	m_characterControllerComp->SetVelocity(m_navigationComp->GetRequestedVelocity());
 }

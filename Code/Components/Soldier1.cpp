@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Soldier1.h"
 #include "AIController.h"
+#include "ActorState.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -25,7 +26,7 @@ namespace
 void Soldier1Component::Initialize()
 {
 	m_animationComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
-	m_animationComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationX(DEG2RAD(90)), Vec3(0)));
+	m_animationComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(DEG2RAD(90), 0, DEG2RAD(180))), Vec3(0)));
 	m_animationComp->SetCharacterFile("Objects/Characters/soldier1/soldier_1.cdf");
 	m_animationComp->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/soldier1.adb");
 	m_animationComp->SetControllerDefinitionFile("Animations/Mannequin/ADB/ThirdPersonControllerDefinition.xml");
@@ -35,7 +36,15 @@ void Soldier1Component::Initialize()
 	m_animationComp->LoadFromDisk();
 	m_animationComp->ResetCharacter();
 
-	m_aiController = m_pEntity->GetOrCreateComponent<AIControllerComponent>();
+	//ai controller
+	m_aiControllerComp = m_pEntity->GetOrCreateComponent<AIControllerComponent>();
+
+	//state
+	m_stateComp = m_pEntity->GetOrCreateComponent<ActorStateComponent>();
+	m_stateComp->SetCharacterController(m_aiControllerComp->GetCharacterController());
+	m_stateComp->SetWalkSpeed(m_walkSpeed);
+	m_stateComp->SetRunSpeed(m_runSpeed);
+	m_stateComp->SetCurrentSpeed(m_currentSpeed);
 }
 
 Cry::Entity::EventFlags Soldier1Component::GetEventMask() const
@@ -58,6 +67,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
+		//UpdateAnimation();
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
@@ -66,4 +76,35 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 	default:
 		break;
 	}
+}
+
+void Soldier1Component::UpdateAnimation()
+{
+	if (!m_aiControllerComp) {
+		return;
+	}
+
+	Vec3 forwardVector = m_pEntity->GetForwardDir().normalized();
+	Vec3 rightVector = m_pEntity->GetRightDir().normalized();
+	Vec3 velocity = m_aiControllerComp->GetVelocity().normalized();
+
+	float forwardDot = velocity.dot(forwardVector);
+	float rightDot = velocity.dot(rightVector);
+	if (m_stateComp->GetState() == EActorState::WALKING) {
+		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 2.f);
+	}
+	else if (m_stateComp->GetState() == EActorState::RUNNING) {
+		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 2.f);
+	}
+
+	int32 inv = rightDot < 0 ? 1 : -1;
+	m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelAngle, crymath::acos(forwardDot) * inv);
+}
+
+void Soldier1Component::MoveTo(Vec3 pos)
+{
+	if (!m_aiControllerComp) {
+		return;
+	}
+	m_aiControllerComp->MoveTo(pos);
 }
