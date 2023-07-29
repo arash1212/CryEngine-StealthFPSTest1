@@ -124,15 +124,15 @@ void Soldier1Component::MoveTo(Vec3 pos)
 	}
 
 	//testing
-    int32 max = 10;
-	int32 min = 0;
-	//int32 range = max - min + 1;
-	//int32 random = rand() % range + min;
-	float random = (min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min)));
 	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
 		testMoveToPos = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_targetEntity != nullptr ? m_targetEntity->GetWorldPos() : m_pEntity->GetWorldPos());
+
+		f32 max = 10;
+		f32 min = 0;
+		f32 random = (min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min)));
+
 		Vec3 Dir = testMoveToPos - m_pEntity->GetWorldPos();
-		testMoveToPos = m_pEntity->GetWorldPos() + Dir.normalize() * random;
+		testMoveToPos = m_targetEntity->GetWorldPos() + Dir.normalize() * random;
 	}
 
 	m_aiControllerComp->MoveTo(testMoveToPos);

@@ -75,6 +75,11 @@ void AIControllerComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
+f32 AIControllerComponent::GetRandomFloat(f32 min, f32 max)
+{
+	return (min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min)));
+}
+
 Vec3 AIControllerComponent::GetVelocity()
 {
 	return m_characterControllerComp->GetVelocity();
@@ -136,8 +141,8 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 	}
 
 	//check distances
+	MNM::TriangleIDArray iDArray;
 	for (int32 i = 0; i < triangleIDArray.size(); i++) {
-		MNM::TriangleIDArray iDArray;
 		iDArray.push_back(triangleIDArray[i]);
 		MNM::SClosestTriangle closestTriangle = gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->FindClosestTriangle(Around, iDArray);
 		if (closestTriangle.position.GetVec3().GetDistance(Around) < MaxDistance) {
@@ -153,9 +158,24 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 	MNM::TriangleID selectedId = resultArray[random];
 
 	triangleIDArray.clear();
-	triangleIDArray.push_back(selectedId);
+	triangleIDArray.append(selectedId);
 
 
 	MNM::SClosestTriangle closestTriangle = gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->FindClosestTriangle(Around, triangleIDArray);
 	return closestTriangle.position.GetVec3();
+
+	/*
+	//Test new ?
+	MNM::TriangleIDArray zeroArray;
+	zeroArray.append(triangleIDArray[0]);
+	MNM::SClosestTriangle zerotTriangle = gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->FindClosestTriangle(Around, zeroArray);
+
+	Vec3 resultPos = zerotTriangle.position.GetVec3() * (1 - crymath::sqrt(GetRandomFloat(0, 10)));
+	for (int32 i = 0; i < triangleIDArray.size(); i++) {
+		MNM::TriangleIDArray iDArray;
+		iDArray.append(triangleIDArray[i]);
+		resultPos += gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->FindClosestTriangle(Around, iDArray).position.GetVec3() * (1 - crymath::sqrt(GetRandomFloat(0, 10)));
+	}
+	return resultPos;
+	*/
 }

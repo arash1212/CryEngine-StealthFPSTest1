@@ -24,6 +24,9 @@ private:
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characterControllerComp = nullptr;
 	struct IEntityNavigationComponent* m_navigationComp = nullptr;
 
+protected:
+	f32 GetRandomFloat(f32 min, f32 max);
+
 public:
 	
 	Vec3 GetVelocity();
