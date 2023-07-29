@@ -34,4 +34,6 @@ public:
 	void LookAt(Vec3 position);
 	void NavigateTo(Vec3 position);
 	void MoveTo(Vec3 position);
+	void MoveToAndLookAtWalkDirection(Vec3 position);
+	Vec3 GetRandomPointOnNavmesh(float MaxDistance, Vec3 Around);
 };

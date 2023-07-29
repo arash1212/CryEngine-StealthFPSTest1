@@ -32,6 +32,10 @@ private:
 	AIControllerComponent* m_aiControllerComp = nullptr;
 	ActorStateComponent* m_stateComp = nullptr;
 
+	IEntity* m_testTargetEntity = nullptr;
+	Vec3 testMoveToPos = ZERO;
+	IEntity* m_targetEntity = nullptr;
+
 private:
 	f32 m_walkSpeed = DEFAULT_PLAYER_WALK_SPEED;
 	f32 m_runSpeed = DEFAULT_PLAYER_RUN_SPEED;

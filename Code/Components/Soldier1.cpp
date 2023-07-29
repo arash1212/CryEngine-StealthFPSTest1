@@ -64,13 +64,28 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::GameplayStarted: {
+		//todo : test target hazf beshe
+		if (!m_testTargetEntity) {
+			m_testTargetEntity = gEnv->pEntitySystem->FindEntityByName("AiTestTargetEntity");
+		}
+
+		if (!m_targetEntity) {
+			m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
+		}
+
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
-		//UpdateAnimation();
+		UpdateAnimation();
 
+		//move to target
+		if (m_targetEntity) {
+			MoveTo(m_targetEntity->GetWorldPos());
+		}
 	}break;
 	case Cry::Entity::EEvent::Reset: {
+		m_targetEntity = nullptr;
+		m_testTargetEntity = nullptr;
 
 	}break;
 	default:
@@ -94,7 +109,7 @@ void Soldier1Component::UpdateAnimation()
 		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 2.f);
 	}
 	else if (m_stateComp->GetState() == EActorState::RUNNING) {
-		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 2.f);
+		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 3.1f);
 	}
 
 	int32 inv = rightDot < 0 ? 1 : -1;
@@ -104,7 +119,24 @@ void Soldier1Component::UpdateAnimation()
 void Soldier1Component::MoveTo(Vec3 pos)
 {
 	if (!m_aiControllerComp) {
+		CryLog("Soldier1Component : (MoveTo) m_aiControllerComp is not assigned !");
 		return;
 	}
-	m_aiControllerComp->MoveTo(pos);
+
+	//testing
+    int32 max = 10;
+	int32 min = 0;
+	//int32 range = max - min + 1;
+	//int32 random = rand() % range + min;
+	float random = (min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min)));
+	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
+		testMoveToPos = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_targetEntity != nullptr ? m_targetEntity->GetWorldPos() : m_pEntity->GetWorldPos());
+		Vec3 Dir = testMoveToPos - m_pEntity->GetWorldPos();
+		testMoveToPos = m_pEntity->GetWorldPos() + Dir.normalize() * random;
+	}
+
+	m_aiControllerComp->MoveTo(testMoveToPos);
+	if (m_targetEntity) {
+		m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
+	}
 }
