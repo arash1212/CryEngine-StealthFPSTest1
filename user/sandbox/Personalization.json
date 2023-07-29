@@ -9,7 +9,8 @@
             "Objects/Weapons/glock/3p",
             "Objects/effects",
             "Objects/effects/bullettracer",
-            "Objects/effects/muzzleflash"
+            "Objects/effects/muzzleflash",
+            "Objects/Characters/soldier1"
         ]
     },
     "CAssetPicker": {
@@ -367,7 +368,8 @@
         ],
         "history": [
             "/Animations/Mannequin/Preview",
-            "/Objects/effects/muzzleflash"
+            "/Objects/effects/muzzleflash",
+            "/Animations"
         ]
     },
     "Environment Editor": {
@@ -380,6 +382,7 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/Characters/soldier1/soldier1-test.cgf.cryasset",
             "Objects/effects/muzzleflash/muzzleflash2.cgf.cryasset",
             "Objects/effects/muzzleflash/muzzleflash1.cgf.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.cgf.cryasset"
@@ -397,6 +400,7 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/Characters/soldier1/soldier1-test.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
             "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset",
             "Objects/effects/muzzleflash/muzzleflash2.mtl.cryasset",
