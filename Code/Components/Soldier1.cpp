@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Soldier1.h"
 #include "AIController.h"
+#include "AIDetection.h"
 #include "ActorState.h"
 #include "GamePlugin.h"
 
@@ -45,6 +46,9 @@ void Soldier1Component::Initialize()
 	m_stateComp->SetWalkSpeed(m_walkSpeed);
 	m_stateComp->SetRunSpeed(m_runSpeed);
 	m_stateComp->SetCurrentSpeed(m_currentSpeed);
+
+	//detection
+	m_detectionComp = m_pEntity->GetOrCreateComponent<AIDetectionComponent>();
 }
 
 Cry::Entity::EventFlags Soldier1Component::GetEventMask() const
@@ -80,7 +84,12 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 		//move to target
 		if (m_targetEntity) {
-			MoveTo(m_targetEntity->GetWorldPos());
+			//MoveTo(m_targetEntity->GetWorldPos());
+
+			m_detectionComp->IsInView(m_targetEntity);
+			if (m_detectionComp->IsVisible(m_targetEntity)) {
+				CryLog("player visible !");
+			}
 		}
 	}break;
 	case Cry::Entity::EEvent::Reset: {

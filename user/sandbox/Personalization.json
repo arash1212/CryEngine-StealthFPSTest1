@@ -382,6 +382,8 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/soldier2.cgf.cryasset",
+            "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/Characters/soldier1/soldier1-test.cgf.cryasset",
             "Objects/effects/muzzleflash/muzzleflash2.cgf.cryasset",
             "Objects/effects/muzzleflash/muzzleflash1.cgf.cryasset",
@@ -400,6 +402,7 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/Characters/soldier1/soldier_1.mtl.cryasset",
             "Objects/Characters/soldier1/soldier1-test.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
             "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset",

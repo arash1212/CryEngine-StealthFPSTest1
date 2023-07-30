@@ -4,9 +4,10 @@
 
 class AIControllerComponent;
 class ActorStateComponent;
+class AIDetectionComponent;
 
-static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 2.f;
-static constexpr f32 DEFAULT_PLAYER_RUN_SPEED = 3.1f;
+static constexpr f32 DEFAULT_SOLDIER_1_WALK_SPEED = 2.f;
+static constexpr f32 DEFAULT_SOLDIER_1_RUN_SPEED = 3.1f;
 
 class Soldier1Component final : public IEntityComponent
 {
@@ -31,6 +32,7 @@ private:
 
 	AIControllerComponent* m_aiControllerComp = nullptr;
 	ActorStateComponent* m_stateComp = nullptr;
+	AIDetectionComponent* m_detectionComp = nullptr;
 
 	IEntity* m_testTargetEntity = nullptr;
 	Vec3 testMoveToPos = ZERO;
