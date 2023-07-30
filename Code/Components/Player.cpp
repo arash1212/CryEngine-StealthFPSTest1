@@ -295,6 +295,11 @@ void PlayerComponent::AddRecoil(Vec3 Amount)
 	m_targetRotation += Quat::CreateRotationXYZ(Amount);
 }
 
+Cry::DefaultComponents::CCharacterControllerComponent* PlayerComponent::GetCharacterController()
+{
+	return m_characterControllerComp;
+}
+
 void PlayerComponent::UpdateFOV()
 {
 	if (bIsAiming) {

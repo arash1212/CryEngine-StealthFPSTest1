@@ -162,7 +162,16 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 
 
 	MNM::SClosestTriangle closestTriangle = gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->FindClosestTriangle(Around, triangleIDArray);
-	return closestTriangle.position.GetVec3();
+
+
+	Vec3 resultPos = closestTriangle.position.GetVec3();
+	f32 resultMax = 10;
+	f32 resultMin = 0;
+	f32 resultRandom = (resultMin + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / resultMax - resultMin)));
+	Vec3 Dir = resultPos - Around;
+	resultPos = Around + Dir.normalize() * resultRandom;
+
+	return resultPos;
 
 	/*
 	//Test new ?
@@ -179,3 +188,4 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 	return resultPos;
 	*/
 }
+

@@ -59,6 +59,7 @@ void ActorStateComponent::ProcessEvent(const SEntityEvent& event)
 void ActorStateComponent::UpdateState()
 {
 	if (!m_characterController) {
+		CryLog("character controller null");
 		return;
 	}
 
@@ -78,6 +79,11 @@ void ActorStateComponent::UpdateState()
 void ActorStateComponent::SetCharacterController(Cry::DefaultComponents::CCharacterControllerComponent* characterController)
 {
 	this->m_characterController = characterController;
+}
+
+Cry::DefaultComponents::CCharacterControllerComponent* ActorStateComponent::GetCharacterController()
+{
+	return m_characterController;
 }
 
 EActorState ActorStateComponent::GetState()

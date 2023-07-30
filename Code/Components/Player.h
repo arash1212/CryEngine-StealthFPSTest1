@@ -78,8 +78,8 @@ private:
 	//rotation (camera/body)
 	f32 m_rotationX = 0.f;
 	f32 m_rotationY = 0.f;
-	f32 m_minRoationX = -1000;
-	f32 m_maxRoationX = 1000;
+	f32 m_minRoationX = -1300;
+	f32 m_maxRoationX = 1300;
 
 	//recoil
 	f32 m_snapiness = 15.2f;
@@ -114,4 +114,5 @@ private:
 public:
 	Vec2 GetRotationDelta();
 	void AddRecoil(Vec3 Amount);
+	Cry::DefaultComponents::CCharacterControllerComponent* GetCharacterController();
 };

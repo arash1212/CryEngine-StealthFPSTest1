@@ -47,13 +47,64 @@ void AIDetectionComponent::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
+		f32 deltaTime = event.fParam[0];
+
+		UpdateDetectionAmount(deltaTime);
+		UpdateDetectionState();
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
+		m_currentTarget = nullptr;
+		m_detectionAmount = 0.f;
+		bIsTargetFound = false;
+		bCanReturnToIdleState = false;
 
 	}break;
 	default:
 		break;
+	}
+}
+
+void AIDetectionComponent::UpdateDetectionAmount(f32 DeltaTime)
+{
+	if (m_currentTarget) {
+		if (IsTargetCanBeSeen(m_currentTarget)) {
+			CryLog("target can be seen !");
+			if (m_detectionAmount < m_maxDetectionAmount) {
+				m_detectionAmount = CLAMP(m_detectionAmount + DeltaTime, 0, m_maxDetectionAmount);
+			}
+		}
+		else if (m_detectionAmount > m_maxDetectionAmount / 2) {
+			m_detectionAmount = CLAMP(m_detectionAmount - DeltaTime, m_maxDetectionAmount / 2, m_maxDetectionAmount);
+		}
+		//return to idle state ?
+		else if (m_detectionAmount >= m_maxDetectionAmount / 2 && bCanReturnToIdleState) {
+			m_detectionAmount = CLAMP(m_detectionAmount - DeltaTime, 0, m_maxDetectionAmount);
+		}
+	}
+	else if (m_detectionAmount > 0) {
+		m_detectionAmount = CLAMP(m_detectionAmount - DeltaTime, 0, m_maxDetectionAmount);
+	}
+
+	if (m_detectionAmount >= m_maxDetectionAmount || bIsTargetFound && m_detectionAmount >= m_maxDetectionAmount / 2) {
+		bIsTargetFound = true;
+	}
+	else if (m_detectionAmount <= m_maxDetectionAmount / 2) {
+		bIsTargetFound = false;
+	}
+
+	CryLog("Detection amount %f !", m_detectionAmount);
+}
+
+void AIDetectionComponent::UpdateDetectionState()
+{
+	if (m_detectionAmount == 0) {
+		m_detectionState = EDetectionState::IDLE;
+	}else if (m_detectionAmount > m_maxDetectionAmount / 2 && m_detectionAmount < m_maxDetectionAmount) {
+		m_detectionState = EDetectionState::CAUTIOUS;
+	}
+	else if (m_detectionAmount >= m_maxDetectionAmount || bIsTargetFound && m_detectionAmount > m_maxDetectionAmount / 2) {
+		m_detectionState = EDetectionState::COMBAT;
 	}
 }
 
@@ -74,27 +125,64 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 	Vec3 currentPos = m_pEntity->GetPos();
 	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 2);
 	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
-	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	//IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
 		if (hits[0].pCollider) {
-
+			/*
 			//Debug
 			if (pd) {
 				pd->Begin("Raycast", true);
 				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
 				pd->AddSphere(origin, 0.3f, ColorF(0, 1, 0), 2);
 			}
+			*/
 
 			//return true if hitEntity is target
 			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
 			if (hitEntity) {
 				CryLog("Guard found %s", hitEntity->GetName());
 
-				if (hitEntity = target) {
+				if (hitEntity == target) {
 					return true;
 				}
 			}
 		}
 	}
 	return false;
+}
+
+bool AIDetectionComponent::IsTargetCanBeSeen(IEntity* target)
+{
+
+	return IsInView(target) && IsVisible(target);
+}
+
+void AIDetectionComponent::SetCurrentTarget(IEntity* currentTarget)
+{
+	this->m_currentTarget = currentTarget;
+}
+
+bool AIDetectionComponent::IsTargetFound()
+{
+	return bIsTargetFound;
+}
+
+EDetectionState AIDetectionComponent::GetDetectionState()
+{
+	return m_detectionState;
+}
+
+f32 AIDetectionComponent::GetDetectionAmount()
+{
+	return m_detectionAmount;
+}
+
+f32 AIDetectionComponent::GetMaxDetectionAmount()
+{
+	return m_maxDetectionAmount;
+}
+
+void AIDetectionComponent::SetCanReturnToIdleState(bool canReturntoIdle)
+{
+	this->bCanReturnToIdleState = canReturntoIdle;
 }

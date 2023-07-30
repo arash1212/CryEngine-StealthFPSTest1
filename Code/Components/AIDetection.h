@@ -1,5 +1,14 @@
 #pragma once
 
+enum class EDetectionState {
+	IDLE,
+	CAUTIOUS,
+	HIGHT_ALERT,
+	COMBAT
+};
+
+static constexpr f32 DEFAULT_MAX_DETECTION_AMOUNT = 1.f;
+
 class AIDetectionComponent final : public IEntityComponent
 {
 public:
@@ -18,8 +27,31 @@ public:
 	}
 
 private:
+	IEntity* m_currentTarget = nullptr;
+
+
+	f32 m_maxDetectionAmount = DEFAULT_MAX_DETECTION_AMOUNT;
+	f32 m_detectionAmount = 0.f;
+	bool bIsTargetFound = false;
+	bool bCanReturnToIdleState = false;
+
+	EDetectionState m_detectionState = EDetectionState::IDLE;
+
+private:
+	void UpdateDetectionAmount(f32 DeltaTime);
+	void UpdateDetectionState();
 
 public:
 	bool IsInView(IEntity* target);
 	bool IsVisible(IEntity* target);
+	bool IsTargetCanBeSeen(IEntity* target);
+
+	//Getter & Setter
+
+	void SetCurrentTarget(IEntity* currentTarget);
+	bool IsTargetFound();
+	EDetectionState GetDetectionState();
+	f32 GetDetectionAmount();
+	f32 GetMaxDetectionAmount();
+	void SetCanReturnToIdleState(bool canReturntoIdle);
 };

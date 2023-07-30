@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 #include "Soldier1.h"
+#include "Player.h"
+#include "IAIActor.h"
 #include "AIController.h"
 #include "AIDetection.h"
 #include "ActorState.h"
@@ -33,7 +35,7 @@ void Soldier1Component::Initialize()
 	m_animationComp->SetControllerDefinitionFile("Animations/Mannequin/ADB/ThirdPersonControllerDefinition.xml");
 	m_animationComp->SetDefaultScopeContextName("ThirdPersonCharacter");
 	m_animationComp->SetDefaultFragmentName("Idle");
-	m_animationComp->SetAnimationDrivenMotion(true);
+	m_animationComp->SetAnimationDrivenMotion(false);
 	m_animationComp->LoadFromDisk();
 	m_animationComp->ResetCharacter();
 
@@ -49,6 +51,16 @@ void Soldier1Component::Initialize()
 
 	//detection
 	m_detectionComp = m_pEntity->GetOrCreateComponent<AIDetectionComponent>();
+
+	//animations
+	m_idleFragmentId = m_animationComp->GetFragmentId("Idle");
+	m_cautiousFragmentId = m_animationComp->GetFragmentId("Cautious");
+	m_combatFragmentId = m_animationComp->GetFragmentId("Combat");
+	m_closeAttackFragmentId = m_animationComp->GetFragmentId("CloseAttack");
+	m_closeAttackAction = new TAction<SAnimationContext>(30U, m_closeAttackFragmentId);
+
+	//last target position
+	InitLastTargetPositionEntity();
 }
 
 Cry::Entity::EventFlags Soldier1Component::GetEventMask() const
@@ -80,26 +92,47 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
+		f32 deltatime = event.fParam[0];
+
 		UpdateAnimation();
+		UpdateCurrentSpeed();
+		UpdateLastTargetPositionEntity();
 
-		//move to target
-		if (m_targetEntity) {
-			//MoveTo(m_targetEntity->GetWorldPos());
-
-			m_detectionComp->IsInView(m_targetEntity);
-			if (m_detectionComp->IsVisible(m_targetEntity)) {
-				CryLog("player visible !");
-			}
+		//todo ?
+		if (!m_stateComp->GetCharacterController()) {
+			m_stateComp->SetCharacterController(m_aiControllerComp->GetCharacterController());
 		}
+
+		//set target for detection object
+		if (m_targetEntity) {
+			Attack();
+		}
+		else {
+			m_detectionComp->SetCurrentTarget(nullptr);
+		}
+
+		//timers 
+		if (m_closeAttackTimePassed < m_timeBetweenCloseAttacks) {
+			m_closeAttackTimePassed += 0.5f * deltatime;
+		}
+
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 		m_targetEntity = nullptr;
 		m_testTargetEntity = nullptr;
+		m_currentSpeed = DEFAULT_SOLDIER_1_WALK_SPEED;
 
 	}break;
 	default:
 		break;
 	}
+}
+
+void Soldier1Component::InitLastTargetPositionEntity()
+{
+	SEntitySpawnParams targetPositionpawnParams;
+	targetPositionpawnParams.vPosition = m_pEntity->GetWorldPos();
+	m_lastTargetPosition = gEnv->pEntitySystem->SpawnEntity(targetPositionpawnParams);
 }
 
 void Soldier1Component::UpdateAnimation()
@@ -114,15 +147,121 @@ void Soldier1Component::UpdateAnimation()
 
 	float forwardDot = velocity.dot(forwardVector);
 	float rightDot = velocity.dot(rightVector);
-	if (m_stateComp->GetState() == EActorState::WALKING) {
+
+	//Set travel speed
+	if (m_stateComp->GetState() == EActorState::IDLE) {
+		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 0.f);
+	}
+	else if (m_stateComp->GetState() == EActorState::WALKING) {
 		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 2.f);
 	}
 	else if (m_stateComp->GetState() == EActorState::RUNNING) {
 		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 3.1f);
 	}
+	
 
 	int32 inv = rightDot < 0 ? 1 : -1;
 	m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelAngle, crymath::acos(forwardDot) * inv);
+
+	//update animation fragment
+	FragmentID currentFragmentId;
+	if (m_detectionComp->GetDetectionState() == EDetectionState::IDLE) {
+		currentFragmentId = m_idleFragmentId;
+	}
+	else if (m_detectionComp->GetDetectionState() == EDetectionState::CAUTIOUS) {
+		currentFragmentId = m_cautiousFragmentId;
+	}
+	else if (m_detectionComp->GetDetectionState() == EDetectionState::COMBAT) {
+		currentFragmentId = m_combatFragmentId;
+	}
+
+	if (m_activeFragmentId != currentFragmentId) {
+		m_activeFragmentId = currentFragmentId;
+
+		m_animationComp->QueueFragmentWithId(m_activeFragmentId);
+	}
+}
+
+void Soldier1Component::UpdateCurrentSpeed()
+{
+	if (m_detectionComp->GetDetectionState() == EDetectionState::IDLE || m_detectionComp->GetDetectionState() == EDetectionState::CAUTIOUS) {
+		m_currentSpeed = m_walkSpeed;
+	}else if(m_detectionComp->GetDetectionState() == EDetectionState::COMBAT) {
+		m_currentSpeed = m_runSpeed;
+	}
+	m_stateComp->SetCurrentSpeed(m_currentSpeed);
+}
+
+void Soldier1Component::UpdateLastTargetPositionEntity()
+{
+	if (!m_lastTargetPosition) {
+		return;
+	}
+	if (!m_targetEntity) {
+		return;
+	}
+
+
+	if (m_detectionComp->IsVisible(m_targetEntity) && (m_detectionComp->GetDetectionState() == EDetectionState::CAUTIOUS || m_detectionComp->GetDetectionState() == EDetectionState::COMBAT)) {
+		m_lastTargetPosition->SetPos(m_targetEntity->GetWorldPos());
+	}
+	/*
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	if (pd) {
+		pd->Begin("Raycast", true);
+		pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.2f, ColorF(1, 0, 0), 2);
+	}
+	*/
+}
+
+void Soldier1Component::Attack()
+{
+	if (!m_targetEntity) {
+		return;
+	}
+
+	m_detectionComp->SetCurrentTarget(m_targetEntity);
+	if (m_detectionComp->IsTargetFound()) {
+		f32 distanceTotarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
+		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsVisible(m_targetEntity)) {
+			MoveTo(m_lastTargetPosition->GetWorldPos());
+		}
+		else {
+			if (distanceTotarget > m_closeAttackDistance) {
+				MoveAroundTarget(m_targetEntity);
+			}
+			else {
+				m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
+				CloseAttack();
+			}
+		}
+	}
+}
+
+void Soldier1Component::CloseAttack()
+{
+	if (m_closeAttackTimePassed >= m_timeBetweenCloseAttacks) {
+		m_animationComp->GetActionController()->Flush();
+		m_activeFragmentId = m_closeAttackFragmentId;
+		m_animationComp->QueueCustomFragment(*m_closeAttackAction);
+		m_closeAttackTimePassed = 0;
+
+		if (m_targetEntity->GetComponent<PlayerComponent>()) {
+			Vec3 dir = m_targetEntity->GetWorldPos() - m_pEntity->GetWorldPos();
+			m_targetEntity->GetComponent<PlayerComponent>()->GetCharacterController()->AddVelocity(dir * 7);
+		}
+	}
+}
+
+bool Soldier1Component::CanMove()
+{
+	return m_closeAttackTimePassed >= m_timeBetweenCloseAttacks;
+}
+
+void Soldier1Component::StopMoving()
+{
+	m_aiControllerComp->GetCharacterController()->ChangeVelocity(ZERO, Cry::DefaultComponents::CCharacterControllerComponent::EChangeVelocityMode::Jump);
+	m_aiControllerComp->MoveTo(m_pEntity->GetWorldPos());
 }
 
 void Soldier1Component::MoveTo(Vec3 pos)
@@ -131,21 +270,32 @@ void Soldier1Component::MoveTo(Vec3 pos)
 		CryLog("Soldier1Component : (MoveTo) m_aiControllerComp is not assigned !");
 		return;
 	}
+	//stop moving if can't move
+	if (!CanMove()) {
+		StopMoving();
+		return;
+	}
 
-	//testing
+	m_aiControllerComp->MoveToAndLookAtWalkDirection(pos);
+	//if (m_targetEntity) {
+	//	m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
+	//}
+}
+
+void Soldier1Component::MoveAroundTarget(IEntity* target)
+{
+	if (!m_targetEntity) {
+		return;
+	}
+	//stop moving if can't move
+	if (!CanMove()) {
+		StopMoving();
+		return;
+	}
+
 	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
 		testMoveToPos = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_targetEntity != nullptr ? m_targetEntity->GetWorldPos() : m_pEntity->GetWorldPos());
-
-		f32 max = 10;
-		f32 min = 0;
-		f32 random = (min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min)));
-
-		Vec3 Dir = testMoveToPos - m_pEntity->GetWorldPos();
-		testMoveToPos = m_targetEntity->GetWorldPos() + Dir.normalize() * random;
 	}
-
 	m_aiControllerComp->MoveTo(testMoveToPos);
-	if (m_targetEntity) {
-		m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
-	}
+	m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
 }

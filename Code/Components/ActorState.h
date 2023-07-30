@@ -43,6 +43,7 @@ private :
 
 public :
 	void SetCharacterController(Cry::DefaultComponents::CCharacterControllerComponent* characterController);
+	Cry::DefaultComponents::CCharacterControllerComponent* GetCharacterController();
 	EActorState GetState();
 
 	//Getter and setter
