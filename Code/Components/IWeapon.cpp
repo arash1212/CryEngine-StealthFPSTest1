@@ -4,6 +4,8 @@
 #include "ShootAccuracy.h"
 #include "IWeapon.h"
 #include "BulletTracer.h"
+#include "IAIActor.h"
+#include "Soldier1.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -155,10 +157,13 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 			if (hitEntity) {
 				CryLog("Weapon hit %s", hitEntity->GetName());
 
-				//apply impluse on entity at hit point
-				pe_action_impulse impulse;
-				impulse.impulse = m_pEntity->GetForwardDir() * 50;
-				hits[0].pCollider->Action(&impulse);
+				//todo : iActor beshe
+				if (!hitEntity->GetComponent<Soldier1Component>()) {
+					//apply impluse on entity at hit point
+					pe_action_impulse impulse;
+					impulse.impulse = m_pEntity->GetForwardDir() * 50;
+					hits[0].pCollider->Action(&impulse);
+				}
 
 				return hitEntity;
 			}
