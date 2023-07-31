@@ -48,6 +48,7 @@ void Soldier1Component::Initialize()
 	m_stateComp->SetWalkSpeed(m_walkSpeed);
 	m_stateComp->SetRunSpeed(m_runSpeed);
 	m_stateComp->SetCurrentSpeed(m_currentSpeed);
+	m_aiControllerComp->SetActorStateComponent(m_stateComp);
 
 	//detection
 	m_detectionComp = m_pEntity->GetOrCreateComponent<AIDetectionComponent>();
@@ -98,6 +99,9 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 		UpdateCurrentSpeed();
 		UpdateLastTargetPositionEntity();
 
+		//test
+		m_aiControllerComp->Patrol(nullptr);
+
 		//todo ?
 		if (!m_stateComp->GetCharacterController()) {
 			m_stateComp->SetCharacterController(m_aiControllerComp->GetCharacterController());
@@ -133,6 +137,17 @@ void Soldier1Component::InitLastTargetPositionEntity()
 	SEntitySpawnParams targetPositionpawnParams;
 	targetPositionpawnParams.vPosition = m_pEntity->GetWorldPos();
 	m_lastTargetPosition = gEnv->pEntitySystem->SpawnEntity(targetPositionpawnParams);
+}
+
+Vec3 Soldier1Component::GetRandomPointToMoveTo(Vec3 Around, f32 distance)
+{
+	Vec3 point = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_lastTargetPosition != nullptr ? m_lastTargetPosition : m_pEntity);
+	//if (m_detectionComp->IsTargetFound()) {
+	//	while (!m_detectionComp->IsVisibleFrom(point, m_targetEntity)) {
+	//		point = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos());
+	//	}
+	//}
+	return point;
 }
 
 void Soldier1Component::UpdateAnimation()
@@ -205,13 +220,12 @@ void Soldier1Component::UpdateLastTargetPositionEntity()
 	if (m_detectionComp->IsVisible(m_targetEntity) && (m_detectionComp->GetDetectionState() == EDetectionState::CAUTIOUS || m_detectionComp->GetDetectionState() == EDetectionState::COMBAT)) {
 		m_lastTargetPosition->SetPos(m_targetEntity->GetWorldPos());
 	}
-	/*
+	
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (pd) {
-		pd->Begin("Raycast", true);
-		pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.2f, ColorF(1, 0, 0), 2);
+		pd->Begin("DetectionRaycast", true);
+		pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.6f, ColorF(1, 0, 0), 2);
 	}
-	*/
 }
 
 void Soldier1Component::Attack()
@@ -223,12 +237,12 @@ void Soldier1Component::Attack()
 	m_detectionComp->SetCurrentTarget(m_targetEntity);
 	if (m_detectionComp->IsTargetFound()) {
 		f32 distanceTotarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
-		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsVisible(m_targetEntity)) {
+		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsTargetFound()) {
 			MoveTo(m_lastTargetPosition->GetWorldPos());
 		}
 		else {
 			if (distanceTotarget > m_closeAttackDistance) {
-				MoveAroundTarget(m_targetEntity);
+				MoveAroundTarget(m_lastTargetPosition);
 			}
 			else {
 				m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
@@ -277,9 +291,6 @@ void Soldier1Component::MoveTo(Vec3 pos)
 	}
 
 	m_aiControllerComp->MoveToAndLookAtWalkDirection(pos);
-	//if (m_targetEntity) {
-	//	m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
-	//}
 }
 
 void Soldier1Component::MoveAroundTarget(IEntity* target)
@@ -294,8 +305,19 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 	}
 
 	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
-		testMoveToPos = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_targetEntity != nullptr ? m_targetEntity->GetWorldPos() : m_pEntity->GetWorldPos());
+		testMoveToPos = GetRandomPointToMoveTo(m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos(), 10);
 	}
-	m_aiControllerComp->MoveTo(testMoveToPos);
-	m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
+
+	//testing
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	pd->Begin("testPoint123", true);
+	pd->AddSphere(testMoveToPos, 0.5f, ColorF(0, 0, 1), 10);
+
+	if (m_detectionComp->IsTargetFound()) {
+		m_aiControllerComp->MoveTo(testMoveToPos);
+		m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
+	}
+	else {
+		m_aiControllerComp->MoveToAndLookAtWalkDirection(testMoveToPos);
+	}
 }

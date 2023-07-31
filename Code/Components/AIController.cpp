@@ -1,7 +1,9 @@
 #include "StdAfx.h"
 #include "AIController.h"
+#include "ActorState.h"
 #include "GamePlugin.h"
 
+#include "CryAISystem/IAIActionSequence.h"
 #include <CryAISystem/IAISystem.h>
 #include <CryAISystem/INavigationSystem.h>
 #include <CryAISystem/INavigation.h>
@@ -43,6 +45,11 @@ void AIControllerComponent::Initialize()
 	m_movementProps.lookAheadDistance = 0.5f;
 	m_navigationComp->SetMovementProperties(m_movementProps);
 
+	//collision avoidance
+	IEntityNavigationComponent::SCollisionAvoidanceProperties collisionAvoidanceProps;
+	collisionAvoidanceProps.radius = 0.5f;
+	m_navigationComp->SetCollisionAvoidanceProperties(collisionAvoidanceProps);
+
 }
 
 Cry::Entity::EventFlags AIControllerComponent::GetEventMask() const
@@ -80,6 +87,20 @@ f32 AIControllerComponent::GetRandomFloat(f32 min, f32 max)
 	return (min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min)));
 }
 
+Vec3 AIControllerComponent::GetRandomPointInsideTriangle(Triangle t)
+{
+	f32 r1 = crymath::sqrt(GetRandomFloat(0.f, 1.f));
+	f32 r2 = GetRandomFloat(0.f, 1.f);
+	f32 m1 = 1 - r1;
+	f32 m2 = r1 * (1 - r2);
+	f32 m3 = r2 * r1;
+
+	Vec3 p1 = t.v0;
+	Vec3 p2 = t.v1;
+	Vec3 p3 = t.v2;
+	return (m1 * p1) + (m2 * p2) + (m3 * p3);
+}
+
 Vec3 AIControllerComponent::GetVelocity()
 {
 	return m_characterControllerComp->GetVelocity();
@@ -114,8 +135,12 @@ void AIControllerComponent::NavigateTo(Vec3 position)
 
 void AIControllerComponent::MoveTo(Vec3 position)
 {
+	if (!m_stateComp) {
+		CryLog("AIControllerComponent : (MoveTo) m_stateComp is null!");
+		return;
+	}
 	NavigateTo(position);
-	m_characterControllerComp->SetVelocity(m_navigationComp->GetRequestedVelocity());
+	m_characterControllerComp->SetVelocity(m_stateComp->GetState() == EActorState::RUNNING ? m_navigationComp->GetRequestedVelocity() * 2 : m_navigationComp->GetRequestedVelocity());
 }
 
 void AIControllerComponent::MoveToAndLookAtWalkDirection(Vec3 position)
@@ -125,12 +150,13 @@ void AIControllerComponent::MoveToAndLookAtWalkDirection(Vec3 position)
 	m_pEntity->SetRotation(Quat::CreateRotationVDir(m_navigationComp->GetRequestedVelocity()));
 }
 
-Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Around)
+Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* Around)
 {
 	MNM::TriangleIDArray resultArray;
+	DynArray<Vec3> resultPositions;
 
 	NavigationAgentTypeID agentTypeId = NavigationAgentTypeID::TNavigationID(1);
-	NavigationMeshID navMeshId = gEnv->pAISystem->GetNavigationSystem()->FindEnclosingMeshID(agentTypeId, Around);
+	NavigationMeshID navMeshId = gEnv->pAISystem->GetNavigationSystem()->FindEnclosingMeshID(agentTypeId, Around->GetWorldPos());
 
 	//get Triangles
 	const Vec3 triggerBoxSize = Vec3(50, 50, 50);
@@ -140,6 +166,24 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 		return m_pEntity->GetWorldPos();
 	}
 
+	for (int32 i = 0; i < triangleIDArray.size(); i++) {
+		int32 j = 0;
+		Triangle triangle;
+		gEnv->pAISystem->GetNavigationSystem()->GetTriangleVertices(navMeshId, triangleIDArray[i], triangle);
+		while (j < 12) {
+			j++;
+			Vec3 point = GetRandomPointInsideTriangle(triangle);
+			if (IsPointVisibleFrom(agentTypeId, point, Around->GetWorldPos())) {
+				IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+				pd->Begin("testPoint", true);
+				pd->AddSphere(point, 0.5f, ColorF(1, 0, 0), 10);
+				resultPositions.append(point);
+			}
+		}
+	}
+
+
+	/*
 	//check distances
 	MNM::TriangleIDArray iDArray;
 	for (int32 i = 0; i < triangleIDArray.size(); i++) {
@@ -163,15 +207,30 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 
 	MNM::SClosestTriangle closestTriangle = gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->FindClosestTriangle(Around, triangleIDArray);
 
+	*/
 
-	Vec3 resultPos = closestTriangle.position.GetVec3();
-	f32 resultMax = 10;
+	//old
+	//Vec3 resultPos = closestTriangle.position.GetVec3();
+	
+	//new 
+	int32 max = resultPositions.size();
+	int32 min = 0;
+	int32 range = max - min + 1;
+	int random = rand() % range + min;
+	Vec3 resultPos = resultPositions[random];
+
+	f32 resultMax = MaxDistance;
 	f32 resultMin = 0;
-	f32 resultRandom = (resultMin + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / resultMax - resultMin)));
-	Vec3 Dir = resultPos - Around;
-	resultPos = Around + Dir.normalize() * resultRandom;
+	Vec3 Dir = resultPos - Around->GetWorldPos();
 
-	return resultPos;
+	resultPos = Around->GetWorldPos() + Dir.normalize() * (resultMin + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / resultMax - resultMin)));
+
+	MNM::SOrderedSnappingMetrics snappingMetrics;
+	snappingMetrics.CreateDefault();
+	SAcceptAllQueryTrianglesFilter filter;
+	MNM::SPointOnNavMesh pointOnNavMesh = gEnv->pAISystem->GetNavigationSystem()->SnapToNavMesh(agentTypeId, resultPos, snappingMetrics, &filter, &navMeshId);
+	return pointOnNavMesh.GetWorldPosition();
+
 
 	/*
 	//Test new ?
@@ -187,5 +246,38 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, Vec3 Arou
 	}
 	return resultPos;
 	*/
+}
+
+bool AIControllerComponent::IsPointVisibleFrom(NavigationAgentTypeID agentTypeId, Vec3 from, Vec3 endPos)
+{
+	MNM::SRayHitOutput rayHitOut;
+	SAcceptAllQueryTrianglesFilter filter;
+	MNM::ERayCastResult result = gEnv->pAISystem->GetNavigationSystem()->NavMeshRayCast(agentTypeId, from, endPos, &filter, &rayHitOut);
+	return result != MNM::ERayCastResult::DisconnectedLocations ? true : false;
+}
+
+void AIControllerComponent::SetActorStateComponent(ActorStateComponent* stateComp)
+{
+	this->m_stateComp = stateComp;
+}
+
+void AIControllerComponent::Patrol(INavPath* path)
+{
+	//PathFollowerParams params;
+	//IPathFollower* follower;
+	//follower->SetParams(params);
+	//follower->AttachToPath(path);
+	//follower->Draw(m_pEntity->GetWorldPos());
+
+	NavigationVolumeID vId =gEnv->pAISystem->GetNavigationSystem()->GetAreaId("1");
+	IEntity* pathTest = gEnv->pEntitySystem->FindEntityByName("ai-path1");
+	if (pathTest) {
+		CryLog("Path Found");
+	}
+	else {
+		CryLog("Path Not Found");
+	}
+	//INavPathPtr pt =gEnv->pAISystem->GetNavigationSystem()
+	// gEnv->pAISystem->GetMNMPathfinder();
 }
 

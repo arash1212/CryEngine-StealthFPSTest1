@@ -44,6 +44,7 @@ private:
 public:
 	bool IsInView(IEntity* target);
 	bool IsVisible(IEntity* target);
+	bool IsVisibleFrom(Vec3 from, IEntity* target);
 	bool IsTargetCanBeSeen(IEntity* target);
 
 	//Getter & Setter

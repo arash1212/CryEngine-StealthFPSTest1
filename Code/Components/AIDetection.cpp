@@ -69,7 +69,7 @@ void AIDetectionComponent::UpdateDetectionAmount(f32 DeltaTime)
 {
 	if (m_currentTarget) {
 		if (IsTargetCanBeSeen(m_currentTarget)) {
-			CryLog("target can be seen !");
+			//CryLog("target can be seen !");
 			if (m_detectionAmount < m_maxDetectionAmount) {
 				m_detectionAmount = CLAMP(m_detectionAmount + DeltaTime, 0, m_maxDetectionAmount);
 			}
@@ -93,17 +93,17 @@ void AIDetectionComponent::UpdateDetectionAmount(f32 DeltaTime)
 		bIsTargetFound = false;
 	}
 
-	CryLog("Detection amount %f !", m_detectionAmount);
+	//CryLog("Detection amount %f !", m_detectionAmount);
 }
 
 void AIDetectionComponent::UpdateDetectionState()
 {
 	if (m_detectionAmount == 0) {
 		m_detectionState = EDetectionState::IDLE;
-	}else if (m_detectionAmount > m_maxDetectionAmount / 2 && m_detectionAmount < m_maxDetectionAmount) {
+	}else if (m_detectionAmount > m_maxDetectionAmount / 2 && m_detectionAmount < m_maxDetectionAmount && !bIsTargetFound) {
 		m_detectionState = EDetectionState::CAUTIOUS;
 	}
-	else if (m_detectionAmount >= m_maxDetectionAmount || bIsTargetFound && m_detectionAmount > m_maxDetectionAmount / 2) {
+	else if (m_detectionAmount >= m_maxDetectionAmount || bIsTargetFound && m_detectionAmount >= m_maxDetectionAmount / 2) {
 		m_detectionState = EDetectionState::COMBAT;
 	}
 }
@@ -123,7 +123,7 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 
 	Vec3 currentPos = m_pEntity->GetPos();
-	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 2);
+	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.6f);
 	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
 	//IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
@@ -140,8 +140,32 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 			//return true if hitEntity is target
 			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
 			if (hitEntity) {
-				CryLog("Guard found %s", hitEntity->GetName());
+				if (hitEntity == target) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
 
+bool AIDetectionComponent::IsVisibleFrom(Vec3 from, IEntity* target)
+{
+	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
+	std::array<ray_hit, 2> hits;
+	static IPhysicalEntity* pSkippedEntities[10];
+	pSkippedEntities[0] = m_pEntity->GetPhysics();
+
+	Vec3 currentPos = from;
+	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.f);
+	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
+
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
+		if (hits[0].pCollider) {
+
+			//return true if hitEntity is target
+			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
+			if (hitEntity) {
 				if (hitEntity == target) {
 					return true;
 				}

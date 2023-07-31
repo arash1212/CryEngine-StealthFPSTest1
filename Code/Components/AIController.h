@@ -1,6 +1,9 @@
 #pragma once
 
+#include <CryAISystem/INavigationSystem.h>
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
+
+class ActorStateComponent;
 
 class AIControllerComponent final : public IEntityComponent
 {
@@ -24,8 +27,11 @@ private:
 	Cry::DefaultComponents::CCharacterControllerComponent* m_characterControllerComp = nullptr;
 	struct IEntityNavigationComponent* m_navigationComp = nullptr;
 
+	ActorStateComponent* m_stateComp;
+
 protected:
 	f32 GetRandomFloat(f32 min, f32 max);
+	Vec3 GetRandomPointInsideTriangle(Triangle t);
 
 public:
 	
@@ -38,5 +44,9 @@ public:
 	void NavigateTo(Vec3 position);
 	void MoveTo(Vec3 position);
 	void MoveToAndLookAtWalkDirection(Vec3 position);
-	Vec3 GetRandomPointOnNavmesh(float MaxDistance, Vec3 Around);
+	Vec3 GetRandomPointOnNavmesh(float MaxDistance, IEntity* Around);
+	bool IsPointVisibleFrom(NavigationAgentTypeID agentTypeId, Vec3 from, Vec3 endPos);
+	void SetActorStateComponent(ActorStateComponent* stateComp);
+	void Patrol(INavPath* path);
+
 };

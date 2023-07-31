@@ -61,6 +61,7 @@ private:
 
 private:
 	void InitLastTargetPositionEntity();
+	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
 
 protected:
 	virtual void UpdateAnimation() override;
