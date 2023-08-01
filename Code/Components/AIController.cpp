@@ -1,8 +1,9 @@
 #include "StdAfx.h"
 #include "AIController.h"
 #include "ActorState.h"
-#include "GamePlugin.h"
+//#include "GamePlugin.h
 
+#include <CryAISystem/ITacticalPointSystem.h>
 #include "CryAISystem/IAIActionSequence.h"
 #include <CryAISystem/IAISystem.h>
 #include <CryAISystem/INavigationSystem.h>
@@ -139,12 +140,24 @@ void AIControllerComponent::MoveTo(Vec3 position)
 		CryLog("AIControllerComponent : (MoveTo) m_stateComp is null!");
 		return;
 	}
+	if (!m_characterControllerComp) {
+		CryLog("AIControllerComponent : (MoveTo) m_characterControllerComp is null!");
+		return;
+	}
 	NavigateTo(position);
 	m_characterControllerComp->SetVelocity(m_stateComp->GetState() == EActorState::RUNNING ? m_navigationComp->GetRequestedVelocity() * 2 : m_navigationComp->GetRequestedVelocity());
 }
 
 void AIControllerComponent::MoveToAndLookAtWalkDirection(Vec3 position)
 {
+	if (!m_stateComp) {
+		CryLog("AIControllerComponent : (MoveToAndLookAtWalkDirection) m_stateComp is null!");
+		return;
+	}
+	if (!m_characterControllerComp) {
+		CryLog("AIControllerComponent : (MoveToAndLookAtWalkDirection) m_characterControllerComp is null!");
+		return;
+	}
 	NavigateTo(position);
 	m_characterControllerComp->SetVelocity(m_navigationComp->GetRequestedVelocity());
 	m_pEntity->SetRotation(Quat::CreateRotationVDir(m_navigationComp->GetRequestedVelocity()));
@@ -261,23 +274,30 @@ void AIControllerComponent::SetActorStateComponent(ActorStateComponent* stateCom
 	this->m_stateComp = stateComp;
 }
 
-void AIControllerComponent::Patrol(INavPath* path)
+void AIControllerComponent::Patrol()
 {
-	//PathFollowerParams params;
-	//IPathFollower* follower;
-	//follower->SetParams(params);
-	//follower->AttachToPath(path);
-	//follower->Draw(m_pEntity->GetWorldPos());
+	float distanceToPoint = m_currentPatrolPoint.GetDistance(m_pEntity->GetWorldPos());
+	if (distanceToPoint <= 1 || m_currentPatrolPoint == ZERO) {
+		//update progress
+		if (m_patrolProgress >= 100) {
+			bIsAtEnd = true;
+		}
+		else if (m_patrolProgress <= 0) {
+			bIsAtEnd = false;
+		}
 
-	NavigationVolumeID vId =gEnv->pAISystem->GetNavigationSystem()->GetAreaId("1");
-	IEntity* pathTest = gEnv->pEntitySystem->FindEntityByName("ai-path1");
-	if (pathTest) {
-		CryLog("Path Found");
+		//reverse
+		if (bIsAtEnd) {
+			m_patrolProgress = CLAMP(m_patrolProgress - 1, 0, 100);
+		}
+		else {
+			m_patrolProgress = CLAMP(m_patrolProgress + 1, 0, 100);;
+		}
+
+		gEnv->pAISystem->GetINavigation()->GetPointOnPathBySegNo("ai-path1", m_currentPatrolPoint, m_patrolProgress);
 	}
-	else {
-		CryLog("Path Not Found");
+
+	if (m_currentPatrolPoint != ZERO) {
+		MoveToAndLookAtWalkDirection(m_currentPatrolPoint);
 	}
-	//INavPathPtr pt =gEnv->pAISystem->GetNavigationSystem()
-	// gEnv->pAISystem->GetMNMPathfinder();
 }
-

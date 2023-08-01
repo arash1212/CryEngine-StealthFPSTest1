@@ -99,8 +99,10 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 		UpdateCurrentSpeed();
 		UpdateLastTargetPositionEntity();
 
-		//test
-		m_aiControllerComp->Patrol(nullptr);
+		//patrol
+		if (!m_detectionComp->IsTargetFound()) {
+			m_aiControllerComp->Patrol();
+		}
 
 		//todo ?
 		if (!m_stateComp->GetCharacterController()) {

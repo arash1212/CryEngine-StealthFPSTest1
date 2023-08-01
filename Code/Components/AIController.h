@@ -1,5 +1,6 @@
 #pragma once
 
+#include <CryAISystem/IPathfinder.h>
 #include <CryAISystem/INavigationSystem.h>
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
 
@@ -12,7 +13,6 @@ public:
 	virtual ~AIControllerComponent() = default;
 
 	virtual void Initialize() override;
-
 	virtual Cry::Entity::EventFlags GetEventMask() const override;
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 
@@ -29,9 +29,15 @@ private:
 
 	ActorStateComponent* m_stateComp;
 
+private :
+	Vec3 m_currentPatrolPoint = ZERO;
+	f32 m_patrolProgress = 0.f;
+	bool bIsAtEnd = false;
+
 protected:
 	f32 GetRandomFloat(f32 min, f32 max);
 	Vec3 GetRandomPointInsideTriangle(Triangle t);
+	INavPath* path;
 
 public:
 	
@@ -47,6 +53,6 @@ public:
 	Vec3 GetRandomPointOnNavmesh(float MaxDistance, IEntity* Around);
 	bool IsPointVisibleFrom(NavigationAgentTypeID agentTypeId, Vec3 from, Vec3 endPos);
 	void SetActorStateComponent(ActorStateComponent* stateComp);
-	void Patrol(INavPath* path);
+	void Patrol();
 
 };

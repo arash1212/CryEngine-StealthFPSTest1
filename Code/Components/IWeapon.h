@@ -73,7 +73,7 @@ protected:
 
 	//recoil
 	f32 m_snapiness = 50.2f;
-	f32 m_returnSpeed = 9.1f;
+	f32 m_returnSpeed = 30.1f;
 	Quat m_meshefaultRotaion = IDENTITY;
 	Quat m_currentRotation = IDENTITY;
 	Quat m_targetRotation = IDENTITY;

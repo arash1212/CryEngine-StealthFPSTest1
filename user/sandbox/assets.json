@@ -5811,7 +5811,7 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1690664171,
+			"timestamp": 1690840909,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5877,6 +5877,10 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/objects/primitive_sphere.cgf",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
 					"usageCount": 0
 				},
@@ -5896,6 +5900,42 @@
 				{ "path": "animations/mannequin/adb/playertags.xml", "usageCount": 0 },
 				{
 					"path": "animations/mannequin/adb/thirdpersoncontrollerdefinition.xml",
+					"usageCount": 0
+				},
+				{
+					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/effects/muzzleflash/muzzleflash_1.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/effects/muzzleflash/muzzleflash_2.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/effects/muzzleflash/muzzleflash_3.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/weapons/glock/1p/glock_glock_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/weapons/glock/1p/hand_texture_1.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/weapons/glock/1p/hand_texture_2.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/weapons/glock/1p/pistol_glock_green_texture.dds",
 					"usageCount": 0
 				},
 				{
@@ -5952,6 +5992,10 @@
 					"usageCount": 0
 				},
 				{
+					"path": "objects/characters/soldier1/soldier_1.chr.cgf",
+					"usageCount": 0
+				},
+				{
 					"path": "objects/characters/soldier1/soldier_1.mtl",
 					"usageCount": 0
 				},
@@ -5999,6 +6043,123 @@
 					"path": "objects/characters/soldier1/soldier_1_rifle_aim_run_right.caf",
 					"usageCount": 0
 				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_idle.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_walk_backward.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_walk_forward.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_walk_right.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_hit_reaction_1.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_hit_reaction_2.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/characters/soldier1/soldier_1_rifle_kick.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash1.cgf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash1.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash2.cgf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash2.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash3.cgf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash3.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash_1.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash_2.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/effects/muzzleflash/muzzleflash_3.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/glock_glock_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/hand_texture_1.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/hand_texture_2.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.cdf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.chr",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_fire.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_green_texture.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_idle.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_mesh.skin",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_run.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/weapons/glock/1p/pistol_glock_walk.caf",
+					"usageCount": 0
+				},
+				{ "path": "scripts/ai/factions.xml", "usageCount": 0 },
 				{
 					"path": "textures/cubemaps/example/environmentprobe1_cm.dds",
 					"usageCount": 0
