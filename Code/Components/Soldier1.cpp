@@ -94,7 +94,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
-		if (bIsGameplayStarted) {
+		//if (bIsGameplayStarted) {
 			f32 deltatime = event.fParam[0];
 
 			UpdateAnimation();
@@ -127,7 +127,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			}
 
 
-		}
+	//	}
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
