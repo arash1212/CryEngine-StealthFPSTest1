@@ -1,11 +1,11 @@
 #pragma once
 
+//#include "IAIActor.h"
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 
 class AIControllerComponent;
 class ActorStateComponent;
 class AIDetectionComponent;
-class IAIActorComponent;
 
 static constexpr f32 DEFAULT_SOLDIER_1_WALK_SPEED = 2.f;
 static constexpr f32 DEFAULT_SOLDIER_1_RUN_SPEED = 3.1f;
@@ -41,9 +41,11 @@ private:
 	IEntity* m_lastTargetPosition;
 
 private:
-	f32 m_walkSpeed = DEFAULT_PLAYER_WALK_SPEED;
-	f32 m_runSpeed = DEFAULT_PLAYER_RUN_SPEED;
-	f32 m_currentSpeed = DEFAULT_PLAYER_WALK_SPEED;
+	bool bIsGameplayStarted = false;
+
+	f32 m_walkSpeed = DEFAULT_SOLDIER_1_WALK_SPEED;
+	f32 m_runSpeed = DEFAULT_SOLDIER_1_RUN_SPEED;
+	f32 m_currentSpeed = DEFAULT_SOLDIER_1_WALK_SPEED;
 
 	//animations
 	FragmentID m_idleFragmentId;
@@ -59,6 +61,8 @@ private:
 	f32 m_timeBetweenCloseAttacks = 0.5f;
 	f32 m_closeAttackTimePassed = 0.f;
 
+	//patrol
+	Schematyc::CSharedString m_patrolPathName = "aiPath-1";
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
@@ -73,4 +77,6 @@ protected:
 	virtual void CloseAttack() override;
 	virtual bool CanMove() override;
 	virtual void StopMoving() override;
+public:
+	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);
 };

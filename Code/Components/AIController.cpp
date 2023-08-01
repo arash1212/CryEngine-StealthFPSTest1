@@ -183,7 +183,7 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* 
 		int32 j = 0;
 		Triangle triangle;
 		gEnv->pAISystem->GetNavigationSystem()->GetTriangleVertices(navMeshId, triangleIDArray[i], triangle);
-		while (j < 12) {
+		while (j <= 20) {
 			j++;
 			Vec3 point = GetRandomPointInsideTriangle(triangle);
 			if (IsPointVisibleFrom(agentTypeId, point, Around->GetWorldPos())) {
@@ -233,7 +233,7 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* 
 	Vec3 resultPos = resultPositions[random];
 
 	f32 resultMax = MaxDistance;
-	f32 resultMin = 0;
+	f32 resultMin = 3;
 	Vec3 Dir = resultPos - Around->GetWorldPos();
 
 	resultPos = Around->GetWorldPos() + Dir.normalize() * (resultMin + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / resultMax - resultMin)));
@@ -274,7 +274,7 @@ void AIControllerComponent::SetActorStateComponent(ActorStateComponent* stateCom
 	this->m_stateComp = stateComp;
 }
 
-void AIControllerComponent::Patrol()
+void AIControllerComponent::Patrol(Schematyc::CSharedString pathName)
 {
 	float distanceToPoint = m_currentPatrolPoint.GetDistance(m_pEntity->GetWorldPos());
 	if (distanceToPoint <= 1 || m_currentPatrolPoint == ZERO) {
@@ -294,7 +294,7 @@ void AIControllerComponent::Patrol()
 			m_patrolProgress = CLAMP(m_patrolProgress + 1, 0, 100);;
 		}
 
-		gEnv->pAISystem->GetINavigation()->GetPointOnPathBySegNo("ai-path1", m_currentPatrolPoint, m_patrolProgress);
+		gEnv->pAISystem->GetINavigation()->GetPointOnPathBySegNo(pathName.c_str(), m_currentPatrolPoint, m_patrolProgress);
 	}
 
 	if (m_currentPatrolPoint != ZERO) {

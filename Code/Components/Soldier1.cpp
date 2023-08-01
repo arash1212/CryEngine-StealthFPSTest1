@@ -81,6 +81,8 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::GameplayStarted: {
+		bIsGameplayStarted = true;
+
 		//todo : test target hazf beshe
 		if (!m_testTargetEntity) {
 			m_testTargetEntity = gEnv->pEntitySystem->FindEntityByName("AiTestTargetEntity");
@@ -90,36 +92,41 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
 		}
 
-
 	}break;
 	case Cry::Entity::EEvent::Update: {
-		f32 deltatime = event.fParam[0];
+		if (bIsGameplayStarted) {
+			f32 deltatime = event.fParam[0];
 
-		UpdateAnimation();
-		UpdateCurrentSpeed();
-		UpdateLastTargetPositionEntity();
+			UpdateAnimation();
+			UpdateCurrentSpeed();
+			UpdateLastTargetPositionEntity();
 
-		//patrol
-		if (!m_detectionComp->IsTargetFound()) {
-			m_aiControllerComp->Patrol();
-		}
+			//patrol
+			//todo : && !m_patrolPathName.empty() && m_patrolPathName != ""
+			if (!m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
+				m_aiControllerComp->Patrol(m_patrolPathName);
+			}
 
-		//todo ?
-		if (!m_stateComp->GetCharacterController()) {
-			m_stateComp->SetCharacterController(m_aiControllerComp->GetCharacterController());
-		}
+			//todo ?
+			if (!m_stateComp->GetCharacterController()) {
+				m_stateComp->SetCharacterController(m_aiControllerComp->GetCharacterController());
+			}
 
-		//set target for detection object
-		if (m_targetEntity) {
-			Attack();
-		}
-		else {
-			m_detectionComp->SetCurrentTarget(nullptr);
-		}
+			//set target for detection object
+			if (m_targetEntity) {
+				//m_detectionComp->IsInView(m_targetEntity);
+				Attack();
+			}
+			else {
+				m_detectionComp->SetCurrentTarget(nullptr);
+			}
 
-		//timers 
-		if (m_closeAttackTimePassed < m_timeBetweenCloseAttacks) {
-			m_closeAttackTimePassed += 0.5f * deltatime;
+			//timers 
+			if (m_closeAttackTimePassed < m_timeBetweenCloseAttacks) {
+				m_closeAttackTimePassed += 0.5f * deltatime;
+			}
+
+
 		}
 
 	}break;
@@ -127,6 +134,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 		m_targetEntity = nullptr;
 		m_testTargetEntity = nullptr;
 		m_currentSpeed = DEFAULT_SOLDIER_1_WALK_SPEED;
+		bIsGameplayStarted = false;
 
 	}break;
 	default:
@@ -280,6 +288,11 @@ void Soldier1Component::StopMoving()
 	m_aiControllerComp->MoveTo(m_pEntity->GetWorldPos());
 }
 
+void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)
+{
+	this->m_patrolPathName = patrolPathName;
+}
+
 void Soldier1Component::MoveTo(Vec3 pos)
 {
 	if (!m_aiControllerComp) {
@@ -310,10 +323,12 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 		testMoveToPos = GetRandomPointToMoveTo(m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos(), 10);
 	}
 
+	/*
 	//testing
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	pd->Begin("testPoint123", true);
 	pd->AddSphere(testMoveToPos, 0.5f, ColorF(0, 0, 1), 10);
+	*/
 
 	if (m_detectionComp->IsTargetFound()) {
 		m_aiControllerComp->MoveTo(testMoveToPos);

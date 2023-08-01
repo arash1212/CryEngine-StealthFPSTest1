@@ -111,8 +111,9 @@ void AIDetectionComponent::UpdateDetectionState()
 bool AIDetectionComponent::IsInView(IEntity* target)
 {
 	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
-	float dot = m_pEntity->GetForwardDir().normalized().dot(dir);
-	return dot > 0;
+	float dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
+	float degree = RAD2DEG(crymath::acos(dot));
+	return degree > 0 && degree < 70;
 }
 
 bool AIDetectionComponent::IsVisible(IEntity* target)
