@@ -63,6 +63,10 @@ private:
 
 	//patrol
 	Schematyc::CSharedString m_patrolPathName = "aiPath-1";
+
+	//cover
+	Vec3 m_currentCoverPosition = ZERO;
+
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);

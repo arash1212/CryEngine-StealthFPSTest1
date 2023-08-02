@@ -83,15 +83,6 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 	case Cry::Entity::EEvent::GameplayStarted: {
 		bIsGameplayStarted = true;
 
-		//todo : test target hazf beshe
-		if (!m_testTargetEntity) {
-			m_testTargetEntity = gEnv->pEntitySystem->FindEntityByName("AiTestTargetEntity");
-		}
-
-		if (!m_targetEntity) {
-			m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
-		}
-
 	}break;
 	case Cry::Entity::EEvent::Update: {
 		//if (bIsGameplayStarted) {
@@ -100,6 +91,15 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			UpdateAnimation();
 			UpdateCurrentSpeed();
 			UpdateLastTargetPositionEntity();
+
+			//todo : test target hazf beshe
+			if (!m_testTargetEntity) {
+				m_testTargetEntity = gEnv->pEntitySystem->FindEntityByName("AiTestTargetEntity");
+			}
+
+			if (!m_targetEntity) {
+				m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
+			}
 
 			//patrol
 			//todo : && !m_patrolPathName.empty() && m_patrolPathName != ""
@@ -125,6 +125,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			if (m_closeAttackTimePassed < m_timeBetweenCloseAttacks) {
 				m_closeAttackTimePassed += 0.5f * deltatime;
 			}
+
 
 
 	//	}
@@ -246,15 +247,32 @@ void Soldier1Component::Attack()
 
 	m_detectionComp->SetCurrentTarget(m_targetEntity);
 	if (m_detectionComp->IsTargetFound()) {
-		f32 distanceTotarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
+		f32 distanceTotarget = m_pEntity->GetWorldPos().GetDistance(m_lastTargetPosition->GetWorldPos());
 		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsTargetFound()) {
-			MoveTo(m_lastTargetPosition->GetWorldPos());
+			//MoveTo(m_lastTargetPosition->GetWorldPos());
 		}
 		else {
-			if (distanceTotarget > m_closeAttackDistance) {
-				MoveAroundTarget(m_lastTargetPosition);
+			if (distanceTotarget > m_closeAttackDistance ) {
+				//move around target if it close and cover is not safe
+				if (!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+					MoveAroundTarget(m_targetEntity);
+					m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
+				}
+				else
+				{
+					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+						m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
+						//move arount target while looking for new cover
+						MoveAroundTarget(m_targetEntity);
+						m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
+					}
+					//move to cover
+					MoveTo(m_currentCoverPosition);
+					m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
+				}
 			}
 			else {
+				//close attack (kick)
 				m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
 				CloseAttack();
 			}
@@ -320,7 +338,7 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 	}
 
 	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
-		testMoveToPos = GetRandomPointToMoveTo(m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos(), 10);
+		testMoveToPos = GetRandomPointToMoveTo(m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos(), 8);
 	}
 
 	/*

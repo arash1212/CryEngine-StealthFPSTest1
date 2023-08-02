@@ -3,6 +3,7 @@
 #include "ActorState.h"
 //#include "GamePlugin.h
 
+#include <CryAISystem/ICoverSystem.h>
 #include <CryAISystem/ITacticalPointSystem.h>
 #include "CryAISystem/IAIActionSequence.h"
 #include <CryAISystem/IAISystem.h>
@@ -131,7 +132,12 @@ void AIControllerComponent::LookAt(Vec3 position)
 
 void AIControllerComponent::NavigateTo(Vec3 position)
 {
-	m_navigationComp->NavigateTo(position);
+	if (position != ZERO){
+		m_navigationComp->NavigateTo(position);
+	}
+	else {
+		m_navigationComp->NavigateTo(m_pEntity->GetWorldPos());
+	}
 }
 
 void AIControllerComponent::MoveTo(Vec3 position)
@@ -159,7 +165,7 @@ void AIControllerComponent::MoveToAndLookAtWalkDirection(Vec3 position)
 		return;
 	}
 	NavigateTo(position);
-	m_characterControllerComp->SetVelocity(m_navigationComp->GetRequestedVelocity());
+	m_characterControllerComp->SetVelocity(m_stateComp->GetState() == EActorState::RUNNING ? m_navigationComp->GetRequestedVelocity() * 2 : m_navigationComp->GetRequestedVelocity());
 	m_pEntity->SetRotation(Quat::CreateRotationVDir(m_navigationComp->GetRequestedVelocity()));
 }
 
@@ -232,7 +238,7 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* 
 	int random = rand() % range + min;
 	Vec3 resultPos = resultPositions[random];
 
-	f32 resultMax = MaxDistance;
+	f32 resultMax = MaxDistance - 2;
 	f32 resultMin = 3;
 	Vec3 Dir = resultPos - Around->GetWorldPos();
 
@@ -300,4 +306,84 @@ void AIControllerComponent::Patrol(Schematyc::CSharedString pathName)
 	if (m_currentPatrolPoint != ZERO) {
 		MoveToAndLookAtWalkDirection(m_currentPatrolPoint);
 	}
+}
+
+Vec3 AIControllerComponent::FindCover(IEntity* target)
+{
+	Vec3 eyes = Vec3(0, 0, 0.25f);
+	NavigationAgentTypeID agentTypeId = NavigationAgentTypeID::TNavigationID(1);
+	std::array<Vec3, 400> locations;
+
+	int32 count = gEnv->pAISystem->GetCoverSystem()->GetCover(m_pEntity->GetWorldPos(), 900.f, &eyes, 1, 0.9f, locations.data(), 30, 3);
+	CryLog("count %i", count);
+	for (int32 i = 0; i < count; i++) {
+		if (IsCoverPointSafe(locations[i], target)) {
+			return locations[i];
+		}
+	}
+	return ZERO;
+}
+
+bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
+{
+	/*
+	NavigationAgentTypeID agentTypeId = NavigationAgentTypeID::TNavigationID(1);
+	MNM::SRayHitOutput rayHitOut;
+	SAcceptAllQueryTrianglesFilter filter;
+	MNM::ERayCastResult result = gEnv->pAISystem->GetNavigationSystem()->NavMeshRayCast(agentTypeId, point, target->GetWorldPos(), &filter, &rayHitOut);
+	*/
+
+	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
+	std::array<ray_hit, 2> hits;
+	static IPhysicalEntity* pSkippedEntities[10];
+	pSkippedEntities[0] = m_pEntity->GetPhysics();
+	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.8f);
+	Vec3 dir = targetPos - point;
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
+		if (hits[0].pCollider) {
+			//Debug
+			if (pd) {
+				pd->Begin("CoverRaycast", true);
+				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 1, 0), 2);
+			}
+
+			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
+			if (hitEntity) {
+				if (hitEntity == target) {
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+			}
+			else {
+				return true;
+			}
+		}
+	}
+	else {
+		return true;
+	}
+
+	/*
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	pd->Begin("testPoi456nt7123", true);
+	pd->AddSphere(rayHitOut.position, 0.8f, ColorF(0, 0, 1), 10);
+	CryLog("safe result : %i", result);
+	return result == MNM::ERayCastResult::Hit ? true : false;
+	*/
+	return true;
+}
+
+Vec3 AIControllerComponent::snapToNavmesh(Vec3 point)
+{
+	NavigationAgentTypeID agentTypeId = NavigationAgentTypeID::TNavigationID(1);
+	NavigationMeshID navMeshId = gEnv->pAISystem->GetNavigationSystem()->FindEnclosingMeshID(agentTypeId, point);
+	MNM::SOrderedSnappingMetrics snappingMetrics;
+	snappingMetrics.CreateDefault();
+	SAcceptAllQueryTrianglesFilter filter;
+	MNM::SPointOnNavMesh pointOnNavMesh = gEnv->pAISystem->GetNavigationSystem()->SnapToNavMesh(agentTypeId, point, snappingMetrics, &filter, &navMeshId);
+	return pointOnNavMesh.GetWorldPosition();
 }
