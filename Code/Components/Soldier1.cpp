@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "IAIActor.h"
 #include "AIController.h"
+#include "WeaponAK47.h"
 #include "AIDetection.h"
 #include "ActorState.h"
 #include "GamePlugin.h"
@@ -60,8 +61,14 @@ void Soldier1Component::Initialize()
 	m_closeAttackFragmentId = m_animationComp->GetFragmentId("CloseAttack");
 	m_closeAttackAction = new TAction<SAnimationContext>(30U, m_closeAttackFragmentId);
 
+	//shootError
+	m_shootAccuracyComp = m_pEntity->GetOrCreateComponent<ShootAccuracyComponent>();
+	m_shootAccuracyComp->SetOwnerEntity(m_pEntity);
+	m_shootAccuracyComp->SetStateComponent(m_stateComp);
+
 	//last target position
 	InitLastTargetPositionEntity();
+
 }
 
 Cry::Entity::EventFlags Soldier1Component::GetEventMask() const
@@ -87,6 +94,43 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 	case Cry::Entity::EEvent::Update: {
 		//if (bIsGameplayStarted) {
 			f32 deltatime = event.fParam[0];
+
+			//todo function ?
+			if (!bIsWeaponInitDone) {
+				m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun");
+
+				SEntitySpawnParams spawnParams;
+				spawnParams.vPosition = m_gunAttachment->GetAttAbsoluteDefault().t;
+				m_weaponBaseEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
+				m_pEntity->AttachChild(m_weaponBaseEntity);
+
+				//primary weapon init
+				m_primaryWeapon = m_weaponBaseEntity->GetOrCreateComponent<WeaponAK47Component>();
+				m_primaryWeapon->SetCharacterController(m_aiControllerComp->GetCharacterController());
+				m_primaryWeapon->SetCameraComponent(nullptr);
+				m_primaryWeapon->SetOwnerEntity(m_pEntity);
+				m_primaryWeapon->SetCameraBaseEntity(nullptr);
+
+
+				//IAttachmentObject* object = m_gunAttachment->GetIAttachmentObject();
+				//todo
+				m_currentlySelectedWeapon = m_primaryWeapon;
+
+				bIsWeaponInitDone = true;
+			}
+
+			if (m_weaponBaseEntity && m_gunAttachment) {
+				m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
+			}
+
+			//test
+			if (m_weaponBaseEntity) {
+				IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+				if (pd) {
+					pd->Begin("DetectionRaycast", true);
+					pd->AddSphere(m_weaponBaseEntity->GetWorldPos(), 5.6f, ColorF(0, 1, 0), 2);
+				}
+			}
 
 			UpdateAnimation();
 			UpdateCurrentSpeed();
@@ -125,7 +169,11 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			if (m_closeAttackTimePassed < m_timeBetweenCloseAttacks) {
 				m_closeAttackTimePassed += 0.5f * deltatime;
 			}
-
+			if (m_coolDownTimePassed < m_coolDownTimer) {
+				m_coolDownTimePassed += 0.5f * deltatime;
+				m_currentShootCount = 0;
+				m_currentlySelectedWeapon->ResetShootSoundNumber();
+			}
 
 
 	//	}
@@ -247,12 +295,26 @@ void Soldier1Component::Attack()
 
 	m_detectionComp->SetCurrentTarget(m_targetEntity);
 	if (m_detectionComp->IsTargetFound()) {
+
 		f32 distanceTotarget = m_pEntity->GetWorldPos().GetDistance(m_lastTargetPosition->GetWorldPos());
 		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsTargetFound()) {
-			//MoveTo(m_lastTargetPosition->GetWorldPos());
+			MoveTo(m_lastTargetPosition->GetWorldPos());
 		}
 		else {
 			if (distanceTotarget > m_closeAttackDistance ) {
+
+				//fire weapon if target is visible
+				if (m_detectionComp->IsVisible(m_targetEntity) && CanUseWeapon()) {
+					if (m_currentlySelectedWeapon->Fire()) {
+
+						//shoot coolDown
+						m_currentShootCount++;
+						if (m_currentShootCount >= m_shootBeforeCoolDown) {
+							m_coolDownTimePassed = 0;
+						}
+					}
+				}
+
 				//move around target if it close and cover is not safe
 				if (!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
 					MoveAroundTarget(m_targetEntity);
@@ -298,6 +360,11 @@ void Soldier1Component::CloseAttack()
 bool Soldier1Component::CanMove()
 {
 	return m_closeAttackTimePassed >= m_timeBetweenCloseAttacks;
+}
+
+bool Soldier1Component::CanUseWeapon()
+{
+	return m_coolDownTimePassed >= m_coolDownTimer && m_closeAttackTimePassed >= m_timeBetweenCloseAttacks;;
 }
 
 void Soldier1Component::StopMoving()

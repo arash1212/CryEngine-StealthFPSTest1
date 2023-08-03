@@ -10,7 +10,9 @@
             "Objects/effects",
             "Objects/effects/bullettracer",
             "Objects/effects/muzzleflash",
-            "Objects/Characters/soldier1"
+            "Objects/Characters/soldier1",
+            "Objects/Weapons/ak47",
+            "Objects/Weapons/ak47/3p"
         ]
     },
     "CAssetPicker": {
@@ -501,7 +503,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/effects/muzzleflash"
+                    "Objects/Weapons/ak47/3p"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -522,7 +524,8 @@
         "history": [
             "/Animations/Mannequin/Preview",
             "/Objects/effects/muzzleflash",
-            "/Animations"
+            "/Animations",
+            "/Objects/Weapons/ak47/3p"
         ]
     },
     "Environment Editor": {
@@ -535,6 +538,7 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/Weapons/ak47/3p/ak-47.cgf.cryasset",
             "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/soldier2.cgf.cryasset",
             "Objects/Characters/soldier1/soldier1-test.cgf.cryasset",
@@ -555,6 +559,7 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/Weapons/ak47/3p/ak-47.mtl.cryasset",
             "Objects/Characters/soldier1/soldier_1.mtl.cryasset",
             "Objects/Characters/soldier1/soldier1-test.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",

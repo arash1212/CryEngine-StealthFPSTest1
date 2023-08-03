@@ -17,5 +17,6 @@ protected:
 	virtual void UpdateCurrentSpeed() = 0;
 	virtual void UpdateLastTargetPositionEntity() = 0;
 	virtual bool CanMove() = 0;
+	virtual bool CanUseWeapon() = 0;
 	virtual void StopMoving() = 0;
 };

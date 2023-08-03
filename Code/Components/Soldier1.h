@@ -6,6 +6,7 @@
 class AIControllerComponent;
 class ActorStateComponent;
 class AIDetectionComponent;
+class IWeaponComponent;
 
 static constexpr f32 DEFAULT_SOLDIER_1_WALK_SPEED = 2.f;
 static constexpr f32 DEFAULT_SOLDIER_1_RUN_SPEED = 3.1f;
@@ -34,11 +35,21 @@ private:
 	AIControllerComponent* m_aiControllerComp = nullptr;
 	ActorStateComponent* m_stateComp = nullptr;
 	AIDetectionComponent* m_detectionComp = nullptr;
+	ShootAccuracyComponent* m_shootAccuracyComp;
 
 	IEntity* m_testTargetEntity = nullptr;
 	Vec3 testMoveToPos = ZERO;
 	IEntity* m_targetEntity = nullptr;
 	IEntity* m_lastTargetPosition;
+
+	//weapons
+	IWeaponComponent* m_currentlySelectedWeapon;
+	IWeaponComponent* m_primaryWeapon;
+
+	IEntity* m_weaponBaseEntity = nullptr;
+	bool bIsWeaponInitDone = false;
+
+	IAttachment* m_gunAttachment;
 
 private:
 	bool bIsGameplayStarted = false;
@@ -67,6 +78,11 @@ private:
 	//cover
 	Vec3 m_currentCoverPosition = ZERO;
 
+	//shoot coolDown
+	int32 m_currentShootCount = 0;
+	int32 m_shootBeforeCoolDown = 13;
+	f32 m_coolDownTimer = 0.8f;
+	f32 m_coolDownTimePassed = 0.f;
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
@@ -80,6 +96,7 @@ protected:
 	virtual void Attack() override;
 	virtual void CloseAttack() override;
 	virtual bool CanMove() override;
+	virtual bool CanUseWeapon() override;
 	virtual void StopMoving() override;
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);

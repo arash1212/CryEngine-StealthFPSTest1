@@ -1,12 +1,13 @@
 #pragma once
 
 class IWeaponComponent;
+class WeaponAK47Component;
 
-class WeaponGlockComponent final : public IWeaponComponent
+class WeaponAK47Component final : public IWeaponComponent
 {
 public:
-	WeaponGlockComponent() = default;
-	virtual ~WeaponGlockComponent() = default;
+	WeaponAK47Component() = default;
+	virtual ~WeaponAK47Component() = default;
 
 	virtual void Initialize() override;
 
@@ -14,9 +15,9 @@ public:
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 
 	// Reflect type to set a unique identifier for this component
-	static void ReflectType(Schematyc::CTypeDesc<WeaponGlockComponent>& desc)
+	static void ReflectType(Schematyc::CTypeDesc<WeaponAK47Component>& desc)
 	{
-		desc.SetGUID("{F97248EA-84DE-4D3C-B1C7-D24425DD3CC8}"_cry_guid);
+		desc.SetGUID("{E9FB6A07-27B4-48E4-8571-D84C68B6D849}"_cry_guid);
 	}
 
 protected:

@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "WeaponGlock.h"
+#include "WeaponAK47.h"
 #include "IWeapon.h"
 #include "Player.h"
 #include "GamePlugin.h"
@@ -11,29 +11,33 @@
 
 namespace
 {
-	static void RegisterWeaponGlockComponent(Schematyc::IEnvRegistrar& registrar)
+	static void RegisterWeaponAK47Component(Schematyc::IEnvRegistrar& registrar)
 	{
 		Schematyc::CEnvRegistrationScope scope = registrar.Scope(IEntity::GetEntityScopeGUID());
 		{
-			Schematyc::CEnvRegistrationScope componentScope = scope.Register(SCHEMATYC_MAKE_ENV_COMPONENT(WeaponGlockComponent));
+			Schematyc::CEnvRegistrationScope componentScope = scope.Register(SCHEMATYC_MAKE_ENV_COMPONENT(WeaponAK47Component));
 		}
 	}
 
-	CRY_STATIC_AUTO_REGISTER_FUNCTION(&RegisterWeaponGlockComponent);
+	CRY_STATIC_AUTO_REGISTER_FUNCTION(&RegisterWeaponAK47Component);
 }
 
-void WeaponGlockComponent::Initialize()
+void WeaponAK47Component::Initialize()
 {
 	m_animationComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
-	m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_defaultRotation, m_defaultPosition));
-	m_animationComp->SetCharacterFile("Objects/Weapons/glock/1p/pistol_glock.cdf");
-	m_animationComp->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/glock.adb");
+	m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_defaultRotation, Vec3(0.32f, -0.9f, 0.95f)));
+	m_animationComp->SetCharacterFile("Objects/Weapons/ak47/3p/ak-47.cdf");
+	m_animationComp->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/ak47.adb");
 	m_animationComp->SetControllerDefinitionFile("Animations/Mannequin/ADB/WeaponControllerDefinition.xml");
 	m_animationComp->SetDefaultScopeContextName("FirstPersonCharacter");
 	m_animationComp->SetDefaultFragmentName("Idle");
 	m_animationComp->SetAnimationDrivenMotion(true);
 	m_animationComp->LoadFromDisk();
 	m_animationComp->ResetCharacter();
+
+	//set m_defaultPosition
+	//m_defaultPosition = m_ownerEntity->GetComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>()->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun")->GetAttWorldAbsolute().t;
+	
 
 	//recoil
 	m_meshefaultRotaion = m_defaultRotation;
@@ -55,15 +59,18 @@ void WeaponGlockComponent::Initialize()
 	//Get Muzzle Attachment
 	m_muzzleAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzle");
 
-	//muzzleflashes
-	m_muzzleFlash1Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash1");
-	m_muzzleFlash1Attachment->HideAttachment(1);
-	m_muzzleFlash2Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash2");
-	m_muzzleFlash2Attachment->HideAttachment(1);
-	m_muzzleFlash3Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash3");
-	m_muzzleFlash3Attachment->HideAttachment(1);
+	//time betweenn shots
+	m_timeBetweenShots = 0.03f;
 
 	InitShootSounds();
+
+	//muzzleflashes
+	//m_muzzleFlash1Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash1");
+	//m_muzzleFlash1Attachment->HideAttachment(1);
+	//m_muzzleFlash2Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash2");
+	//m_muzzleFlash2Attachment->HideAttachment(1);
+	//m_muzzleFlash3Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash3");
+	//m_muzzleFlash3Attachment->HideAttachment(1);
 
 	//m_muzzleFlashMesh = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CStaticMeshComponent>();
 	//m_muzzleFlashMesh->SetTransformMatrix(Matrix34::Create(Vec3(0.1f), Quat::CreateRotationZ(RAD2DEG(90)), m_muzzleAttachment->GetAttAbsoluteDefault().t + m_pEntity->GetForwardDir() * 2.5f));
@@ -72,7 +79,7 @@ void WeaponGlockComponent::Initialize()
 	//m_muzzleFlashMesh->ResetObject();
 }
 
-Cry::Entity::EventFlags WeaponGlockComponent::GetEventMask() const
+Cry::Entity::EventFlags WeaponAK47Component::GetEventMask() const
 {
 	return
 		Cry::Entity::EEvent::Initialize |
@@ -81,7 +88,7 @@ Cry::Entity::EventFlags WeaponGlockComponent::GetEventMask() const
 		Cry::Entity::EEvent::Reset;
 }
 
-void WeaponGlockComponent::ProcessEvent(const SEntityEvent& event)
+void WeaponAK47Component::ProcessEvent(const SEntityEvent& event)
 {
 	switch (event.event)
 	{
@@ -93,11 +100,11 @@ void WeaponGlockComponent::ProcessEvent(const SEntityEvent& event)
 	}break;
 	case Cry::Entity::EEvent::Update: {
 		float deltatime = event.fParam[0];
-		UpdateAnimation();
+		//UpdateAnimation();
 		KickBack();
 		Recoil();
-		UpdateMuzzleFlashes();
-		Aim();
+		//UpdateMuzzleFlashes();
+		//Aim();
 
 		//apply sway if owner is player
 		if (m_ownerEntity && m_ownerEntity->GetComponent<PlayerComponent>()) {
@@ -122,7 +129,14 @@ void WeaponGlockComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-void WeaponGlockComponent::InitShootSounds()
+void WeaponAK47Component::InitShootSounds()
 {
-	m_shootSounds.Insert(0, CryAudio::StringToId("glock_fire_sound_1"));
+	m_shootSounds.Insert(0, CryAudio::StringToId("ak-47-shoot-sound"));
+	m_shootSounds.Insert(1, CryAudio::StringToId("ak-47-shoot-sound-1"));
+	m_shootSounds.Insert(2, CryAudio::StringToId("ak-47-shoot-sound-2"));
+	m_shootSounds.Insert(3, CryAudio::StringToId("ak-47-shoot-sound-3"));
+	m_shootSounds.Insert(4, CryAudio::StringToId("ak-47-shoot-sound-4"));
+	m_shootSounds.Insert(5, CryAudio::StringToId("ak-47-shoot-sound-5"));
+	m_shootSounds.Insert(6, CryAudio::StringToId("ak-47-shoot-sound-6"));
+	m_shootSounds.Insert(6, CryAudio::StringToId("ak-47-shoot-sound-7"));
 }

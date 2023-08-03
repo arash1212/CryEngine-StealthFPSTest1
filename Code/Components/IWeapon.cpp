@@ -79,16 +79,16 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 	return nullptr;
 }
 
-void IWeaponComponent::Fire()
+bool IWeaponComponent::Fire()
 {
 	ShootAccuracyComponent* shootAccuracyComp = m_ownerEntity->GetComponent<ShootAccuracyComponent>();
 	if (!shootAccuracyComp) {
 		CryLog("IWeaponComponent : Owner have no shootAccuracy assigned !");
-		return;
+		return false;
 	}
 	if (!m_muzzleAttachment) {
 		CryLog("IWeaponComponent : Weapon muzzle attachment not found !");
-		return;
+		return false;
 	}
 
 	//apply shootError to owner
@@ -114,9 +114,13 @@ void IWeaponComponent::Fire()
 		//else
 		else {
 			//ye kar dige bokon ?
+			Vec3 shooterror = Vec3(GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()));
+
+			Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
+			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(m_pEntity->GetForwardDir()));
 		}
 
-		m_audioComp->ExecuteTrigger(m_shootSound);
+		m_audioComp->ExecuteTrigger(GetRandomShootSound());
 
 
 		//muzzleflashes
@@ -129,7 +133,11 @@ void IWeaponComponent::Fire()
 
 		//apply recoil to weapon model after shot
 		m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
+
+		return true;
 	}
+
+	return false;
 }
 
 void IWeaponComponent::SetCameraComponent(Cry::DefaultComponents::CCameraComponent* cameraComp)
@@ -185,6 +193,11 @@ Vec3 IWeaponComponent::GetMeshRecoilAmount()
 {
 	recoilInv *= -1;
 	return Vec3(GetRandomValue(-0.07f, -0.05f), recoilInv * 0.02f, recoilInv * 0.02f);
+}
+
+void IWeaponComponent::ResetShootSoundNumber()
+{
+	m_currentShootSoundNumber = 0;
 }
 
 f32 IWeaponComponent::GetRandomValue(f32 min, f32 max)
@@ -296,9 +309,9 @@ void IWeaponComponent::SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir)
 {
 	Vec3 spawnPos = pos;
 	Quat rotation = dir;
-	//rotation.v.x += error.x;
-	//rotation.v.y += error.y;
-	//rotation.v.z += error.z;
+	rotation.v.x += error.x;
+	rotation.v.y += error.y;
+	rotation.v.z += error.z;
 
 	SEntitySpawnParams bulletTracerSpawnParams;
 	bulletTracerSpawnParams.vPosition = spawnPos;
@@ -338,4 +351,21 @@ void IWeaponComponent::Aim()
 			Vec3::CreateLerp(m_animationComp->GetTransform().get()->GetTranslation(), m_aimPosition, 0.5f * 8.f * gEnv->pTimer->GetFrameTime())));
 	}
 
+}
+
+CryAudio::ControlId IWeaponComponent::GetRandomShootSound()
+{
+	/*
+	if (m_currentShootSoundNumber >= m_shootSounds.Size() - 1) {
+		m_currentShootSoundNumber = 0;
+	}
+	else {
+		m_currentShootSoundNumber++;
+	}
+	*/
+	int32 randomNum = 0;
+	if (m_shootSounds.Size() > 1) {
+		randomNum = GetRandomInt(0, m_shootSounds.Size() - 1);
+	}
+	return m_shootSounds.At(randomNum);
 }

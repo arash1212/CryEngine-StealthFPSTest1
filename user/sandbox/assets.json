@@ -5655,8 +5655,8 @@
 			"type": "Animation",
 			"guid": "74df591e-f47c-51be-1f3c-2131e18bc49c",
 			"name": "walkcross_fwd_lft_3p",
-			"timestamp": 132973673629920000,
-			"files": [ "animations/motusanims/strafe/walkcross_fwd_lft_3p.caf" ],
+			"timestamp": 1652897362,
+			"files": [ "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf.cryasset",
@@ -6313,7 +6313,7 @@
 			"type": "Character",
 			"guid": "f6ca9f20-7ce5-cc42-18ad-55e556020d94",
 			"name": "soldier_1",
-			"timestamp": 1690736404,
+			"timestamp": 1691064942,
 			"files": [ "Objects/Characters/soldier1/soldier_1.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6868,6 +6868,181 @@
 				{ "key": "height", "value": "616" },
 				{ "key": "mipCount", "value": "1" },
 				{ "key": "width", "value": "608" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Character",
+			"guid": "0430ceeb-0fca-b931-132d-4eb38d535a74",
+			"name": "ak-47",
+			"timestamp": 1691074141,
+			"files": [ "Objects/Weapons/ak47/3p/ak-47.cdf" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/Weapons/ak47/3p/ak-47.cdf.cryasset",
+			"details": [ ],
+			"dependencies": [
+				{ "path": "Objects/Weapons/ak47/3p/ak-47.chr", "usageCount": 0 },
+				{ "path": "Objects/Weapons/ak47/3p/ak-47_Ak47.skin", "usageCount": 0 }
+			]
+		},
+		{
+			"type": "Mesh",
+			"guid": "3893a388-1ab9-4e84-d168-9c7e80013667",
+			"name": "ak-47",
+			"timestamp": 1691069340,
+			"files": [ "Objects/Weapons/ak47/3p/ak-47.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak-47.fbx",
+			"metadata": "Objects/Weapons/ak47/3p/ak-47.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "2" },
+				{ "key": "triangleCount", "value": "19926" },
+				{ "key": "vertexCount", "value": "17477" }
+			],
+			"dependencies": [
+				{ "path": "Objects/Weapons/ak47/3p/ak-47.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Skeleton",
+			"guid": "9a6cfd91-e1f4-de16-d284-c0c80a4c6077",
+			"name": "ak-47",
+			"timestamp": 1691069360,
+			"files": [
+				"Objects/Weapons/ak47/3p/ak-47.chr",
+				"Objects/Weapons/ak47/3p/ak-47.chrparams"
+			],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak-47.fbx",
+			"metadata": "Objects/Weapons/ak47/3p/ak-47.chr.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Material",
+			"guid": "fb96f67b-166a-5799-5cc1-3ddcbbbc58bb",
+			"name": "ak-47",
+			"timestamp": 1691069732,
+			"files": [ "Objects/Weapons/ak47/3p/ak-47.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/Weapons/ak47/3p/ak-47.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "2" },
+				{ "key": "textureCount", "value": "5" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/Weapons/ak47/3p/ak47_base_color.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/Weapons/ak47/3p/ak47_normal_opengl.dds",
+					"usageCount": 1
+				},
+				{ "path": "Objects/Weapons/ak47/3p/ak47_height.dds", "usageCount": 1 },
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 1
+				}
+			]
+		},
+		{
+			"type": "SkinnedMesh",
+			"guid": "2919410b-3c92-8f76-5a95-e17bdaf1b2ad",
+			"name": "ak-47_Ak47",
+			"timestamp": 1691069345,
+			"files": [ "Objects/Weapons/ak47/3p/ak-47_Ak47.skin" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak-47.fbx",
+			"metadata": "Objects/Weapons/ak47/3p/ak-47_Ak47.skin.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "bonesCount", "value": "6" },
+				{ "key": "materialCount", "value": "2" },
+				{ "key": "triangleCount", "value": "19926" },
+				{ "key": "vertexCount", "value": "17475" }
+			],
+			"dependencies": [
+				{ "path": "Objects/Weapons/ak47/3p/ak-47.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Animation",
+			"guid": "3ad9b2f3-f8c2-03b7-3d31-8e2eec016ab5",
+			"name": "ak-47_Fire",
+			"timestamp": 1691069352,
+			"files": [ "Objects/Weapons/ak47/3p/ak-47_Fire.caf" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak-47.fbx",
+			"metadata": "Objects/Weapons/ak47/3p/ak-47_Fire.caf.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "9bcd5148-d4c4-f1ec-29e8-a1e0b6ad5962",
+			"name": "ak47_base_color",
+			"timestamp": 1691069449,
+			"files": [ "Objects/Weapons/ak47/3p/ak47_base_color.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak47_base_color.tif",
+			"metadata": "Objects/Weapons/ak47/3p/ak47_base_color.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "4096" },
+				{ "key": "mipCount", "value": "11" },
+				{ "key": "width", "value": "4096" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "028f72ce-95fa-50bd-e272-75d49dd1293d",
+			"name": "ak47_height",
+			"timestamp": 1691069515,
+			"files": [ "Objects/Weapons/ak47/3p/ak47_height.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak47_height.tif",
+			"metadata": "Objects/Weapons/ak47/3p/ak47_height.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "4096" },
+				{ "key": "mipCount", "value": "11" },
+				{ "key": "width", "value": "4096" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "1b84b487-cf6d-81b3-47f3-8b6f992cc278",
+			"name": "ak47_metallic",
+			"timestamp": 1691069592,
+			"files": [ "Objects/Weapons/ak47/3p/ak47_metallic.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak47_metallic.tif",
+			"metadata": "Objects/Weapons/ak47/3p/ak47_metallic.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "4096" },
+				{ "key": "mipCount", "value": "11" },
+				{ "key": "width", "value": "4096" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "53bf36f8-b3f8-d08a-bec4-46d77e09f623",
+			"name": "ak47_normal_opengl",
+			"timestamp": 1691069660,
+			"files": [ "Objects/Weapons/ak47/3p/ak47_normal_opengl.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/Weapons/ak47/3p/ak47_normal_opengl.tif",
+			"metadata": "Objects/Weapons/ak47/3p/ak47_normal_opengl.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "4096" },
+				{ "key": "mipCount", "value": "11" },
+				{ "key": "width", "value": "4096" }
 			],
 			"dependencies": [ ]
 		},

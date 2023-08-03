@@ -37,6 +37,7 @@ protected:
 	IEntity* m_ownerEntity = nullptr;
 	IEntity* m_cameraBaseEntity = nullptr;
 
+
 protected:
 	Vec3 m_muzzlePos = ZERO;
 	Vec3 m_attackDir = ZERO;
@@ -71,7 +72,8 @@ protected:
 	float m_kickBackSpeed = 45.f;
 
 	//sounds
-	CryAudio::ControlId m_shootSound;
+	int32 m_currentShootSoundNumber = 0;
+	Schematyc::CArray<CryAudio::ControlId> m_shootSounds;
 
 	//recoil
 	f32 m_snapiness = 50.2f;
@@ -112,10 +114,12 @@ protected:
 	virtual void SpawnBulletTracer(Vec3 error, Vec3 pos, Quat dir);
 	virtual void UpdateMuzzleFlashes();
 	virtual void Aim();
+	virtual CryAudio::ControlId GetRandomShootSound();
+	virtual void InitShootSounds() = 0;
 
 public :
 	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);
-	virtual void Fire();
+	virtual bool Fire();
 	virtual void Sway(f32 mouseX, f32 mouseY);
 
 	virtual void AddKickBack(Vec3 amount);
@@ -132,5 +136,5 @@ public :
 	f32 GetShootError();
 	virtual Vec3 GetCameraRecoilAmount();
 	virtual Vec3 GetMeshRecoilAmount();
-
+	virtual void ResetShootSoundNumber();
 };
