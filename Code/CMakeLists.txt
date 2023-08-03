@@ -37,6 +37,7 @@ add_sources("Components_uber.cpp"
 		"Components/ShootAccuracy.cpp"
 		"Components/Soldier1.cpp"
 		"Components/SpawnPoint.cpp"
+		"Components/WeaponGlock.cpp"
 		"Components/ActorState.h"
 		"Components/AIController.h"
 		"Components/AIDetection.h"
@@ -49,6 +50,7 @@ add_sources("Components_uber.cpp"
 		"Components/ShootAccuracy.h"
 		"Components/Soldier1.h"
 		"Components/SpawnPoint.h"
+		"Components/WeaponGlock.h"
 )
 
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/CVarOverrides.h")

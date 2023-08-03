@@ -14,11 +14,12 @@ public:
 	IWeaponComponent() = default;
 	virtual ~IWeaponComponent() = default;
 
-	virtual void Initialize() override;
+	virtual void Initialize() override = 0;
 
-	virtual Cry::Entity::EventFlags GetEventMask() const override;
-	virtual void ProcessEvent(const SEntityEvent& event) override;
+	virtual Cry::Entity::EventFlags GetEventMask() const override = 0;
+	virtual void ProcessEvent(const SEntityEvent& event) override = 0;
 
+	/*
 	// Reflect type to set a unique identifier for this component
 	static void ReflectType(Schematyc::CTypeDesc<IWeaponComponent>& desc)
 	{
@@ -26,6 +27,7 @@ public:
 		desc.AddMember(&IWeaponComponent::m_damage, 'wd', "weapondamage", "Weapon Damage", "Set Weapon Damage", WEAPON_DEFAULT_DAMAGE);
 		desc.AddMember(&IWeaponComponent::m_timeBetweenShots, 'tbs', "weapontimebetweenshots", "Weapon Time Between Shots", "Set Weapon Time Between Shots", WEAPON_DEFAULT_TIME_BETWEEN_SHOTS);
 	}
+	*/
 
 protected:
 	Cry::DefaultComponents::CAdvancedAnimationComponent* m_animationComp = nullptr;

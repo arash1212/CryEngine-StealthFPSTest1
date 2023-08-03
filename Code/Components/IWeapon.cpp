@@ -13,6 +13,7 @@
 #include <CrySchematyc/Env/IEnvRegistrar.h>
 #include <CryCore/StaticInstanceList.h>
 
+/*
 namespace
 {
 	static void RegisterIWeaponComponent(Schematyc::IEnvRegistrar& registrar)
@@ -25,105 +26,7 @@ namespace
 
 	CRY_STATIC_AUTO_REGISTER_FUNCTION(&RegisterIWeaponComponent);
 }
-
-void IWeaponComponent::Initialize()
-{
-	m_animationComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
-	m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_defaultRotation, m_defaultPosition));
-	m_animationComp->SetCharacterFile("Objects/Weapons/glock/1p/pistol_glock.cdf");
-	m_animationComp->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/glock.adb");
-	m_animationComp->SetControllerDefinitionFile("Animations/Mannequin/ADB/WeaponControllerDefinition.xml");
-	m_animationComp->SetDefaultScopeContextName("FirstPersonCharacter");
-	m_animationComp->SetDefaultFragmentName("Idle");
-	m_animationComp->SetAnimationDrivenMotion(true);
-	m_animationComp->LoadFromDisk();
-	m_animationComp->ResetCharacter();
-
-	//recoil
-	m_meshefaultRotaion = m_defaultRotation;
-	m_targetRotation = m_defaultRotation;
-
-	//Fragments
-	m_idleFragmentId = m_animationComp->GetFragmentId("Idle");
-	m_walkFragmentId = m_animationComp->GetFragmentId("Walk");
-	m_fireFragmentId = m_animationComp->GetFragmentId("Fire");
-	m_runFragmentId = m_animationComp->GetFragmentId("Run");
-
-	m_fireAction = new TAction<SAnimationContext>(30U, m_fireFragmentId);
-
-	m_defaultAnimationCompRotation = m_animationComp->GetTransform().get()->GetRotation().ToQuat();
-	m_defaultAnimationCompPosition = m_animationComp->GetTransform().get()->GetTranslation();
-
-	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
-	m_shootSound = CryAudio::StringToId("glock_fire_sound_1");
-
-	//Get Muzzle Attachment
-	m_muzzleAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzle");
-
-	//muzzleflashes
-	m_muzzleFlash1Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash1");
-	m_muzzleFlash1Attachment->HideAttachment(1);
-	m_muzzleFlash2Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash2");
-	m_muzzleFlash2Attachment->HideAttachment(1);
-	m_muzzleFlash3Attachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("muzzleflash3");
-	m_muzzleFlash3Attachment->HideAttachment(1);
-
-	//m_muzzleFlashMesh = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CStaticMeshComponent>();
-	//m_muzzleFlashMesh->SetTransformMatrix(Matrix34::Create(Vec3(0.1f), Quat::CreateRotationZ(RAD2DEG(90)), m_muzzleAttachment->GetAttAbsoluteDefault().t + m_pEntity->GetForwardDir() * 2.5f));
-	//m_muzzleFlashMesh->SetFilePath("Objects/effects/muzzleflash/muzzleflash1.cgf");
-	//m_muzzleFlashMesh->LoadFromDisk();
-	//m_muzzleFlashMesh->ResetObject();
-}
-
-Cry::Entity::EventFlags IWeaponComponent::GetEventMask() const
-{
-	return
-		Cry::Entity::EEvent::Initialize |
-		Cry::Entity::EEvent::GameplayStarted |
-		Cry::Entity::EEvent::Update |
-		Cry::Entity::EEvent::Reset;
-}
-
-void IWeaponComponent::ProcessEvent(const SEntityEvent& event)
-{
-	switch (event.event)
-	{
-	case Cry::Entity::EEvent::Initialize: {
-
-	}break;
-	case Cry::Entity::EEvent::GameplayStarted: {
-
-	}break;
-	case Cry::Entity::EEvent::Update: {
-		float deltatime = event.fParam[0];
-		UpdateAnimation();
-		KickBack();
-		Recoil();
-		UpdateMuzzleFlashes();
-		Aim();
-
-		//apply sway if owner is player
-		if (m_ownerEntity && m_ownerEntity->GetComponent<PlayerComponent>()) {
-			Vec2 rotationDelta = m_ownerEntity->GetComponent<PlayerComponent>()->GetRotationDelta();
-			Sway(rotationDelta.y, rotationDelta.x);
-		}
-		
-		//timers 
-		if (m_shotTimePassed < m_timeBetweenShots) {
-			m_shotTimePassed += 0.5f * deltatime;
-		}
-		if (m_MuzzleFlashDeActivationTimePassed < m_timeBetweenMuzzleFlashDeActivation) {
-			m_MuzzleFlashDeActivationTimePassed += 0.5f * deltatime;
-		}
-
-	}break;
-	case Cry::Entity::EEvent::Reset: {
-
-	}break;
-	default:
-		break;
-	}
-}
+*/
 
 IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 {

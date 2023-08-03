@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "Player.h"
 #include "IWeapon.h"
+#include "WeaponGlock.h"
 #include "Crosshair.h"
 #include "SpawnPoint.h"
 #include "ShootAccuracy.h"
@@ -41,7 +42,7 @@ void PlayerComponent::Initialize()
 	InitInputs();
 
 	//primary weapon init
-	m_primaryWeapon = m_cameraBase->GetOrCreateComponent<IWeaponComponent>();
+	m_primaryWeapon = m_cameraBase->GetOrCreateComponent<WeaponGlockComponent>();
 	m_primaryWeapon->SetCharacterController(m_characterControllerComp);
 	m_primaryWeapon->SetCameraComponent(m_cameraComp);
 	m_primaryWeapon->SetOwnerEntity(m_pEntity);

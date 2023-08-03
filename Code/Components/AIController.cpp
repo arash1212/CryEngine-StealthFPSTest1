@@ -337,7 +337,8 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 	std::array<ray_hit, 2> hits;
 	static IPhysicalEntity* pSkippedEntities[10];
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
-	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.8f);
+	//height target estefade beshe
+	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 2.1f);
 	Vec3 dir = targetPos - point;
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {

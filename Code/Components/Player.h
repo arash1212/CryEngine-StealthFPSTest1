@@ -10,6 +10,7 @@ class ActorStateComponent;
 class IWeaponComponent;
 class CrosshairComponent;
 class ShootAccuracyComponent;
+class WeaponGlockComponent;
 
 static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 4.f;
 static constexpr f32 DEFAULT_PLAYER_RUN_SPEED = 6.f;
