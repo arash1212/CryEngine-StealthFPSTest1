@@ -68,6 +68,12 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 					hits[0].pCollider->Action(&impulse);
 				}
 
+				//if hitEntity is an actor
+				if (hitEntity->GetComponent<Soldier1Component>()) {
+					hitEntity->GetComponent<Soldier1Component>()->ReactToHit();
+					CryLog("Weapon hit actor");
+				}
+
 				return hitEntity;
 			}
 		}

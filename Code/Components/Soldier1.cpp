@@ -6,6 +6,7 @@
 #include "WeaponAK47.h"
 #include "AIDetection.h"
 #include "ActorState.h"
+#include "Health.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -59,7 +60,12 @@ void Soldier1Component::Initialize()
 	m_cautiousFragmentId = m_animationComp->GetFragmentId("Cautious");
 	m_combatFragmentId = m_animationComp->GetFragmentId("Combat");
 	m_closeAttackFragmentId = m_animationComp->GetFragmentId("CloseAttack");
+	m_reactToHit1FragmentId = m_animationComp->GetFragmentId("ReactToHit1");
+	m_reactToHit2FragmentId = m_animationComp->GetFragmentId("ReactToHit2");
+
 	m_closeAttackAction = new TAction<SAnimationContext>(30U, m_closeAttackFragmentId);
+	m_reactToHit1Action = new TAction<SAnimationContext>(30U, m_reactToHit1FragmentId);
+	m_reactToHit2Action = new TAction<SAnimationContext>(30U, m_reactToHit2FragmentId);
 
 	//shootError
 	m_shootAccuracyComp = m_pEntity->GetOrCreateComponent<ShootAccuracyComponent>();
@@ -68,6 +74,9 @@ void Soldier1Component::Initialize()
 
 	//last target position
 	InitLastTargetPositionEntity();
+
+	//health
+	m_healthComp = m_pEntity->GetOrCreateComponent<HealthComponent>();
 
 }
 
@@ -174,7 +183,9 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 				m_currentShootCount = 0;
 				m_currentlySelectedWeapon->ResetShootSoundNumber();
 			}
-
+			if (m_hitReactionTimePassed < m_hitReactionTimer) {
+				m_hitReactionTimePassed += 0.5f * deltatime;
+			}
 
 	//	}
 
@@ -359,18 +370,41 @@ void Soldier1Component::CloseAttack()
 
 bool Soldier1Component::CanMove()
 {
-	return m_closeAttackTimePassed >= m_timeBetweenCloseAttacks;
+	return m_closeAttackTimePassed >= m_timeBetweenCloseAttacks 
+		&& m_hitReactionTimePassed >= m_hitReactionTimer;
 }
 
 bool Soldier1Component::CanUseWeapon()
 {
-	return m_coolDownTimePassed >= m_coolDownTimer && m_closeAttackTimePassed >= m_timeBetweenCloseAttacks;;
+	return m_coolDownTimePassed >= m_coolDownTimer 
+		&& m_closeAttackTimePassed >= m_timeBetweenCloseAttacks 
+		&& m_hitReactionTimePassed >= m_hitReactionTimer;
 }
 
 void Soldier1Component::StopMoving()
 {
 	m_aiControllerComp->GetCharacterController()->ChangeVelocity(ZERO, Cry::DefaultComponents::CCharacterControllerComponent::EChangeVelocityMode::Jump);
 	m_aiControllerComp->MoveTo(m_pEntity->GetWorldPos());
+}
+
+void Soldier1Component::ReactToHit()
+{
+	if (!m_animationComp) {
+		CryLog("Soldier1Component : (ReactToHit) animationComp is null.");
+	}
+
+	int32 randomNum = GetRandomInt(1, 2);
+	IActionPtr selectedAction;
+	if (randomNum == 1) {
+		selectedAction = m_reactToHit1Action;
+	}else if (randomNum == 2) {
+		selectedAction = m_reactToHit2Action;
+	}
+
+	m_animationComp->GetActionController()->Flush();
+	m_animationComp->QueueCustomFragment(*selectedAction);
+	m_activeFragmentId = m_reactToHit1FragmentId;
+	m_hitReactionTimePassed = 0;
 }
 
 void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)

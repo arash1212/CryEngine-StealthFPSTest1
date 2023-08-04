@@ -7,6 +7,7 @@ class AIControllerComponent;
 class ActorStateComponent;
 class AIDetectionComponent;
 class IWeaponComponent;
+class HealthComponent;
 
 static constexpr f32 DEFAULT_SOLDIER_1_WALK_SPEED = 2.f;
 static constexpr f32 DEFAULT_SOLDIER_1_RUN_SPEED = 3.1f;
@@ -51,6 +52,9 @@ private:
 
 	IAttachment* m_gunAttachment;
 
+	//health
+	HealthComponent* m_healthComp;
+
 private:
 	bool bIsGameplayStarted = false;
 
@@ -64,8 +68,12 @@ private:
 	FragmentID m_combatFragmentId;
 	FragmentID m_closeAttackFragmentId;
 	FragmentID m_activeFragmentId;
+	FragmentID m_reactToHit1FragmentId;
+	FragmentID m_reactToHit2FragmentId;
 
 	IActionPtr m_closeAttackAction;
+	IActionPtr m_reactToHit1Action;
+	IActionPtr m_reactToHit2Action;
 	//attack
 	f32 m_maxAttackDistance = 40.f;
 	f32 m_closeAttackDistance = 2.f;
@@ -81,8 +89,12 @@ private:
 	//shoot coolDown
 	int32 m_currentShootCount = 0;
 	int32 m_shootBeforeCoolDown = 13;
-	f32 m_coolDownTimer = 0.8f;
+	f32 m_coolDownTimer = 0.4f;
 	f32 m_coolDownTimePassed = 0.f;
+
+	//hit reaction timer
+	f32 m_hitReactionTimer = 0.2f;
+	f32 m_hitReactionTimePassed = 0.f;
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
@@ -98,6 +110,8 @@ protected:
 	virtual bool CanMove() override;
 	virtual bool CanUseWeapon() override;
 	virtual void StopMoving() override;
+
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);
+	virtual void ReactToHit() override;
 };
