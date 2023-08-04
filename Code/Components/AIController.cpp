@@ -280,7 +280,7 @@ void AIControllerComponent::SetActorStateComponent(ActorStateComponent* stateCom
 	this->m_stateComp = stateComp;
 }
 
-void AIControllerComponent::Patrol(Schematyc::CSharedString pathName)
+Vec3 AIControllerComponent::Patrol(Schematyc::CSharedString pathName)
 {
 	float distanceToPoint = m_currentPatrolPoint.GetDistance(m_pEntity->GetWorldPos());
 	if (distanceToPoint <= 1 || m_currentPatrolPoint == ZERO) {
@@ -303,9 +303,12 @@ void AIControllerComponent::Patrol(Schematyc::CSharedString pathName)
 		gEnv->pAISystem->GetINavigation()->GetPointOnPathBySegNo(pathName.c_str(), m_currentPatrolPoint, m_patrolProgress);
 	}
 
+	return m_currentPatrolPoint;
+	/*
 	if (m_currentPatrolPoint != ZERO) {
 		MoveToAndLookAtWalkDirection(m_currentPatrolPoint);
 	}
+	*/
 }
 
 Vec3 AIControllerComponent::FindCover(IEntity* target)

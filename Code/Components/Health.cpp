@@ -60,3 +60,8 @@ void HealthComponent::ApplyDamage(f32 damage)
 {
 	m_health -= damage;
 }
+
+f32 HealthComponent::GetHealth()
+{
+	return m_health;
+}

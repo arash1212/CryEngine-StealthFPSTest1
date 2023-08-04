@@ -157,7 +157,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			//patrol
 			//todo : && !m_patrolPathName.empty() && m_patrolPathName != ""
 			if (!m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
-				m_aiControllerComp->Patrol(m_patrolPathName);
+				MoveTo(m_aiControllerComp->Patrol(m_patrolPathName));
 			}
 
 			//todo ?
@@ -316,7 +316,7 @@ void Soldier1Component::Attack()
 
 				//fire weapon if target is visible
 				if (m_detectionComp->IsVisible(m_targetEntity) && CanUseWeapon()) {
-					if (m_currentlySelectedWeapon->Fire()) {
+					if (m_currentlySelectedWeapon->Fire(m_targetEntity)) {
 
 						//shoot coolDown
 						m_currentShootCount++;

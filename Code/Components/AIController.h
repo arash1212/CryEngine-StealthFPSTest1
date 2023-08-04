@@ -53,7 +53,7 @@ public:
 	Vec3 GetRandomPointOnNavmesh(float MaxDistance, IEntity* Around);
 	bool IsPointVisibleFrom(NavigationAgentTypeID agentTypeId, Vec3 from, Vec3 endPos);
 	void SetActorStateComponent(ActorStateComponent* stateComp);
-	void Patrol(Schematyc::CSharedString pathName);
+	Vec3 Patrol(Schematyc::CSharedString pathName);
 	Vec3 FindCover(IEntity* target);
 	bool IsCoverPointSafe(Vec3 point, IEntity* target);
 	Vec3 snapToNavmesh(Vec3 point);

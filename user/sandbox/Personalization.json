@@ -559,14 +559,14 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
             "Objects/Weapons/ak47/3p/ak-47.mtl.cryasset",
             "Objects/Characters/soldier1/soldier_1.mtl.cryasset",
             "Objects/Characters/soldier1/soldier1-test.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
             "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset",
             "Objects/effects/muzzleflash/muzzleflash2.mtl.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash1.mtl.cryasset",
-            "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset"
+            "Objects/effects/muzzleflash/muzzleflash1.mtl.cryasset"
         ]
     }
 }

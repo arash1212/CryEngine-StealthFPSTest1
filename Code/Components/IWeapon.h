@@ -119,7 +119,7 @@ protected:
 
 public :
 	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);
-	virtual bool Fire();
+	virtual bool Fire(IEntity* target);
 	virtual void Sway(f32 mouseX, f32 mouseY);
 
 	virtual void AddKickBack(Vec3 amount);

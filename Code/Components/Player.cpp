@@ -4,6 +4,7 @@
 #include "WeaponGlock.h"
 #include "Crosshair.h"
 #include "SpawnPoint.h"
+#include "Health.h"
 #include "ShootAccuracy.h"
 #include "GamePlugin.h"
 
@@ -65,6 +66,9 @@ void PlayerComponent::Initialize()
 	m_shootAccuracyComp = m_pEntity->GetOrCreateComponent<ShootAccuracyComponent>();
 	m_shootAccuracyComp->SetOwnerEntity(m_pEntity);
 	m_shootAccuracyComp->SetStateComponent(m_stateComp);
+
+	//health
+	m_health = m_pEntity->GetOrCreateComponent<HealthComponent>();
 
 	//Set player Entity name.
 	m_pEntity->SetName("playerEntity");
@@ -177,7 +181,7 @@ void PlayerComponent::InitInputs()
 	m_inputComp->RegisterAction("player", "fire", [this](int activationMode, float value)
 		{
 			if (activationMode == eAAM_OnHold) {
-				m_currentlySelectedWeapon->Fire();
+				m_currentlySelectedWeapon->Fire(nullptr);
 			}
 		}
 	);
@@ -211,6 +215,18 @@ void PlayerComponent::InitInputs()
 		}
 	);
 	m_inputComp->BindAction("player", "aim", eAID_KeyboardMouse, eKI_Mouse2);
+
+	m_inputComp->RegisterAction("player", "crouch", [this](int activationMode, float value)
+		{
+			if (activationMode == eAAM_OnHold) {
+				bIsCrouching = true;
+			}
+			else {
+				bIsCrouching = false;
+			}
+		}
+	);
+	m_inputComp->BindAction("player", "crouch", eAID_KeyboardMouse, eKI_LCtrl);
 }
 
 void PlayerComponent::Move()
@@ -232,10 +248,17 @@ void PlayerComponent::RotateCamera()
 	m_rotationY = CLAMP(m_rotationY += m_rotationDelta.y, m_minRoationX, m_maxRoationX);
 	Quat rotation = Quat::CreateRotationX(m_rotationY * m_rotationSpeed);
 	m_cameraRoot->SetRotation(rotation);
+
+	//crouch
+	UpdateCrouch(rotation);
 }
 
 void PlayerComponent::HeadBob(float deltatime)
 {
+	if (bIsCrouching) {
+		return;
+	}
+
 	//apply headbob if player is moving
 	if (m_characterControllerComp->IsWalking()) {
 		m_headBobTimer += deltatime * m_currentSpeed * 3;
@@ -313,4 +336,19 @@ void PlayerComponent::UpdateFOV()
 
 	//perfom update 
 	m_cameraComp->SetFieldOfView(CryTransform::CAngle::FromDegrees(m_currentFov));
+}
+
+void PlayerComponent::UpdateCrouch(Quat Rotation)
+{
+	if (bIsCrouching) {
+		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.75f, 0.75f, 0.4f), IDENTITY, Vec3(0, 0, 0.75f)));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 0.6f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
+		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 0.6f)));
+	}
+	else
+	{
+		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.8f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
+		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.0f)));
+	}
 }

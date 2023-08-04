@@ -68,10 +68,15 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 					hits[0].pCollider->Action(&impulse);
 				}
 
+
 				//if hitEntity is an actor
 				if (hitEntity->GetComponent<Soldier1Component>()) {
 					hitEntity->GetComponent<Soldier1Component>()->ReactToHit();
 					CryLog("Weapon hit actor");
+				}
+				//if hitEntity is player
+				else if (hitEntity->GetComponent<PlayerComponent>()) {
+					CryLog("Weapon hit Player");
 				}
 
 				return hitEntity;
@@ -85,7 +90,7 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 	return nullptr;
 }
 
-bool IWeaponComponent::Fire()
+bool IWeaponComponent::Fire(IEntity* target)
 {
 	ShootAccuracyComponent* shootAccuracyComp = m_ownerEntity->GetComponent<ShootAccuracyComponent>();
 	if (!shootAccuracyComp) {
@@ -123,7 +128,12 @@ bool IWeaponComponent::Fire()
 			Vec3 shooterror = Vec3(GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()));
 
 			Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
-			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(m_pEntity->GetForwardDir()));
+			//dir
+			Vec3 targetPos = Vec3(target->GetWorldPos().x + 0.4f, target->GetWorldPos().y, target->GetWorldPos().z + 1.3f);
+			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
+
+			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror);
+			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
 		}
 
 		m_audioComp->ExecuteTrigger(GetRandomShootSound());

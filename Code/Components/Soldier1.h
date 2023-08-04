@@ -93,7 +93,7 @@ private:
 	f32 m_coolDownTimePassed = 0.f;
 
 	//hit reaction timer
-	f32 m_hitReactionTimer = 0.2f;
+	f32 m_hitReactionTimer = 0.3f;
 	f32 m_hitReactionTimePassed = 0.f;
 private:
 	void InitLastTargetPositionEntity();

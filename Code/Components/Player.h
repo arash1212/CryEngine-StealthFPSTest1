@@ -11,6 +11,7 @@ class IWeaponComponent;
 class CrosshairComponent;
 class ShootAccuracyComponent;
 class WeaponGlockComponent;
+class HealthComponent;
 
 static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 4.f;
 static constexpr f32 DEFAULT_PLAYER_RUN_SPEED = 6.f;
@@ -64,6 +65,9 @@ private:
 	//crosshair
 	CrosshairComponent* m_crosshairComp;
 
+	//health
+	HealthComponent* m_health;
+
 private:
 	//movement infos
 	Vec2 m_movementOffset = ZERO;
@@ -75,6 +79,9 @@ private:
 	f32 m_jumpForce = DEFAULT_PLAYER_JUMP_FORCE;
 	f32 m_headBobTimer = 0.f;
 	f32 m_defaultPosZ = 0;
+
+	//crouch
+	bool bIsCrouching = false;
 
 	//rotation (camera/body)
 	f32 m_rotationX = 0.f;
@@ -111,6 +118,8 @@ private:
 	void UpdateCrosshair();
 
 	void UpdateFOV();
+
+	void UpdateCrouch(Quat Rotation);
 
 public:
 	Vec2 GetRotationDelta();
