@@ -72,13 +72,13 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 
 				//if hitEntity is an actor
 				if (hitEntity->GetComponent<Soldier1Component>()) {
-					hitEntity->GetComponent<Soldier1Component>()->ReactToHit();
+					hitEntity->GetComponent<Soldier1Component>()->ReactToHit(m_pEntity);
 					CryLog("Weapon hit actor");
 				}
 				//if hitEntity is player
 				else if (hitEntity->GetComponent<PlayerComponent>()) {
 					CryLog("Weapon hit Player");
-					hitEntity->GetComponent<PlayerComponent>()->ReactToHit();
+					hitEntity->GetComponent<PlayerComponent>()->ReactToHit(m_pEntity);
 				}
 
 				//if hitEntity has healthComponent

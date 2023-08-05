@@ -23,5 +23,5 @@ protected:
 	f32 GetRandomValue(f32 min, f32 max);
 	int32 GetRandomInt(int32 min, int32 max);
 public:
-	virtual void ReactToHit() = 0;
+	virtual void ReactToHit(IEntity* attacker) = 0;
 };

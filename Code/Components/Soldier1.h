@@ -86,6 +86,11 @@ private:
 	f32 m_closeAttackDistance = 2.f;
 	f32 m_timeBetweenCloseAttacks = 0.5f;
 	f32 m_closeAttackTimePassed = 0.f;
+	f32 m_timeBetweenCheckLastTargetPosition = 4.2f;
+	f32 m_lastTargetPositionTimePassed = m_timeBetweenCheckLastTargetPosition;
+	f32 m_timeBetweenFindingCover = 5.2f;
+	f32 m_findingCoverTimePassed = m_timeBetweenFindingCover;
+
 
 	//patrol
 	Schematyc::CSharedString m_patrolPathName = "aiPath-1";
@@ -126,5 +131,5 @@ protected:
 
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);
-	virtual void ReactToHit() override;
+	virtual void ReactToHit(IEntity* attacker) override;
 };

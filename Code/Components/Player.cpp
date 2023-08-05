@@ -393,7 +393,7 @@ void PlayerComponent::UpdateHealthbar()
 	m_healthbarUIElement->CallFunction("SetHealth", args);
 }
 
-void PlayerComponent::ReactToHit()
+void PlayerComponent::ReactToHit(IEntity* attacker)
 {
 	if (m_gettingHitSoundTimePassed >= m_timeBetweenPlayingGettingHitSound) {
 		int32 randomInt = GetRandomInt(1, 4);

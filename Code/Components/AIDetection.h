@@ -53,6 +53,8 @@ public:
 	bool IsTargetFound();
 	EDetectionState GetDetectionState();
 	f32 GetDetectionAmount();
+	void SetDetectionToMax();
+	void SetDetectionToCatious();
 	f32 GetMaxDetectionAmount();
 	void SetCanReturnToIdleState(bool canReturntoIdle);
 };

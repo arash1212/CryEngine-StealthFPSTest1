@@ -202,6 +202,16 @@ f32 AIDetectionComponent::GetDetectionAmount()
 	return m_detectionAmount;
 }
 
+void AIDetectionComponent::SetDetectionToMax()
+{
+	m_detectionAmount = m_maxDetectionAmount;
+}
+
+void AIDetectionComponent::SetDetectionToCatious()
+{
+	m_detectionAmount = m_maxDetectionAmount / 2;
+}
+
 f32 AIDetectionComponent::GetMaxDetectionAmount()
 {
 	return m_maxDetectionAmount;

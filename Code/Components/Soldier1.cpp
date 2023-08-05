@@ -195,6 +195,12 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			if (m_gettingHitSoundTimePassed < m_timeBetweenPlayingGettingHitSound) {
 				m_gettingHitSoundTimePassed += 0.5f * deltatime;
 			}
+			if (m_lastTargetPositionTimePassed < m_timeBetweenCheckLastTargetPosition) {
+				m_lastTargetPositionTimePassed += 0.5f * deltatime;
+			}
+			if (m_findingCoverTimePassed < m_timeBetweenFindingCover) {
+				m_findingCoverTimePassed += 0.5f * deltatime;
+			}
 
 			Die();
 		}
@@ -323,7 +329,7 @@ void Soldier1Component::Attack()
 			MoveTo(m_lastTargetPosition->GetWorldPos());
 		}
 		else {
-			if (distanceTotarget > m_closeAttackDistance ) {
+			if (distanceTotarget > m_closeAttackDistance) {
 
 				//fire weapon if target is visible
 				if (m_detectionComp->IsVisible(m_targetEntity) && CanUseWeapon()) {
@@ -351,7 +357,9 @@ void Soldier1Component::Attack()
 						m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 					}
 					//move to cover
-					MoveTo(m_currentCoverPosition);
+					if (m_findingCoverTimePassed >= m_timeBetweenFindingCover) {
+						MoveTo(m_currentCoverPosition);
+					}
 					m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 				}
 			}
@@ -361,6 +369,21 @@ void Soldier1Component::Attack()
 				CloseAttack();
 			}
 		}
+
+		//check last target pos if target is not visible
+		if (m_detectionComp->IsTargetFound() && !m_detectionComp->IsVisible(m_targetEntity) && m_lastTargetPositionTimePassed >= m_timeBetweenCheckLastTargetPosition) {
+			MoveAroundTarget(m_lastTargetPosition);
+		}
+
+		//reset detection timer if target is visible
+		if (m_detectionComp->IsVisible(m_targetEntity)) {
+			m_lastTargetPositionTimePassed = 0;
+		}
+		else {
+			m_findingCoverTimePassed = m_timeBetweenFindingCover - 1.5f;
+		}
+
+
 	}
 }
 
@@ -398,7 +421,7 @@ void Soldier1Component::StopMoving()
 	m_aiControllerComp->MoveTo(m_pEntity->GetWorldPos());
 }
 
-void Soldier1Component::ReactToHit()
+void Soldier1Component::ReactToHit(IEntity* attacker)
 {
 	if (!bIsAlive) {
 		return;
@@ -436,6 +459,10 @@ void Soldier1Component::ReactToHit()
 		m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
 		m_gettingHitSoundTimePassed = 0;
 	}
+
+	//
+	m_aiControllerComp->LookAt(attacker->GetWorldPos());
+	m_detectionComp->SetDetectionToCatious();
 }
 
 void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)

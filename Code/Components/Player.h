@@ -148,5 +148,5 @@ public:
 	void AddRecoil(Vec3 Amount);
 	Cry::DefaultComponents::CCharacterControllerComponent* GetCharacterController();
 
-	void ReactToHit();
+	void ReactToHit(IEntity* attacker);
 };
