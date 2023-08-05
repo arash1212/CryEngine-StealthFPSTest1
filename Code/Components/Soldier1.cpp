@@ -228,7 +228,7 @@ void Soldier1Component::InitLastTargetPositionEntity()
 
 Vec3 Soldier1Component::GetRandomPointToMoveTo(Vec3 Around, f32 distance)
 {
-	Vec3 point = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_lastTargetPosition != nullptr ? m_lastTargetPosition : m_pEntity);
+	Vec3 point = m_aiControllerComp->GetRandomPointOnNavmesh(10, m_lastTargetPosition != nullptr ? m_lastTargetPosition : m_pEntity);
 	//if (m_detectionComp->IsTargetFound()) {
 	//	while (!m_detectionComp->IsVisibleFrom(point, m_targetEntity)) {
 	//		point = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos());
@@ -372,7 +372,8 @@ void Soldier1Component::Attack()
 
 		//check last target pos if target is not visible
 		if (m_detectionComp->IsTargetFound() && !m_detectionComp->IsVisible(m_targetEntity) && m_lastTargetPositionTimePassed >= m_timeBetweenCheckLastTargetPosition) {
-			MoveAroundTarget(m_lastTargetPosition);
+			//todo : move around
+			MoveTo(m_lastTargetPosition->GetWorldPos());
 		}
 
 		//reset detection timer if target is visible
@@ -380,7 +381,7 @@ void Soldier1Component::Attack()
 			m_lastTargetPositionTimePassed = 0;
 		}
 		else {
-			m_findingCoverTimePassed = m_timeBetweenFindingCover - 1.5f;
+			//m_findingCoverTimePassed = m_timeBetweenFindingCover - 1.5f;
 		}
 
 
@@ -495,8 +496,11 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 		StopMoving();
 		return;
 	}
+	if (!m_detectionComp->IsVisible(m_targetEntity)) {
+		testMoveToPos = m_pEntity->GetWorldPos();
+	}
 
-	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
+	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2 ) {
 		testMoveToPos = GetRandomPointToMoveTo(m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos(), 8);
 	}
 

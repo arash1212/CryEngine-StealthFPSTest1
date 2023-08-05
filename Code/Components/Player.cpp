@@ -137,7 +137,7 @@ void PlayerComponent::InitCamera()
 	SEntitySpawnParams cameraRootSpawnParams;
 	cameraRootSpawnParams.vPosition = Vec3(0);
 	m_cameraRoot = gEnv->pEntitySystem->SpawnEntity(cameraRootSpawnParams);
-	m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), IDENTITY, Vec3(0, 0, 1.8f)));
+	m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), IDENTITY, Vec3(0, 0, 1.9f)));
 
 	//Spawn m_cameraBase Entity
 	SEntitySpawnParams cameraBaseSpawnParams;
@@ -331,6 +331,11 @@ void PlayerComponent::AddRecoil(Vec3 Amount)
 	m_targetRotation += Quat::CreateRotationXYZ(Amount);
 }
 
+bool PlayerComponent::IsCrouching()
+{
+	return bIsCrouching;
+}
+
 Cry::DefaultComponents::CCharacterControllerComponent* PlayerComponent::GetCharacterController()
 {
 	return m_characterControllerComp;
@@ -354,13 +359,13 @@ void PlayerComponent::UpdateCrouch(Quat Rotation)
 {
 	if (bIsCrouching) {
 		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.75f, 0.75f, 0.4f), IDENTITY, Vec3(0, 0, 0.75f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.0f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.4f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
 		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 0.6f)));
 	}
 	else
 	{
 		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.8f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.9f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
 		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.0f)));
 	}
 }

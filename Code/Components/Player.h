@@ -146,6 +146,7 @@ private:
 public:
 	Vec2 GetRotationDelta();
 	void AddRecoil(Vec3 Amount);
+	bool IsCrouching();
 	Cry::DefaultComponents::CCharacterControllerComponent* GetCharacterController();
 
 	void ReactToHit(IEntity* attacker);

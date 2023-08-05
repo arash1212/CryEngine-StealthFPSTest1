@@ -124,7 +124,13 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 
 	Vec3 currentPos = m_pEntity->GetPos();
-	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.6f);
+
+	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.9f);
+	if (target->GetComponent<PlayerComponent>()) {
+		if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
+			origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.49f);
+		}
+	}
 	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
 	//IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {

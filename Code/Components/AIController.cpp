@@ -178,8 +178,8 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* 
 	NavigationMeshID navMeshId = gEnv->pAISystem->GetNavigationSystem()->FindEnclosingMeshID(agentTypeId, Around->GetWorldPos());
 
 	//get Triangles
-	const Vec3 triggerBoxSize = Vec3(50, 50, 50);
-    MNM::aabb_t	 aabb = MNM::aabb_t(triggerBoxSize * -25.5f, triggerBoxSize * 25.5f);
+	const Vec3 triggerBoxSize = Vec3(20, 20, 20);
+    MNM::aabb_t	 aabb = MNM::aabb_t(triggerBoxSize * -15.5f, triggerBoxSize * 15.5f);
 	MNM::TriangleIDArray triangleIDArray = gEnv->pAISystem->GetNavigationSystem()->GetMNMNavMesh(navMeshId)->QueryTriangles(aabb);
 	if (triangleIDArray.size() <= 0 || !triangleIDArray[0].IsValid() || !navMeshId.IsValid() || !agentTypeId.IsValid()) {
 		return m_pEntity->GetWorldPos();

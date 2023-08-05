@@ -5811,13 +5811,17 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691084788,
+			"timestamp": 1691266726,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Levels/example.level.cryasset",
 			"details": [ ],
 			"dependencies": [
+				{
+					"path": "%editor%/materials/crydesigner_selection.mtl",
+					"usageCount": 0
+				},
 				{ "path": "%editor%/objects/anchor.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.mtl", "usageCount": 0 },
@@ -5893,6 +5897,10 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/texturemsg/orange_for_designer.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
 					"usageCount": 0
 				},
@@ -5910,6 +5918,7 @@
 					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
 					"usageCount": 0
 				},
+				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
 				{
 					"path": "editor/resourcecache/objects/effects/bullettracer/tracer_standard02.dds",
 					"usageCount": 0
