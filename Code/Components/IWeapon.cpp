@@ -6,6 +6,7 @@
 #include "BulletTracer.h"
 #include "IAIActor.h"
 #include "Soldier1.h"
+#include "Health.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -77,6 +78,12 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 				//if hitEntity is player
 				else if (hitEntity->GetComponent<PlayerComponent>()) {
 					CryLog("Weapon hit Player");
+					hitEntity->GetComponent<PlayerComponent>()->ReactToHit();
+				}
+
+				//if hitEntity has healthComponent
+				if (hitEntity->GetComponent<HealthComponent>()) {
+					hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
 				}
 
 				return hitEntity;

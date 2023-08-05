@@ -71,9 +71,14 @@ void Soldier1Component::Initialize()
 	m_shootAccuracyComp = m_pEntity->GetOrCreateComponent<ShootAccuracyComponent>();
 	m_shootAccuracyComp->SetOwnerEntity(m_pEntity);
 	m_shootAccuracyComp->SetStateComponent(m_stateComp);
+	m_shootAccuracyComp->SetMaxShootError(0.6f);
+	m_shootAccuracyComp->SetShootError(0.4f);
 
 	//last target position
 	InitLastTargetPositionEntity();
+
+	//audio
+	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
 	//health
 	m_healthComp = m_pEntity->GetOrCreateComponent<HealthComponent>();
@@ -102,6 +107,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 	}break;
 	case Cry::Entity::EEvent::Update: {
 		//if (bIsGameplayStarted) {
+		if (bIsAlive) {
 			f32 deltatime = event.fParam[0];
 
 			//todo function ?
@@ -186,7 +192,12 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			if (m_hitReactionTimePassed < m_hitReactionTimer) {
 				m_hitReactionTimePassed += 0.5f * deltatime;
 			}
+			if (m_gettingHitSoundTimePassed < m_timeBetweenPlayingGettingHitSound) {
+				m_gettingHitSoundTimePassed += 0.5f * deltatime;
+			}
 
+			Die();
+		}
 	//	}
 
 	}break;
@@ -389,6 +400,9 @@ void Soldier1Component::StopMoving()
 
 void Soldier1Component::ReactToHit()
 {
+	if (!bIsAlive) {
+		return;
+	}
 	if (!m_animationComp) {
 		CryLog("Soldier1Component : (ReactToHit) animationComp is null.");
 	}
@@ -405,6 +419,23 @@ void Soldier1Component::ReactToHit()
 	m_animationComp->QueueCustomFragment(*selectedAction);
 	m_activeFragmentId = m_reactToHit1FragmentId;
 	m_hitReactionTimePassed = 0;
+
+	if (m_gettingHitSoundTimePassed >= m_timeBetweenPlayingGettingHitSound) {
+		//play sound
+		int32 randomInt = GetRandomInt(1, 3);
+		const char* audioName;
+		if (randomInt == 1) {
+			audioName = "enemy_get_hit_sound_1";
+		}
+		else 	if (randomInt == 2) {
+			audioName = "enemy_get_hit_sound_2";
+		}
+		else 	if (randomInt == 3) {
+			audioName = "enemy_get_hit_sound_3";
+		}
+		m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
+		m_gettingHitSoundTimePassed = 0;
+	}
 }
 
 void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)
@@ -455,5 +486,45 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 	}
 	else {
 		m_aiControllerComp->MoveToAndLookAtWalkDirection(testMoveToPos);
+	}
+}
+
+
+void Soldier1Component::Die()
+{
+	if (m_healthComp->GetHealth() <= 0 && bIsAlive) {
+
+		/*
+		//play dead sound
+		m_randomDeadSound = cry_random<int32>(1, 3);
+		string idString;
+		if (m_randomGetHitSound == 1) {
+			idString = "ai_dead_sound_1";
+		}
+		else if (m_randomGetHitSound == 2) {
+			idString = "ai_dead_sound_2";
+		}
+		else if (m_randomGetHitSound == 3) {
+			idString = "ai_dead_sound_3";
+		}
+	
+
+		CryAudio::ControlId deadSound = CryAudio::StringToId(idString);
+		m_audioComp->ExecuteTrigger(deadSound);
+		*/
+
+		m_pEntity->RemoveComponent<Cry::DefaultComponents::CCharacterControllerComponent>();
+		m_pEntity->RemoveComponent<IEntityNavigationComponent>();
+		m_pEntity->RemoveComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
+
+		m_animationComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
+		m_animationComp->SetCharacterFile("Objects/Characters/soldier1/soldier_1.cdf");
+		m_animationComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(0, 0, 67.5f)), Vec3(0, 0, 0)));
+
+		m_ragdollComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CRagdollComponent>();
+		m_ragdollComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(0, 0, 179.1)), Vec3(0, 0, 0)));
+
+		m_ragdollComp->Enable(true);
+		bIsAlive = false;
 	}
 }

@@ -38,5 +38,7 @@ public:
 	void AddShootError(f32 amount);
 	void SetOwnerEntity(IEntity* ownerEntity);
 	void SetStateComponent(ActorStateComponent* stateComp);
+	void SetMaxShootError(f32 maxError);
+	void SetShootError(f32 error);
 	f32 GetShootError();
 };

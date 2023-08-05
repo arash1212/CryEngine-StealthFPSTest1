@@ -97,6 +97,16 @@ void ShootAccuracyComponent::SetStateComponent(ActorStateComponent* stateComp)
 	m_stateComp = stateComp;
 }
 
+void ShootAccuracyComponent::SetMaxShootError(f32 maxError)
+{
+	this->m_maxError = maxError;
+}
+
+void ShootAccuracyComponent::SetShootError(f32 error)
+{
+	this->m_shootError = error;
+}
+
 f32 ShootAccuracyComponent::GetShootError()
 {
 	return m_shootError;

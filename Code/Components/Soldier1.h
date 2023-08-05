@@ -1,6 +1,7 @@
 #pragma once
 
 //#include "IAIActor.h"
+#include <DefaultComponents/Physics/RagdollComponent.h>
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 
 class AIControllerComponent;
@@ -55,6 +56,12 @@ private:
 	//health
 	HealthComponent* m_healthComp;
 
+	//audio
+	IEntityAudioComponent* m_audioComp;
+
+	//ragdol
+	Cry::DefaultComponents::CRagdollComponent* m_ragdollComp;
+
 private:
 	bool bIsGameplayStarted = false;
 
@@ -92,9 +99,14 @@ private:
 	f32 m_coolDownTimer = 0.4f;
 	f32 m_coolDownTimePassed = 0.f;
 
-	//hit reaction timer
+	//hit reaction 
 	f32 m_hitReactionTimer = 0.3f;
 	f32 m_hitReactionTimePassed = 0.f;
+	f32 m_timeBetweenPlayingGettingHitSound = 0.4f;
+	f32 m_gettingHitSoundTimePassed = 0.4f;
+
+	bool bIsAlive = true;
+
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
@@ -110,6 +122,7 @@ protected:
 	virtual bool CanMove() override;
 	virtual bool CanUseWeapon() override;
 	virtual void StopMoving() override;
+	virtual void Die() override;
 
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);

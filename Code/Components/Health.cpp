@@ -58,7 +58,7 @@ void HealthComponent::ProcessEvent(const SEntityEvent& event)
 
 void HealthComponent::ApplyDamage(f32 damage)
 {
-	m_health -= damage;
+	m_health = CLAMP(m_health - damage, 0, m_maxHealth);
 }
 
 f32 HealthComponent::GetHealth()

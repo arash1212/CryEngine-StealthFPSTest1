@@ -5,7 +5,7 @@
 #include <DefaultComponents/Cameras/CameraComponent.h>
 #include <DefaultComponents/Geometry/StaticMeshComponent.h>
 
-static constexpr f32 WEAPON_DEFAULT_DAMAGE = 20.f;
+static constexpr f32 WEAPON_DEFAULT_DAMAGE = 15.f;
 static constexpr f32 WEAPON_DEFAULT_TIME_BETWEEN_SHOTS = 0.1f;
 
 class IWeaponComponent : public IEntityComponent

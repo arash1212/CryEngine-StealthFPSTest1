@@ -13,10 +13,14 @@ class ShootAccuracyComponent;
 class WeaponGlockComponent;
 class HealthComponent;
 
+struct IUIElement;
+
 static constexpr f32 DEFAULT_PLAYER_WALK_SPEED = 4.f;
 static constexpr f32 DEFAULT_PLAYER_RUN_SPEED = 6.f;
 static constexpr f32 DEFAULT_PLAYER_ROTATION_SPEED = 0.001f;
 static constexpr f32 DEFAULT_PLAYER_JUMP_FORCE = 6.f;
+
+static string HEALTHBAR_UI_ELEMENT_NAME = "healthbar";
 
 ////////////////////////////////////////////////////////
 // Represents a player participating in gameplay
@@ -53,6 +57,8 @@ private:
 	Cry::DefaultComponents::CCapsulePrimitiveComponent* m_capsuleComp = nullptr;
 	Cry::Audio::DefaultComponents::CListenerComponent* m_listenerComp = nullptr;
 
+	//audio
+	IEntityAudioComponent* m_audioComp;
 
 	//weapons
 	IWeaponComponent* m_currentlySelectedWeapon;
@@ -67,6 +73,7 @@ private:
 
 	//health
 	HealthComponent* m_health;
+	IUIElement* m_healthbarUIElement = nullptr;
 
 private:
 	//movement infos
@@ -102,7 +109,16 @@ private:
 	float m_currentFov = m_deafultFov;
 	float m_fovChangeSpeed = 20.f;
 
+	//health
+	f32 m_timeBetweenPlayingGettingHitSound = 0.4f;
+	f32 m_gettingHitSoundTimePassed = 0.4f;
+
+
 private:
+	//
+	f32 GetRandomValue(f32 min, f32 max);
+	int32 GetRandomInt(int32 min, int32 max);
+
 	//inits
 	void InitCamera();
 	void InitInputs();
@@ -121,8 +137,16 @@ private:
 
 	void UpdateCrouch(Quat Rotation);
 
+	//healthbar
+	void HideHealthbar();
+	void ShowHealthbar();
+	void UpdateHealthbar();
+
+
 public:
 	Vec2 GetRotationDelta();
 	void AddRecoil(Vec3 Amount);
 	Cry::DefaultComponents::CCharacterControllerComponent* GetCharacterController();
+
+	void ReactToHit();
 };

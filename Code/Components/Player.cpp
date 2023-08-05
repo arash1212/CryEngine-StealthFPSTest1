@@ -8,6 +8,7 @@
 #include "ShootAccuracy.h"
 #include "GamePlugin.h"
 
+#include <FlashUI/FlashUIElement.h>
 #include <CryRenderer/IRenderAuxGeom.h>
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
 #include <CrySchematyc/Env/IEnvRegistrar.h>
@@ -69,6 +70,10 @@ void PlayerComponent::Initialize()
 
 	//health
 	m_health = m_pEntity->GetOrCreateComponent<HealthComponent>();
+	m_healthbarUIElement = gEnv->pFlashUI->GetUIElement(HEALTHBAR_UI_ELEMENT_NAME);
+	ShowHealthbar();
+
+	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
 	//Set player Entity name.
 	m_pEntity->SetName("playerEntity");
@@ -106,6 +111,13 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 		UpdateCrosshair();
 
 		UpdateFOV();
+
+		UpdateHealthbar();
+
+		//timers 
+		if (m_gettingHitSoundTimePassed < m_timeBetweenPlayingGettingHitSound) {
+			m_gettingHitSoundTimePassed += 0.5f * deltatime;
+		}
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
@@ -342,7 +354,7 @@ void PlayerComponent::UpdateCrouch(Quat Rotation)
 {
 	if (bIsCrouching) {
 		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.75f, 0.75f, 0.4f), IDENTITY, Vec3(0, 0, 0.75f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 0.6f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.0f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
 		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 0.6f)));
 	}
 	else
@@ -351,4 +363,68 @@ void PlayerComponent::UpdateCrouch(Quat Rotation)
 		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.8f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
 		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.0f)));
 	}
+}
+
+
+void PlayerComponent::HideHealthbar()
+{
+	m_healthbarUIElement->SetVisible(false);
+}
+
+void PlayerComponent::ShowHealthbar()
+{
+	m_healthbarUIElement->SetVisible(true);
+}
+
+void PlayerComponent::UpdateHealthbar()
+{
+	if (!m_healthbarUIElement) {
+		return;
+	}
+	/*
+	if (m_currentHealth == m_lastHealthUpdateAmount) {
+		return;
+	}
+	*/
+
+	//m_lastHealthUpdateAmount = m_currentHealth;
+	SUIArguments args;
+	args.AddArgument(m_health->GetHealth());
+	m_healthbarUIElement->CallFunction("SetHealth", args);
+}
+
+void PlayerComponent::ReactToHit()
+{
+	if (m_gettingHitSoundTimePassed >= m_timeBetweenPlayingGettingHitSound) {
+		int32 randomInt = GetRandomInt(1, 4);
+		const char* audioName;
+		if (randomInt == 1) {
+			audioName = "player_get_hit_sound_1";
+		}
+		else 	if (randomInt == 2) {
+			audioName = "player_get_hit_sound_2";
+		}
+		else 	if (randomInt == 3) {
+			audioName = "player_get_hit_sound_3";
+		}
+		else 	if (randomInt == 4) {
+			audioName = "player_get_hit_sound_4";
+		}
+		m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
+		m_gettingHitSoundTimePassed = 0;
+	}
+}
+
+
+/*******************************************************************************************************************************/
+
+f32 PlayerComponent::GetRandomValue(f32 min, f32 max)
+{
+	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min));
+}
+
+int32 PlayerComponent::GetRandomInt(int32 min, int32 max)
+{
+	int32 range = max - min + 1;
+	return rand() % range + min;
 }
