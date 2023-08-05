@@ -61,6 +61,7 @@ void EnemySpawnPointComponent::Spawn()
 {
 	SEntitySpawnParams spawnParams;
 	spawnParams.vPosition = m_pEntity->GetWorldPos();
+	spawnParams.qRotation = m_pEntity->GetWorldRotation();
 	IEntity* spawnedEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 	Soldier1Component* soldier1 = spawnedEntity->GetOrCreateComponent<Soldier1Component>();
 	soldier1->SetPatrolPathName(spawnInfo.m_patrolPathName);

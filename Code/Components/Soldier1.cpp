@@ -71,8 +71,8 @@ void Soldier1Component::Initialize()
 	m_shootAccuracyComp = m_pEntity->GetOrCreateComponent<ShootAccuracyComponent>();
 	m_shootAccuracyComp->SetOwnerEntity(m_pEntity);
 	m_shootAccuracyComp->SetStateComponent(m_stateComp);
-	m_shootAccuracyComp->SetMaxShootError(0.6f);
-	m_shootAccuracyComp->SetShootError(0.4f);
+	m_shootAccuracyComp->SetMaxShootError(0.4f);
+	m_shootAccuracyComp->SetShootError(0.2f);
 
 	//last target position
 	InitLastTargetPositionEntity();
@@ -519,10 +519,15 @@ void Soldier1Component::Die()
 
 		m_animationComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
 		m_animationComp->SetCharacterFile("Objects/Characters/soldier1/soldier_1.cdf");
-		m_animationComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(0, 0, 67.5f)), Vec3(0, 0, 0)));
+		m_animationComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(0, 0, DEG2RAD(-45))), Vec3(0)));
+		m_animationComp->ResetCharacter();
 
 		m_ragdollComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CRagdollComponent>();
-		m_ragdollComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(0, 0, 179.1)), Vec3(0, 0, 0)));
+		//m_ragdollComp->SetTransformMatrix(Matrix34::Create(Vec3(1), Quat::CreateRotationXYZ(Ang3(0, 0, 179.1)), Vec3(0, 0, 0)));
+
+		//detach gun
+		m_weaponBaseEntity->SetPos(m_pEntity->GetWorldPos());
+		m_pEntity->DetachAll();
 
 		m_ragdollComp->Enable(true);
 		bIsAlive = false;
