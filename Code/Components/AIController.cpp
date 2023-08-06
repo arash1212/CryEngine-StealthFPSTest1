@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "AIController.h"
 #include "ActorState.h"
+#include "Player.h"
 //#include "GamePlugin.h
 
 #include <CryAISystem/ICoverSystem.h>
@@ -320,7 +321,7 @@ Vec3 AIControllerComponent::FindCover(IEntity* target)
 	int32 count = gEnv->pAISystem->GetCoverSystem()->GetCover(m_pEntity->GetWorldPos(), 900.f, &eyes, 1, 0.9f, locations.data(), 30, 3);
 	CryLog("count %i", count);
 	for (int32 i = 0; i < count; i++) {
-		if (IsCoverPointSafe(locations[i], target)) {
+		if (IsCoverPointSafe(locations[i], target) && IsCoverUsable(locations[i], target)) {
 			return locations[i];
 		}
 	}
@@ -342,6 +343,12 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 	//height target estefade beshe
 	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 2.1f);
+	if (target->GetComponent<PlayerComponent>()) {
+		if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
+			targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.0f);
+		}
+	}
+
 	Vec3 dir = targetPos - point;
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
@@ -379,6 +386,52 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 	return result == MNM::ERayCastResult::Hit ? true : false;
 	*/
 	return true;
+}
+
+bool AIControllerComponent::IsCoverUsable(Vec3 point, IEntity* target)
+{
+	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
+	std::array<ray_hit, 2> hits;
+	static IPhysicalEntity* pSkippedEntities[10];
+	pSkippedEntities[0] = m_pEntity->GetPhysics();
+	//height target estefade beshe
+	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 2.1f);
+	if (target->GetComponent<PlayerComponent>()) {
+		if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
+			targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.0f);
+		}
+	}
+
+	point.z += 1.5f;
+	Vec3 dir = targetPos - point;
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
+		if (hits[0].pCollider) {
+			//Debug
+			if (pd) {
+				pd->Begin("CoverRaycast", true);
+				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 1, 0), 2);
+			}
+
+			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
+			if (hitEntity) {
+				if (hitEntity == target) {
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+			else {
+				return false;
+			}
+		}
+	}
+	else {
+		return false;
+	}
+	return false;
 }
 
 Vec3 AIControllerComponent::snapToNavmesh(Vec3 point)

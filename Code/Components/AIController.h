@@ -56,5 +56,6 @@ public:
 	Vec3 Patrol(Schematyc::CSharedString pathName);
 	Vec3 FindCover(IEntity* target);
 	bool IsCoverPointSafe(Vec3 point, IEntity* target);
+	bool IsCoverUsable(Vec3 point, IEntity* target);
 	Vec3 snapToNavmesh(Vec3 point);
 };
