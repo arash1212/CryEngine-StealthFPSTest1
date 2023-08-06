@@ -125,24 +125,29 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 
 	Vec3 currentPos = m_pEntity->GetPos();
 
-	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.9f);
+	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.8f);
+	Vec3 targetPos = target->GetWorldPos();
 	if (target->GetComponent<PlayerComponent>()) {
-		if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
-			origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.49f);
+		if (!target->GetComponent<PlayerComponent>()->IsCrouching()) {
+			targetPos = Vec3(targetPos.x, targetPos.y, targetPos.z);
+		}
+		else {
+			targetPos = Vec3(targetPos.x, targetPos.y, targetPos.z - 0.71f);
 		}
 	}
-	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
-	//IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	Vec3 dir = targetPos - m_pEntity->GetWorldPos();
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
 		if (hits[0].pCollider) {
-			/*
+			
 			//Debug
 			if (pd) {
 				pd->Begin("Raycast", true);
-				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
-				pd->AddSphere(origin, 0.3f, ColorF(0, 1, 0), 2);
+				//pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
+				//pd->AddSphere(origin, 0.3f, ColorF(0, 1, 0), 2);
+				pd->AddLine(origin, hits[0].pt, ColorF(1, 0, 0), 1);
 			}
-			*/
+			
 
 			//return true if hitEntity is target
 			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);

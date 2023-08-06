@@ -36,6 +36,8 @@ void PlayerComponent::Initialize()
 	m_capsuleComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CCapsulePrimitiveComponent>();
 	m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
 
+	m_capsuleNormalHeight = m_capsuleComp->m_height;
+
 	m_inputComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CInputComponent>();
 
 	m_listenerComp = m_pEntity->GetOrCreateComponent<Cry::Audio::DefaultComponents::CListenerComponent>();
@@ -358,15 +360,19 @@ void PlayerComponent::UpdateFOV()
 void PlayerComponent::UpdateCrouch(Quat Rotation)
 {
 	if (bIsCrouching) {
-		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.75f, 0.75f, 0.4f), IDENTITY, Vec3(0, 0, 0.75f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.4f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
-		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 0.6f)));
+		//m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.85f, 0.85f, 0.47f), IDENTITY, Vec3(0, 0, 0.9f)));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.f), 0.5f * 15 * gEnv->pTimer->GetFrameTime())));
+		//m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 0.6f)));'
+		m_capsuleComp->m_height = m_capsuleNormalHeight / 12;
+		m_capsuleComp->SetTransformMatrix(Matrix34::Create(m_cameraComp->GetTransformMatrix().GetScale(), IDENTITY, Vec3(0, 0, 0.55f)));
 	}
 	else
 	{
-		m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.9f), 0.5f * 5 * gEnv->pTimer->GetFrameTime())));
-		m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.0f)));
+		//m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.8f), 0.5f * 15 * gEnv->pTimer->GetFrameTime())));
+		//m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.0f)));
+		m_capsuleComp->m_height = m_capsuleNormalHeight;
+		m_capsuleComp->SetTransformMatrix(Matrix34::Create(m_cameraComp->GetTransformMatrix().GetScale(), IDENTITY, Vec3(0, 0, 1.2f)));
 	}
 }
 

@@ -136,7 +136,13 @@ bool IWeaponComponent::Fire(IEntity* target)
 
 			Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
 			//dir
-			Vec3 targetPos = Vec3(target->GetWorldPos().x + 0.4f, target->GetWorldPos().y, target->GetWorldPos().z + 1.3f);
+			Vec3 targetPos = Vec3(target->GetWorldPos().x + 0.4f, target->GetWorldPos().y, target->GetWorldPos().z + 1.5f);
+			if (target->GetComponent<PlayerComponent>()) {
+				if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
+					targetPos = Vec3(target->GetWorldPos().x + 0.4f, target->GetWorldPos().y, target->GetWorldPos().z + 0.8f);
+				}
+			}
+
 			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
 
 			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror);

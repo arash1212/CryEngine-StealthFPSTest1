@@ -89,6 +89,7 @@ private:
 
 	//crouch
 	bool bIsCrouching = false;
+	f32 m_capsuleNormalHeight = ZERO;
 
 	//rotation (camera/body)
 	f32 m_rotationX = 0.f;
