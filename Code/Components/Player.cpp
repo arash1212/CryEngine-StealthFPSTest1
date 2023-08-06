@@ -316,7 +316,7 @@ void PlayerComponent::UpdateCrosshair()
 
 	//show / hide crosshair if play is aiming
 	if (bIsAiming) {
-		m_crosshairComp->Hide();
+		//m_crosshairComp->Hide();
 	}
 	else {
 		m_crosshairComp->Show();

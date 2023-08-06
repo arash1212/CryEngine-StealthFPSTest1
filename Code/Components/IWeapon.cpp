@@ -324,8 +324,8 @@ void IWeaponComponent::AddKickBack(Vec3 amount)
 
 void IWeaponComponent::Recoil()
 {
-	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_meshefaultRotaion, 0.5f * m_returnSpeed * gEnv->pTimer->GetFrameTime());
-	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, 0.4f * m_snapiness * gEnv->pTimer->GetFrameTime());
+	m_targetRotation = Quat::CreateSlerp(m_targetRotation, m_meshefaultRotaion, m_returnSpeed * gEnv->pTimer->GetFrameTime());
+	m_currentRotation = Quat::CreateSlerp(m_currentRotation, m_targetRotation, m_snapiness * gEnv->pTimer->GetFrameTime());
 	m_animationComp->SetTransformMatrix(Matrix34::Create(m_animationComp->GetTransform().get()->GetScale(), m_currentRotation, m_animationComp->GetTransform().get()->GetTranslation()));
 }
 
@@ -377,7 +377,7 @@ void IWeaponComponent::Aim()
 {
 	if (bIsAiming) {
 		m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_aimRotation,
-			Vec3::CreateLerp(m_animationComp->GetTransform().get()->GetTranslation(), m_aimPosition, 0.5f * 8.f * gEnv->pTimer->GetFrameTime())));
+			Vec3::CreateLerp(m_animationComp->GetTransform().get()->GetTranslation(), m_aimPosition, 0.1f * 3.f * gEnv->pTimer->GetFrameTime())));
 	}
 
 }

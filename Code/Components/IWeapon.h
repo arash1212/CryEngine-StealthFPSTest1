@@ -63,21 +63,21 @@ protected:
 	IActionPtr m_fireAction;
 
 	//sway
-	float m_swaySpeed = 1.4f;
+	float m_swaySpeed = 0.7f;
 	Quat m_defaultAnimationCompRotation = IDENTITY;
 	Vec3 m_defaultAnimationCompPosition = ZERO;
 
 	//kickback
 	Vec3 m_kickBackAmount = Vec3(0.f, 0.f, 0.f);
-	float m_kickBackSpeed = 45.f;
+	float m_kickBackSpeed = 17.f;
 
 	//sounds
 	int32 m_currentShootSoundNumber = 0;
 	Schematyc::CArray<CryAudio::ControlId> m_shootSounds;
 
 	//recoil
-	f32 m_snapiness = 50.2f;
-	f32 m_returnSpeed = 30.1f;
+	f32 m_snapiness = 15.2f;
+	f32 m_returnSpeed = 5.1f;
 	Quat m_meshefaultRotaion = IDENTITY;
 	Quat m_currentRotation = IDENTITY;
 	Quat m_targetRotation = IDENTITY;
@@ -101,8 +101,8 @@ protected:
 
 	//aiming
 	bool bIsAiming = false;
-	Vec3 m_aimPosition = Vec3(-0.842f, -0.05f, -0.09f);
-	Quat m_aimRotation = Quat::CreateRotationZ(160.234f);
+	Vec3 m_aimPosition = Vec3(-3.98f, -0.05f, 1.91f);
+	Quat m_aimRotation = Quat::CreateRotationZ(160.236f);
 
 protected:
 	f32 GetRandomValue(f32 min, f32 max);
