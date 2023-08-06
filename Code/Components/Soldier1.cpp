@@ -110,6 +110,8 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 		if (bIsAlive) {
 			f32 deltatime = event.fParam[0];
 
+			PlayDetectionSound();
+
 			//todo function ?
 			if (!bIsWeaponInitDone) {
 				m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun");
@@ -203,6 +205,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			}
 
 			Die();
+
 		}
 	//	}
 
@@ -561,6 +564,44 @@ void Soldier1Component::Die()
 		m_pEntity->DetachAll();
 
 		m_ragdollComp->Enable(true);
+
+		PlatDeathSound();
 		bIsAlive = false;
+	}
+}
+
+void Soldier1Component::PlatDeathSound()
+{
+	int32 randomInt = GetRandomInt(1, 3);
+	const char* audioName;
+	if (randomInt == 1) {
+		audioName = "ai_dead_sound_1";
+	}
+	else 	if (randomInt == 2) {
+		audioName = "ai_dead_sound_2";
+	}
+	else 	if (randomInt == 3) {
+		audioName = "ai_dead_sound_3";
+	}
+	m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
+}
+
+void Soldier1Component::PlayDetectionSound()
+{
+	if (m_detectionComp->IsTargetFound() && !bIsDetectionSoundPlayed) {
+		int32 randomInt = GetRandomInt(1, 3);
+		const char* audioName;
+		if (randomInt == 1) {
+			audioName = "ai_detection_sound_1";
+		}
+		else 	if (randomInt == 2) {
+			audioName = "ai_detection_sound_2";
+		}
+		else 	if (randomInt == 3) {
+			audioName = "ai_detection_sound_3";
+		}
+		m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
+		bIsDetectionSoundPlayed = true;
+		m_coolDownTimePassed = 0;
 	}
 }

@@ -101,8 +101,8 @@ protected:
 
 	//aiming
 	bool bIsAiming = false;
-	Vec3 m_aimPosition = Vec3(-3.98f, -0.05f, 1.91f);
-	Quat m_aimRotation = Quat::CreateRotationZ(160.236f);
+	Vec3 m_aimPosition = Vec3(-3.94f, -0.05f, 1.94f);
+	Quat m_aimRotation = Quat::CreateRotationZ(160.226f);
 
 protected:
 	f32 GetRandomValue(f32 min, f32 max);

@@ -82,7 +82,7 @@ private:
 	IActionPtr m_reactToHit1Action;
 	IActionPtr m_reactToHit2Action;
 	//attack
-	f32 m_maxAttackDistance = 40.f;
+	f32 m_maxAttackDistance = 140.f;
 	f32 m_closeAttackDistance = 2.f;
 	f32 m_timeBetweenCloseAttacks = 0.5f;
 	f32 m_closeAttackTimePassed = 0.f;
@@ -110,6 +110,9 @@ private:
 	f32 m_timeBetweenPlayingGettingHitSound = 0.4f;
 	f32 m_gettingHitSoundTimePassed = 0.4f;
 
+	//detection
+	bool bIsDetectionSoundPlayed = false;
+
 	bool bIsAlive = true;
 
 private:
@@ -128,6 +131,8 @@ protected:
 	virtual bool CanUseWeapon() override;
 	virtual void StopMoving() override;
 	virtual void Die() override;
+	void PlatDeathSound();
+	void PlayDetectionSound();
 
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);
