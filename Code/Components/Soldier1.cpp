@@ -353,7 +353,7 @@ void Soldier1Component::Attack()
 				}
 				else
 				{
-					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity) || !m_aiControllerComp->IsCoverUsable(m_currentCoverPosition, m_targetEntity)) {
+					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
 						m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
 						//move arount target while looking for new cover
 						MoveAroundTarget(m_targetEntity);
@@ -377,6 +377,7 @@ void Soldier1Component::Attack()
 		if (m_detectionComp->IsTargetFound() && !m_detectionComp->IsVisible(m_targetEntity) && m_lastTargetPositionTimePassed >= m_timeBetweenCheckLastTargetPosition) {
 			//todo : move around
 			MoveTo(m_lastTargetPosition->GetWorldPos());
+			m_currentCoverPosition = ZERO;
 		}
 
 		//reset detection timer if target is visible

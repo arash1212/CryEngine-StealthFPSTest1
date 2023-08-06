@@ -342,7 +342,7 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 	static IPhysicalEntity* pSkippedEntities[10];
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 	//height target estefade beshe
-	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 2.1f);
+	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.6f);
 	if (target->GetComponent<PlayerComponent>()) {
 		if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
 			targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.0f);
@@ -395,7 +395,7 @@ bool AIControllerComponent::IsCoverUsable(Vec3 point, IEntity* target)
 	static IPhysicalEntity* pSkippedEntities[10];
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 	//height target estefade beshe
-	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 2.1f);
+	Vec3 targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.6f);
 	if (target->GetComponent<PlayerComponent>()) {
 		if (target->GetComponent<PlayerComponent>()->IsCrouching()) {
 			targetPos = Vec3(target->GetWorldPos().x, target->GetWorldPos().y, target->GetWorldPos().z + 1.0f);
