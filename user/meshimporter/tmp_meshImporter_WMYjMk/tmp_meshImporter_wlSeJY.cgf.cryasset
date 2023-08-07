@@ -1,0 +1,14 @@
+<AssetMetadata version="0" type="Mesh" guid="9d9d0044-56e2-9f89-d6c7-9b46eb75a501" source="security-camera-1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_wlSeJY.cgf"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">3</Detail>
+  <Detail name="triangleCount">472</Detail>
+  <Detail name="vertexCount">464</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">Objects/securitycamera/security-camera-1.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

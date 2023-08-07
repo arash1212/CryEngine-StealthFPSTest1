@@ -51,7 +51,7 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 
 			//Debug
 			if (pd) {
-				pd->Begin("Raycast", true);
+				pd->Begin("RaycastWeapon", true);
 				//pd->AddText3D(hits[0].pt, 500, ColorF(0, 1, 0), 2, "Hit : %s", hitEntity->GetName());
 				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
 			}

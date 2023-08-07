@@ -113,7 +113,7 @@ bool AIDetectionComponent::IsInView(IEntity* target)
 	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
 	float dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
 	float degree = RAD2DEG(crymath::acos(dot));
-	return degree > 0 && degree < 70;
+	return degree > m_minDetectionDegree && degree < m_maxDetectionDegree;
 }
 
 bool AIDetectionComponent::IsVisible(IEntity* target)
@@ -125,7 +125,7 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 
 	Vec3 currentPos = m_pEntity->GetPos();
 
-	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 1.8f);
+	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + m_detectionHeight);
 	Vec3 targetPos = target->GetWorldPos();
 	if (target->GetComponent<PlayerComponent>()) {
 		if (!target->GetComponent<PlayerComponent>()->IsCrouching()) {
@@ -142,9 +142,9 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 			
 			//Debug
 			if (pd) {
-				pd->Begin("Raycast", true);
+				pd->Begin("RaycastDetectionComp", true);
 				//pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
-				//pd->AddSphere(origin, 0.3f, ColorF(0, 1, 0), 2);
+				//pd->AddSphere(hits[0].pt, 0.3f, ColorF(0, 1, 0), 2);
 				pd->AddLine(origin, hits[0].pt, ColorF(1, 0, 0), 1);
 			}
 			
@@ -232,3 +232,19 @@ void AIDetectionComponent::SetCanReturnToIdleState(bool canReturntoIdle)
 {
 	this->bCanReturnToIdleState = canReturntoIdle;
 }
+
+void AIDetectionComponent::SetMaxDetectionDegree(int32 degree)
+{
+	this->m_maxDetectionDegree = degree;
+}
+
+void AIDetectionComponent::SetMinDetectionDegree(int32 degree)
+{
+	this->m_minDetectionDegree = degree;
+}
+
+void AIDetectionComponent::SetDetectionHeight(f32 height)
+{
+	this->m_detectionHeight = height;
+}
+

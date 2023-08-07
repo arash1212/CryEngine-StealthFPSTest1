@@ -29,12 +29,15 @@ public:
 private:
 	IEntity* m_currentTarget = nullptr;
 
+	f32 m_detectionHeight = 1.8f;
 
 	f32 m_maxDetectionAmount = DEFAULT_MAX_DETECTION_AMOUNT;
 	f32 m_detectionAmount = 0.f;
 	bool bIsTargetFound = false;
 	bool bCanReturnToIdleState = false;
 
+	int32 m_maxDetectionDegree = 70;
+	int32 m_minDetectionDegree = 0;
 	EDetectionState m_detectionState = EDetectionState::IDLE;
 
 private:
@@ -57,4 +60,7 @@ public:
 	void SetDetectionToCatious();
 	f32 GetMaxDetectionAmount();
 	void SetCanReturnToIdleState(bool canReturntoIdle);
+	void SetMaxDetectionDegree(int32 degree);
+	void SetMinDetectionDegree(int32 degree);
+	void SetDetectionHeight(f32 height);
 };
