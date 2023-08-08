@@ -30,9 +30,11 @@ void SecurityCameraComponent::Initialize()
 	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
 	m_detectionComp = m_pEntity->GetOrCreateComponent<AIDetectionComponent>();
-	m_detectionComp->SetMaxDetectionDegree(160);
+	m_detectionComp->SetMaxDetectionDegree(165);
 	m_detectionComp->SetMinDetectionDegree(118);
 	m_detectionComp->SetDetectionHeight(0.8f);
+	m_detectionComp->SetTargetNormalHeight(1.0f);
+	m_detectionComp->SetTargetCrouchHeight(-0.07f);
 
 	m_defaultZRotation = m_pEntity->GetRotation().GetRotZ();
 

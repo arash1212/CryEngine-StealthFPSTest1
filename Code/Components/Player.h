@@ -86,6 +86,7 @@ private:
 	f32 m_jumpForce = DEFAULT_PLAYER_JUMP_FORCE;
 	f32 m_headBobTimer = 0.f;
 	f32 m_defaultPosZ = 0;
+	bool bCanStand = false;
 
 	//crouch
 	bool bIsCrouching = false;
@@ -129,6 +130,7 @@ private:
 	void Rotate();
 	void RotateCamera();
 	void HeadBob(float deltatime);
+	bool CanStand();
 
 	void RecoilUpdate();
 

@@ -116,6 +116,8 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 
 		UpdateHealthbar();
 
+		bCanStand = CanStand();
+
 		//timers 
 		if (m_gettingHitSoundTimePassed < m_timeBetweenPlayingGettingHitSound) {
 			m_gettingHitSoundTimePassed += 0.5f * deltatime;
@@ -269,7 +271,7 @@ void PlayerComponent::RotateCamera()
 
 void PlayerComponent::HeadBob(float deltatime)
 {
-	if (bIsCrouching) {
+	if (bIsCrouching || !bCanStand) {
 		return;
 	}
 
@@ -286,6 +288,33 @@ void PlayerComponent::HeadBob(float deltatime)
 		currentPos.z = m_defaultPosZ;
 		m_cameraRoot->SetPos(Vec3::CreateLerp(m_cameraRoot->GetPos(), currentPos, 0.1f * 20 * deltatime));
 	}
+}
+
+bool PlayerComponent::CanStand()
+{
+	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
+	std::array<ray_hit, 2> hits;
+	static IPhysicalEntity* pSkippedEntities[10];
+	pSkippedEntities[0] = m_pEntity->GetPhysics();
+
+	Vec3 currentPos = m_pEntity->GetPos();
+	Vec3 origin = Vec3(currentPos.x, currentPos.y, currentPos.z + 0.1f);
+	Vec3 dir = m_pEntity->GetUpDir();
+
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * 2, ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
+		if (hits[0].pCollider) {
+			//Debug
+			if (pd) {
+				pd->Begin("RaycastPlayerStand", true);
+				//pd->AddText3D(hits[0].pt, 500, ColorF(0, 1, 0), 2, "Hit : %s", hitEntity->GetName());
+				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
+			}
+
+			return false;
+		}
+	}
+	return true;
 }
 
 void PlayerComponent::RecoilUpdate()
@@ -335,7 +364,7 @@ void PlayerComponent::AddRecoil(Vec3 Amount)
 
 bool PlayerComponent::IsCrouching()
 {
-	return bIsCrouching;
+	return !bCanStand | bIsCrouching;
 }
 
 Cry::DefaultComponents::CCharacterControllerComponent* PlayerComponent::GetCharacterController()
@@ -360,17 +389,13 @@ void PlayerComponent::UpdateFOV()
 void PlayerComponent::UpdateCrouch(Quat Rotation)
 {
 	if (bIsCrouching) {
-		//m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.85f, 0.85f, 0.47f), IDENTITY, Vec3(0, 0, 0.9f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.f), 0.5f * 15 * gEnv->pTimer->GetFrameTime())));
-		//m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 0.6f)));'
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.f), 0.5f * 4 * gEnv->pTimer->GetFrameTime())));
 		m_capsuleComp->m_height = m_capsuleNormalHeight / 12;
 		m_capsuleComp->SetTransformMatrix(Matrix34::Create(m_cameraComp->GetTransformMatrix().GetScale(), IDENTITY, Vec3(0, 0, 0.55f)));
 	}
-	else
+	else if (bCanStand && !bIsCrouching)
 	{
-		//m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
-		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.8f), 0.5f * 15 * gEnv->pTimer->GetFrameTime())));
-		//m_characterControllerComp->SetTransformMatrix(Matrix34::Create(Vec3(1, 1, 2.7f), IDENTITY, Vec3(0, 0, 1.0f)));
+		m_cameraRoot->SetLocalTM(Matrix34::Create(Vec3(1), Rotation, Vec3::CreateLerp(m_cameraRoot->GetLocalTM().GetTranslation(), Vec3(0, 0, 1.8f), 0.5f * 4 * gEnv->pTimer->GetFrameTime())));
 		m_capsuleComp->m_height = m_capsuleNormalHeight;
 		m_capsuleComp->SetTransformMatrix(Matrix34::Create(m_cameraComp->GetTransformMatrix().GetScale(), IDENTITY, Vec3(0, 0, 1.2f)));
 	}

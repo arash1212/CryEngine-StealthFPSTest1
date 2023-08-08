@@ -113,6 +113,8 @@ bool AIDetectionComponent::IsInView(IEntity* target)
 	Vec3 dir = target->GetWorldPos() - m_pEntity->GetWorldPos();
 	float dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
 	float degree = RAD2DEG(crymath::acos(dot));
+
+	//CryLog("degree :%f ", degree);
 	return degree > m_minDetectionDegree && degree < m_maxDetectionDegree;
 }
 
@@ -129,10 +131,10 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 	Vec3 targetPos = target->GetWorldPos();
 	if (target->GetComponent<PlayerComponent>()) {
 		if (!target->GetComponent<PlayerComponent>()->IsCrouching()) {
-			targetPos = Vec3(targetPos.x, targetPos.y, targetPos.z);
+			targetPos = Vec3(targetPos.x, targetPos.y, targetPos.z + m_targetNormalHeight);
 		}
 		else {
-			targetPos = Vec3(targetPos.x, targetPos.y, targetPos.z - 0.71f);
+			targetPos = Vec3(targetPos.x, targetPos.y, targetPos.z - m_targetCrouchHeight);
 		}
 	}
 	Vec3 dir = targetPos - m_pEntity->GetWorldPos();
@@ -246,5 +248,15 @@ void AIDetectionComponent::SetMinDetectionDegree(int32 degree)
 void AIDetectionComponent::SetDetectionHeight(f32 height)
 {
 	this->m_detectionHeight = height;
+}
+
+void AIDetectionComponent::SetTargetNormalHeight(f32 height)
+{
+	m_targetNormalHeight = height;
+}
+
+void AIDetectionComponent::SetTargetCrouchHeight(f32 croutchHeight)
+{
+	m_targetCrouchHeight = croutchHeight;
 }
 

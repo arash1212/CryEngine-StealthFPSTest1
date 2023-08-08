@@ -5811,7 +5811,7 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691435546,
+			"timestamp": 1691436185,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5885,15 +5885,15 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/objects/primitive_sphere.cgf",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/texturemsg/defaultsolids.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/textures/default_probe_cm.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/textures/default_probe_cm_diff.dds",
 					"usageCount": 0
 				},
 				{
@@ -5901,6 +5901,19 @@
 					"usageCount": 0
 				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
+				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
+				{
+					"path": "editor/resourcecache/objects/securitycamera/defaultmaterial_basecolor.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/securitycamera/defaultmaterial_metallicroughness.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/securitycamera/defaultmaterial_normal.dds",
+					"usageCount": 0
+				},
 				{
 					"path": "engineassets/materials/water/ocean_default.mtl",
 					"usageCount": 0
@@ -5963,23 +5976,11 @@
 					"usageCount": 0
 				},
 				{
-					"path": "objects/securitycamera/security-camera-1.cgf",
-					"usageCount": 0
-				},
-				{
 					"path": "objects/securitycamera/security-camera-1.mtl",
 					"usageCount": 0
 				},
 				{
 					"path": "objects/securitycamera/security-camera-base-1.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/securitycamera/security-camera-base-1.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/securitycamera/security-camera-base-1.mtl",
 					"usageCount": 0
 				},
 				{
