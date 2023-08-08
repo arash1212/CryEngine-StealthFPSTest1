@@ -5787,8 +5787,8 @@
 			"type": "Animation",
 			"guid": "a41303bf-bc0f-6509-b7c3-a8f3744539d9",
 			"name": "walk_fwd_3p",
-			"timestamp": 132973673640740000,
-			"files": [ "animations/motusanims/walk_fwd_3p.caf" ],
+			"timestamp": 1652897364,
+			"files": [ "Animations/motusAnims/walk_fwd_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/walk_fwd_3p.caf.cryasset",
@@ -5811,19 +5811,25 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691436185,
+			"timestamp": 1691506128,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Levels/example.level.cryasset",
 			"details": [ ],
 			"dependencies": [
+				{ "path": "%editor%/materials/areasolid.dds", "usageCount": 0 },
+				{ "path": "%editor%/materials/areasolid.mtl", "usageCount": 0 },
+				{ "path": "%editor%/materials/shaderlist.xml", "usageCount": 0 },
 				{ "path": "%editor%/objects/anchor.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.mtl", "usageCount": 0 },
 				{ "path": "%editor%/objects/gradf.dds", "usageCount": 0 },
 				{ "path": "%editor%/objects/helper.mtl", "usageCount": 0 },
 				{ "path": "%editor%/objects/helper_illum.mtl", "usageCount": 0 },
+				{ "path": "%editor%/objects/mtlobjects.mtl", "usageCount": 0 },
+				{ "path": "%editor%/objects/mtlplane.cgf", "usageCount": 0 },
+				{ "path": "%editor%/objects/mtlsphere.cgf", "usageCount": 0 },
 				{
 					"path": "%engine%/engineassets/icons/averagememoryusage.dds",
 					"usageCount": 0
@@ -5873,6 +5879,14 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/materials/meshimporter/mi_previewvertexalpha.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/materials/meshimporter/mi_previewvertexcolor.mtl",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/materials/water/wateroceanbottom.mtl",
 					"usageCount": 0
 				},
@@ -5889,6 +5903,10 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/texturemsg/color_black.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
 					"usageCount": 0
 				},
@@ -5897,11 +5915,44 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/textures/default_probe_cm.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/textures/default_probe_cm_diff.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
 					"usageCount": 0
 				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
 				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
+				{ "path": "animations/motusanims/walk_fwd_3p.caf", "usageCount": 0 },
+				{
+					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_basecolor.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_emissive.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_height.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_metallic.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_roughness.dds",
+					"usageCount": 0
+				},
 				{
 					"path": "editor/resourcecache/objects/securitycamera/defaultmaterial_basecolor.dds",
 					"usageCount": 0
@@ -5959,6 +6010,34 @@
 					"usageCount": 1
 				},
 				{ "path": "libs/environmentpresets/example.env", "usageCount": 1 },
+				{ "path": "objects/alarm1/alarm_1.cgf", "usageCount": 0 },
+				{ "path": "objects/alarm1/alarm_1.cgf", "usageCount": 0 },
+				{ "path": "objects/alarm1/alarm_1.mtl", "usageCount": 0 },
+				{ "path": "objects/alarm1/alarm_1.mtl", "usageCount": 0 },
+				{
+					"path": "objects/alarm1/tower_tower_shader_basecolor.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarm1/tower_tower_shader_emissive.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarm1/tower_tower_shader_height.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarm1/tower_tower_shader_metallic.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarm1/tower_tower_shader_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarm1/tower_tower_shader_roughness.dds",
+					"usageCount": 0
+				},
 				{
 					"path": "objects/securitycamera/defaultmaterial_basecolor.dds",
 					"usageCount": 0
@@ -6145,6 +6224,164 @@
 			"dependencies": [
 				{ "path": "%engine%/EngineAssets/Textures/white.dds", "usageCount": 0 }
 			]
+		},
+		{
+			"type": "Mesh",
+			"guid": "0eeb8f0c-ec33-a9dd-ab4f-0d7f3de24de8",
+			"name": "alarm_1",
+			"timestamp": 1691505974,
+			"files": [ "Objects/alarm1/alarm_1.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/alarm_1.fbx",
+			"metadata": "Objects/alarm1/alarm_1.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "1038" },
+				{ "key": "vertexCount", "value": "693" }
+			],
+			"dependencies": [ { "path": "Objects/alarm1/alarm_1.mtl", "usageCount": 1 } ]
+		},
+		{
+			"type": "Material",
+			"guid": "32ffb145-586d-ac3c-63ed-b36a972b8deb",
+			"name": "alarm_1",
+			"timestamp": 1691505948,
+			"files": [ "Objects/alarm1/alarm_1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/alarm1/alarm_1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "8" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/alarm1/Tower_Tower_shader_BaseColor.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/alarm1/tower_tower_shader_normal.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/alarm1/tower_tower_shader_metallic.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/alarm1/tower_tower_shader_roughness.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/alarm1/tower_tower_shader_height.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/alarm1/tower_tower_shader_emissive.dds",
+					"usageCount": 1
+				},
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 2
+				}
+			]
+		},
+		{
+			"type": "Texture",
+			"guid": "f2df5413-a12f-bc97-ae95-1ea0b327d6f6",
+			"name": "tower_tower_shader_basecolor",
+			"timestamp": 1691505885,
+			"files": [ "Objects/alarm1/tower_tower_shader_basecolor.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/tower_tower_shader_basecolor.tif",
+			"metadata": "Objects/alarm1/tower_tower_shader_basecolor.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "da10391a-e144-a9de-40f4-bd85e7bd217d",
+			"name": "tower_tower_shader_emissive",
+			"timestamp": 1691505891,
+			"files": [ "Objects/alarm1/tower_tower_shader_emissive.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/tower_tower_shader_emissive.tif",
+			"metadata": "Objects/alarm1/tower_tower_shader_emissive.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "5cf80c09-cbeb-44d1-7792-d2c7f6ff4911",
+			"name": "tower_tower_shader_height",
+			"timestamp": 1691505897,
+			"files": [ "Objects/alarm1/tower_tower_shader_height.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/tower_tower_shader_height.tif",
+			"metadata": "Objects/alarm1/tower_tower_shader_height.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "7d5af746-f5b6-0e93-6ab4-43a0f9bd7721",
+			"name": "tower_tower_shader_metallic",
+			"timestamp": 1691505864,
+			"files": [ "Objects/alarm1/tower_tower_shader_metallic.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/tower_tower_shader_metallic.tif",
+			"metadata": "Objects/alarm1/tower_tower_shader_metallic.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "c7b6201e-06c0-71e6-3245-8e2b737f3f99",
+			"name": "tower_tower_shader_normal",
+			"timestamp": 1691505865,
+			"files": [ "Objects/alarm1/tower_tower_shader_normal.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/tower_tower_shader_normal.tif",
+			"metadata": "Objects/alarm1/tower_tower_shader_normal.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "a0ac4945-5569-ec38-3546-c8ed6f721ff9",
+			"name": "tower_tower_shader_roughness",
+			"timestamp": 1691505876,
+			"files": [ "Objects/alarm1/tower_tower_shader_roughness.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarm1/tower_tower_shader_roughness.tif",
+			"metadata": "Objects/alarm1/tower_tower_shader_roughness.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
 		},
 		{
 			"type": "Character",
@@ -6356,9 +6593,9 @@
 		},
 		{
 			"type": "Character",
-			"guid": "f6ca9f20-7ce5-cc42-18ad-55e556020d94",
+			"guid": "190da718-1593-4b01-274e-ce08437ffe16",
 			"name": "soldier_1",
-			"timestamp": 1691247422,
+			"timestamp": 1691507959,
 			"files": [ "Objects/Characters/soldier1/soldier_1.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6377,9 +6614,9 @@
 		},
 		{
 			"type": "Mesh",
-			"guid": "e80d6de2-c07f-27a8-f9c8-6b034c8a81bd",
+			"guid": "71526656-779b-bdc9-4c1f-45d0639dc3a7",
 			"name": "soldier_1",
-			"timestamp": 1690733346,
+			"timestamp": 1691507663,
 			"files": [ "Objects/Characters/soldier1/soldier_1.cgf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6399,9 +6636,9 @@
 		},
 		{
 			"type": "Skeleton",
-			"guid": "ec97f336-b7e8-c34a-7231-cdaa3d20c3b0",
+			"guid": "5512bd15-781f-a34b-d7c5-6edc708ee925",
 			"name": "soldier_1",
-			"timestamp": 1690733687,
+			"timestamp": 1691507881,
 			"files": [
 				"Objects/Characters/soldier1/soldier_1.chr",
 				"Objects/Characters/soldier1/soldier_1.chrparams"
@@ -6414,9 +6651,9 @@
 		},
 		{
 			"type": "Material",
-			"guid": "9a2fef46-0df2-3305-dd2f-2c964aa06ae2",
+			"guid": "0df6eae8-6935-555a-3335-4c5a973cc04a",
 			"name": "soldier_1",
-			"timestamp": 1690733687,
+			"timestamp": 1691507880,
 			"files": [ "Objects/Characters/soldier1/soldier_1.mtl" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6435,9 +6672,9 @@
 		},
 		{
 			"type": "SkinnedMesh",
-			"guid": "164b192e-0d88-ec29-fa31-8c2cd0bbc1a6",
+			"guid": "701785e2-89f2-43ed-ad6f-f7b82c622e4c",
 			"name": "soldier_1_Mesh",
-			"timestamp": 1690733363,
+			"timestamp": 1691507690,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Mesh.skin" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6458,9 +6695,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "88068561-2ef9-340a-5724-efa81f4bab5f",
+			"guid": "3e10fb8c-20ae-5ccf-b10b-857bf3591329",
 			"name": "soldier_1_Normal_Idle",
-			"timestamp": 1690733535,
+			"timestamp": 1691507805,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Normal_Idle.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6470,9 +6707,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "57d081e0-e0f9-e875-794c-d477c11022e4",
+			"guid": "7d2bd9da-97cb-434b-94d9-e5f9f7aa148f",
 			"name": "soldier_1_Normal_Walk_Backward",
-			"timestamp": 1690733544,
+			"timestamp": 1691507810,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Normal_Walk_Backward.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6482,9 +6719,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "936fdb20-6470-faf6-9188-b570892c66ca",
+			"guid": "3584a83b-dbfb-caf2-eef4-9d4584013949",
 			"name": "soldier_1_Normal_Walk_Forward",
-			"timestamp": 1690733553,
+			"timestamp": 1691507814,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Normal_Walk_Forward.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6494,9 +6731,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "cc88d006-3b81-89c0-0d07-484a90d62f80",
+			"guid": "c6cc4d2e-0af0-e44a-5fb0-a494365a8a72",
 			"name": "soldier_1_Normal_Walk_Left",
-			"timestamp": 1690733562,
+			"timestamp": 1691507818,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Normal_Walk_Left.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6506,9 +6743,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "45eb6112-b710-1848-7565-69a126c03799",
+			"guid": "8d96b657-b09e-c932-2b24-560743c3e7ba",
 			"name": "soldier_1_Normal_Walk_Right",
-			"timestamp": 1690733571,
+			"timestamp": 1691507822,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Normal_Walk_Right.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6518,9 +6755,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "46bd3ce3-d5c9-8a3e-49cd-2c1602d4afb2",
+			"guid": "50cf74dd-75bf-5ca1-42c6-dee6f58787af",
 			"name": "soldier_1_Rifle_Aim_Run_Backward",
-			"timestamp": 1690733580,
+			"timestamp": 1691507826,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Aim_Run_Backward.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6530,9 +6767,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "d6e82177-09e7-00ca-4c1e-9538d4ff5caa",
+			"guid": "0f7b4306-0f63-f1be-bd79-04c47b52697b",
 			"name": "soldier_1_rifle_Aim_Run_Forward",
-			"timestamp": 1690733681,
+			"timestamp": 1691507877,
 			"files": [ "Objects/Characters/soldier1/soldier_1_rifle_Aim_Run_Forward.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6542,9 +6779,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "9de3b887-984b-31c6-eb4b-700cd7e324b1",
+			"guid": "6ed285ae-90b4-ba63-a5be-a4b94ff7c808",
 			"name": "soldier_1_Rifle_Aim_Run_Idle",
-			"timestamp": 1690733590,
+			"timestamp": 1691507830,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Aim_Run_Idle.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6554,9 +6791,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "8c93cc5b-a41b-9a1f-be1c-f05d047d986f",
+			"guid": "609ee4f0-e46e-8c2e-baad-6cf0a4ab6095",
 			"name": "soldier_1_Rifle_Aim_Run_Left",
-			"timestamp": 1690733599,
+			"timestamp": 1691507834,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Aim_Run_Left.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6566,9 +6803,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "fc2b58e5-afdd-afba-3e7f-5652d09f9a7b",
+			"guid": "94293d2f-129c-7cdd-06b4-e77945524c5c",
 			"name": "soldier_1_Rifle_Aim_Run_Right",
-			"timestamp": 1690733607,
+			"timestamp": 1691507838,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Aim_Run_Right.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6578,9 +6815,21 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "76a91bdc-761f-fcdb-3d42-acd23dc2a6d9",
+			"guid": "405f5c0b-2268-aef5-0ee1-bc9ffe6e1a6c",
+			"name": "soldier_1_Rifle_Cover_Sit",
+			"timestamp": 1691507842,
+			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Cover_Sit.caf" ],
+			"workFiles": [ ],
+			"source": "Objects/Characters/soldier1/soldier_1.fbx",
+			"metadata": "Objects/Characters/soldier1/soldier_1_Rifle_Cover_Sit.caf.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Animation",
+			"guid": "3d3f61e6-b191-6d3c-2bef-1c26224907aa",
 			"name": "soldier_1_Rifle_Crouch_Idle",
-			"timestamp": 1690733617,
+			"timestamp": 1691507847,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Crouch_Idle.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6590,9 +6839,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "b8d94841-3fe7-e07f-02dd-4f52f81f4503",
+			"guid": "eca525c8-2282-0a3f-1c27-513634e476ac",
 			"name": "soldier_1_Rifle_Crouch_Walk_Backward",
-			"timestamp": 1690733626,
+			"timestamp": 1691507851,
 			"files": [
 				"Objects/Characters/soldier1/soldier_1_Rifle_Crouch_Walk_Backward.caf"
 			],
@@ -6604,9 +6853,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "fdd46db4-0429-e776-a84d-2477e28ce263",
+			"guid": "1d53eb6b-a1d2-4eae-b9d8-bf4daad143e3",
 			"name": "soldier_1_Rifle_Crouch_Walk_Forward",
-			"timestamp": 1690733635,
+			"timestamp": 1691507857,
 			"files": [
 				"Objects/Characters/soldier1/soldier_1_Rifle_Crouch_Walk_Forward.caf"
 			],
@@ -6618,9 +6867,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "0647d6ff-45b4-29cc-ee34-4210ac978ee5",
+			"guid": "3133edf6-a9a5-9db3-3f2c-72daea45d253",
 			"name": "soldier_1_Rifle_Crouch_Walk_Right",
-			"timestamp": 1690733644,
+			"timestamp": 1691507861,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Crouch_Walk_Right.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6630,9 +6879,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "3bd18782-87b8-d275-fdea-65b9e40720f0",
+			"guid": "10941ade-00eb-ed60-d31e-d82a916ed861",
 			"name": "soldier_1_Rifle_Hit_Reaction_1",
-			"timestamp": 1690733653,
+			"timestamp": 1691507865,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Hit_Reaction_1.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6642,9 +6891,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "2eb893a6-21f7-0ade-bbf3-edf6cb98bcae",
+			"guid": "a5c4de58-a386-c736-8a1d-cf5e9788ebd4",
 			"name": "soldier_1_Rifle_Hit_Reaction_2",
-			"timestamp": 1690733662,
+			"timestamp": 1691507869,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Hit_Reaction_2.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
@@ -6654,9 +6903,9 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "63cd2ccb-dd9f-a1a3-8b5a-fc9d64ee3797",
+			"guid": "0e8ba367-9115-0a07-1204-c2d2e250b3f5",
 			"name": "soldier_1_Rifle_Kick",
-			"timestamp": 1690733672,
+			"timestamp": 1691507873,
 			"files": [ "Objects/Characters/soldier1/soldier_1_Rifle_Kick.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",

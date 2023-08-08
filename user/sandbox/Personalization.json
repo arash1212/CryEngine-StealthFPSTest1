@@ -13,7 +13,8 @@
             "Objects/Characters/soldier1",
             "Objects/Weapons/ak47",
             "Objects/Weapons/ak47/3p",
-            "Objects/securitycamera"
+            "Objects/securitycamera",
+            "Objects/alarm1"
         ]
     },
     "CAssetPicker": {
@@ -344,7 +345,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/securitycamera"
+                    "Objects/alaram1"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -678,7 +679,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/securitycamera"
+                    "Objects/alarm1"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -713,15 +714,16 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/Characters/soldier1/soldier1.cgf.cryasset",
+            "Objects/alarm1/alarm_1.cgf.cryasset",
+            "Objects/alaram1/alaram_1.cgf.cryasset",
             "Objects/securitycamera/security-camera-base-1.cgf.cryasset",
             "Objects/securitycamera/security-camera-1.cgf.cryasset",
             "Objects/Weapons/ak47/3p/ak-47.cgf.cryasset",
             "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/soldier2.cgf.cryasset",
             "Objects/Characters/soldier1/soldier1-test.cgf.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash2.cgf.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash1.cgf.cryasset",
-            "Objects/Weapons/glock/1p/pistol_glock.cgf.cryasset"
+            "Objects/effects/muzzleflash/muzzleflash2.cgf.cryasset"
         ]
     },
     "Import Skeleton": {
@@ -736,6 +738,8 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/alarm1/alarm_1.mtl.cryasset",
+            "Objects/alaram1/alaram_1.mtl.cryasset",
             "Objects/securitycamera/security-camera-base-1.mtl.cryasset",
             "Objects/securitycamera/security-camera-1.mtl.cryasset",
             "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
@@ -743,9 +747,7 @@
             "Objects/Characters/soldier1/soldier_1.mtl.cryasset",
             "Objects/Characters/soldier1/soldier1-test.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash2.mtl.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash1.mtl.cryasset"
+            "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset"
         ]
     }
 }

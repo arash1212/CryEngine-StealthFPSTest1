@@ -41,7 +41,13 @@ private:
 	CryAudio::ControlId m_detectionSound = CryAudio::StringToId("security_camera_sound_1");
 	bool bIsDetectionSoundPlayed = false;
 
+	//detection timers
+	f32 m_timeBetweenTriggeringAlarams = 1.4f;
+	f32 m_triggeringAlaramsTimePassed = 0;
+	bool bIsTriggeredAlarams = false;
+
 private:
 	void UpdateRotation(f32 DeltaTime);
+	void TriggerAlarams();
 
 };

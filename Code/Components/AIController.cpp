@@ -402,7 +402,7 @@ bool AIControllerComponent::IsCoverUsable(Vec3 point, IEntity* target)
 		}
 	}
 
-	point.z += 1.5f;
+	point.z += 1.6f;
 	Vec3 dir = targetPos - point;
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {

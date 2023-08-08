@@ -1,6 +1,7 @@
 #include "StdAfx.h"
 #include "SecurityCamera.h"
 #include "Player.h"
+#include "AlarmSpeaker.h"
 #include "AIDetection.h"
 #include "GamePlugin.h"
 
@@ -26,6 +27,9 @@ namespace
 void SecurityCameraComponent::Initialize()
 {
 	m_meshComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CStaticMeshComponent>();
+	m_meshComp->SetFilePath("Objects/securitycamera/security-camera-1.cgf");
+	m_meshComp->LoadFromDisk();
+	m_meshComp->ResetObject();
 
 	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
@@ -117,6 +121,9 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 		//stop detection sound
 		bIsDetectionSoundPlayed = false;
 		m_audioComp->StopTrigger(m_detectionSound);
+
+		m_triggeringAlaramsTimePassed = 0;
+		bIsTriggeredAlarams = false;
 	}
 
 	//if target is visible
@@ -130,6 +137,26 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 		if (!bIsDetectionSoundPlayed) {
 			bIsDetectionSoundPlayed = true;
 			m_audioComp->ExecuteTrigger(m_detectionSound);
+		}
+
+		m_triggeringAlaramsTimePassed += 0.5f * DeltaTime;
+		if (m_triggeringAlaramsTimePassed >= m_timeBetweenTriggeringAlarams && !bIsTriggeredAlarams) {
+			TriggerAlarams();
+			bIsTriggeredAlarams = true;
+		}
+	}
+}
+
+void SecurityCameraComponent::TriggerAlarams()
+{
+	IEntityItPtr entityItPtr = gEnv->pEntitySystem->GetEntityIterator();
+	entityItPtr.get()->MoveFirst();
+
+	while (!entityItPtr.get()->IsEnd())
+	{
+		IEntity* entity = entityItPtr.get()->Next();
+		if (entity->GetComponent<AlaramSpeakerComponent>()) {
+			entity->GetComponent<AlaramSpeakerComponent>()->SetEnabled(true);
 		}
 	}
 }

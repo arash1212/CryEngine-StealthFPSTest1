@@ -77,6 +77,7 @@ private:
 	FragmentID m_activeFragmentId;
 	FragmentID m_reactToHit1FragmentId;
 	FragmentID m_reactToHit2FragmentId;
+	FragmentID m_takeCoverSitFragmentId;
 
 	IActionPtr m_closeAttackAction;
 	IActionPtr m_reactToHit1Action;
@@ -101,7 +102,7 @@ private:
 	//shoot coolDown
 	int32 m_currentShootCount = 0;
 	int32 m_shootBeforeCoolDown = 13;
-	f32 m_coolDownTimer = 0.4f;
+	f32 m_coolDownTimer = 1.0f;
 	f32 m_coolDownTimePassed = 0.f;
 
 	//hit reaction 
@@ -133,6 +134,8 @@ protected:
 	virtual void Die() override;
 	void PlatDeathSound();
 	void PlayDetectionSound();
+
+	bool IsAtCover();
 
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);

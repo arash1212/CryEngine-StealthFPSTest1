@@ -62,6 +62,7 @@ void Soldier1Component::Initialize()
 	m_closeAttackFragmentId = m_animationComp->GetFragmentId("CloseAttack");
 	m_reactToHit1FragmentId = m_animationComp->GetFragmentId("ReactToHit1");
 	m_reactToHit2FragmentId = m_animationComp->GetFragmentId("ReactToHit2");
+	m_takeCoverSitFragmentId = m_animationComp->GetFragmentId("TakeCoverSit");
 
 	m_closeAttackAction = new TAction<SAnimationContext>(30U, m_closeAttackFragmentId);
 	m_reactToHit1Action = new TAction<SAnimationContext>(30U, m_reactToHit1FragmentId);
@@ -362,6 +363,16 @@ void Soldier1Component::Attack()
 					//move to cover
 					if (m_findingCoverTimePassed >= m_timeBetweenFindingCover) {
 						MoveTo(m_currentCoverPosition);
+
+
+						//play cover animation
+						/*
+						if (m_currentShootCount >= m_shootBeforeCoolDown && IsAtCover()) {
+							m_animationComp->GetActionController()->Flush();
+							m_activeFragmentId = m_takeCoverSitFragmentId;
+							m_animationComp->QueueFragmentWithId(m_takeCoverSitFragmentId);
+						}
+						*/
 					}
 					m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 				}
@@ -605,4 +616,13 @@ void Soldier1Component::PlayDetectionSound()
 		bIsDetectionSoundPlayed = true;
 		m_coolDownTimePassed = 0;
 	}
+}
+
+bool Soldier1Component::IsAtCover()
+{
+	if (m_currentCoverPosition == ZERO) {
+		return false;
+	}
+	f32 distanceToCover = m_pEntity->GetWorldPos().GetDistance(m_currentCoverPosition);
+	return distanceToCover <= 1;
 }
