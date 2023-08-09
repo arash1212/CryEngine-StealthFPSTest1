@@ -10,19 +10,19 @@
 
 namespace
 {
-	static void RegisterAlaramSpeakerComponent(Schematyc::IEnvRegistrar& registrar)
+	static void RegisterAlarmSpeakerComponent(Schematyc::IEnvRegistrar& registrar)
 	{
 		Schematyc::CEnvRegistrationScope scope = registrar.Scope(IEntity::GetEntityScopeGUID());
 		{
-			Schematyc::CEnvRegistrationScope componentScope = scope.Register(SCHEMATYC_MAKE_ENV_COMPONENT(AlaramSpeakerComponent));
+			Schematyc::CEnvRegistrationScope componentScope = scope.Register(SCHEMATYC_MAKE_ENV_COMPONENT(AlarmSpeakerComponent));
 		}
 	}
 
-	CRY_STATIC_AUTO_REGISTER_FUNCTION(&RegisterAlaramSpeakerComponent);
+	CRY_STATIC_AUTO_REGISTER_FUNCTION(&RegisterAlarmSpeakerComponent);
 }
 
 
-void AlaramSpeakerComponent::Initialize()
+void AlarmSpeakerComponent::Initialize()
 {
 	m_meshComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CStaticMeshComponent>();
 	m_meshComp->SetFilePath("Objects/alarm1/alarm_1.cgf");
@@ -40,7 +40,7 @@ void AlaramSpeakerComponent::Initialize()
 	m_pEntity->Physicalize(physParams);
 }
 
-Cry::Entity::EventFlags AlaramSpeakerComponent::GetEventMask() const
+Cry::Entity::EventFlags AlarmSpeakerComponent::GetEventMask() const
 {
 	return
 		Cry::Entity::EEvent::Initialize |
@@ -49,7 +49,7 @@ Cry::Entity::EventFlags AlaramSpeakerComponent::GetEventMask() const
 		Cry::Entity::EEvent::Reset;
 }
 
-void AlaramSpeakerComponent::ProcessEvent(const SEntityEvent& event)
+void AlarmSpeakerComponent::ProcessEvent(const SEntityEvent& event)
 {
 	switch (event.event)
 	{
@@ -72,7 +72,7 @@ void AlaramSpeakerComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
-void AlaramSpeakerComponent::UpdateAlarm()
+void AlarmSpeakerComponent::UpdateAlarm()
 {
 	if (bIsEnabled) {
 		if (!bIsSoundPlaying) {
@@ -87,7 +87,7 @@ void AlaramSpeakerComponent::UpdateAlarm()
 	}
 }
 
-void AlaramSpeakerComponent::SetEnabled(bool isEnable)
+void AlarmSpeakerComponent::SetEnabled(bool isEnable)
 {
 	this->bIsEnabled = isEnable;
 }

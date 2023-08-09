@@ -2,11 +2,11 @@
 
 #include <DefaultComponents/Geometry/StaticMeshComponent.h>
 
-class AlaramSpeakerComponent final : public IEntityComponent
+class AlarmSpeakerComponent final : public IEntityComponent
 {
 public:
-	AlaramSpeakerComponent() = default;
-	virtual ~AlaramSpeakerComponent() = default;
+	AlarmSpeakerComponent() = default;
+	virtual ~AlarmSpeakerComponent() = default;
 
 	virtual void Initialize() override;
 
@@ -14,10 +14,10 @@ public:
 	virtual void ProcessEvent(const SEntityEvent& event) override;
 
 	// Reflect type to set a unique identifier for this component
-	static void ReflectType(Schematyc::CTypeDesc<AlaramSpeakerComponent>& desc)
+	static void ReflectType(Schematyc::CTypeDesc<AlarmSpeakerComponent>& desc)
 	{
 		desc.SetGUID("{6596A191-FF21-413E-B843-A781078FE3F6}"_cry_guid);
-		desc.AddMember(&AlaramSpeakerComponent::bIsEnabled, 'ien', "isEnabled", "Is Enabled", "Set Is Enabled", false);
+		desc.AddMember(&AlarmSpeakerComponent::bIsEnabled, 'ien', "isEnabled", "Is Enabled", "Set Is Enabled", false);
 	}
 
 private:

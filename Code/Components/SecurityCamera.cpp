@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "AlarmSpeaker.h"
 #include "AIDetection.h"
+#include "AlarmManager.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -77,6 +78,10 @@ void SecurityCameraComponent::ProcessEvent(const SEntityEvent& event)
 			m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
 		}
 
+		if (!m_alaramManager) {
+			m_alaramManager = gEnv->pEntitySystem->FindEntityByName("alarmManager");
+		}
+
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 		m_targetEntity = nullptr;
@@ -149,6 +154,11 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 
 void SecurityCameraComponent::TriggerAlarams()
 {
+	if (!m_alaramManager) {
+		CryLog("SecurityCameraComponent : (TriggerAlarams) m_alaramManager is null.");
+		return;
+	}
+	/*
 	IEntityItPtr entityItPtr = gEnv->pEntitySystem->GetEntityIterator();
 	entityItPtr.get()->MoveFirst();
 
@@ -159,4 +169,6 @@ void SecurityCameraComponent::TriggerAlarams()
 			entity->GetComponent<AlaramSpeakerComponent>()->SetEnabled(true);
 		}
 	}
+	*/
+	m_alaramManager->GetComponent<AlarmManagerComponent>()->SetEnabled(true);
 }

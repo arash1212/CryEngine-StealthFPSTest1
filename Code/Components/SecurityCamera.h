@@ -23,12 +23,14 @@ public:
 
 private:
 
-	Cry::DefaultComponents::CStaticMeshComponent* m_meshComp;
-	IEntityAudioComponent* m_audioComp;
+	Cry::DefaultComponents::CStaticMeshComponent* m_meshComp = nullptr;;
+	IEntityAudioComponent* m_audioComp = nullptr;
 
-	AIDetectionComponent* m_detectionComp;
+	AIDetectionComponent* m_detectionComp = nullptr;;
 
-	IEntity* m_targetEntity;
+	IEntity* m_targetEntity = nullptr;;
+
+	IEntity* m_alaramManager = nullptr;;
 
 private:
 	f32 m_maxZRotation = 250;

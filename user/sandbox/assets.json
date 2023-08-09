@@ -5787,8 +5787,8 @@
 			"type": "Animation",
 			"guid": "a41303bf-bc0f-6509-b7c3-a8f3744539d9",
 			"name": "walk_fwd_3p",
-			"timestamp": 1652897364,
-			"files": [ "Animations/motusAnims/walk_fwd_3p.caf" ],
+			"timestamp": 132973673640740000,
+			"files": [ "animations/motusanims/walk_fwd_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/walk_fwd_3p.caf.cryasset",
@@ -5811,25 +5811,19 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691506128,
+			"timestamp": 1691565367,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Levels/example.level.cryasset",
 			"details": [ ],
 			"dependencies": [
-				{ "path": "%editor%/materials/areasolid.dds", "usageCount": 0 },
-				{ "path": "%editor%/materials/areasolid.mtl", "usageCount": 0 },
-				{ "path": "%editor%/materials/shaderlist.xml", "usageCount": 0 },
 				{ "path": "%editor%/objects/anchor.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.mtl", "usageCount": 0 },
 				{ "path": "%editor%/objects/gradf.dds", "usageCount": 0 },
 				{ "path": "%editor%/objects/helper.mtl", "usageCount": 0 },
 				{ "path": "%editor%/objects/helper_illum.mtl", "usageCount": 0 },
-				{ "path": "%editor%/objects/mtlobjects.mtl", "usageCount": 0 },
-				{ "path": "%editor%/objects/mtlplane.cgf", "usageCount": 0 },
-				{ "path": "%editor%/objects/mtlsphere.cgf", "usageCount": 0 },
 				{
 					"path": "%engine%/engineassets/icons/averagememoryusage.dds",
 					"usageCount": 0
@@ -5879,14 +5873,6 @@
 					"usageCount": 0
 				},
 				{
-					"path": "%engine%/engineassets/materials/meshimporter/mi_previewvertexalpha.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/materials/meshimporter/mi_previewvertexcolor.mtl",
-					"usageCount": 0
-				},
-				{
 					"path": "%engine%/engineassets/materials/water/wateroceanbottom.mtl",
 					"usageCount": 0
 				},
@@ -5903,10 +5889,6 @@
 					"usageCount": 0
 				},
 				{
-					"path": "%engine%/engineassets/texturemsg/color_black.dds",
-					"usageCount": 0
-				},
-				{
 					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
 					"usageCount": 0
 				},
@@ -5915,20 +5897,11 @@
 					"usageCount": 0
 				},
 				{
-					"path": "%engine%/engineassets/textures/default_probe_cm.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/textures/default_probe_cm_diff.dds",
-					"usageCount": 0
-				},
-				{
 					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
 					"usageCount": 0
 				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
 				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
-				{ "path": "animations/motusanims/walk_fwd_3p.caf", "usageCount": 0 },
 				{
 					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_basecolor.dds",
 					"usageCount": 0
@@ -6011,8 +5984,6 @@
 				},
 				{ "path": "libs/environmentpresets/example.env", "usageCount": 1 },
 				{ "path": "objects/alarm1/alarm_1.cgf", "usageCount": 0 },
-				{ "path": "objects/alarm1/alarm_1.cgf", "usageCount": 0 },
-				{ "path": "objects/alarm1/alarm_1.mtl", "usageCount": 0 },
 				{ "path": "objects/alarm1/alarm_1.mtl", "usageCount": 0 },
 				{
 					"path": "objects/alarm1/tower_tower_shader_basecolor.dds",
