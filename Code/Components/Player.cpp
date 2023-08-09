@@ -6,6 +6,7 @@
 #include "SpawnPoint.h"
 #include "Health.h"
 #include "ShootAccuracy.h"
+#include "ActorInfo.h"
 #include "GamePlugin.h"
 
 #include <FlashUI/FlashUIElement.h>
@@ -77,6 +78,10 @@ void PlayerComponent::Initialize()
 
 	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
+	//info
+	m_info = m_pEntity->GetOrCreateComponent<ActorInfoComponent>();
+	m_info->SetFaction(EFaction::FACTION2);
+
 	//Set player Entity name.
 	m_pEntity->SetName("playerEntity");
 }
@@ -122,7 +127,6 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 		if (m_gettingHitSoundTimePassed < m_timeBetweenPlayingGettingHitSound) {
 			m_gettingHitSoundTimePassed += 0.5f * deltatime;
 		}
-
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 		m_movementOffset = ZERO;

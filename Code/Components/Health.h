@@ -1,5 +1,7 @@
 #pragma once
 
+static constexpr f32 MAX_HEALTH = 100.f;
+
 class HealthComponent final : public IEntityComponent
 {
 public:
@@ -14,10 +16,11 @@ public:
 	static void ReflectType(Schematyc::CTypeDesc<HealthComponent>& desc)
 	{
 		desc.SetGUID("{32474862-E055-4F79-BC5D-9397E14C8D76}"_cry_guid);
+		desc.AddMember(&HealthComponent::m_maxHealth, 'mh', "maxhealth", "Max Health", "Set Max Health", MAX_HEALTH);
 	}
 
 private:
-	f32 m_maxHealth = 100.f;
+	f32 m_maxHealth = MAX_HEALTH;
 	f32 m_health = m_maxHealth;
 
 public:

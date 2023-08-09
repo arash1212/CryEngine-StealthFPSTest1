@@ -28,4 +28,5 @@ private:
 
 public:
 	void SetEnabled(bool isEnable);
+	bool IsAlarmEnable();
 };

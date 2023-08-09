@@ -84,6 +84,9 @@ void Soldier1Component::Initialize()
 	//health
 	m_healthComp = m_pEntity->GetOrCreateComponent<HealthComponent>();
 
+	//info
+	m_info = m_pEntity->GetOrCreateComponent<ActorInfoComponent>();
+
 }
 
 Cry::Entity::EventFlags Soldier1Component::GetEventMask() const
@@ -141,26 +144,23 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 				m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
 			}
 
+			/*
 			//test
 			if (m_weaponBaseEntity) {
 				IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 				if (pd) {
-					pd->Begin("DetectionRaycast", true);
-					pd->AddSphere(m_weaponBaseEntity->GetWorldPos(), 5.6f, ColorF(0, 1, 0), 2);
+					pd->Begin("DetectionRaycast23", true);
+					//pd->AddSphere(m_weaponBaseEntity->GetWorldPos(), 5.6f, ColorF(0, 1, 0), 2);
 				}
 			}
+			*/
 
 			UpdateAnimation();
 			UpdateCurrentSpeed();
 			UpdateLastTargetPositionEntity();
 
-			//todo : test target hazf beshe
-			if (!m_testTargetEntity) {
-				m_testTargetEntity = gEnv->pEntitySystem->FindEntityByName("AiTestTargetEntity");
-			}
-
-			if (!m_targetEntity) {
-				m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
+			if (!m_targetEntity && m_info) {
+				m_targetEntity = m_info->GetHostileEntity();
 			}
 
 			//patrol
@@ -206,14 +206,12 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			}
 
 			Die();
-
 		}
 	//	}
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 		m_targetEntity = nullptr;
-		m_testTargetEntity = nullptr;
 		m_currentSpeed = DEFAULT_SOLDIER_1_WALK_SPEED;
 		bIsGameplayStarted = false;
 

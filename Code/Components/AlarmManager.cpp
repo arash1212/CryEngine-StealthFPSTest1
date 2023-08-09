@@ -84,3 +84,8 @@ void AlarmManagerComponent::SetEnabled(bool isEnable)
 		m_speakerEntities.At(i)->GetComponent<AlarmSpeakerComponent>()->SetEnabled(bIsAlarmEnabled);
 	}
 }
+
+bool AlarmManagerComponent::IsAlarmEnable()
+{
+	return bIsAlarmEnabled;
+}

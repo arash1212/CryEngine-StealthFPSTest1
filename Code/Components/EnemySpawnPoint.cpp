@@ -3,6 +3,7 @@
 #include "IAIActor.h"
 #include "Soldier1.h"
 #include "GamePlugin.h"
+#include "ActorInfo.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
@@ -65,12 +66,24 @@ void EnemySpawnPointComponent::Spawn()
 	IEntity* spawnedEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 	Soldier1Component* soldier1 = spawnedEntity->GetOrCreateComponent<Soldier1Component>();
 	soldier1->SetPatrolPathName(spawnInfo.m_patrolPathName);
+
+	//todo : ye fekri be halesh bokon
+	if (spawnInfo.m_factionNumber == "1") {
+		spawnedEntity->GetComponent<ActorInfoComponent>()->SetFaction(EFaction::FACTION1);
+	}
+	else if (spawnInfo.m_factionNumber == "2") {
+		spawnedEntity->GetComponent<ActorInfoComponent>()->SetFaction(EFaction::FACTION2);
+	}
+	else if (spawnInfo.m_factionNumber == "3") {
+		spawnedEntity->GetComponent<ActorInfoComponent>()->SetFaction(EFaction::FACTION3);
+	}
 }
 
 inline bool EnemySpawnPointComponent::SSpawnPointDefinition::Serialize(Serialization::IArchive& archive)
 {
 	archive.openBlock("SpawnPointDefinition", "SpawnPointDefinition");
 	archive(m_patrolPathName, "PatrolPathName", "PatrolPathName");
+	archive(m_factionNumber, "FactionNum", "FactionNum");
 	archive.closeBlock();
 	return true;
 }

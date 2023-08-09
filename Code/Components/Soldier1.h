@@ -9,6 +9,7 @@ class ActorStateComponent;
 class AIDetectionComponent;
 class IWeaponComponent;
 class HealthComponent;
+class ActorInfoComponent;
 
 static constexpr f32 DEFAULT_SOLDIER_1_WALK_SPEED = 2.f;
 static constexpr f32 DEFAULT_SOLDIER_1_RUN_SPEED = 3.1f;
@@ -39,7 +40,6 @@ private:
 	AIDetectionComponent* m_detectionComp = nullptr;
 	ShootAccuracyComponent* m_shootAccuracyComp;
 
-	IEntity* m_testTargetEntity = nullptr;
 	Vec3 testMoveToPos = ZERO;
 	IEntity* m_targetEntity = nullptr;
 	IEntity* m_lastTargetPosition;
@@ -61,6 +61,9 @@ private:
 
 	//ragdol
 	Cry::DefaultComponents::CRagdollComponent* m_ragdollComp;
+
+	//info
+	ActorInfoComponent* m_info;
 
 private:
 	bool bIsGameplayStarted = false;

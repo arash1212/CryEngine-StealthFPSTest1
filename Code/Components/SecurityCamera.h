@@ -3,6 +3,8 @@
 #include <DefaultComponents/Geometry/StaticMeshComponent.h>
 
 class AIDetectionComponent;
+class ActorInfoComponent;
+class HealthComponent;
 
 class SecurityCameraComponent final : public IEntityComponent
 {
@@ -31,6 +33,12 @@ private:
 	IEntity* m_targetEntity = nullptr;;
 
 	IEntity* m_alaramManager = nullptr;;
+
+	//info
+	ActorInfoComponent* m_info = nullptr;
+
+	//health
+	HealthComponent* m_healthComp = nullptr;
 
 private:
 	f32 m_maxZRotation = 250;

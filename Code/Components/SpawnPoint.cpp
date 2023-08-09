@@ -69,7 +69,7 @@ void SpawnPointComponent::SpawnPlayer()
 	SEntitySpawnParams playerSpawnParams;
 	playerSpawnParams.vPosition = m_pEntity->GetPos();
 	playerSpawnParams.qRotation = m_pEntity->GetRotation();
-	m_player = gEnv->pEntitySystem->SpawnEntity(playerSpawnParams);
+	m_player = gEnv->pEntitySystem->SpawnEntity(playerSpawnParams, true);
 
 	m_player->GetOrCreateComponent<PlayerComponent>();
 }

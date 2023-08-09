@@ -41,6 +41,7 @@ void HealthComponent::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::GameplayStarted: {
+		m_health = m_maxHealth;
 
 	}break;
 	case Cry::Entity::EEvent::Update: {

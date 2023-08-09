@@ -2,6 +2,8 @@
 
 #include <DefaultComponents/Geometry/AdvancedAnimationComponent.h>
 
+class ActorInfoComponent;
+
 class EnemySpawnPointComponent final : public IEntityComponent
 {
 public:
@@ -19,7 +21,8 @@ public:
 		{
 			desc.SetLabel("SpawnPointDefinition");
 			desc.SetGUID("{AAED0CC6-730E-4EC8-8BBA-994FA5008DD5}"_cry_guid);
-			desc.AddMember(&SSpawnPointDefinition::m_patrolPathName, 'pna', "pathpatronname", "Path Patrol Name", "Set Path Patro Namme", "");
+			desc.AddMember(&SSpawnPointDefinition::m_patrolPathName, 'pna', "pathpatronname", "Path Patrol Name", "Set Path Patro Name", "");
+			desc.AddMember(&SSpawnPointDefinition::m_factionNumber, 'mfcn', "factionnum", "Faction Num", "Set Faction Num", "1");
 		}
 
 		inline bool Serialize(Serialization::IArchive& archive);
@@ -28,6 +31,7 @@ public:
 		inline bool operator!=(const SSpawnPointDefinition& rhs) const { return !(*this == rhs); }
 
 		Schematyc::CSharedString m_patrolPathName = "";
+		Schematyc::CSharedString m_factionNumber;
 	};
 	typedef SSpawnPointDefinition SpawnPoint;
 

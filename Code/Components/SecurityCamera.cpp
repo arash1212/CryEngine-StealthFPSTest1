@@ -43,6 +43,12 @@ void SecurityCameraComponent::Initialize()
 
 	m_defaultZRotation = m_pEntity->GetRotation().GetRotZ();
 
+	//info
+	m_info = m_pEntity->GetOrCreateComponent<ActorInfoComponent>();
+
+	//health
+	m_healthComp = m_pEntity->GetOrCreateComponent<HealthComponent>();
+
 	//physicalize camera
 	SEntityPhysicalizeParams physParams;
 	physParams.type = PE_STATIC;

@@ -12,6 +12,7 @@ class CrosshairComponent;
 class ShootAccuracyComponent;
 class WeaponGlockComponent;
 class HealthComponent;
+class ActorInfoComponent;
 
 struct IUIElement;
 
@@ -74,6 +75,9 @@ private:
 	//health
 	HealthComponent* m_health;
 	IUIElement* m_healthbarUIElement = nullptr;
+
+	//info
+	ActorInfoComponent* m_info;
 
 private:
 	//movement infos
