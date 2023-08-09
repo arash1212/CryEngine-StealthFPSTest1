@@ -162,6 +162,13 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			if (!m_targetEntity && m_info) {
 				m_targetEntity = m_info->GetHostileEntity();
 			}
+			//target is dead find new one
+			else if (m_targetEntity) {
+				if (m_targetEntity->GetComponent<HealthComponent>()->GetHealth() <= 0) {
+					m_targetEntity = nullptr;
+				}
+			}
+
 
 			//patrol
 			//todo : && !m_patrolPathName.empty() && m_patrolPathName != ""
