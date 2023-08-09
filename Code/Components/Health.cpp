@@ -66,3 +66,8 @@ f32 HealthComponent::GetHealth()
 {
 	return m_health;
 }
+
+void HealthComponent::SetMaxHealth(f32 maxHealth)
+{
+	this->m_maxHealth = maxHealth;
+}

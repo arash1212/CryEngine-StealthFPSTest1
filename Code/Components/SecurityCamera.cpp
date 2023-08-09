@@ -48,6 +48,7 @@ void SecurityCameraComponent::Initialize()
 
 	//health
 	m_healthComp = m_pEntity->GetOrCreateComponent<HealthComponent>();
+	m_healthComp->SetMaxHealth(40.f);
 
 	//physicalize camera
 	SEntityPhysicalizeParams physParams;
@@ -73,24 +74,35 @@ void SecurityCameraComponent::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::GameplayStarted: {
+		m_defaultX = m_pEntity->GetRotation().v.x;
 
 	}break;
 	case Cry::Entity::EEvent::Update: {
 		f32 deltaTime = event.fParam[0];
 
-		UpdateRotation(deltaTime);
+		if (!bIsDestroyed) {
+			UpdateRotation(deltaTime);
 
-		if (!m_targetEntity) {
-			m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
+			if (!m_targetEntity) {
+				m_targetEntity = gEnv->pEntitySystem->FindEntityByName("playerEntity");
+			}
+
+			if (!m_alaramManager) {
+				m_alaramManager = gEnv->pEntitySystem->FindEntityByName("alarmManager");
+			}
+
+
+			Destroy();
+		}
+		else {
+			m_pEntity->SetLocalTM(Matrix34::Create(m_pEntity->GetScale(), Quat::CreateSlerp(m_pEntity->GetRotation(), Quat::CreateRotationXYZ(Ang3(m_defaultX - 5, 0, m_pEntity->GetRotation().GetRotZ())), 0.4f * gEnv->pTimer->GetFrameTime()), m_pEntity->GetPos()));
 		}
 
-		if (!m_alaramManager) {
-			m_alaramManager = gEnv->pEntitySystem->FindEntityByName("alarmManager");
-		}
 
 	}break;
 	case Cry::Entity::EEvent::Reset: {
 		m_targetEntity = nullptr;
+		bIsDestroyed = false;
 
 	}break;
 	default:
@@ -177,4 +189,24 @@ void SecurityCameraComponent::TriggerAlarams()
 	}
 	*/
 	m_alaramManager->GetComponent<AlarmManagerComponent>()->SetEnabled(true);
+}
+
+void SecurityCameraComponent::Destroy()
+{
+	if (!m_healthComp || bIsDestroyed) {
+		return;
+	}
+
+	if (m_healthComp->GetHealth() <= 0) {
+		//m_pEntity->SetRotation(Quat::CreateSlerp(m_pEntity->GetRotation(), Quat::CreateRotationY(m_defaultY - 40), 0.1f * gEnv->pTimer->GetFrameTime()));
+		bIsDestroyed = true;
+
+		//
+		bIsDetectionSoundPlayed = false;
+		m_audioComp->StopTrigger(m_detectionSound);
+
+		m_audioComp->ExecuteTrigger(m_destroySound);
+		m_triggeringAlaramsTimePassed = 0;
+		bIsTriggeredAlarams = false;
+	}
 }

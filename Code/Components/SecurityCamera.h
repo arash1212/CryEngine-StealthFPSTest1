@@ -47,8 +47,11 @@ private:
 
 	f32 timeElapsed = 0.f;
 
+	f32 m_defaultX = 0.f;
+
 	//detectioSound
 	CryAudio::ControlId m_detectionSound = CryAudio::StringToId("security_camera_sound_1");
+	CryAudio::ControlId m_destroySound = CryAudio::StringToId("explosion_camera_sound");
 	bool bIsDetectionSoundPlayed = false;
 
 	//detection timers
@@ -56,8 +59,12 @@ private:
 	f32 m_triggeringAlaramsTimePassed = 0;
 	bool bIsTriggeredAlarams = false;
 
+	//health
+	bool bIsDestroyed = false;
+
 private:
 	void UpdateRotation(f32 DeltaTime);
 	void TriggerAlarams();
+	void Destroy();
 
 };

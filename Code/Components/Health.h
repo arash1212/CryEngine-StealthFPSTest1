@@ -26,4 +26,5 @@ private:
 public:
 	void ApplyDamage(f32 damage);
 	f32 GetHealth();
+	void SetMaxHealth(f32 maxHealth);
 };
