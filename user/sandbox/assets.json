@@ -5808,10 +5808,166 @@
 			"dependencies": [ ]
 		},
 		{
+			"type": "Environment",
+			"guid": "588db128-b629-3e63-1a70-2a1d69fe5924",
+			"name": "craters",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/craters.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/craters.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "ee8d64f2-9592-3576-0264-4ee7d67eb704",
+			"name": "dawn_1630",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/dawn_1630.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/dawn_1630.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "430a2bad-6536-8080-f691-a88a01855a91",
+			"name": "dawn_fast_clouds_0630",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/desert_dawn_0630.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/dawn_fast_clouds_0630.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "ff610a9b-1da5-014c-aee0-324f1ca0dffa",
+			"name": "day_night_cycle_2",
+			"timestamp": 1687523106,
+			"files": [ "environment-preset-pack/1.0.0/day_night_cycle_2.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/day_night_cycle_2.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "2d12deb4-2b7d-bb63-4fca-6d6e57ec2b54",
+			"name": "desert_gold_magic_hour",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/desert_gold_magic_hour_1630.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/desert_gold_magic_hour.env_1630.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "c96cf45f-8ec5-81f1-005e-8b6f681bf0ce",
+			"name": "foggy_dense",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/foggy_dense.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/foggy_dense.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "82b4dae0-760f-b19b-c0da-cd07451b24f1",
+			"name": "magic_hour_low_clouds",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/magic_hour_low_clouds.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/magic_hour_low_clouds.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "887dbbd0-9884-837a-dcf5-7fcd46cd6fe7",
+			"name": "midday_1630",
+			"timestamp": 1642420761,
+			"files": [ "environment-preset-pack/1.0.0/midday_1630.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/midday_1630.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "9ad3ba80-086f-fc0e-e8c6-5de536397356",
+			"name": "night_clear_skies",
+			"timestamp": 1687971084,
+			"files": [ "environment-preset-pack/1.0.0/night_clear_skies.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/night_clear_skies.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "1ebad13a-55be-677d-a0b4-03d6ceefb4ab",
+			"name": "night_dark_clear",
+			"timestamp": 1642420762,
+			"files": [ "environment-preset-pack/1.0.0/night_dark_clear.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/night_dark_clear.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "942e476c-dcf4-387e-237b-8cb37d5266d9",
+			"name": "nightvision",
+			"timestamp": 1642420762,
+			"files": [ "environment-preset-pack/1.0.0/nightvision.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/nightvision.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "b3cd1096-2ed4-8039-6abc-a6997fedc5d1",
+			"name": "overcast_1800",
+			"timestamp": 1642420762,
+			"files": [ "environment-preset-pack/1.0.0/overcast_1800.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/overcast_1800.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Environment",
+			"guid": "e0685ad3-6587-48be-bf34-d5089f168f00",
+			"name": "sidescroller_silhouettes",
+			"timestamp": 1642420762,
+			"files": [ "environment-preset-pack/1.0.0/sidescroller_silhouettes.env" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "environment-preset-pack/1.0.0/sidescroller_silhouettes.env.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691579890,
+			"timestamp": 1691688150,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -5888,6 +6044,7 @@
 					"path": "%engine%/engineassets/objects/primitive_sphere.cgf",
 					"usageCount": 0
 				},
+				{ "path": "%engine%/engineassets/raintextures.xml", "usageCount": 0 },
 				{
 					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
 					"usageCount": 0
@@ -5897,23 +6054,34 @@
 					"usageCount": 0
 				},
 				{
+					"path": "%engine%/engineassets/textures/rain/puddle_mask.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/textures/rain/rain_spatter.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/textures/rain/rain_streak.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/textures/rain/rainfall.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/textures/rain/rainfall_ddn.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "%engine%/engineassets/textures/rain/surface_flow_ddn.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "%engine%/engineassets/textures/skys/night/half_moon.dds",
 					"usageCount": 0
 				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
-				{
-					"path": "animations/mannequin/adb/playerfragmentids.xml",
-					"usageCount": 0
-				},
-				{ "path": "animations/mannequin/adb/playertags.xml", "usageCount": 0 },
-				{
-					"path": "animations/mannequin/adb/thirdpersoncontrollerdefinition.xml",
-					"usageCount": 0
-				},
-				{
-					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
-					"usageCount": 0
-				},
 				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
 				{
 					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_basecolor.dds",
@@ -5940,22 +6108,6 @@
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/effects/bullettracer/tracer_standard02.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "editor/resourcecache/objects/effects/muzzleflash/muzzleflash_1.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "editor/resourcecache/objects/effects/muzzleflash/muzzleflash_2.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "editor/resourcecache/objects/effects/muzzleflash/muzzleflash_3.dds",
-					"usageCount": 0
-				},
-				{
 					"path": "editor/resourcecache/objects/securitycamera/defaultmaterial_basecolor.dds",
 					"usageCount": 0
 				},
@@ -5968,35 +6120,31 @@
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/ak47/3p/ak47_base_color.dds",
+					"path": "editor/resourcecache/objects/static/fence/fence_alb.dds",
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/ak47/3p/ak47_height.dds",
+					"path": "editor/resourcecache/objects/static/fence/fence_nml.dds",
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/ak47/3p/ak47_normal_opengl.dds",
+					"path": "editor/resourcecache/textures/terrain/mud1/mud_with_vegetation_albedo.dds",
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
+					"path": "editor/resourcecache/textures/terrain/mud1/mud_with_vegetation_ao.dds",
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/glock_glock_normal.dds",
+					"path": "editor/resourcecache/textures/terrain/mud1/mud_with_vegetation_height.dds",
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/hand_texture_1.dds",
+					"path": "editor/resourcecache/textures/terrain/mud1/mud_with_vegetation_metallic.dds",
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/hand_texture_2.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "editor/resourcecache/objects/weapons/glock/1p/pistol_glock_green_texture.dds",
+					"path": "editor/resourcecache/textures/terrain/mud1/mud_with_vegetation_normal-ogl.dds",
 					"usageCount": 0
 				},
 				{
@@ -6021,6 +6169,10 @@
 				},
 				{
 					"path": "environment-preset-pack/1.0.0/magic_hour_low_clouds.env",
+					"usageCount": 1
+				},
+				{
+					"path": "environment-preset-pack/1.0.0/midday_1630.env",
 					"usageCount": 1
 				},
 				{
@@ -6071,146 +6223,6 @@
 					"usageCount": 0
 				},
 				{
-					"path": "objects/characters/soldier1/soldier_1.cdf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1.chr",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1.chr.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_mesh.skin",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_normal_idle.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_normal_walk_backward.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_normal_walk_forward.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_normal_walk_left.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_normal_walk_right.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_aim_run_backward.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_aim_run_forward.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_aim_run_idle.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_aim_run_left.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_aim_run_right.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_cover_sit.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_idle.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_walk_backward.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_walk_forward.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_crouch_walk_right.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_hit_reaction_1.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_hit_reaction_2.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/characters/soldier1/soldier_1_rifle_kick.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/bullettracer/bullet_tracer_1.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/bullettracer/bullet_tracer_1.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/bullettracer/tracer_standard02.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash1.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash1.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash2.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash2.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash3.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash3.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash_1.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash_2.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/effects/muzzleflash/muzzleflash_3.dds",
-					"usageCount": 0
-				},
-				{
 					"path": "objects/securitycamera/defaultmaterial_basecolor.dds",
 					"usageCount": 0
 				},
@@ -6238,79 +6250,42 @@
 					"path": "objects/securitycamera/security-camera-base-1.mtl",
 					"usageCount": 0
 				},
-				{ "path": "objects/weapons/ak47/3p/ak-47.cdf", "usageCount": 0 },
-				{ "path": "objects/weapons/ak47/3p/ak-47.chr", "usageCount": 0 },
-				{ "path": "objects/weapons/ak47/3p/ak-47.mtl", "usageCount": 0 },
-				{ "path": "objects/weapons/ak47/3p/ak-47_ak47.skin", "usageCount": 0 },
-				{ "path": "objects/weapons/ak47/3p/ak-47_fire.caf", "usageCount": 0 },
-				{
-					"path": "objects/weapons/ak47/3p/ak47_base_color.dds",
-					"usageCount": 0
-				},
-				{ "path": "objects/weapons/ak47/3p/ak47_height.dds", "usageCount": 0 },
-				{
-					"path": "objects/weapons/ak47/3p/ak47_normal_opengl.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/glock_glock_albedotransparency.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/glock_glock_normal.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/hand_texture_1.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/hand_texture_2.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.cdf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.chr",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock.mtl",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_fire.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_green_texture.dds",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_idle.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_mesh.skin",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_run.caf",
-					"usageCount": 0
-				},
-				{
-					"path": "objects/weapons/glock/1p/pistol_glock_walk.caf",
-					"usageCount": 0
-				},
-				{ "path": "scripts/ai/factions.xml", "usageCount": 0 },
+				{ "path": "objects/static/fence/fence_1.cgf", "usageCount": 0 },
+				{ "path": "objects/static/fence/fence_1.mtl", "usageCount": 0 },
+				{ "path": "objects/static/fence/fence_alb.dds", "usageCount": 0 },
+				{ "path": "objects/static/fence/fence_nml.dds", "usageCount": 0 },
+				{ "path": "objects/static/fence/fence_o_1.cgf", "usageCount": 0 },
+				{ "path": "objects/static/fence/fence_o_1.mtl", "usageCount": 0 },
 				{
 					"path": "textures/cubemaps/example/environmentprobe1_cm.dds",
 					"usageCount": 0
 				},
 				{
 					"path": "textures/cubemaps/example/environmentprobe1_cm_diff.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/terrain/mud1/mud_with_vegetation_albedo.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/terrain/mud1/mud_with_vegetation_ao.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/terrain/mud1/mud_with_vegetation_height.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/terrain/mud1/mud_with_vegetation_metallic.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/terrain/mud1/mud_with_vegetation_normal-ogl.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "textures/terrain/mud1/terrain_material_mud_1.mtl",
 					"usageCount": 0
 				}
 			]
@@ -7563,6 +7538,154 @@
 			]
 		},
 		{
+			"type": "Mesh",
+			"guid": "6bee6074-028b-6dce-4517-e8df49ebcd67",
+			"name": "fence_1",
+			"timestamp": 1691683441,
+			"files": [ "Objects/static/fence/fence_1.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/static/fence/fence_1.fbx",
+			"metadata": "Objects/static/fence/fence_1.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "6" },
+				{ "key": "triangleCount", "value": "560" },
+				{ "key": "vertexCount", "value": "448" }
+			],
+			"dependencies": [
+				{ "path": "Objects/static/fence/fence_1.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "dcc1e3b3-9adb-d19d-90dc-2330cc1851df",
+			"name": "fence_1",
+			"timestamp": 1691683332,
+			"files": [ "Objects/static/fence/fence_1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/static/fence/fence_1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "6" },
+				{ "key": "textureCount", "value": "4" }
+			],
+			"dependencies": [
+				{ "path": "Objects/static/fence/fence_alb.dds", "usageCount": 4 },
+				{ "path": "Objects/static/fence/fence_nml.dds", "usageCount": 1 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 5
+				},
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 }
+			]
+		},
+		{
+			"type": "Texture",
+			"guid": "b07ef825-9a75-2ac4-d7a0-a66cce1c28e6",
+			"name": "fence_alb",
+			"timestamp": 1691667606,
+			"files": [ "Objects/static/fence/fence_alb.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/fence/fence_alb.tif",
+			"metadata": "Objects/static/fence/fence_alb.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "33b60089-546f-f9eb-ea79-2576a4ffea40",
+			"name": "fence_alb_2",
+			"timestamp": 1691666234,
+			"files": [ "Objects/static/fence/fence_alb_2.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/fence/fence_alb_2.tif",
+			"metadata": "Objects/static/fence/fence_alb_2.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "57a372a5-2f65-cd2b-7b0b-1c9c25c72ad2",
+			"name": "fence_hgt",
+			"timestamp": 1691664893,
+			"files": [ "Objects/static/fence/fence_hgt.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/fence/fence_hgt.tif",
+			"metadata": "Objects/static/fence/fence_hgt.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "0cb6006a-0c04-4aba-d522-45a0854d4c31",
+			"name": "fence_nml",
+			"timestamp": 1691664725,
+			"files": [ "Objects/static/fence/fence_nml.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/fence/fence_nml.tif",
+			"metadata": "Objects/static/fence/fence_nml.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Mesh",
+			"guid": "6401f3b9-b09e-99c7-fbd3-5a279bd810fd",
+			"name": "fence_o_1",
+			"timestamp": 1691683505,
+			"files": [ "Objects/static/fence/fence_o_1.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/static/fence/fence_o_1.fbx",
+			"metadata": "Objects/static/fence/fence_o_1.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "6" },
+				{ "key": "triangleCount", "value": "302" },
+				{ "key": "vertexCount", "value": "252" }
+			],
+			"dependencies": [
+				{ "path": "Objects/static/fence/fence_o_1.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "30419230-5ce6-6ac6-dae2-1c916349568b",
+			"name": "fence_o_1",
+			"timestamp": 1691683103,
+			"files": [ "Objects/static/fence/fence_o_1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/static/fence/fence_o_1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "6" },
+				{ "key": "textureCount", "value": "4" }
+			],
+			"dependencies": [
+				{ "path": "Objects/static/fence/fence_alb.dds", "usageCount": 4 },
+				{ "path": "Objects/static/fence/fence_nml.dds", "usageCount": 1 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 5
+				},
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 }
+			]
+		},
+		{
 			"type": "Character",
 			"guid": "0430ceeb-0fca-b931-132d-4eb38d535a74",
 			"name": "ak-47",
@@ -8176,6 +8299,122 @@
 				{ "key": "width", "value": "192" }
 			],
 			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "0b0143ff-5cca-a39d-8696-5ccaddf84813",
+			"name": "mud_with_vegetation_albedo",
+			"timestamp": 1691674698,
+			"files": [ "Textures/terrain/mud1/mud_with_vegetation_albedo.dds" ],
+			"workFiles": [ ],
+			"source": "Textures/terrain/mud1/mud_with_vegetation_albedo.tif",
+			"metadata": "Textures/terrain/mud1/mud_with_vegetation_albedo.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "2b11cd87-1850-ccf3-5c50-38f6f777ba74",
+			"name": "mud_with_vegetation_ao",
+			"timestamp": 1691674706,
+			"files": [ "Textures/terrain/mud1/mud_with_vegetation_ao.dds" ],
+			"workFiles": [ ],
+			"source": "Textures/terrain/mud1/mud_with_vegetation_ao.tif",
+			"metadata": "Textures/terrain/mud1/mud_with_vegetation_ao.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "4243bc32-f2e5-e7a0-95e7-bd8d36001455",
+			"name": "mud_with_vegetation_height",
+			"timestamp": 1691674714,
+			"files": [ "Textures/terrain/mud1/mud_with_vegetation_height.dds" ],
+			"workFiles": [ ],
+			"source": "Textures/terrain/mud1/mud_with_vegetation_height.tif",
+			"metadata": "Textures/terrain/mud1/mud_with_vegetation_height.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "acc65bc3-0309-ce66-27dd-0a887bd00b94",
+			"name": "mud_with_vegetation_metallic",
+			"timestamp": 1691674688,
+			"files": [ "Textures/terrain/mud1/mud_with_vegetation_metallic.dds" ],
+			"workFiles": [ ],
+			"source": "Textures/terrain/mud1/mud_with_vegetation_metallic.tif",
+			"metadata": "Textures/terrain/mud1/mud_with_vegetation_metallic.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "624cc24c-3547-cebd-4ea0-157942b03b9d",
+			"name": "mud_with_vegetation_normal-ogl",
+			"timestamp": 1691674726,
+			"files": [ "Textures/terrain/mud1/mud_with_vegetation_normal-ogl.dds" ],
+			"workFiles": [ ],
+			"source": "Textures/terrain/mud1/mud_with_vegetation_normal-ogl.tif",
+			"metadata": "Textures/terrain/mud1/mud_with_vegetation_normal-ogl.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Material",
+			"guid": "70bfd2f7-1e36-b340-d8b3-ca3b7f778232",
+			"name": "terrain_material_mud_1",
+			"timestamp": 1691675980,
+			"files": [ "Textures/terrain/mud1/terrain_material_mud_1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Textures/terrain/mud1/terrain_material_mud_1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "1" },
+				{ "key": "textureCount", "value": "5" }
+			],
+			"dependencies": [
+				{
+					"path": "Textures/terrain/mud1/mud_with_vegetation_albedo.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Textures/terrain/mud1/mud_with_vegetation_normal-ogl.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Textures/terrain/mud1/mud_with_vegetation_metallic.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Textures/terrain/mud1/mud_with_vegetation_ao.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Textures/terrain/mud1/mud_with_vegetation_height.dds",
+					"usageCount": 1
+				}
+			]
 		}
 	]
 }

@@ -114,14 +114,14 @@ bool AIDetectionComponent::IsInView(IEntity* target)
 	float dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
 	float degree = RAD2DEG(crymath::acos(dot));
 
-	//CryLog("degree :%f ", degree);
-	return degree > m_minDetectionDegree && degree < m_maxDetectionDegree;
+	CryLog("degree :%f ", degree);
+	return degree >= m_minDetectionDegree && degree <= m_maxDetectionDegree;
 }
 
 bool AIDetectionComponent::IsVisible(IEntity* target)
 {
-	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
-	std::array<ray_hit, 2> hits;
+	int flags = rwi_pierceability(9);
+	std::array<ray_hit, 4> hits;
 	static IPhysicalEntity* pSkippedEntities[10];
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 
@@ -139,23 +139,25 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 	}
 	Vec3 dir = targetPos - m_pEntity->GetWorldPos();
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
-	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
-		if (hits[0].pCollider) {
-			
-			//Debug
-			if (pd) {
-				pd->Begin("RaycastDetectionComp", true);
-				//pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
-				//pd->AddSphere(hits[0].pt, 0.3f, ColorF(0, 1, 0), 2);
-				pd->AddLine(origin, hits[0].pt, ColorF(1, 0, 0), 1);
-			}
-			
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(origin, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 4, pSkippedEntities, 4)) {
+		for (int32 i = 0; i < hits.size(); i++) {
+			if (hits[i].pCollider) {
 
-			//return true if hitEntity is target
-			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
-			if (hitEntity) {
-				if (hitEntity == target) {
-					return true;
+				//Debug
+				if (pd) {
+					pd->Begin("RaycastDetectionComp", true);
+					//pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
+					//pd->AddSphere(hits[0].pt, 0.3f, ColorF(0, 1, 0), 2);
+					pd->AddLine(origin, hits[i].pt, ColorF(1, 0, 0), 1);
+				}
+
+
+				//return true if hitEntity is target
+				IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[i].pCollider);
+				if (hitEntity) {
+					if (hitEntity == target) {
+						return true;
+					}
 				}
 			}
 		}

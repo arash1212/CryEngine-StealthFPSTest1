@@ -419,6 +419,7 @@ void Soldier1Component::CloseAttack()
 		if (m_targetEntity->GetComponent<PlayerComponent>()) {
 			Vec3 dir = m_targetEntity->GetWorldPos() - m_pEntity->GetWorldPos();
 			m_targetEntity->GetComponent<PlayerComponent>()->GetCharacterController()->AddVelocity(dir * 7);
+			return;
 		}
 	}
 }
@@ -483,7 +484,7 @@ void Soldier1Component::ReactToHit(IEntity* attacker)
 
 	//
 	m_aiControllerComp->LookAt(attacker->GetWorldPos());
-	m_detectionComp->SetDetectionToCatious();
+	m_detectionComp->SetDetectionToMax();
 }
 
 void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)

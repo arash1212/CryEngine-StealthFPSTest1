@@ -57,6 +57,8 @@ private:
 	//detection timers
 	f32 m_timeBetweenTriggeringAlarams = 1.4f;
 	f32 m_triggeringAlaramsTimePassed = 0;
+	f32 m_timeBetweenReturningBackToNormal = 1.5f;
+	f32 m_returningBackToNormalTimePassed = 0;
 	bool bIsTriggeredAlarams = false;
 
 	//health

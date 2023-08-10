@@ -1,0 +1,151 @@
+{
+	"version": 1,
+	"source_filename": "e:/cryengine projects/stealthfpstest1/assets/Objects/static/fence/fence_1.fbx",
+	"output_ext": "cgf",
+	"material_filename": "Objects/static/fence/fence_1",
+	"unit_size": "file",
+	"scale": 1.0,
+	"forward_up_axes": "+Z+Y",
+	"merge_all_nodes": false,
+	"scene_origin": false,
+	"ignore_custom_normals": false,
+	"ignore_uv": false,
+	"materials": [
+		{
+			"name": "Material.001",
+			"file": "",
+			"physicalize": "proxy_only",
+			"sub_index": 0,
+			"ui_autoflag": true
+		},
+		{
+			"name": "Material.002",
+			"file": "",
+			"physicalize": "no",
+			"sub_index": 1,
+			"ui_autoflag": true
+		},
+		{
+			"name": "Material.003",
+			"file": "",
+			"physicalize": "no",
+			"sub_index": 2,
+			"ui_autoflag": true
+		},
+		{
+			"name": "Material.004",
+			"file": "",
+			"physicalize": "no",
+			"sub_index": 3,
+			"ui_autoflag": true
+		},
+		{
+			"name": "$Proxy",
+			"file": "",
+			"physicalize": "proxy_only",
+			"sub_index": 4,
+			"ui_autoflag": true
+		},
+		{
+			"name": "<unassigned>",
+			"file": "",
+			"physicalize": "no",
+			"sub_index": 5,
+			"ui_autoflag": true
+		}
+	],
+	"nodes": [
+		{
+			"name": "ProxyMesh",
+			"path": [ "ProxyMesh" ],
+			"mass": -1.0,
+			"density": -1.0
+		},
+		{
+			"name": "Cylinder.007",
+			"path": [ "Cylinder.007" ],
+			"mass": -1.0,
+			"density": -1.0
+		}
+	],
+	"animation": {
+		"name": "",
+		"motionNodePath": [ ],
+		"startFrame": -1,
+		"endFrame": -1
+	},
+	"globalSettings": {
+		"general_settings": { "input_filename": "fence_1", "output_filename": "" },
+		"static_mesh_settings": {
+			"merge_all_nodes": false,
+			"scene_origin": false,
+			"compute_normals": false,
+			"compute_uv": false
+		},
+		"conversion_settings": {
+			"unit": "file (cm)",
+			"scale": 1.0,
+			"forward": "+Z",
+			"up": "+Y"
+		},
+		"output_settings": { "use_32_bit_positions": false }
+	},
+	"editorNodeMeta": [ ],
+	"editorMaterialMeta": [
+		{
+			"name": "Material.001",
+			"physicalize_setting": "proxy_only",
+			"sub_material_index": 0,
+			"auto_id": true,
+			"color": { "r": 0.753, "g": 0.45149, "b": 0.59411, "a": 1.0 }
+		},
+		{
+			"name": "Material.002",
+			"physicalize_setting": "no",
+			"sub_material_index": 1,
+			"auto_id": true,
+			"color": { "r": 0.46083, "g": 0.80623, "b": 0.74307, "a": 1.0 }
+		},
+		{
+			"name": "Material.003",
+			"physicalize_setting": "no",
+			"sub_material_index": 2,
+			"auto_id": true,
+			"color": { "r": 0.67699, "g": 0.72892, "b": 0.88707, "a": 1.0 }
+		},
+		{
+			"name": "Material.004",
+			"physicalize_setting": "no",
+			"sub_material_index": 3,
+			"auto_id": true,
+			"color": { "r": 0.62844, "g": 0.88541, "b": 0.84996, "a": 1.0 }
+		},
+		{
+			"name": "$Proxy",
+			"physicalize_setting": "proxy_only",
+			"sub_material_index": 4,
+			"auto_id": true,
+			"color": { "r": 0.40562, "g": 0.91475, "b": 0.75582, "a": 1.0 }
+		},
+		{
+			"name": "<unassigned>",
+			"physicalize_setting": "no",
+			"sub_material_index": 5,
+			"auto_id": true,
+			"color": { "r": 1.0, "g": 1.0, "b": 1.0, "a": 1.0 }
+		}
+	],
+	"use_32_bit_positions": false,
+	"autolodsettings": {
+		"globalparams": {
+			"viewresolution": 26.69321,
+			"viewsaround": 12,
+			"viewelevations": 3,
+			"silhouetteweight": 5.0,
+			"vertexwelding": 0.001,
+			"checktopology": true,
+			"objecthasbase": false
+		},
+		"nodeparams": [ ]
+	}
+}

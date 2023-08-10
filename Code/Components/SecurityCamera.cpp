@@ -35,10 +35,10 @@ void SecurityCameraComponent::Initialize()
 	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
 	m_detectionComp = m_pEntity->GetOrCreateComponent<AIDetectionComponent>();
-	m_detectionComp->SetMaxDetectionDegree(165);
+	m_detectionComp->SetMaxDetectionDegree(180);
 	m_detectionComp->SetMinDetectionDegree(118);
 	m_detectionComp->SetDetectionHeight(0.8f);
-	m_detectionComp->SetTargetNormalHeight(1.0f);
+	m_detectionComp->SetTargetNormalHeight(0.8f);
 	m_detectionComp->SetTargetCrouchHeight(-0.07f);
 
 	m_defaultZRotation = m_pEntity->GetRotation().GetRotZ();
@@ -112,9 +112,9 @@ void SecurityCameraComponent::ProcessEvent(const SEntityEvent& event)
 
 void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 {
+	Quat currentRotation = m_pEntity->GetRotation();
 	//rotate normaly if target is not visible
 	if (!m_targetEntity || !m_detectionComp->IsTargetCanBeSeen(m_targetEntity)) {
-		Quat currentRotation = m_pEntity->GetRotation();
 		Quat rotation;
 
 		Quat minRot = Quat::CreateRotationZ(m_defaultZRotation - m_maxZRotation);
@@ -138,8 +138,13 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 			rotation = maxRot;
 		}
 
-		m_pEntity->SetRotation(Quat::CreateSlerp(currentRotation, rotation, timeElapsed / 350));
-		timeElapsed += DeltaTime;
+		if (m_returningBackToNormalTimePassed >= m_timeBetweenReturningBackToNormal) {
+			m_pEntity->SetRotation(Quat::CreateSlerp(currentRotation, rotation, timeElapsed / 350));
+			timeElapsed += DeltaTime;
+		}
+		else {
+			m_returningBackToNormalTimePassed += 0.5f * DeltaTime;
+		}
 
 		//stop detection sound
 		bIsDetectionSoundPlayed = false;
@@ -151,8 +156,12 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 
 	//if target is visible
 	else if (m_detectionComp->IsTargetCanBeSeen(m_targetEntity)) {
-		Vec3 dir = m_targetEntity->GetWorldPos() - m_pEntity->GetWorldPos();
+		m_returningBackToNormalTimePassed = 0;
+
+		Vec3 targetPos = Vec3(m_targetEntity->GetWorldPos().x, m_targetEntity->GetWorldPos().y, m_targetEntity->GetWorldPos().z);
+		Vec3 dir = targetPos - m_pEntity->GetWorldPos();
 		dir.z += 3.5f;
+
 		m_pEntity->SetRotation(Quat::CreateSlerp(m_pEntity->GetRotation(), Quat::CreateRotationVDir(-dir), timeElapsed / 250));
 		timeElapsed += DeltaTime;
 

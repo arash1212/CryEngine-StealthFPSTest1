@@ -1,6 +1,6 @@
 {
     "Asset Browser": {
-        "RecentImportPath": "C:/Users/Arash/Desktop/StealthFPS Assets/Weapons/glock/"
+        "RecentImportPath": "C:/Users/Arash/Desktop/StealthFPS Assets/fence/textures/"
     },
     "AssetFolderModel": {
         "AddedFolders": [
@@ -14,7 +14,11 @@
             "Objects/Weapons/ak47",
             "Objects/Weapons/ak47/3p",
             "Objects/securitycamera",
-            "Objects/alarm1"
+            "Objects/alarm1",
+            "Objects/static",
+            "Objects/static/fence",
+            "Textures/terrain",
+            "Textures/terrain/mud1"
         ]
     },
     "CAssetPicker": {
@@ -171,7 +175,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/securitycamera"
+                    "Textures/terrain/mud1"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -679,11 +683,11 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/alarm1"
+                    "Objects/static/fence"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
-            "recursiveView": false,
+            "recursiveView": true,
             "showFolders": true,
             "thumbnailView": {
                 "size": {
@@ -714,6 +718,8 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/static/fence/fence_o_1.cgf.cryasset",
+            "Objects/static/fence/fence_1.cgf.cryasset",
             "Objects/Characters/soldier1/soldier1.cgf.cryasset",
             "Objects/alarm1/alarm_1.cgf.cryasset",
             "Objects/alaram1/alaram_1.cgf.cryasset",
@@ -721,9 +727,7 @@
             "Objects/securitycamera/security-camera-1.cgf.cryasset",
             "Objects/Weapons/ak47/3p/ak-47.cgf.cryasset",
             "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
-            "Objects/soldier2.cgf.cryasset",
-            "Objects/Characters/soldier1/soldier1-test.cgf.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash2.cgf.cryasset"
+            "Objects/soldier2.cgf.cryasset"
         ]
     },
     "Import Skeleton": {
@@ -738,16 +742,16 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/static/fence/fence_o_1.mtl.cryasset",
+            "Objects/static/fence/fence_1.mtl.cryasset",
+            "Textures/terrain/mud1/terrain_material_mud_1.mtl.cryasset",
+            "textures/terrain/mud1/terrain_material_mud_1.mtl.cryasset",
+            "%engine%/engineassets/materials/material_terrain_default.mtl.cryasset",
+            "%engine%/engineassets/materials/material_layers_default.mtl.cryasset",
+            "Objects/static/fence/fence.mtl.cryasset",
             "Objects/alarm1/alarm_1.mtl.cryasset",
             "Objects/alaram1/alaram_1.mtl.cryasset",
-            "Objects/securitycamera/security-camera-base-1.mtl.cryasset",
-            "Objects/securitycamera/security-camera-1.mtl.cryasset",
-            "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
-            "Objects/Weapons/ak47/3p/ak-47.mtl.cryasset",
-            "Objects/Characters/soldier1/soldier_1.mtl.cryasset",
-            "Objects/Characters/soldier1/soldier1-test.mtl.cryasset",
-            "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
-            "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset"
+            "Objects/securitycamera/security-camera-base-1.mtl.cryasset"
         ]
     }
 }

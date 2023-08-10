@@ -116,6 +116,7 @@ protected:
 	virtual void Aim();
 	virtual CryAudio::ControlId GetRandomShootSound();
 	virtual void InitShootSounds() = 0;
+	virtual bool IsSurfaceIdSkippable(int surfaceId);
 
 public :
 	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);

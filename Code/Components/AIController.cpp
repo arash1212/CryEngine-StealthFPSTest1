@@ -343,8 +343,8 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 	MNM::ERayCastResult result = gEnv->pAISystem->GetNavigationSystem()->NavMeshRayCast(agentTypeId, point, target->GetWorldPos(), &filter, &rayHitOut);
 	*/
 
-	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
-	std::array<ray_hit, 2> hits;
+	int flags = rwi_pierceability(9);
+	std::array<ray_hit, 4> hits;
 	static IPhysicalEntity* pSkippedEntities[10];
 	pSkippedEntities[0] = m_pEntity->GetPhysics();
 	//height target estefade beshe
@@ -357,26 +357,28 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 
 	Vec3 dir = targetPos - point;
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
-	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
-		if (hits[0].pCollider) {
-			//Debug
-			if (pd) {
-				pd->Begin("CoverRaycast", true);
-				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 1, 0), 2);
-			}
-
-			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
-			if (hitEntity) {
-				if (hitEntity == target) {
-					return false;
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(point, dir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 4, pSkippedEntities, 4)) {
+		for (int32 i = 0; i < hits.size(); i++) {
+			if (hits[i].pCollider) {
+				//Debug
+				if (pd) {
+					pd->Begin("CoverRaycast", true);
+					pd->AddSphere(hits[i].pt, 0.2f, ColorF(1, 1, 0), 2);
 				}
-				else
-				{
+
+				IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[i].pCollider);
+				if (hitEntity) {
+					if (hitEntity == target) {
+						return false;
+					}
+					else
+					{
+						return true;
+					}
+				}
+				else {
 					return true;
 				}
-			}
-			else {
-				return true;
 			}
 		}
 	}

@@ -1,0 +1,14 @@
+<AssetMetadata version="0" type="Mesh" guid="422b00e7-4738-d7ab-fcc6-5ca5dad9e23e" source="fence_1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_tnhEjB.cgf"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">6</Detail>
+  <Detail name="triangleCount">536</Detail>
+  <Detail name="vertexCount">416</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">Objects/static/fence/fence_1.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

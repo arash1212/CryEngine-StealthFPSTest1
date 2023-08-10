@@ -9,6 +9,9 @@
 #include "Health.h"
 #include "GamePlugin.h"
 
+#include <Cry3DEngine/I3DEngine.h>
+#include <Cry3DEngine/IMaterial.h>
+#include <Cry3DEngine/ISurfaceType.h>
 #include <CryRenderer/IRenderAuxGeom.h>
 #include <CrySchematyc/Env/Elements/EnvComponent.h>
 #include <CrySchematyc/Env/IEnvRegistrar.h>
@@ -39,54 +42,55 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 		finalDir.z += error.z;
 	}
 
-	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
-	std::array<ray_hit, 2> hits;
+	//9 yani az har material ba pierceability bishtar rad beshe
+	int flags = rwi_pierceability(9);
+	std::array<ray_hit, 4> hits;
 	static IPhysicalEntity* pSkippedEntities[10];
 	pSkippedEntities[0] = m_ownerEntity->GetPhysics();
 	pSkippedEntities[1] = m_pEntity->GetPhysics();
 
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
-	if (gEnv->pPhysicalWorld->RayWorldIntersection(from, finalDir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 2, pSkippedEntities, 2)) {
-		if (hits[0].pCollider) {
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(from, finalDir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 4, pSkippedEntities, 4)) {
+		for (int32 i = 0; i < hits.size(); i++) {
+			if (hits[i].pCollider) {
 
-			//Debug
-			if (pd) {
-				pd->Begin("RaycastWeapon", true);
-				//pd->AddText3D(hits[0].pt, 500, ColorF(0, 1, 0), 2, "Hit : %s", hitEntity->GetName());
-				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
-			}
-
-			//return hitEntity if exist
-			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
-			if (hitEntity) {
-				CryLog("Weapon hit %s", hitEntity->GetName());
-
-				//todo : iActor beshe
-				if (!hitEntity->GetComponent<Soldier1Component>()) {
-					//apply impluse on entity at hit point
-					pe_action_impulse impulse;
-					impulse.impulse = m_pEntity->GetForwardDir() * 50;
-					hits[0].pCollider->Action(&impulse);
+				//Debug
+				if (pd) {
+					pd->Begin("RaycastWeapon", true);
+					//pd->AddText3D(hits[0].pt, 500, ColorF(0, 1, 0), 2, "Hit : %s", hitEntity->GetName());
+					pd->AddSphere(hits[i].pt, 0.05f, ColorF(1, 0, 0), 2);
 				}
 
+				//return hitEntity if exist
+				IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[i].pCollider);
+				if (hitEntity) {
+					CryLog("Weapon hit %s", hitEntity->GetName());
 
-				//if hitEntity is an actor
-				if (hitEntity->GetComponent<Soldier1Component>()) {
-					hitEntity->GetComponent<Soldier1Component>()->ReactToHit(m_pEntity);
-					CryLog("Weapon hit actor");
-				}
-				//if hitEntity is player
-				else if (hitEntity->GetComponent<PlayerComponent>()) {
-					CryLog("Weapon hit Player");
-					hitEntity->GetComponent<PlayerComponent>()->ReactToHit(m_pEntity);
-				}
+					//todo : iActor beshe
+					if (!hitEntity->GetComponent<Soldier1Component>()) {
+						//apply impluse on entity at hit point
+						pe_action_impulse impulse;
+						impulse.impulse = m_pEntity->GetForwardDir() * 50;
+						hits[i].pCollider->Action(&impulse);
+					}
 
-				//if hitEntity has healthComponent
-				if (hitEntity->GetComponent<HealthComponent>()) {
-					hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
-				}
 
-				return hitEntity;
+					//if hitEntity is an actor
+					if (hitEntity->GetComponent<Soldier1Component>()) {
+						hitEntity->GetComponent<Soldier1Component>()->ReactToHit(m_pEntity);
+					}
+					//if hitEntity is player
+					else if (hitEntity->GetComponent<PlayerComponent>()) {
+						hitEntity->GetComponent<PlayerComponent>()->ReactToHit(m_pEntity);
+					}
+
+					//if hitEntity has healthComponent
+					if (hitEntity->GetComponent<HealthComponent>()) {
+						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
+					}
+
+					return hitEntity;
+				}
 			}
 		}
 	}
@@ -397,4 +401,17 @@ CryAudio::ControlId IWeaponComponent::GetRandomShootSound()
 		randomNum = GetRandomInt(0, m_shootSounds.Size() - 1);
 	}
 	return m_shootSounds.At(randomNum);
+}
+
+bool IWeaponComponent::IsSurfaceIdSkippable(int surfaceId)
+{
+	//skipaables
+	int fenceTypeId = gEnv->p3DEngine->GetMaterialManager()->GetSurfaceTypeIdByName("mat_metal_fence");
+
+	//current
+	if (fenceTypeId == surfaceId) {
+		return true;
+	}
+
+	return false;
 }
