@@ -104,8 +104,8 @@ protected:
 
 	//aiming
 	bool bIsAiming = false;
-	Vec3 m_aimPosition = Vec3(-3.94f, -0.05f, 1.94f);
-	Quat m_aimRotation = Quat::CreateRotationZ(160.226f);
+	Vec3 m_aimPosition = Vec3(-4.00f, -0.05f, 1.94f);
+	Quat m_aimRotation = Quat::CreateRotationZ(160.230f);
 
 	//noise maker
 	NoiseMakerComponent* m_noiseMakerComp;

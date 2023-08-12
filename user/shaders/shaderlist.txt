@@ -144,3 +144,5 @@
 <2>DeferredRain@DeferredRainGBufferPS()(%_RT_SAMPLE1)(0)(0)(0)(0)(PS)
 <2>PostEffectsGame@SceneRainVS()()(0)(0)(0)(0)(VS)
 <2>PostEffectsGame@SceneRainPS()()(0)(0)(0)(0)(PS)
+<2>Templbeamproc@TemplBeamVS()(%_RT_NO_TESSELLATION|%_RT_SKELETON_SSD)(0)(0)(0)(0)(VS)
+<2>Templbeamproc@TemplBeamPS()(%_RT_SKELETON_SSD)(0)(0)(0)(0)(PS)
