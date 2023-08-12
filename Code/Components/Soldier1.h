@@ -42,7 +42,7 @@ private:
 
 	Vec3 testMoveToPos = ZERO;
 	IEntity* m_targetEntity = nullptr;
-	IEntity* m_lastTargetPosition;
+	IEntity* m_lastTargetPosition = nullptr;
 
 	//weapons
 	IWeaponComponent* m_currentlySelectedWeapon;
@@ -119,6 +119,12 @@ private:
 
 	bool bIsAlive = true;
 
+	//camera report
+	Vec3 m_lastCameraReportedPos = ZERO;
+	bool bShouldCheckLastCameraReportedPos = false;
+	f32 m_timeBetweenCheckingLastCameraReportedPosition = 10.f;
+	f32 m_lastCameraReportedPositionCheckTimePassed = 0.f;
+
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
@@ -137,10 +143,17 @@ protected:
 	virtual void Die() override;
 	void PlatDeathSound();
 	void PlayDetectionSound();
+	void CheckLastCameraPosition();
 
 	bool IsAtCover();
 
 public:
 	void SetPatrolPathName(Schematyc::CSharedString patrolPathName);
 	virtual void ReactToHit(IEntity* attacker) override;
+
+	void SetLastTargetPosition(Vec3 pos);
+	void SetDetectionToCautious();
+	void SetDetectionToMax();
+	void SetLastCameraReportedPos(Vec3 pos);
+	void SetFoundTarget(bool isFound);
 };

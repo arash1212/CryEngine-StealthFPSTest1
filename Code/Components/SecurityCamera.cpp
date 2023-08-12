@@ -2,6 +2,7 @@
 #include "SecurityCamera.h"
 #include "Player.h"
 #include "AlarmSpeaker.h"
+#include "Soldier1.h"
 #include "AIDetection.h"
 #include "AlarmManager.h"
 #include "GamePlugin.h"
@@ -155,26 +156,31 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 	}
 
 	//if target is visible
-	else if (m_detectionComp->IsTargetCanBeSeen(m_targetEntity)) {
-		m_returningBackToNormalTimePassed = 0;
+	else if ( m_detectionComp->IsTargetCanBeSeen(m_targetEntity)) {
+		f32 distanceToTarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
+		if (distanceToTarget <= m_maxDetectionDistance) {
+			m_returningBackToNormalTimePassed = 0;
 
-		Vec3 targetPos = Vec3(m_targetEntity->GetWorldPos().x, m_targetEntity->GetWorldPos().y, m_targetEntity->GetWorldPos().z);
-		Vec3 dir = targetPos - m_pEntity->GetWorldPos();
-		dir.z += 3.5f;
+			Vec3 targetPos = Vec3(m_targetEntity->GetWorldPos().x, m_targetEntity->GetWorldPos().y, m_targetEntity->GetWorldPos().z);
+			Vec3 dir = targetPos - m_pEntity->GetWorldPos();
+			dir.z += 3.5f;
 
-		m_pEntity->SetRotation(Quat::CreateSlerp(m_pEntity->GetRotation(), Quat::CreateRotationVDir(-dir), timeElapsed / 250));
-		timeElapsed += DeltaTime;
+			m_pEntity->SetRotation(Quat::CreateSlerp(m_pEntity->GetRotation(), Quat::CreateRotationVDir(-dir), timeElapsed / 250));
+			timeElapsed += DeltaTime;
 
-		//play sound
-		if (!bIsDetectionSoundPlayed) {
-			bIsDetectionSoundPlayed = true;
-			m_audioComp->ExecuteTrigger(m_detectionSound);
-		}
+			//play sound
+			if (!bIsDetectionSoundPlayed) {
+				bIsDetectionSoundPlayed = true;
+				m_audioComp->ExecuteTrigger(m_detectionSound);
+			}
 
-		m_triggeringAlaramsTimePassed += 0.5f * DeltaTime;
-		if (m_triggeringAlaramsTimePassed >= m_timeBetweenTriggeringAlarams && !bIsTriggeredAlarams) {
-			TriggerAlarams();
-			bIsTriggeredAlarams = true;
+			m_triggeringAlaramsTimePassed += 0.5f * DeltaTime;
+			if (m_triggeringAlaramsTimePassed >= m_timeBetweenTriggeringAlarams && !bIsTriggeredAlarams) {
+				TriggerAlarams();
+				bIsTriggeredAlarams = true;
+
+				SetSoldiersLastTargetPosition();
+			}
 		}
 	}
 }
@@ -217,5 +223,33 @@ void SecurityCameraComponent::Destroy()
 		m_audioComp->ExecuteTrigger(m_destroySound);
 		m_triggeringAlaramsTimePassed = 0;
 		bIsTriggeredAlarams = false;
+	}
+}
+
+void SecurityCameraComponent::SetSoldiersLastTargetPosition()
+{
+	//todo
+	int32 num = 0;
+
+	IEntityItPtr entityItPtr = gEnv->pEntitySystem->GetEntityIterator();
+	entityItPtr->MoveFirst();
+	while (!entityItPtr->IsEnd()) {
+		IEntity* entity = entityItPtr->Next();
+		if (entity->GetComponent<Soldier1Component>()) {
+			f32 distanceToSoldier = entity->GetWorldPos().GetDistance(m_pEntity->GetWorldPos());
+
+			if (num < 3) {
+				if (distanceToSoldier < 40) {
+					entity->GetComponent<Soldier1Component>()->SetLastCameraReportedPos(m_targetEntity->GetWorldPos());
+					entity->GetComponent<Soldier1Component>()->SetDetectionToCautious();
+				}
+				else {
+					continue;
+				}
+			}
+			else {
+				break;
+			}
+		}
 	}
 }

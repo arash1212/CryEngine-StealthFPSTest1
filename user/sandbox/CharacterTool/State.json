@@ -80,7 +80,7 @@
 					"bottomColor": { "r": 32, "g": 32, "b": 32, "a": 255 }
 				}
 			},
-			"playbackTime": 1.5089
+			"playbackTime": 1.03939
 		}
 	},
 	"dockWidgetManager": {
@@ -109,6 +109,7 @@
 							"Compression (Animations/)",
 							"Compression (Animations/)|Compression Presets",
 							"Compression (Animations/)|DBA Table",
+							"Animations (objects/characters/soldier1/)|blendspace",
 							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Idle",
 							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Backward",
 							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Forward",
@@ -128,17 +129,19 @@
 							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Hit_Reaction_2",
 							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Kick",
 							"Skeletons|Objects",
-							"Characters|Objects"
+							"Characters|Objects",
+							"Characters|Objects|Characters",
+							"Characters|Objects|Characters|soldier1"
 						],
 						"selectedItems": [
-							"Skeletons|Objects|Characters|soldier1|soldier_1.chrparams",
-							"Skeletons|Objects|Characters|soldier1",
-							"Skeletons|Objects|Characters|soldier1",
-							"Skeletons|Objects|Characters|soldier1",
-							"Skeletons|Objects|Characters|soldier1",
-							"Skeletons|Objects|Characters|soldier1"
+							"Animations (objects/characters/soldier1/)|blendspace|normal_locomotion",
+							"Animations (objects/characters/soldier1/)|blendspace",
+							"Animations (objects/characters/soldier1/)|blendspace|1 KB",
+							"Animations (objects/characters/soldier1/)|blendspace|136",
+							"Animations (objects/characters/soldier1/)|blendspace",
+							"Animations (objects/characters/soldier1/)|blendspace"
 						],
-						"currentItem": "Skeletons|Objects|Characters|soldier1|soldier_1.chrparams",
+						"currentItem": "Animations (objects/characters/soldier1/)|blendspace|normal_locomotion",
 						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
 						"sectionsVisible": [ 0 ]
 					}
@@ -155,22 +158,24 @@
 			]
 		}
 	},
-	"displayParameterSplittersWidths": [ 524, 200 ],
+	"displayParameterSplittersWidths": [ 675, 200 ],
 	"displayOptionsVisible": true,
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
 		"propertyTree": {
-			"focusedRow": [ 2 ],
-			"selection": [ [ 2 ] ],
-			"expanded": [ 1, 1, 1, 0, 1, 1, 1 ]
+			"focusedRow": [ ],
+			"selection": [ ],
+			"expanded": [
+				1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1
+			]
 		},
 		"outlineMode": "oneTree"
 	},
 	"blendSpacePreview": {
 		"viewport": {
 			"cameraTarget": {
-				"q": { "x": -0.43732, "y": 0.09074, "z": -0.18178, "w": 0.87606 },
-				"t": { "x": 1.31434, "y": -3.00027, "z": 3.05184 }
+				"q": { "x": -0.5272, "y": 0.18034, "z": -0.26876, "w": 0.78569 },
+				"t": { "x": 0.255, "y": -3.11018, "z": 4.66728 }
 			}
 		},
 		"characterScale": 0.5,
@@ -186,25 +191,25 @@
 		"Objects/Weapons/glock/1p/pistol_glock.cdf"
 	],
 	"windowGeometry": [
-		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 21, 0, 0, 3, 111, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 5, 21, 0, 0, 3, 111, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 21, 0, 0,
-		3, 111
+		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 119, 0, 0, 3, 220, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 7, 119, 0, 0, 3, 220, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 119, 0, 0,
+		3, 220
 	],
 	"windowState": [
-		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 204, 0, 0, 3, 9, 252, 2, 0, 0, 0, 2, 251,
+		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 204, 0, 0, 3, 118, 252, 2, 0, 0, 0, 2, 251,
 		0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108, 0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45,
-		0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 9, 0, 0, 0, 107, 0, 255, 255, 255, 251, 0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108,
+		0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 118, 0, 0, 0, 107, 0, 255, 255, 255, 251, 0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108,
 		0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45, 0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 118, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 102, 0, 0, 3, 9, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 49, 0, 0, 3, 118, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
 		0, 99, 0, 101, 0, 110, 0, 101, 0, 95, 0, 112, 0, 97, 0, 114, 0, 97, 0, 109, 0, 101, 0, 116, 0, 101, 0, 114, 0, 115, 1, 0,
-		0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
-		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 31, 0, 0, 1, 116, 0, 0, 0, 81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
+		0, 0, 0, 0, 0, 0, 181, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
+		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 187, 0, 0, 0, 81, 0, 0, 0, 81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
 		0, 108, 0, 101, 0, 110, 0, 100, 0, 95, 0, 115, 0, 112, 0, 97, 0, 99, 0, 101, 0, 95, 0, 112, 0, 114, 0, 101, 0, 118, 0, 105,
-		0, 101, 0, 119, 1, 0, 0, 1, 153, 0, 0, 1, 112, 0, 0, 0, 223, 0, 255, 255, 255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105,
+		0, 101, 0, 119, 1, 0, 0, 1, 18, 0, 0, 2, 100, 0, 0, 0, 223, 0, 255, 255, 255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105,
 		0, 109, 0, 95, 0, 101, 0, 118, 0, 101, 0, 110, 0, 116, 0, 95, 0, 112, 0, 114, 0, 101, 0, 115, 0, 101, 0, 116, 0, 115, 0, 0,
-		0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0, 0, 5, 22, 0, 0, 0, 97, 252, 1, 0, 0, 0,
-		1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99, 0, 107, 1, 0, 0, 0, 0, 0, 0, 5, 22, 0,
-		0, 1, 176, 0, 255, 255, 255, 0, 0, 2, 216, 0, 0, 3, 9, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252,
+		0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0, 0, 7, 120, 0, 0, 0, 97, 252, 1, 0, 0, 0,
+		1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99, 0, 107, 1, 0, 0, 0, 0, 0, 0, 7, 120, 0,
+		0, 1, 176, 0, 255, 255, 255, 0, 0, 3, 111, 0, 0, 3, 118, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252,
 		0, 0, 0, 0
 	]
 }

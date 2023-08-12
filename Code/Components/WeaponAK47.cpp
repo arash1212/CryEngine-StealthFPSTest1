@@ -2,6 +2,7 @@
 #include "WeaponAK47.h"
 #include "IWeapon.h"
 #include "Player.h"
+#include "NoiseMaker.h"
 #include "GamePlugin.h"
 
 #include <CryRenderer/IRenderAuxGeom.h>
@@ -77,6 +78,10 @@ void WeaponAK47Component::Initialize()
 	//m_muzzleFlashMesh->SetFilePath("Objects/effects/muzzleflash/muzzleflash1.cgf");
 	//m_muzzleFlashMesh->LoadFromDisk();
 	//m_muzzleFlashMesh->ResetObject();
+
+	//noiseMaker comp
+	m_noiseMakerComp = m_pEntity->GetOrCreateComponent<NoiseMakerComponent>();
+	m_noiseMakerComp->SetOwner(m_ownerEntity);
 }
 
 Cry::Entity::EventFlags WeaponAK47Component::GetEventMask() const

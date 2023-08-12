@@ -8,6 +8,9 @@
 static constexpr f32 WEAPON_DEFAULT_DAMAGE = 15.f;
 static constexpr f32 WEAPON_DEFAULT_TIME_BETWEEN_SHOTS = 0.1f;
 
+class NoiseMakerComponent;
+
+
 class IWeaponComponent : public IEntityComponent
 {
 public:
@@ -76,8 +79,8 @@ protected:
 	Schematyc::CArray<CryAudio::ControlId> m_shootSounds;
 
 	//recoil
-	f32 m_snapiness = 15.2f;
-	f32 m_returnSpeed = 5.1f;
+	f32 m_snapiness = 10.2f;
+	f32 m_returnSpeed = 3.1f;
 	Quat m_meshefaultRotaion = IDENTITY;
 	Quat m_currentRotation = IDENTITY;
 	Quat m_targetRotation = IDENTITY;
@@ -103,6 +106,9 @@ protected:
 	bool bIsAiming = false;
 	Vec3 m_aimPosition = Vec3(-3.94f, -0.05f, 1.94f);
 	Quat m_aimRotation = Quat::CreateRotationZ(160.226f);
+
+	//noise maker
+	NoiseMakerComponent* m_noiseMakerComp;
 
 protected:
 	f32 GetRandomValue(f32 min, f32 max);

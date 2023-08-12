@@ -45,6 +45,8 @@ private:
 	bool bIsReachedRightEnd = false;
 	f32 m_defaultZRotation = ZERO;
 
+	f32 m_maxDetectionDistance = 15.f;
+
 	f32 timeElapsed = 0.f;
 
 	f32 m_defaultX = 0.f;
@@ -68,5 +70,6 @@ private:
 	void UpdateRotation(f32 DeltaTime);
 	void TriggerAlarams();
 	void Destroy();
+	void SetSoldiersLastTargetPosition();
 
 };

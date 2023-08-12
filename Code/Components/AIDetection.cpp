@@ -114,7 +114,7 @@ bool AIDetectionComponent::IsInView(IEntity* target)
 	float dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
 	float degree = RAD2DEG(crymath::acos(dot));
 
-	CryLog("degree :%f ", degree);
+	//CryLog("degree :%f ", degree);
 	return degree >= m_minDetectionDegree && degree <= m_maxDetectionDegree;
 }
 
@@ -207,6 +207,11 @@ bool AIDetectionComponent::IsTargetFound()
 	return bIsTargetFound;
 }
 
+void AIDetectionComponent::SetFoundTarget(bool isFound)
+{
+	this->bIsTargetFound = isFound;
+}
+
 EDetectionState AIDetectionComponent::GetDetectionState()
 {
 	return m_detectionState;
@@ -224,7 +229,7 @@ void AIDetectionComponent::SetDetectionToMax()
 
 void AIDetectionComponent::SetDetectionToCatious()
 {
-	m_detectionAmount = m_maxDetectionAmount / 2;
+	m_detectionAmount = (m_maxDetectionAmount / 2) + 0.1f;
 }
 
 f32 AIDetectionComponent::GetMaxDetectionAmount()

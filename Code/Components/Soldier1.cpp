@@ -172,7 +172,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 			//patrol
 			//todo : && !m_patrolPathName.empty() && m_patrolPathName != ""
-			if (!m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
+			if (!bShouldCheckLastCameraReportedPos && !m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
 				MoveTo(m_aiControllerComp->Patrol(m_patrolPathName));
 			}
 
@@ -212,6 +212,9 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 				m_findingCoverTimePassed += 0.5f * deltatime;
 			}
 
+			//check last camera reported pos
+			CheckLastCameraPosition();
+
 			Die();
 		}
 	//	}
@@ -237,7 +240,7 @@ void Soldier1Component::InitLastTargetPositionEntity()
 
 Vec3 Soldier1Component::GetRandomPointToMoveTo(Vec3 Around, f32 distance)
 {
-	Vec3 point = m_aiControllerComp->GetRandomPointOnNavmesh(10, m_lastTargetPosition != nullptr ? m_lastTargetPosition : m_pEntity);
+	Vec3 point = m_aiControllerComp->GetRandomPointOnNavmesh(distance, m_lastTargetPosition != nullptr ? m_lastTargetPosition : m_pEntity);
 	//if (m_detectionComp->IsTargetFound()) {
 	//	while (!m_detectionComp->IsVisibleFrom(point, m_targetEntity)) {
 	//		point = m_aiControllerComp->GetRandomPointOnNavmesh(15, m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos());
@@ -487,6 +490,34 @@ void Soldier1Component::ReactToHit(IEntity* attacker)
 	m_detectionComp->SetDetectionToMax();
 }
 
+void Soldier1Component::SetLastTargetPosition(Vec3 pos)
+{
+	this->m_lastTargetPosition->SetPos(pos);
+}
+
+void Soldier1Component::SetDetectionToCautious()
+{
+	this->m_detectionComp->SetDetectionToCatious();
+}
+
+void Soldier1Component::SetDetectionToMax()
+{
+	this->m_detectionComp->SetDetectionToMax();
+}
+
+void Soldier1Component::SetLastCameraReportedPos(Vec3 pos)
+{
+	m_lastCameraReportedPos = pos;
+	bShouldCheckLastCameraReportedPos = true;
+	m_lastCameraReportedPositionCheckTimePassed = 0.f;
+	testMoveToPos = ZERO;
+}
+
+void Soldier1Component::SetFoundTarget(bool isFound)
+{
+	this->m_detectionComp->SetFoundTarget(isFound);
+}
+
 void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)
 {
 	this->m_patrolPathName = patrolPathName;
@@ -621,6 +652,23 @@ void Soldier1Component::PlayDetectionSound()
 		m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
 		bIsDetectionSoundPlayed = true;
 		m_coolDownTimePassed = 0;
+	}
+}
+
+void Soldier1Component::CheckLastCameraPosition()
+{
+	if (bShouldCheckLastCameraReportedPos && m_lastCameraReportedPositionCheckTimePassed <= m_timeBetweenCheckingLastCameraReportedPosition) {
+
+		if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
+			testMoveToPos = GetRandomPointToMoveTo(m_lastCameraReportedPos != ZERO ? m_lastCameraReportedPos : m_pEntity->GetWorldPos(), 5);
+		}
+		m_aiControllerComp->MoveTo(testMoveToPos);
+		m_aiControllerComp->LookAt(m_lastCameraReportedPos);
+	}
+
+	f32 distanceToPos = m_pEntity->GetWorldPos().GetDistance(m_lastCameraReportedPos);
+	if (bShouldCheckLastCameraReportedPos && distanceToPos <= 5) {
+		m_lastCameraReportedPositionCheckTimePassed += 0.5f + gEnv->pTimer->GetFrameTime();
 	}
 }
 

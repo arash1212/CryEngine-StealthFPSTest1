@@ -4,6 +4,7 @@
 #include "ShootAccuracy.h"
 #include "IWeapon.h"
 #include "BulletTracer.h"
+#include "NoiseMaker.h"
 #include "IAIActor.h"
 #include "Soldier1.h"
 #include "Health.h"
@@ -166,6 +167,10 @@ bool IWeaponComponent::Fire(IEntity* target)
 
 		//apply recoil to weapon model after shot
 		m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
+
+		if (m_noiseMakerComp) {
+			m_noiseMakerComp->MakeNoise();
+		}
 
 		return true;
 	}

@@ -56,6 +56,7 @@ public:
 
 	void SetCurrentTarget(IEntity* currentTarget);
 	bool IsTargetFound();
+	void SetFoundTarget(bool isFound);
 	EDetectionState GetDetectionState();
 	f32 GetDetectionAmount();
 	void SetDetectionToMax();
