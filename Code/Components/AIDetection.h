@@ -38,7 +38,7 @@ private:
 	bool bIsTargetFound = false;
 	bool bCanReturnToIdleState = false;
 
-	int32 m_maxDetectionDegree = 70;
+	int32 m_maxDetectionDegree = 80;
 	int32 m_minDetectionDegree = 0;
 	EDetectionState m_detectionState = EDetectionState::IDLE;
 

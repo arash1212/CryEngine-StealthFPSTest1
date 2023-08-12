@@ -124,6 +124,7 @@ private:
 	bool bShouldCheckLastCameraReportedPos = false;
 	f32 m_timeBetweenCheckingLastCameraReportedPosition = 10.f;
 	f32 m_lastCameraReportedPositionCheckTimePassed = 0.f;
+	bool bIsLastCameraReportedPosCheckDone = false;
 
 private:
 	void InitLastTargetPositionEntity();

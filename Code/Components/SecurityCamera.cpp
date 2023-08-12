@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "AlarmSpeaker.h"
 #include "Soldier1.h"
+#include "Health.h"
 #include "AIDetection.h"
 #include "AlarmManager.h"
 #include "GamePlugin.h"
@@ -158,7 +159,7 @@ void SecurityCameraComponent::UpdateRotation(f32 DeltaTime)
 	//if target is visible
 	else if ( m_detectionComp->IsTargetCanBeSeen(m_targetEntity)) {
 		f32 distanceToTarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
-		if (distanceToTarget <= m_maxDetectionDistance) {
+		if (distanceToTarget <= m_maxDetectionDistance && m_targetEntity->GetComponent<HealthComponent>()->GetHealth() > 0) {
 			m_returningBackToNormalTimePassed = 0;
 
 			Vec3 targetPos = Vec3(m_targetEntity->GetWorldPos().x, m_targetEntity->GetWorldPos().y, m_targetEntity->GetWorldPos().z);

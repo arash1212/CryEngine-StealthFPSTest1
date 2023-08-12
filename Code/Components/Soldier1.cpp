@@ -509,6 +509,7 @@ void Soldier1Component::SetLastCameraReportedPos(Vec3 pos)
 {
 	m_lastCameraReportedPos = pos;
 	bShouldCheckLastCameraReportedPos = true;
+	bIsLastCameraReportedPosCheckDone = false;
 	m_lastCameraReportedPositionCheckTimePassed = 0.f;
 	testMoveToPos = ZERO;
 }
@@ -657,18 +658,29 @@ void Soldier1Component::PlayDetectionSound()
 
 void Soldier1Component::CheckLastCameraPosition()
 {
+	//move around last camera reported position and check for target 
 	if (bShouldCheckLastCameraReportedPos && m_lastCameraReportedPositionCheckTimePassed <= m_timeBetweenCheckingLastCameraReportedPosition) {
 
 		if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
-			testMoveToPos = GetRandomPointToMoveTo(m_lastCameraReportedPos != ZERO ? m_lastCameraReportedPos : m_pEntity->GetWorldPos(), 5);
+			testMoveToPos = GetRandomPointToMoveTo(m_lastCameraReportedPos != ZERO ? m_lastCameraReportedPos : m_pEntity->GetWorldPos(), 3);
 		}
 		m_aiControllerComp->MoveTo(testMoveToPos);
 		m_aiControllerComp->LookAt(m_lastCameraReportedPos);
 	}
 
+	//update timer
 	f32 distanceToPos = m_pEntity->GetWorldPos().GetDistance(m_lastCameraReportedPos);
-	if (bShouldCheckLastCameraReportedPos && distanceToPos <= 5) {
+	if (bShouldCheckLastCameraReportedPos && distanceToPos <= 3) {
 		m_lastCameraReportedPositionCheckTimePassed += 0.5f + gEnv->pTimer->GetFrameTime();
+	}
+
+	//back to normal if checked last camera reported position for *m_timeBetweenCheckingLastCameraReportedPosition* time
+	if (!bIsLastCameraReportedPosCheckDone && m_lastCameraReportedPositionCheckTimePassed >= m_timeBetweenCheckingLastCameraReportedPosition) {
+		bShouldCheckLastCameraReportedPos = false;
+		testMoveToPos = m_pEntity->GetWorldPos();
+
+		//for doing this just once each time
+		bIsLastCameraReportedPosCheckDone = true;
 	}
 }
 
