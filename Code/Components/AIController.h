@@ -36,6 +36,7 @@ private :
 
 protected:
 	f32 GetRandomFloat(f32 min, f32 max);
+	int32 GetRandomInt(int32 min, int32 max);
 	Vec3 GetRandomPointInsideTriangle(Triangle t);
 	INavPath* path;
 
@@ -58,4 +59,5 @@ public:
 	bool IsCoverPointSafe(Vec3 point, IEntity* target);
 	bool IsCoverUsable(Vec3 point, IEntity* target);
 	Vec3 snapToNavmesh(Vec3 point);
+	void SortLocationsByDistance(std::array<Vec3, 400> &locations, int32 size);
 };

@@ -77,17 +77,19 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 
 
 					//if hitEntity is an actor
-					if (hitEntity->GetComponent<Soldier1Component>()) {
+					if (hitEntity->GetComponent<Soldier1Component>() && hitEntity->GetComponent<ActorInfoComponent>()->GetFaction() != m_ownerEntity->GetComponent<ActorInfoComponent>()->GetFaction()) {
 						hitEntity->GetComponent<Soldier1Component>()->ReactToHit(m_pEntity);
+						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
 					}
 					//if hitEntity is player
 					else if (hitEntity->GetComponent<PlayerComponent>()) {
 						hitEntity->GetComponent<PlayerComponent>()->ReactToHit(m_pEntity);
+						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
 					}
 
 					//if hitEntity has healthComponent
 					if (hitEntity->GetComponent<HealthComponent>()) {
-						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
+						
 					}
 
 					return hitEntity;
@@ -150,7 +152,7 @@ bool IWeaponComponent::Fire(IEntity* target)
 
 			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
 
-			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror);
+			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 50);
 			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
 		}
 

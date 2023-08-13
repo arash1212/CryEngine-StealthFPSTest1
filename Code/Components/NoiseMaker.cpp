@@ -2,6 +2,7 @@
 #include "NoiseMaker.h"
 #include "Soldier1.h"
 #include "ActorInfo.h"
+#include "Health.h"
 #include "GamePlugin.h"
 
 #include <CryEntitySystem/IEntitySystem.h>
@@ -60,6 +61,15 @@ void NoiseMakerComponent::ProcessEvent(const SEntityEvent& event)
 
 void NoiseMakerComponent::MakeNoise()
 {
+	//todo : fix (owner=null)
+	/*
+	if (m_owner && m_owner->GetComponent<HealthComponent>()) {
+		if (m_owner->GetComponent<HealthComponent>()->GetHealth() <= 0) {
+			return;
+		}
+	}
+	*/
+
 	/*
 	DynArray<IPhysicalEntity**> pEntities;
 	CryLog("noise entity size : %i", gEnv->pEntitySystem->GetPhysicalEntitiesInBox(m_pEntity->GetWorldPos(), m_noiseDistance, *pEntities.data()));

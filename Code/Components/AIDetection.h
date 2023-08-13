@@ -3,7 +3,7 @@
 enum class EDetectionState {
 	IDLE,
 	CAUTIOUS,
-	HIGHT_ALERT,
+	HIGH_ALERT,
 	COMBAT
 };
 

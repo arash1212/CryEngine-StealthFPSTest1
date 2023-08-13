@@ -195,16 +195,16 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* 
 		int32 j = 0;
 		Triangle triangle;
 		gEnv->pAISystem->GetNavigationSystem()->GetTriangleVertices(navMeshId, triangleIDArray[i], triangle);
-		while (j <= 20) {
+		//while (j <= 5) {
 			j++;
 			Vec3 point = GetRandomPointInsideTriangle(triangle);
 			if (IsPointVisibleFrom(agentTypeId, point, Around->GetWorldPos())) {
-				IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
-				pd->Begin("testPoint", true);
-				pd->AddSphere(point, 0.5f, ColorF(1, 0, 0), 10);
+				//IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+				//pd->Begin("testPoint", true);
+				//pd->AddSphere(point, 0.5f, ColorF(1, 0, 0), 10);
 				resultPositions.append(point);
 			}
-		}
+		//}
 	}
 
 
@@ -324,10 +324,11 @@ Vec3 AIControllerComponent::FindCover(IEntity* target)
 	std::array<Vec3, 400> locations;
 
 	int32 count = gEnv->pAISystem->GetCoverSystem()->GetCover(m_pEntity->GetWorldPos(), 900.f, &eyes, 1, 0.9f, locations.data(), 30, 3);
+	SortLocationsByDistance(locations, count);
 	CryLog("count %i", count);
 	for (int32 i = 0; i < count; i++) {
-		//&& IsCoverUsable(locations[i], target)
-		if (IsCoverPointSafe(locations[i], target)) {
+		//int32 random = GetRandomInt(0, count);
+		if (IsCoverPointSafe(locations[i], target) && IsCoverUsable(locations[i], target)) {
 			return locations[i];
 		}
 	}
@@ -451,4 +452,31 @@ Vec3 AIControllerComponent::snapToNavmesh(Vec3 point)
 	SAcceptAllQueryTrianglesFilter filter;
 	MNM::SPointOnNavMesh pointOnNavMesh = gEnv->pAISystem->GetNavigationSystem()->SnapToNavMesh(agentTypeId, point, snappingMetrics, &filter, &navMeshId);
 	return pointOnNavMesh.GetWorldPosition();
+}
+
+void AIControllerComponent::SortLocationsByDistance(std::array<Vec3, 400> &locations, int32 size)
+{
+	/*
+	std::sort(locations.begin(), locations.end(), [this](Vec3 a, Vec3 b)
+		{
+			return m_pEntity->GetWorldPos().GetDistance(a) < m_pEntity->GetWorldPos().GetDistance(b);
+		});
+	*/
+	Vec3 closest = m_pEntity->GetWorldPos();
+	for (int32 j = 0; j < size; j++) {
+		f32 closestDistance = 10000.f;
+		for (int32 i = j; i < size; i++) {
+			f32 distanceToCover = m_pEntity->GetWorldPos().GetDistance(locations[i]);
+			if (distanceToCover < closestDistance) {
+				closestDistance = distanceToCover;
+				locations[j] = locations[i];
+			}
+		}
+	}
+}
+
+int32 AIControllerComponent::GetRandomInt(int32 min, int32 max)
+{
+	int32 range = max - min + 1;
+	return rand() % range + min;
 }

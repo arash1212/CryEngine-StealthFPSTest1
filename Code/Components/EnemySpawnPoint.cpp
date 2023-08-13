@@ -66,6 +66,7 @@ void EnemySpawnPointComponent::Spawn()
 	IEntity* spawnedEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 	Soldier1Component* soldier1 = spawnedEntity->GetOrCreateComponent<Soldier1Component>();
 	soldier1->SetPatrolPathName(spawnInfo.m_patrolPathName);
+	soldier1->SetSpawnPos(m_pEntity->GetWorldPos());
 
 	//todo : ye fekri be halesh bokon
 	if (spawnInfo.m_factionNumber == "1") {

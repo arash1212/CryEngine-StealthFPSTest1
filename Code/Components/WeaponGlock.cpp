@@ -74,7 +74,6 @@ void WeaponGlockComponent::Initialize()
 
 	//noiseMaker comp
 	m_noiseMakerComp = m_pEntity->GetOrCreateComponent<NoiseMakerComponent>();
-	m_noiseMakerComp->SetOwner(m_ownerEntity);
 }
 
 Cry::Entity::EventFlags WeaponGlockComponent::GetEventMask() const
@@ -94,6 +93,7 @@ void WeaponGlockComponent::ProcessEvent(const SEntityEvent& event)
 
 	}break;
 	case Cry::Entity::EEvent::GameplayStarted: {
+		m_noiseMakerComp->SetOwner(m_ownerEntity);
 
 	}break;
 	case Cry::Entity::EEvent::Update: {

@@ -87,6 +87,8 @@ void Soldier1Component::Initialize()
 	//info
 	m_info = m_pEntity->GetOrCreateComponent<ActorInfoComponent>();
 
+	m_timeBetweenSittignInCover = GetRandomValue(0.3f, 0.5f);
+
 }
 
 Cry::Entity::EventFlags Soldier1Component::GetEventMask() const
@@ -117,32 +119,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			PlayDetectionSound();
 
 			//todo function ?
-			if (!bIsWeaponInitDone) {
-				m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun");
-
-				SEntitySpawnParams spawnParams;
-				spawnParams.vPosition = m_gunAttachment->GetAttAbsoluteDefault().t;
-				m_weaponBaseEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
-				m_pEntity->AttachChild(m_weaponBaseEntity);
-
-				//primary weapon init
-				m_primaryWeapon = m_weaponBaseEntity->GetOrCreateComponent<WeaponAK47Component>();
-				m_primaryWeapon->SetCharacterController(m_aiControllerComp->GetCharacterController());
-				m_primaryWeapon->SetCameraComponent(nullptr);
-				m_primaryWeapon->SetOwnerEntity(m_pEntity);
-				m_primaryWeapon->SetCameraBaseEntity(nullptr);
-
-
-				//IAttachmentObject* object = m_gunAttachment->GetIAttachmentObject();
-				//todo
-				m_currentlySelectedWeapon = m_primaryWeapon;
-
-				bIsWeaponInitDone = true;
-			}
-
-			if (m_weaponBaseEntity && m_gunAttachment) {
-				m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
-			}
+			InitWeapon();
 
 			/*
 			//test
@@ -165,15 +142,27 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			//target is dead find new one
 			else if (m_targetEntity) {
 				if (m_targetEntity->GetComponent<HealthComponent>()->GetHealth() <= 0) {
-					m_targetEntity = nullptr;
+					//m_targetEntity = nullptr;
 				}
 			}
 
 
 			//patrol
-			//todo : && !m_patrolPathName.empty() && m_patrolPathName != ""
 			if (!bShouldCheckLastCameraReportedPos && !m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
-				MoveTo(m_aiControllerComp->Patrol(m_patrolPathName));
+				if (m_detectionComp->GetDetectionState() < EDetectionState::CAUTIOUS) {
+					m_movePosition = m_aiControllerComp->Patrol(m_patrolPathName);
+				}
+				else {
+					m_movePosition = m_pEntity->GetWorldPos();
+					m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
+				}
+			}
+			//back to spawn if no patrol points assigned
+			else if (!bShouldCheckLastCameraReportedPos && !m_detectionComp->IsTargetFound() && m_patrolPathName.empty() || m_patrolPathName == "") {
+				f32 distaneToSpawnPos = m_pEntity->GetWorldPos().GetDistance(m_spawnPos);
+				if (distaneToSpawnPos > 1) {
+					MoveTo(m_spawnPos);
+				}
 			}
 
 			//todo ?
@@ -211,6 +200,15 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			if (m_findingCoverTimePassed < m_timeBetweenFindingCover) {
 				m_findingCoverTimePassed += 0.5f * deltatime;
 			}
+			if (m_checkingCoverTimePassed < m_timeBetweenCheckingCover) {
+				m_checkingCoverTimePassed += 0.5f * deltatime;
+			}
+			if (m_SittingInCoverTimePassed < m_timeBetweenSittignInCover) {
+				m_SittingInCoverTimePassed += 0.5f * deltatime;
+			}
+
+			//move
+			MoveTo(m_movePosition);
 
 			//check last camera reported pos
 			CheckLastCameraPosition();
@@ -278,7 +276,7 @@ void Soldier1Component::UpdateAnimation()
 	m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelAngle, crymath::acos(forwardDot) * inv);
 
 	//update animation fragment
-	FragmentID currentFragmentId;
+	FragmentID currentFragmentId = m_combatFragmentId;
 	if (m_detectionComp->GetDetectionState() == EDetectionState::IDLE) {
 		currentFragmentId = m_idleFragmentId;
 	}
@@ -286,7 +284,12 @@ void Soldier1Component::UpdateAnimation()
 		currentFragmentId = m_cautiousFragmentId;
 	}
 	else if (m_detectionComp->GetDetectionState() == EDetectionState::COMBAT) {
-		currentFragmentId = m_combatFragmentId;
+	//	if (CanUseWeapon() || m_aiControllerComp->GetCharacterController()->IsWalking()) {
+			currentFragmentId = m_combatFragmentId;
+	//	}
+	//	else if (m_SittingInCoverTimePassed >= m_timeBetweenSittignInCover) {
+	//		currentFragmentId = m_takeCoverSitFragmentId;
+	//	}
 	}
 
 	if (m_activeFragmentId != currentFragmentId) {
@@ -338,14 +341,16 @@ void Soldier1Component::Attack()
 
 		f32 distanceTotarget = m_pEntity->GetWorldPos().GetDistance(m_lastTargetPosition->GetWorldPos());
 		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsTargetFound()) {
-			MoveTo(m_lastTargetPosition->GetWorldPos());
+			m_movePosition = m_lastTargetPosition->GetWorldPos();
 		}
 		else {
 			if (distanceTotarget > m_closeAttackDistance) {
+				m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 
 				//fire weapon if target is visible
 				if (m_detectionComp->IsVisible(m_targetEntity) && CanUseWeapon()) {
 					if (m_currentlySelectedWeapon->Fire(m_targetEntity)) {
+						m_SittingInCoverTimePassed = 0.f;
 
 						//shoot coolDown
 						m_currentShootCount++;
@@ -355,47 +360,56 @@ void Soldier1Component::Attack()
 					}
 				}
 
+				//m_checkingCoverTimePassed > m_timeBetweenCheckingCover && ! 
 				//move around target if it close and cover is not safe
-				if (!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
-					MoveAroundTarget(m_targetEntity);
+				if (m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+					//MoveAroundTarget(m_targetEntity);
 					m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
+					//m_checkingCoverTimePassed = 0;
 				}
+
+				
 				else
 				{
-					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+					if (m_currentCoverPosition == ZERO ||!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
 						m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
 						//move arount target while looking for new cover
 						MoveAroundTarget(m_targetEntity);
-						m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 					}
 					//move to cover
 					if (m_findingCoverTimePassed >= m_timeBetweenFindingCover) {
-						MoveTo(m_currentCoverPosition);
+						//if (m_pEntity->GetWorldPos().GetDistance(m_currentCoverPosition) > 1.f) {
+						m_movePosition = m_currentCoverPosition;
+						//}
 
-
-						//play cover animation
 						/*
+						//play cover animation
 						if (m_currentShootCount >= m_shootBeforeCoolDown && IsAtCover()) {
 							m_animationComp->GetActionController()->Flush();
-							m_activeFragmentId = m_takeCoverSitFragmentId;
+							m_activeFragmentId = m_idleFragmentId;
 							m_animationComp->QueueFragmentWithId(m_takeCoverSitFragmentId);
 						}
 						*/
+						
 					}
-					m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 				}
+
 			}
+
 			else {
 				//close attack (kick)
-				m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
-				CloseAttack();
+				f32 distanceToTarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
+				if (distanceToTarget <= 2) {
+					m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
+					CloseAttack();
+				}
 			}
 		}
 
 		//check last target pos if target is not visible
 		if (m_detectionComp->IsTargetFound() && !m_detectionComp->IsVisible(m_targetEntity) && m_lastTargetPositionTimePassed >= m_timeBetweenCheckLastTargetPosition) {
 			//todo : move around
-			MoveTo(m_lastTargetPosition->GetWorldPos());
+			//MoveTo(m_lastTargetPosition->GetWorldPos());
 			m_currentCoverPosition = ZERO;
 		}
 
@@ -443,7 +457,7 @@ bool Soldier1Component::CanUseWeapon()
 void Soldier1Component::StopMoving()
 {
 	m_aiControllerComp->GetCharacterController()->ChangeVelocity(ZERO, Cry::DefaultComponents::CCharacterControllerComponent::EChangeVelocityMode::Jump);
-	m_aiControllerComp->MoveTo(m_pEntity->GetWorldPos());
+	m_movePosition = m_pEntity->GetWorldPos();
 }
 
 void Soldier1Component::ReactToHit(IEntity* attacker)
@@ -519,6 +533,11 @@ void Soldier1Component::SetFoundTarget(bool isFound)
 	this->m_detectionComp->SetFoundTarget(isFound);
 }
 
+void Soldier1Component::SetSpawnPos(Vec3 pos)
+{
+	this->m_spawnPos = pos;
+}
+
 void Soldier1Component::SetPatrolPathName(Schematyc::CSharedString patrolPathName)
 {
 	this->m_patrolPathName = patrolPathName;
@@ -535,8 +554,12 @@ void Soldier1Component::MoveTo(Vec3 pos)
 		StopMoving();
 		return;
 	}
-
-	m_aiControllerComp->MoveToAndLookAtWalkDirection(pos);
+	if (m_detectionComp->IsTargetFound()) {
+		m_aiControllerComp->MoveTo(pos);
+	}
+	else {
+		m_aiControllerComp->MoveToAndLookAtWalkDirection(pos);
+	}
 }
 
 void Soldier1Component::MoveAroundTarget(IEntity* target)
@@ -553,7 +576,7 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 		testMoveToPos = m_pEntity->GetWorldPos();
 	}
 
-	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2 ) {
+	if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 1 ) {
 		testMoveToPos = GetRandomPointToMoveTo(m_lastTargetPosition != nullptr ? m_lastTargetPosition->GetWorldPos() : m_pEntity->GetWorldPos(), 8);
 	}
 
@@ -563,14 +586,15 @@ void Soldier1Component::MoveAroundTarget(IEntity* target)
 	pd->Begin("testPoint123", true);
 	pd->AddSphere(testMoveToPos, 0.5f, ColorF(0, 0, 1), 10);
 	*/
-
+	m_movePosition = testMoveToPos;
+	/*
 	if (m_detectionComp->IsTargetFound()) {
-		m_aiControllerComp->MoveTo(testMoveToPos);
 		m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 	}
 	else {
-		m_aiControllerComp->MoveToAndLookAtWalkDirection(testMoveToPos);
+		m_aiControllerComp->LookAt(m_detectionComp->)
 	}
+	*/
 }
 
 
@@ -662,7 +686,7 @@ void Soldier1Component::CheckLastCameraPosition()
 	if (bShouldCheckLastCameraReportedPos && m_lastCameraReportedPositionCheckTimePassed <= m_timeBetweenCheckingLastCameraReportedPosition) {
 
 		if (testMoveToPos == ZERO || m_pEntity->GetWorldPos().GetDistance(testMoveToPos) < 2) {
-			testMoveToPos = GetRandomPointToMoveTo(m_lastCameraReportedPos != ZERO ? m_lastCameraReportedPos : m_pEntity->GetWorldPos(), 3);
+			testMoveToPos = GetRandomPointToMoveTo(m_lastCameraReportedPos , 3);
 		}
 		m_aiControllerComp->MoveTo(testMoveToPos);
 		m_aiControllerComp->LookAt(m_lastCameraReportedPos);
@@ -684,11 +708,41 @@ void Soldier1Component::CheckLastCameraPosition()
 	}
 }
 
+void Soldier1Component::InitWeapon()
+{
+	if (!bIsWeaponInitDone) {
+		m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun");
+
+		SEntitySpawnParams spawnParams;
+		spawnParams.vPosition = m_gunAttachment->GetAttAbsoluteDefault().t;
+		m_weaponBaseEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
+		m_pEntity->AttachChild(m_weaponBaseEntity);
+
+		//primary weapon init
+		m_primaryWeapon = m_weaponBaseEntity->GetOrCreateComponent<WeaponAK47Component>();
+		m_primaryWeapon->SetCharacterController(m_aiControllerComp->GetCharacterController());
+		m_primaryWeapon->SetCameraComponent(nullptr);
+		m_primaryWeapon->SetOwnerEntity(m_pEntity);
+		m_primaryWeapon->SetCameraBaseEntity(nullptr);
+
+
+		//IAttachmentObject* object = m_gunAttachment->GetIAttachmentObject();
+		//todo
+		m_currentlySelectedWeapon = m_primaryWeapon;
+
+		bIsWeaponInitDone = true;
+	}
+
+	if (m_weaponBaseEntity && m_gunAttachment) {
+		m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
+	}
+}
+
 bool Soldier1Component::IsAtCover()
 {
 	if (m_currentCoverPosition == ZERO) {
 		return false;
 	}
 	f32 distanceToCover = m_pEntity->GetWorldPos().GetDistance(m_currentCoverPosition);
-	return distanceToCover <= 1;
+	return distanceToCover <= 1.6f;
 }

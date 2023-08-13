@@ -66,6 +66,8 @@ private:
 	ActorInfoComponent* m_info;
 
 private:
+
+	Vec3 m_movePosition = ZERO;
 	bool bIsGameplayStarted = false;
 
 	f32 m_walkSpeed = DEFAULT_SOLDIER_1_WALK_SPEED;
@@ -94,6 +96,8 @@ private:
 	f32 m_lastTargetPositionTimePassed = m_timeBetweenCheckLastTargetPosition;
 	f32 m_timeBetweenFindingCover = 5.2f;
 	f32 m_findingCoverTimePassed = m_timeBetweenFindingCover;
+	f32 m_timeBetweenCheckingCover = 1.f;
+	f32 m_checkingCoverTimePassed = 1.f;
 
 
 	//patrol
@@ -101,6 +105,8 @@ private:
 
 	//cover
 	Vec3 m_currentCoverPosition = ZERO;
+	f32 m_timeBetweenSittignInCover = 0.4f;
+	f32 m_SittingInCoverTimePassed = 0.f;
 
 	//shoot coolDown
 	int32 m_currentShootCount = 0;
@@ -126,6 +132,12 @@ private:
 	f32 m_lastCameraReportedPositionCheckTimePassed = 0.f;
 	bool bIsLastCameraReportedPosCheckDone = false;
 
+	//
+	f32 m_timeBetweenCheckLastTargetPos = 0.9f;
+	f32 m_checkLastTargetPosPassed = 0.0f;
+
+	Vec3 m_spawnPos = ZERO;
+
 private:
 	void InitLastTargetPositionEntity();
 	Vec3 GetRandomPointToMoveTo(Vec3 Around, f32 distance);
@@ -145,6 +157,7 @@ protected:
 	void PlatDeathSound();
 	void PlayDetectionSound();
 	void CheckLastCameraPosition();
+	void InitWeapon();
 
 	bool IsAtCover();
 
@@ -157,4 +170,5 @@ public:
 	void SetDetectionToMax();
 	void SetLastCameraReportedPos(Vec3 pos);
 	void SetFoundTarget(bool isFound);
+	void SetSpawnPos(Vec3 pos);
 };
