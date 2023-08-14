@@ -1,5 +1,7 @@
 #pragma once
 
+class Soldier1Component;
+
 #include <CryAISystem/IPathfinder.h>
 #include <CryAISystem/INavigationSystem.h>
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
@@ -58,6 +60,7 @@ public:
 	Vec3 FindCover(IEntity* target);
 	bool IsCoverPointSafe(Vec3 point, IEntity* target);
 	bool IsCoverUsable(Vec3 point, IEntity* target);
+	bool isCoverAvailable(Vec3 point);
 	Vec3 snapToNavmesh(Vec3 point);
 	void SortLocationsByDistance(std::array<Vec3, 400> &locations, int32 size);
 };

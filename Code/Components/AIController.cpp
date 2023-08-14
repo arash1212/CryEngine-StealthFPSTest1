@@ -323,12 +323,12 @@ Vec3 AIControllerComponent::FindCover(IEntity* target)
 	NavigationAgentTypeID agentTypeId = NavigationAgentTypeID::TNavigationID(1);
 	std::array<Vec3, 400> locations;
 
-	int32 count = gEnv->pAISystem->GetCoverSystem()->GetCover(m_pEntity->GetWorldPos(), 900.f, &eyes, 1, 0.9f, locations.data(), 30, 3);
+	int32 count = gEnv->pAISystem->GetCoverSystem()->GetCover(m_pEntity->GetWorldPos(), 900.f, &eyes, 1, 0.9f, locations.data(), 80, 3);
 	SortLocationsByDistance(locations, count);
 	CryLog("count %i", count);
 	for (int32 i = 0; i < count; i++) {
 		//int32 random = GetRandomInt(0, count);
-		if (IsCoverPointSafe(locations[i], target) && IsCoverUsable(locations[i], target)) {
+		if (IsCoverPointSafe(locations[i], target) && IsCoverUsable(locations[i], target) && isCoverAvailable(locations[i])) {
 			return locations[i];
 		}
 	}
@@ -363,7 +363,7 @@ bool AIControllerComponent::IsCoverPointSafe(Vec3 point, IEntity* target)
 			if (hits[i].pCollider) {
 				//Debug
 				if (pd) {
-					pd->Begin("CoverRaycast", true);
+					pd->Begin("CoverSafeRaycast", true);
 					pd->AddSphere(hits[i].pt, 0.2f, ColorF(1, 1, 0), 2);
 				}
 
@@ -419,7 +419,7 @@ bool AIControllerComponent::IsCoverUsable(Vec3 point, IEntity* target)
 			//Debug
 			if (pd) {
 				pd->Begin("CoverRaycast", true);
-				pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 1, 0), 2);
+			//	pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 1, 0), 2);
 			}
 
 			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
@@ -441,6 +441,22 @@ bool AIControllerComponent::IsCoverUsable(Vec3 point, IEntity* target)
 		return false;
 	}
 	return false;
+}
+
+bool AIControllerComponent::isCoverAvailable(Vec3 point)
+{
+	IEntityItPtr entityItPtr = gEnv->pEntitySystem->GetEntityIterator();
+	entityItPtr->MoveFirst();
+	while (!entityItPtr->IsEnd()) {
+		IEntity* entity = entityItPtr->Next();
+		if (entity->GetComponent<Soldier1Component>()) {
+			f32 distanceToSoldier = point.GetDistance(entity->GetWorldPos());
+			if (distanceToSoldier < 2) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 Vec3 AIControllerComponent::snapToNavmesh(Vec3 point)

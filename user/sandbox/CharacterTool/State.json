@@ -80,7 +80,7 @@
 					"bottomColor": { "r": 32, "g": 32, "b": 32, "a": 255 }
 				}
 			},
-			"playbackTime": 1.03939
+			"playbackTime": 0.94077
 		}
 	},
 	"dockWidgetManager": {
@@ -109,7 +109,6 @@
 							"Compression (Animations/)",
 							"Compression (Animations/)|Compression Presets",
 							"Compression (Animations/)|DBA Table",
-							"Animations (objects/characters/soldier1/)|blendspace",
 							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Idle",
 							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Backward",
 							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Forward",
@@ -134,14 +133,14 @@
 							"Characters|Objects|Characters|soldier1"
 						],
 						"selectedItems": [
-							"Animations (objects/characters/soldier1/)|blendspace|normal_locomotion",
-							"Animations (objects/characters/soldier1/)|blendspace",
-							"Animations (objects/characters/soldier1/)|blendspace|1 KB",
-							"Animations (objects/characters/soldier1/)|blendspace|136",
-							"Animations (objects/characters/soldier1/)|blendspace",
-							"Animations (objects/characters/soldier1/)|blendspace"
+							"Characters|Objects|Characters|soldier1|soldier_1.cdf",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1"
 						],
-						"currentItem": "Animations (objects/characters/soldier1/)|blendspace|normal_locomotion",
+						"currentItem": "Characters|Objects|Characters|soldier1|soldier_1.cdf",
 						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
 						"sectionsVisible": [ 0 ]
 					}
@@ -151,22 +150,20 @@
 	},
 	"displayPanel": {
 		"propertyTree": {
-			"focusedRow": [ 4, 2 ],
-			"selection": [ [ 4, 2 ] ],
-			"expanded": [
-				0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-			]
+			"focusedRow": [ ],
+			"selection": [ ],
+			"expanded": [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
 		}
 	},
-	"displayParameterSplittersWidths": [ 675, 200 ],
-	"displayOptionsVisible": true,
+	"displayParameterSplittersWidths": [ 1367, 0 ],
+	"displayOptionsVisible": false,
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
 		"propertyTree": {
-			"focusedRow": [ ],
-			"selection": [ ],
+			"focusedRow": [ 6, 1, 12 ],
+			"selection": [ [ 6, 1, 12 ] ],
 			"expanded": [
-				1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1
+				1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1
 			]
 		},
 		"outlineMode": "oneTree"
@@ -174,8 +171,8 @@
 	"blendSpacePreview": {
 		"viewport": {
 			"cameraTarget": {
-				"q": { "x": -0.5272, "y": 0.18034, "z": -0.26876, "w": 0.78569 },
-				"t": { "x": 0.255, "y": -3.11018, "z": 4.66728 }
+				"q": { "x": 0.02034, "y": -0.1018, "z": 0.97532, "w": -0.19487 },
+				"t": { "x": -0.88123, "y": 2.19696, "z": 1.58522 }
 			}
 		},
 		"characterScale": 0.5,
@@ -184,32 +181,27 @@
 	"animEventPresetPanel": {
 		"palette": { "addWithSingleClick": false, "hotkeys": [ ] }
 	},
-	"recentCharacters": [
-		"Objects/Characters/soldier1/soldier_1.cdf",
-		"Objects/Characters/soldier1/soldier1.cdf",
-		"Objects/Weapons/ak47/3p/ak-47.cdf",
-		"Objects/Weapons/glock/1p/pistol_glock.cdf"
-	],
+	"recentCharacters": [ "Objects/Characters/soldier1/soldier_1.cdf" ],
 	"windowGeometry": [
-		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 119, 0, 0, 3, 220, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 7, 119, 0, 0, 3, 220, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 119, 0, 0,
-		3, 220
+		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 211, 0, 0, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 5, 211, 0, 0, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 211, 0, 0,
+		3, 19
 	],
 	"windowState": [
-		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 204, 0, 0, 3, 118, 252, 2, 0, 0, 0, 2, 251,
+		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 2, 173, 252, 2, 0, 0, 0, 2, 251,
 		0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108, 0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45,
-		0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 118, 0, 0, 0, 107, 0, 255, 255, 255, 251, 0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108,
+		0, 48, 1, 0, 0, 0, 0, 0, 0, 2, 173, 0, 0, 0, 107, 0, 255, 255, 255, 251, 0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108,
 		0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45, 0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 118, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 3, 49, 0, 0, 3, 118, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 240, 0, 0, 2, 173, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
 		0, 99, 0, 101, 0, 110, 0, 101, 0, 95, 0, 112, 0, 97, 0, 114, 0, 97, 0, 109, 0, 101, 0, 116, 0, 101, 0, 114, 0, 115, 1, 0,
-		0, 0, 0, 0, 0, 0, 181, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
-		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 187, 0, 0, 0, 81, 0, 0, 0, 81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
+		0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
+		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 48, 0, 0, 2, 125, 0, 0, 0, 81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
 		0, 108, 0, 101, 0, 110, 0, 100, 0, 95, 0, 115, 0, 112, 0, 97, 0, 99, 0, 101, 0, 95, 0, 112, 0, 114, 0, 101, 0, 118, 0, 105,
-		0, 101, 0, 119, 1, 0, 0, 1, 18, 0, 0, 2, 100, 0, 0, 0, 223, 0, 255, 255, 255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105,
+		0, 101, 0, 119, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 223, 0, 255, 255, 255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105,
 		0, 109, 0, 95, 0, 101, 0, 118, 0, 101, 0, 110, 0, 116, 0, 95, 0, 112, 0, 114, 0, 101, 0, 115, 0, 101, 0, 116, 0, 115, 0, 0,
-		0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0, 0, 7, 120, 0, 0, 0, 97, 252, 1, 0, 0, 0,
-		1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99, 0, 107, 1, 0, 0, 0, 0, 0, 0, 7, 120, 0,
-		0, 1, 176, 0, 255, 255, 255, 0, 0, 3, 111, 0, 0, 3, 118, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252,
+		0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0, 0, 5, 212, 0, 0, 0, 97, 252, 1, 0, 0, 0,
+		1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99, 0, 107, 1, 0, 0, 0, 0, 0, 0, 5, 212, 0,
+		0, 1, 176, 0, 255, 255, 255, 0, 0, 3, 211, 0, 0, 2, 173, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252,
 		0, 0, 0, 0
 	]
 }

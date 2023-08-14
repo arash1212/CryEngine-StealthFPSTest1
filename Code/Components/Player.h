@@ -149,7 +149,6 @@ private:
 	void ShowHealthbar();
 	void UpdateHealthbar();
 
-
 public:
 	Vec2 GetRotationDelta();
 	void AddRecoil(Vec3 Amount);

@@ -214,6 +214,22 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			CheckLastCameraPosition();
 
 			Die();
+
+			//aim look 
+			if (m_targetEntity) {
+				IAnimationPoseBlenderDir* animDir = m_animationComp->GetCharacter()->GetISkeletonPose()->GetIPoseBlenderLook();
+				//CryLog("rot y : %f", m_animationComp->GetCharacter()->GetISkeletonPose()->GetAbsJointByID(10).q.v.y);
+				//CryLog("ik number %i", m_animationComp->GetCharacter()->GetISkeletonPose()->SetHumanLimbIK(m_targetEntity->GetWorldPos(), "Spine01"));
+				if (animDir) {
+					animDir->SetTarget(m_targetEntity->GetWorldPos());
+					animDir->SetState(true);
+
+					SAnimationPoseModifierParams modifierParams;
+					animDir->Execute(modifierParams);
+				}else{
+					//CryLog("blender null");
+				}
+			}
 		}
 	//	}
 
@@ -326,7 +342,7 @@ void Soldier1Component::UpdateLastTargetPositionEntity()
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (pd) {
 		pd->Begin("DetectionRaycast", true);
-		pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.6f, ColorF(1, 0, 0), 2);
+		pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.6f, ColorF(0, 0, 1), 2);
 	}
 }
 
@@ -362,25 +378,22 @@ void Soldier1Component::Attack()
 
 				//m_checkingCoverTimePassed > m_timeBetweenCheckingCover && ! 
 				//move around target if it close and cover is not safe
-				if (m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
-					//MoveAroundTarget(m_targetEntity);
+				if (!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+					MoveAroundTarget(m_targetEntity);
 					m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
-					//m_checkingCoverTimePassed = 0;
+					m_checkingCoverTimePassed = 0;
 				}
-
-				
-				else
-				{
-					if (m_currentCoverPosition == ZERO ||!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+				else {
+					
+					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
 						m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
 						//move arount target while looking for new cover
 						MoveAroundTarget(m_targetEntity);
+						//m_checkingCoverTimePassed = 0.f;
 					}
 					//move to cover
 					if (m_findingCoverTimePassed >= m_timeBetweenFindingCover) {
-						//if (m_pEntity->GetWorldPos().GetDistance(m_currentCoverPosition) > 1.f) {
 						m_movePosition = m_currentCoverPosition;
-						//}
 
 						/*
 						//play cover animation
@@ -399,7 +412,7 @@ void Soldier1Component::Attack()
 			else {
 				//close attack (kick)
 				f32 distanceToTarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
-				if (distanceToTarget <= 2) {
+				if (distanceToTarget <= 2 && m_detectionComp->IsVisible(m_targetEntity)) {
 					m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
 					CloseAttack();
 				}
@@ -409,7 +422,7 @@ void Soldier1Component::Attack()
 		//check last target pos if target is not visible
 		if (m_detectionComp->IsTargetFound() && !m_detectionComp->IsVisible(m_targetEntity) && m_lastTargetPositionTimePassed >= m_timeBetweenCheckLastTargetPosition) {
 			//todo : move around
-			//MoveTo(m_lastTargetPosition->GetWorldPos());
+			m_movePosition = m_lastTargetPosition->GetWorldPos();
 			m_currentCoverPosition = ZERO;
 		}
 
@@ -554,7 +567,7 @@ void Soldier1Component::MoveTo(Vec3 pos)
 		StopMoving();
 		return;
 	}
-	if (m_detectionComp->IsTargetFound()) {
+	if (m_detectionComp->IsTargetFound() || m_detectionComp->GetDetectionState() > EDetectionState::IDLE) {
 		m_aiControllerComp->MoveTo(pos);
 	}
 	else {
@@ -711,10 +724,8 @@ void Soldier1Component::CheckLastCameraPosition()
 void Soldier1Component::InitWeapon()
 {
 	if (!bIsWeaponInitDone) {
-		m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun");
-
 		SEntitySpawnParams spawnParams;
-		spawnParams.vPosition = m_gunAttachment->GetAttAbsoluteDefault().t;
+		//spawnParams.vPosition = m_gunAttachment->GetAttAbsoluteDefault().t;
 		m_weaponBaseEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
 		m_pEntity->AttachChild(m_weaponBaseEntity);
 
@@ -725,7 +736,16 @@ void Soldier1Component::InitWeapon()
 		m_primaryWeapon->SetOwnerEntity(m_pEntity);
 		m_primaryWeapon->SetCameraBaseEntity(nullptr);
 
+		//baraye halat sevom shakhs attachment estefade shod.inja attachment ro migire az ru model
+		m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName(m_primaryWeapon->GetAttachmentName());
+		m_gunAttachment->HideAttachment(0);
 
+		//m_primaryWeapon->SetMuzzleAttachment(m_gunAttachment->GetIAttachmentObject()->GetICharacterInstance()->GetIAttachmentManager()->GetInterfaceByName("muzzle"));
+
+		m_weaponBaseEntity = gEnv->pEntitySystem->SpawnEntity(spawnParams);
+		m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttAbsoluteDefault().t);
+
+		//m_gunAttachment->HideAttachment(0);
 		//IAttachmentObject* object = m_gunAttachment->GetIAttachmentObject();
 		//todo
 		m_currentlySelectedWeapon = m_primaryWeapon;
@@ -733,9 +753,14 @@ void Soldier1Component::InitWeapon()
 		bIsWeaponInitDone = true;
 	}
 
-	if (m_weaponBaseEntity && m_gunAttachment) {
-		m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
-	}
+	
+	//if (m_weaponBaseEntity && m_gunAttachment) {
+		//CEntityAttachment attachment;
+		//attachment.SetEntityId(m_weaponBaseEntity->GetId());
+		//attachment.ProcessAttachment(m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun"));
+		//m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
+		//m_weaponBaseEntity->SetRotation(m_gunAttachment->GetAttModelRelative().q);
+	//}
 }
 
 bool Soldier1Component::IsAtCover()

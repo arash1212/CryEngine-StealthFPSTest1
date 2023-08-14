@@ -5655,8 +5655,8 @@
 			"type": "Animation",
 			"guid": "74df591e-f47c-51be-1f3c-2131e18bc49c",
 			"name": "walkcross_fwd_lft_3p",
-			"timestamp": 132973673629920000,
-			"files": [ "animations/motusanims/strafe/walkcross_fwd_lft_3p.caf" ],
+			"timestamp": 1652897362,
+			"files": [ "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf.cryasset",
@@ -5967,7 +5967,7 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691933766,
+			"timestamp": 1691946255,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6070,6 +6070,7 @@
 					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
 					"usageCount": 0
 				},
+				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
 				{
 					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_basecolor.dds",
 					"usageCount": 0
@@ -7051,7 +7052,7 @@
 			"type": "Character",
 			"guid": "190da718-1593-4b01-274e-ce08437ffe16",
 			"name": "soldier_1",
-			"timestamp": 1691507959,
+			"timestamp": 1692033063,
 			"files": [ "Objects/Characters/soldier1/soldier_1.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -7065,7 +7066,8 @@
 				{
 					"path": "Objects/Characters/soldier1/soldier_1_Mesh.skin",
 					"usageCount": 0
-				}
+				},
+				{ "path": "Objects/Weapons/ak47/3p/ak-47.cdf", "usageCount": 0 }
 			]
 		},
 		{
@@ -7094,11 +7096,8 @@
 			"type": "Skeleton",
 			"guid": "5512bd15-781f-a34b-d7c5-6edc708ee925",
 			"name": "soldier_1",
-			"timestamp": 1691507881,
-			"files": [
-				"Objects/Characters/soldier1/soldier_1.chr",
-				"Objects/Characters/soldier1/soldier_1.chrparams"
-			],
+			"timestamp": 1692015206,
+			"files": [ "Objects/Characters/soldier1/soldier_1.chr" ],
 			"workFiles": [ ],
 			"source": "Objects/Characters/soldier1/soldier_1.fbx",
 			"metadata": "Objects/Characters/soldier1/soldier_1.chr.cryasset",
@@ -7125,6 +7124,21 @@
 					"usageCount": 2
 				}
 			]
+		},
+		{
+			"type": "Material",
+			"guid": "9e1bce4d-b189-53db-85e2-9cb0060aae36",
+			"name": "soldier_1_hitmaterial",
+			"timestamp": 1692015205,
+			"files": [ "Objects/Characters/soldier1/soldier_1_hitmaterial.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/Characters/soldier1/soldier_1_hitmaterial.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "2" },
+				{ "key": "textureCount", "value": "0" }
+			],
+			"dependencies": [ ]
 		},
 		{
 			"type": "SkinnedMesh",

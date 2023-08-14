@@ -51,7 +51,7 @@ void PlayerComponent::Initialize()
 	m_primaryWeapon->SetCharacterController(m_characterControllerComp);
 	m_primaryWeapon->SetCameraComponent(m_cameraComp);
 	m_primaryWeapon->SetOwnerEntity(m_pEntity);
-	m_primaryWeapon->SetCameraBaseEntity(m_cameraRoot);
+	m_primaryWeapon->SetCameraBaseEntity(m_cameraBase);
 
 	//todo
 	m_currentlySelectedWeapon = m_primaryWeapon;
@@ -155,6 +155,7 @@ void PlayerComponent::InitCamera()
 	//Attach spawned entities to player
 	m_pEntity->AttachChild(m_cameraRoot);
 	m_cameraRoot->AttachChild(m_cameraBase);
+
 
 	m_cameraComp = m_cameraBase->GetOrCreateComponent<Cry::DefaultComponents::CCameraComponent>();
 
@@ -454,7 +455,6 @@ void PlayerComponent::ReactToHit(IEntity* attacker)
 		m_gettingHitSoundTimePassed = 0;
 	}
 }
-
 
 /*******************************************************************************************************************************/
 

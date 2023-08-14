@@ -718,6 +718,8 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/Characters/soldier1/soldier_1_Mesh.skin.cryasset",
+            "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/static/fence/fence_o_1.cgf.cryasset",
             "Objects/static/fence/fence_1.cgf.cryasset",
             "Objects/Characters/soldier1/soldier1.cgf.cryasset",
@@ -725,13 +727,12 @@
             "Objects/alaram1/alaram_1.cgf.cryasset",
             "Objects/securitycamera/security-camera-base-1.cgf.cryasset",
             "Objects/securitycamera/security-camera-1.cgf.cryasset",
-            "Objects/Weapons/ak47/3p/ak-47.cgf.cryasset",
-            "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
-            "Objects/soldier2.cgf.cryasset"
+            "Objects/Weapons/ak47/3p/ak-47.cgf.cryasset"
         ]
     },
     "Import Skeleton": {
         "Recent Files": [
+            "Objects/Characters/soldier1/soldier_1.chr.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.chr.cryasset"
         ]
     },

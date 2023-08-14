@@ -94,9 +94,9 @@ private:
 	f32 m_closeAttackTimePassed = 0.f;
 	f32 m_timeBetweenCheckLastTargetPosition = 4.2f;
 	f32 m_lastTargetPositionTimePassed = m_timeBetweenCheckLastTargetPosition;
-	f32 m_timeBetweenFindingCover = 5.2f;
+	f32 m_timeBetweenFindingCover = 6.2f;
 	f32 m_findingCoverTimePassed = m_timeBetweenFindingCover;
-	f32 m_timeBetweenCheckingCover = 1.f;
+	f32 m_timeBetweenCheckingCover = 0.7f;
 	f32 m_checkingCoverTimePassed = 1.f;
 
 

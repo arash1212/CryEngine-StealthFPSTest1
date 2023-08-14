@@ -1,0 +1,14 @@
+<AssetMetadata version="0" type="Mesh" guid="e6eb0daa-a269-536a-ce9f-a56906b0f64b" source="soldier_1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_bBzHak.cgf"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">3</Detail>
+  <Detail name="triangleCount">490</Detail>
+  <Detail name="vertexCount">1035</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">%ENGINE%/EngineAssets/TextureMsg/DefaultSolids.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

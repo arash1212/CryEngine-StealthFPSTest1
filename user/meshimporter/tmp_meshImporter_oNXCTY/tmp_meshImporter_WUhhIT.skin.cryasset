@@ -1,0 +1,15 @@
+<AssetMetadata version="0" type="SkinnedMesh" guid="211a9928-f2b2-08cf-85e3-57f3016ebb6e" source="soldier_1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_WUhhIT.skin"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">3</Detail>
+  <Detail name="triangleCount">490</Detail>
+  <Detail name="vertexCount">1035</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+  <Detail name="bonesCount">35</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">%ENGINE%/EngineAssets/TextureMsg/DefaultSolids.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

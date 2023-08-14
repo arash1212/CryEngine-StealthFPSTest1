@@ -66,7 +66,7 @@ protected:
 	IActionPtr m_fireAction;
 
 	//sway
-	float m_swaySpeed = 0.7f;
+	float m_swaySpeed = 1.5f;
 	Quat m_defaultAnimationCompRotation = IDENTITY;
 	Vec3 m_defaultAnimationCompPosition = ZERO;
 
@@ -144,4 +144,6 @@ public :
 	virtual Vec3 GetCameraRecoilAmount();
 	virtual Vec3 GetMeshRecoilAmount();
 	virtual void ResetShootSoundNumber();
+	virtual string GetAttachmentName() = 0;
+	void SetMuzzleAttachment(IAttachment* muzzleAttachment);
 };

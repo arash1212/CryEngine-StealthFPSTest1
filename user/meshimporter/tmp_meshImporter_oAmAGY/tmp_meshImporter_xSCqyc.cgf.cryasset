@@ -1,0 +1,14 @@
+<AssetMetadata version="0" type="Mesh" guid="a8015dde-3b09-fab4-8c3d-715cf1e11d10" source="soldier_1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_xSCqyc.cgf"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">2</Detail>
+  <Detail name="triangleCount">490</Detail>
+  <Detail name="vertexCount">1035</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">Objects/Characters/soldier1/soldier_1.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

@@ -62,6 +62,8 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 					pd->AddSphere(hits[i].pt, 0.05f, ColorF(1, 0, 0), 2);
 				}
 
+				CryLog("partId %i", hits[0].ipart);
+
 				//return hitEntity if exist
 				IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[i].pCollider);
 				if (hitEntity) {
@@ -88,8 +90,8 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 					}
 
 					//if hitEntity has healthComponent
-					if (hitEntity->GetComponent<HealthComponent>()) {
-						
+					else if (hitEntity->GetComponent<HealthComponent>() && hitEntity->GetComponent<ActorInfoComponent>() && hitEntity->GetComponent<ActorInfoComponent>()->GetFaction() != m_ownerEntity->GetComponent<ActorInfoComponent>()->GetFaction()) {
+						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
 					}
 
 					return hitEntity;
@@ -135,6 +137,9 @@ bool IWeaponComponent::Fire(IEntity* target)
 			//spawn bullet tracer
 			Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
 			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(m_cameraComp->GetCamera().GetViewdir()));
+
+			//apply recoil to weapon model after shot
+			m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
 		}
 		//else
 		else {
@@ -152,7 +157,7 @@ bool IWeaponComponent::Fire(IEntity* target)
 
 			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
 
-			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 50);
+			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 5);
 			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
 		}
 
@@ -166,9 +171,6 @@ bool IWeaponComponent::Fire(IEntity* target)
 		m_activeFragmentId = m_fireFragmentId;
 		m_animationComp->GetActionController()->Flush();
 		m_animationComp->QueueCustomFragment(*m_fireAction);
-
-		//apply recoil to weapon model after shot
-		m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
 
 		if (m_noiseMakerComp) {
 			m_noiseMakerComp->MakeNoise();
@@ -240,6 +242,11 @@ void IWeaponComponent::ResetShootSoundNumber()
 	m_currentShootSoundNumber = 0;
 }
 
+void IWeaponComponent::SetMuzzleAttachment(IAttachment* muzzleAttachment)
+{
+	this->m_muzzleAttachment = muzzleAttachment;
+}
+
 f32 IWeaponComponent::GetRandomValue(f32 min, f32 max)
 {
 	return min + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / max - min));
@@ -279,18 +286,18 @@ void IWeaponComponent::UpdateAnimation()
 
 void IWeaponComponent::Sway(f32 mouseX, f32 mouseY)
 {
-	mouseX *= 0.04f;
-	mouseY *= -0.035f;
+	mouseX *= -0.01f;
+	mouseY *= 0.004f;
 
-	Quat rotationX = Quat::CreateRotationY(mouseX);
-	Quat rotationY = Quat::CreateRotationX(mouseY);
+	Quat rotationX = Quat::CreateRotationX(mouseX);
+	Quat rotationY = Quat::CreateRotationY(mouseY);
 
 	Quat targetRotation = rotationX * rotationY;
 
 	m_animationComp->SetTransformMatrix(Matrix34::Create(m_animationComp->GetTransformMatrix().GetScale(),
 		Quat::CreateSlerp(
 			m_animationComp->GetTransform().get()->GetRotation().ToQuat(),
-			m_defaultAnimationCompRotation + targetRotation, 0.3f * m_swaySpeed * gEnv->pTimer->GetFrameTime()),
+			m_defaultAnimationCompRotation * targetRotation, m_swaySpeed * gEnv->pTimer->GetFrameTime()),
 		m_animationComp->GetTransformMatrix().GetTranslation()
 	));
 }

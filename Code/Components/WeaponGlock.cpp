@@ -131,3 +131,8 @@ void WeaponGlockComponent::InitShootSounds()
 {
 	m_shootSounds.Insert(0, CryAudio::StringToId("glock_fire_sound_1"));
 }
+
+string WeaponGlockComponent::GetAttachmentName()
+{
+	return "glock";
+}

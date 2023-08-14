@@ -21,4 +21,6 @@ public:
 
 protected:
 	virtual void InitShootSounds() override;
+public:
+	virtual string GetAttachmentName() override;
 };

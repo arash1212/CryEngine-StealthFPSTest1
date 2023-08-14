@@ -25,8 +25,9 @@ namespace
 
 void WeaponAK47Component::Initialize()
 {
+	
 	m_animationComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>();
-	m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_defaultRotation, Vec3(0.32f, -0.9f, 0.95f)));
+	m_animationComp->SetTransformMatrix(Matrix34::Create(m_defaultSize, m_defaultRotation, Vec3(-0.09f, -0.7f, 0.0f)));
 	m_animationComp->SetCharacterFile("Objects/Weapons/ak47/3p/ak-47.cdf");
 	m_animationComp->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/ak47.adb");
 	m_animationComp->SetControllerDefinitionFile("Animations/Mannequin/ADB/WeaponControllerDefinition.xml");
@@ -35,6 +36,11 @@ void WeaponAK47Component::Initialize()
 	m_animationComp->SetAnimationDrivenMotion(true);
 	m_animationComp->LoadFromDisk();
 	m_animationComp->ResetCharacter();
+	
+
+	//agar thirdPerson hast faghat chun az attachment estefade mishe
+	m_animationComp->GetEntity()->Hide(true);
+	
 
 	//set m_defaultPosition
 	//m_defaultPosition = m_ownerEntity->GetComponent<Cry::DefaultComponents::CAdvancedAnimationComponent>()->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun")->GetAttWorldAbsolute().t;
@@ -44,16 +50,18 @@ void WeaponAK47Component::Initialize()
 	m_meshefaultRotaion = m_defaultRotation;
 	m_targetRotation = m_defaultRotation;
 
+	
 	//Fragments
 	m_idleFragmentId = m_animationComp->GetFragmentId("Idle");
 	m_walkFragmentId = m_animationComp->GetFragmentId("Walk");
 	m_fireFragmentId = m_animationComp->GetFragmentId("Fire");
 	m_runFragmentId = m_animationComp->GetFragmentId("Run");
+	
 
 	m_fireAction = new TAction<SAnimationContext>(30U, m_fireFragmentId);
 
-	m_defaultAnimationCompRotation = m_animationComp->GetTransform().get()->GetRotation().ToQuat();
-	m_defaultAnimationCompPosition = m_animationComp->GetTransform().get()->GetTranslation();
+	//m_defaultAnimationCompRotation = m_animationComp->GetTransform().get()->GetRotation().ToQuat();
+	//m_defaultAnimationCompPosition = m_animationComp->GetTransform().get()->GetTranslation();
 
 	m_audioComp = m_pEntity->GetOrCreateComponent<IEntityAudioComponent>();
 
@@ -106,8 +114,8 @@ void WeaponAK47Component::ProcessEvent(const SEntityEvent& event)
 	case Cry::Entity::EEvent::Update: {
 		float deltatime = event.fParam[0];
 		//UpdateAnimation();
-		KickBack();
-		Recoil();
+		//KickBack();
+//		Recoil();
 		//UpdateMuzzleFlashes();
 		//Aim();
 
@@ -144,4 +152,9 @@ void WeaponAK47Component::InitShootSounds()
 	m_shootSounds.Insert(5, CryAudio::StringToId("ak-47-shoot-sound-5"));
 	m_shootSounds.Insert(6, CryAudio::StringToId("ak-47-shoot-sound-6"));
 	m_shootSounds.Insert(6, CryAudio::StringToId("ak-47-shoot-sound-7"));
+}
+
+string WeaponAK47Component::GetAttachmentName()
+{
+	return "ak47";
 }

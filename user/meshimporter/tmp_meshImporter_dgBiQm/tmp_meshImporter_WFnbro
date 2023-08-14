@@ -1,0 +1,1040 @@
+{
+	"version": 1,
+	"source_filename": "e:/cryengine projects/stealthfpstest1/assets/Objects/Characters/soldier1/soldier_1.fbx",
+	"output_ext": "chr",
+	"material_filename": "%ENGINE%/EngineAssets/TextureMsg/DefaultSolids",
+	"unit_size": "file",
+	"scale": 1.0,
+	"forward_up_axes": "",
+	"merge_all_nodes": false,
+	"scene_origin": false,
+	"ignore_custom_normals": false,
+	"ignore_uv": false,
+	"materials": [ ],
+	"nodes": [ ],
+	"animation": {
+		"name": "",
+		"motionNodePath": [ ],
+		"startFrame": -1,
+		"endFrame": -1
+	},
+	"jointPhysicsData": [
+		{
+			"jointNodePath": [ ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [ "Armature" ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [ "Mesh" ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [ "Armature", "mixamorig:Hips" ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [ "Armature", "mixamorig:Hips", "mixamorig:Spine" ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [ "Armature", "mixamorig:Hips", "mixamorig:LeftUpLeg" ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [ "Armature", "mixamorig:Hips", "mixamorig:RightUpLeg" ],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:RightUpLeg",
+				"mixamorig:RightLeg"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:RightUpLeg",
+				"mixamorig:RightLeg",
+				"mixamorig:RightFoot"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:RightUpLeg",
+				"mixamorig:RightLeg",
+				"mixamorig:RightFoot",
+				"mixamorig:RightToeBase"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:RightUpLeg",
+				"mixamorig:RightLeg",
+				"mixamorig:RightFoot",
+				"mixamorig:RightToeBase",
+				"mixamorig:RightToe_End"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:RightUpLeg",
+				"mixamorig:RightLeg",
+				"mixamorig:RightFoot",
+				"mixamorig:RightToeBase",
+				"mixamorig:RightToe_End",
+				"mixamorig:RightToe_End_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:LeftUpLeg",
+				"mixamorig:LeftLeg"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:LeftUpLeg",
+				"mixamorig:LeftLeg",
+				"mixamorig:LeftFoot"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:LeftUpLeg",
+				"mixamorig:LeftLeg",
+				"mixamorig:LeftFoot",
+				"mixamorig:LeftToeBase"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:LeftUpLeg",
+				"mixamorig:LeftLeg",
+				"mixamorig:LeftFoot",
+				"mixamorig:LeftToeBase",
+				"mixamorig:LeftToe_End"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:LeftUpLeg",
+				"mixamorig:LeftLeg",
+				"mixamorig:LeftFoot",
+				"mixamorig:LeftToeBase",
+				"mixamorig:LeftToe_End",
+				"mixamorig:LeftToe_End_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:Neck"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandThumb1"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandIndex1"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandIndex1",
+				"mixamorig:RightHandIndex2"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandIndex1",
+				"mixamorig:RightHandIndex2",
+				"mixamorig:RightHandIndex3"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandIndex1",
+				"mixamorig:RightHandIndex2",
+				"mixamorig:RightHandIndex3",
+				"mixamorig:RightHandIndex4"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandIndex1",
+				"mixamorig:RightHandIndex2",
+				"mixamorig:RightHandIndex3",
+				"mixamorig:RightHandIndex4",
+				"mixamorig:RightHandIndex4_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandThumb1",
+				"mixamorig:RightHandThumb2"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandThumb1",
+				"mixamorig:RightHandThumb2",
+				"mixamorig:RightHandThumb3"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandThumb1",
+				"mixamorig:RightHandThumb2",
+				"mixamorig:RightHandThumb3",
+				"mixamorig:RightHandThumb4"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:RightShoulder",
+				"mixamorig:RightArm",
+				"mixamorig:RightForeArm",
+				"mixamorig:RightHand",
+				"mixamorig:RightHandThumb1",
+				"mixamorig:RightHandThumb2",
+				"mixamorig:RightHandThumb3",
+				"mixamorig:RightHandThumb4",
+				"mixamorig:RightHandThumb4_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandThumb1"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandIndex1"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandIndex1",
+				"mixamorig:LeftHandIndex2"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandIndex1",
+				"mixamorig:LeftHandIndex2",
+				"mixamorig:LeftHandIndex3"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandIndex1",
+				"mixamorig:LeftHandIndex2",
+				"mixamorig:LeftHandIndex3",
+				"mixamorig:LeftHandIndex4"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandIndex1",
+				"mixamorig:LeftHandIndex2",
+				"mixamorig:LeftHandIndex3",
+				"mixamorig:LeftHandIndex4",
+				"mixamorig:LeftHandIndex4_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandThumb1",
+				"mixamorig:LeftHandThumb2"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandThumb1",
+				"mixamorig:LeftHandThumb2",
+				"mixamorig:LeftHandThumb3"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandThumb1",
+				"mixamorig:LeftHandThumb2",
+				"mixamorig:LeftHandThumb3",
+				"mixamorig:LeftHandThumb4"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:LeftShoulder",
+				"mixamorig:LeftArm",
+				"mixamorig:LeftForeArm",
+				"mixamorig:LeftHand",
+				"mixamorig:LeftHandThumb1",
+				"mixamorig:LeftHandThumb2",
+				"mixamorig:LeftHandThumb3",
+				"mixamorig:LeftHandThumb4",
+				"mixamorig:LeftHandThumb4_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:Neck",
+				"mixamorig:Head"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:Neck",
+				"mixamorig:Head",
+				"mixamorig:HeadTop_End"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		},
+		{
+			"jointNodePath": [
+				"Armature",
+				"mixamorig:Hips",
+				"mixamorig:Spine",
+				"mixamorig:Spine1",
+				"mixamorig:Spine2",
+				"mixamorig:Neck",
+				"mixamorig:Head",
+				"mixamorig:HeadTop_End",
+				"mixamorig:HeadTop_End_end"
+			],
+			"jointLimits": {
+				"min_x": 0.0,
+				"min_y": 0.0,
+				"min_z": 0.0,
+				"max_x": 0.0,
+				"max_y": 0.0,
+				"max_z": 0.0
+			}
+		}
+	],
+	"use_32_bit_positions": false,
+	"autolodsettings": {
+		"globalparams": {
+			"viewresolution": 26.69321,
+			"viewsaround": 12,
+			"viewelevations": 3,
+			"silhouetteweight": 5.0,
+			"vertexwelding": 0.001,
+			"checktopology": true,
+			"objecthasbase": false
+		},
+		"nodeparams": [ ]
+	}
+}
