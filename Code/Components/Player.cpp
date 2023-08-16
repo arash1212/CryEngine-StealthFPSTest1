@@ -454,6 +454,12 @@ void PlayerComponent::ReactToHit(IEntity* attacker)
 		m_audioComp->ExecuteTrigger(CryAudio::StringToId(audioName));
 		m_gettingHitSoundTimePassed = 0;
 	}
+
+	//shake camera
+	f32 x = -0.19f;
+	f32 y = GetRandomValue(-0.02f, 0.02f);
+	f32 z = GetRandomValue(-0.02f, 0.02f);
+	AddRecoil(Vec3(x, y, z));
 }
 
 /*******************************************************************************************************************************/

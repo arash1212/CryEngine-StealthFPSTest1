@@ -1,0 +1,14 @@
+<AssetMetadata version="0" type="Mesh" guid="735b2202-1a88-a879-2037-e5afa09c33aa" source="bullet_tracer_1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_VClXkA.cgf"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">3</Detail>
+  <Detail name="triangleCount">24</Detail>
+  <Detail name="vertexCount">48</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">Objects/effects/bullettracer/bullet_tracer_1.mtl</Path>
+ </Dependencies>
+</AssetMetadata>

@@ -449,6 +449,9 @@ bool AIControllerComponent::isCoverAvailable(Vec3 point)
 	entityItPtr->MoveFirst();
 	while (!entityItPtr->IsEnd()) {
 		IEntity* entity = entityItPtr->Next();
+		if (entity == m_pEntity)
+			continue;
+
 		if (entity->GetComponent<Soldier1Component>()) {
 			f32 distanceToSoldier = point.GetDistance(entity->GetWorldPos());
 			if (distanceToSoldier < 2) {

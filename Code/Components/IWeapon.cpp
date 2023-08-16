@@ -135,11 +135,13 @@ bool IWeaponComponent::Fire(IEntity* target)
 			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shooterror);
 
 			//spawn bullet tracer
-			Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
-			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(m_cameraComp->GetCamera().GetViewdir()));
+			if (GetRandomInt(0, 10) % 2 == 0) {
+				Vec3 p = m_muzzleAttachment->GetAttWorldAbsolute().t - m_pEntity->GetWorldPos();
+				SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(m_cameraComp->GetCamera().GetViewdir()));
 
-			//apply recoil to weapon model after shot
-			m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
+				//apply recoil to weapon model after shot
+				m_targetRotation *= Quat::CreateRotationXYZ(GetMeshRecoilAmount());
+			}
 		}
 		//else
 		else {
@@ -158,7 +160,10 @@ bool IWeaponComponent::Fire(IEntity* target)
 			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
 
 			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 5);
-			SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
+
+			if (GetRandomInt(0, 10) % 2 == 0) {
+				SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
+			}
 		}
 
 		m_audioComp->ExecuteTrigger(GetRandomShootSound());
@@ -234,7 +239,7 @@ Vec3 IWeaponComponent::GetCameraRecoilAmount()
 Vec3 IWeaponComponent::GetMeshRecoilAmount()
 {
 	recoilInv *= -1;
-	return Vec3(GetRandomValue(-0.07f, -0.05f), recoilInv * 0.02f, recoilInv * 0.02f);
+	return Vec3(GetRandomValue(-0.07f, -0.05f), recoilInv * 0.03f, recoilInv * 0.03f);
 }
 
 void IWeaponComponent::ResetShootSoundNumber()
@@ -245,6 +250,11 @@ void IWeaponComponent::ResetShootSoundNumber()
 void IWeaponComponent::SetMuzzleAttachment(IAttachment* muzzleAttachment)
 {
 	this->m_muzzleAttachment = muzzleAttachment;
+}
+
+void IWeaponComponent::Hide(bool hide)
+{
+	this->m_animationComp->GetEntity()->Hide(hide);
 }
 
 f32 IWeaponComponent::GetRandomValue(f32 min, f32 max)

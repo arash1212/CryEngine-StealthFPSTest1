@@ -93,7 +93,7 @@ protected:
 	IAttachment* m_muzzleAttachment;
 
 	//muzzleflash
-	f32 m_timeBetweenMuzzleFlashDeActivation = 0.04f;
+	f32 m_timeBetweenMuzzleFlashDeActivation = 0.02f;
 	f32 m_MuzzleFlashDeActivationTimePassed = 0.f;
 	IAttachment* m_muzzleFlash1Attachment;
 	IAttachment* m_muzzleFlash2Attachment;
@@ -146,4 +146,5 @@ public :
 	virtual void ResetShootSoundNumber();
 	virtual string GetAttachmentName() = 0;
 	void SetMuzzleAttachment(IAttachment* muzzleAttachment);
+	void Hide(bool hide);
 };

@@ -342,7 +342,7 @@ void Soldier1Component::UpdateLastTargetPositionEntity()
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (pd) {
 		pd->Begin("DetectionRaycast", true);
-		pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.6f, ColorF(0, 0, 1), 2);
+		//pd->AddSphere(m_lastTargetPosition->GetWorldPos(), 0.6f, ColorF(0, 0, 1), 2);
 	}
 }
 
@@ -378,14 +378,14 @@ void Soldier1Component::Attack()
 
 				//m_checkingCoverTimePassed > m_timeBetweenCheckingCover && ! 
 				//move around target if it close and cover is not safe
-				if (!m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+				if (!m_aiControllerComp->isCoverAvailable(m_currentCoverPosition) || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
 					MoveAroundTarget(m_targetEntity);
 					m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
 					m_checkingCoverTimePassed = 0;
 				}
 				else {
 					
-					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity)) {
+					if (m_currentCoverPosition == ZERO || !m_aiControllerComp->IsCoverPointSafe(m_currentCoverPosition, m_targetEntity) || !m_aiControllerComp->isCoverAvailable(m_currentCoverPosition)) {
 						m_currentCoverPosition = m_aiControllerComp->FindCover(m_targetEntity);
 						//move arount target while looking for new cover
 						MoveAroundTarget(m_targetEntity);
@@ -652,6 +652,11 @@ void Soldier1Component::Die()
 
 		m_ragdollComp->Enable(true);
 
+
+		//m_currentlySelectedWeapon->Hide(false);
+		m_gunAttachment = m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName(m_primaryWeapon->GetAttachmentName());
+		m_gunAttachment->HideAttachment(0);
+
 		PlatDeathSound();
 		bIsAlive = false;
 	}
@@ -751,16 +756,19 @@ void Soldier1Component::InitWeapon()
 		m_currentlySelectedWeapon = m_primaryWeapon;
 
 		bIsWeaponInitDone = true;
+
+		m_currentlySelectedWeapon->Hide(true);
 	}
 
 	
-	//if (m_weaponBaseEntity && m_gunAttachment) {
+	if (m_weaponBaseEntity && m_gunAttachment) {
 		//CEntityAttachment attachment;
 		//attachment.SetEntityId(m_weaponBaseEntity->GetId());
 		//attachment.ProcessAttachment(m_animationComp->GetCharacter()->GetIAttachmentManager()->GetInterfaceByName("gun"));
-		//m_weaponBaseEntity->SetPos(m_gunAttachment->GetAttModelRelative().t);
+		//Vec3 pos = Vec3(m_gunAttachment->GetAttModelRelative().t.x, m_gunAttachment->GetAttModelRelative().t.y, m_gunAttachment->GetAttModelRelative().t.z + 0.9f);
+		//m_weaponBaseEntity->SetPos(pos);
 		//m_weaponBaseEntity->SetRotation(m_gunAttachment->GetAttModelRelative().q);
-	//}
+	}
 }
 
 bool Soldier1Component::IsAtCover()

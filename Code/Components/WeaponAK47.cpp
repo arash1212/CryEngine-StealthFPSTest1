@@ -39,7 +39,6 @@ void WeaponAK47Component::Initialize()
 	
 
 	//agar thirdPerson hast faghat chun az attachment estefade mishe
-	m_animationComp->GetEntity()->Hide(true);
 	
 
 	//set m_defaultPosition
@@ -90,6 +89,8 @@ void WeaponAK47Component::Initialize()
 	//noiseMaker comp
 	m_noiseMakerComp = m_pEntity->GetOrCreateComponent<NoiseMakerComponent>();
 	m_noiseMakerComp->SetOwner(m_ownerEntity);
+
+	//Hide(true);
 }
 
 Cry::Entity::EventFlags WeaponAK47Component::GetEventMask() const

@@ -103,7 +103,7 @@ private:
 	f32 m_maxRoationX = 1300;
 
 	//recoil
-	f32 m_snapiness = 13.2f;
+	f32 m_snapiness = 16.2f;
 	f32 m_returnSpeed = 5.1f;
 	Quat m_cameraDefaultRotaion = IDENTITY;
 	Quat m_currentRotation = IDENTITY;

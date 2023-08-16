@@ -110,7 +110,7 @@ private:
 
 	//shoot coolDown
 	int32 m_currentShootCount = 0;
-	int32 m_shootBeforeCoolDown = 13;
+	int32 m_shootBeforeCoolDown = 8;
 	f32 m_coolDownTimer = 1.0f;
 	f32 m_coolDownTimePassed = 0.f;
 
