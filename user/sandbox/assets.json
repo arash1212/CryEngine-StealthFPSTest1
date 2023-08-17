@@ -5427,8 +5427,8 @@
 			"type": "Animation",
 			"guid": "d5861a50-6837-d6bc-7dac-4037d73a76f0",
 			"name": "stepRotate_lft_180_3p",
-			"timestamp": 132973673610360000,
-			"files": [ "animations/motusanims/steprotate/stepRotate_lft_180_3p.caf" ],
+			"timestamp": 1652897361,
+			"files": [ "Animations/motusAnims/stepRotate/stepRotate_lft_180_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/stepRotate/stepRotate_lft_180_3p.caf.cryasset",
@@ -5655,8 +5655,8 @@
 			"type": "Animation",
 			"guid": "74df591e-f47c-51be-1f3c-2131e18bc49c",
 			"name": "walkcross_fwd_lft_3p",
-			"timestamp": 132973673629920000,
-			"files": [ "animations/motusanims/strafe/walkcross_fwd_lft_3p.caf" ],
+			"timestamp": 1652897362,
+			"files": [ "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/strafe/walkcross_fwd_lft_3p.caf.cryasset",
@@ -5967,19 +5967,21 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1692261667,
+			"timestamp": 1692276578,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Levels/example.level.cryasset",
 			"details": [ ],
 			"dependencies": [
+				{ "path": "%editor%/materials/shaderlist.xml", "usageCount": 0 },
 				{ "path": "%editor%/objects/anchor.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.cgf", "usageCount": 0 },
 				{ "path": "%editor%/objects/envcube.mtl", "usageCount": 0 },
 				{ "path": "%editor%/objects/gradf.dds", "usageCount": 0 },
 				{ "path": "%editor%/objects/helper.mtl", "usageCount": 0 },
 				{ "path": "%editor%/objects/helper_illum.mtl", "usageCount": 0 },
+				{ "path": "%editor%/objects/mtlplane.cgf", "usageCount": 0 },
 				{
 					"path": "%engine%/engineassets/icons/averagememoryusage.dds",
 					"usageCount": 0
@@ -6038,14 +6040,6 @@
 				},
 				{
 					"path": "%engine%/engineassets/objects/primitive_cylinder.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/objects/primitive_sphere.cgf",
-					"usageCount": 0
-				},
-				{
-					"path": "%engine%/engineassets/texturemsg/defaultnouvs.dds",
 					"usageCount": 0
 				},
 				{
@@ -6143,11 +6137,23 @@
 					"usageCount": 0
 				},
 				{
+					"path": "editor/resourcecache/objects/static/cover/cover_test_1_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/static/cover/cover_test_1_texture.dds",
+					"usageCount": 0
+				},
+				{
 					"path": "editor/resourcecache/objects/static/fence/fence_alb.dds",
 					"usageCount": 0
 				},
 				{
 					"path": "editor/resourcecache/objects/static/fence/fence_nml.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/static/test/cover_test_1_normal.dds",
 					"usageCount": 0
 				},
 				{
@@ -6288,6 +6294,7 @@
 					"path": "objects/alarmbutton/alarmbutton_defaultmaterial.skin",
 					"usageCount": 0
 				},
+				{ "path": "objects/alarmbutton/alarmbutton_idle.caf", "usageCount": 0 },
 				{
 					"path": "objects/alarmbutton/alarmbutton_pushbutton.caf",
 					"usageCount": 0
@@ -6465,12 +6472,41 @@
 					"path": "objects/securitycamera/security-camera-base-1.mtl",
 					"usageCount": 0
 				},
+				{
+					"path": "objects/static/cover/cover_test_1_mesh.cgf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/static/cover/cover_test_1_mesh.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/static/cover/cover_test_1_mesh.mtl",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/static/cover/cover_test_1_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/static/cover/cover_test_1_texture.dds",
+					"usageCount": 0
+				},
 				{ "path": "objects/static/fence/fence_1.cgf", "usageCount": 0 },
 				{ "path": "objects/static/fence/fence_1.mtl", "usageCount": 0 },
 				{ "path": "objects/static/fence/fence_alb.dds", "usageCount": 0 },
 				{ "path": "objects/static/fence/fence_nml.dds", "usageCount": 0 },
 				{ "path": "objects/static/fence/fence_o_1.cgf", "usageCount": 0 },
 				{ "path": "objects/static/fence/fence_o_1.mtl", "usageCount": 0 },
+				{
+					"path": "objects/static/test/cover_test_1_normal.dds",
+					"usageCount": 0
+				},
+				{ "path": "objects/static/test/test_prob_1_mesh.cgf", "usageCount": 0 },
+				{ "path": "objects/static/test/test_prob_1_mesh.mtl", "usageCount": 0 },
+				{ "path": "objects/static/test/test_prob_1_mesh.mtl", "usageCount": 0 },
+				{ "path": "objects/static/test/test_prob_2_mesh.mtl", "usageCount": 0 },
+				{ "path": "objects/static/test/test_prob_2_mesh.mtl", "usageCount": 0 },
 				{ "path": "objects/weapons/ak47/3p/ak-47.cdf", "usageCount": 0 },
 				{ "path": "objects/weapons/ak47/3p/ak-47.chr", "usageCount": 0 },
 				{ "path": "objects/weapons/ak47/3p/ak-47.mtl", "usageCount": 0 },
@@ -6886,9 +6922,9 @@
 		},
 		{
 			"type": "Character",
-			"guid": "56409161-ac1c-a338-8a82-377cc5b5a85c",
+			"guid": "2a101f61-6712-2a73-6283-624f017de887",
 			"name": "alarmButton",
-			"timestamp": 1692257101,
+			"timestamp": 1692268767,
 			"files": [ "Objects/alarmbutton/alarmButton.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6904,16 +6940,16 @@
 		},
 		{
 			"type": "Mesh",
-			"guid": "08184ef6-62a7-85e3-a216-f5c056789c2e",
-			"name": "alarmbutton",
-			"timestamp": 1692257589,
-			"files": [ "Objects/alarmbutton/alarmbutton.cgf" ],
+			"guid": "c2df7512-96ce-6251-3f13-a26d7149feba",
+			"name": "alarmButton",
+			"timestamp": 1692268702,
+			"files": [ "Objects/alarmbutton/alarmButton.cgf" ],
 			"workFiles": [ ],
 			"source": "Objects/alarmbutton/alarmButton.fbx",
-			"metadata": "Objects/alarmbutton/alarmbutton.cgf.cryasset",
+			"metadata": "Objects/alarmbutton/alarmButton.cgf.cryasset",
 			"details": [
 				{ "key": "16BitPrecision", "value": "false" },
-				{ "key": "materialCount", "value": "3" },
+				{ "key": "materialCount", "value": "2" },
 				{ "key": "triangleCount", "value": "820" },
 				{ "key": "vertexCount", "value": "604" }
 			],
@@ -6923,9 +6959,9 @@
 		},
 		{
 			"type": "Skeleton",
-			"guid": "2ef9d604-62c5-60d2-ad36-280b7a422af9",
+			"guid": "642d09f7-f0ba-2b23-7c0b-238aac5a7960",
 			"name": "alarmButton",
-			"timestamp": 1692257067,
+			"timestamp": 1692268742,
 			"files": [
 				"Objects/alarmbutton/alarmButton.chr",
 				"Objects/alarmbutton/alarmButton.chrparams"
@@ -6938,22 +6974,22 @@
 		},
 		{
 			"type": "Material",
-			"guid": "27d454f8-3b2f-f15f-b710-dea135bc1a11",
+			"guid": "baef4c1d-a408-e3d2-f90c-1b44eede5c9f",
 			"name": "alarmButton",
-			"timestamp": 1692257067,
+			"timestamp": 1692268742,
 			"files": [ "Objects/alarmbutton/alarmButton.mtl" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Objects/alarmbutton/alarmButton.mtl.cryasset",
 			"details": [
-				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "subMaterialCount", "value": "2" },
 				{ "key": "textureCount", "value": "4" }
 			],
 			"dependencies": [
-				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 },
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 },
 				{
 					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
-					"usageCount": 2
+					"usageCount": 1
 				},
 				{
 					"path": "Objects/alarmbutton/Material_baseColor.dds",
@@ -6964,9 +7000,9 @@
 		},
 		{
 			"type": "SkinnedMesh",
-			"guid": "1728a85e-6aea-1eba-3049-2e20bacf332e",
+			"guid": "c0b1a617-b7fc-c1ba-ddb5-482ffee70e0d",
 			"name": "alarmButton_defaultMaterial",
-			"timestamp": 1692257050,
+			"timestamp": 1692268712,
 			"files": [ "Objects/alarmbutton/alarmButton_defaultMaterial.skin" ],
 			"workFiles": [ ],
 			"source": "Objects/alarmbutton/alarmButton.fbx",
@@ -6974,7 +7010,7 @@
 			"details": [
 				{ "key": "16BitPrecision", "value": "false" },
 				{ "key": "bonesCount", "value": "3" },
-				{ "key": "materialCount", "value": "3" },
+				{ "key": "materialCount", "value": "2" },
 				{ "key": "triangleCount", "value": "820" },
 				{ "key": "vertexCount", "value": "604" }
 			],
@@ -6984,9 +7020,21 @@
 		},
 		{
 			"type": "Animation",
-			"guid": "c0b079bc-702d-1ed6-7ff8-395929351970",
+			"guid": "328b69bb-9028-3e88-2c26-543c6b4f18f7",
+			"name": "alarmButton_Idle",
+			"timestamp": 1692268726,
+			"files": [ "Objects/alarmbutton/alarmButton_Idle.caf" ],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/alarmButton.fbx",
+			"metadata": "Objects/alarmbutton/alarmButton_Idle.caf.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Animation",
+			"guid": "86163b10-211d-3122-2373-0e851955c6e4",
 			"name": "alarmButton_PushButton",
-			"timestamp": 1692257058,
+			"timestamp": 1692268731,
 			"files": [ "Objects/alarmbutton/alarmButton_PushButton.caf" ],
 			"workFiles": [ ],
 			"source": "Objects/alarmbutton/alarmButton.fbx",
@@ -6996,9 +7044,9 @@
 		},
 		{
 			"type": "Texture",
-			"guid": "7e277f81-68c6-e750-1c66-70054acd4900",
+			"guid": "5fb57e7d-c809-4467-0067-414c00424bd8",
 			"name": "material_basecolor",
-			"timestamp": 1692257073,
+			"timestamp": 1692268751,
 			"files": [ "Objects/alarmbutton/material_basecolor.dds" ],
 			"workFiles": [ ],
 			"source": "Objects/alarmbutton/material_basecolor.tif",
@@ -7012,9 +7060,9 @@
 		},
 		{
 			"type": "Texture",
-			"guid": "e2dcea51-7db7-7516-3602-43252044fa98",
+			"guid": "e888c7fc-21b2-d9cf-fb66-d99fee2e359b",
 			"name": "material_normal",
-			"timestamp": 1692257081,
+			"timestamp": 1692268763,
 			"files": [ "Objects/alarmbutton/material_normal.dds" ],
 			"workFiles": [ ],
 			"source": "Objects/alarmbutton/material_normal.tif",
@@ -7238,7 +7286,7 @@
 			"type": "Character",
 			"guid": "190da718-1593-4b01-274e-ce08437ffe16",
 			"name": "soldier_1",
-			"timestamp": 1692180866,
+			"timestamp": 1692271559,
 			"files": [ "Objects/Characters/soldier1/soldier_1.cdf" ],
 			"workFiles": [ ],
 			"source": "",
@@ -7981,6 +8029,89 @@
 		},
 		{
 			"type": "Mesh",
+			"guid": "563e15ce-57cc-dc03-cd04-e56ce06757a5",
+			"name": "cover_test_1_mesh",
+			"timestamp": 1692273467,
+			"files": [ "Objects/static/cover/cover_test_1_mesh.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/static/cover/cover_test_1_mesh.fbx",
+			"metadata": "Objects/static/cover/cover_test_1_mesh.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "12" },
+				{ "key": "vertexCount", "value": "24" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/static/cover/cover_test_1_mesh.mtl",
+					"usageCount": 1
+				}
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "a5f7aee5-b859-258f-91cc-6c7da9e74882",
+			"name": "cover_test_1_mesh",
+			"timestamp": 1692276284,
+			"files": [ "Objects/static/cover/cover_test_1_mesh.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/static/cover/cover_test_1_mesh.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "4" }
+			],
+			"dependencies": [
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 2
+				},
+				{
+					"path": "Objects/static/cover/cover_test_1_texture.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/static/cover/cover_test_1_normal.dds",
+					"usageCount": 1
+				}
+			]
+		},
+		{
+			"type": "Texture",
+			"guid": "f5509300-0d4e-6de4-2eb6-a117248ae6cf",
+			"name": "cover_test_1_normal",
+			"timestamp": 1692273448,
+			"files": [ "Objects/static/cover/cover_test_1_normal.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/cover/cover_test_1_normal.tif",
+			"metadata": "Objects/static/cover/cover_test_1_normal.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "1066" },
+				{ "key": "mipCount", "value": "1" },
+				{ "key": "width", "value": "1600" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "588b708f-de62-f8cc-bd7e-da882751af3d",
+			"name": "cover_test_1_texture",
+			"timestamp": 1692273446,
+			"files": [ "Objects/static/cover/cover_test_1_texture.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/cover/cover_test_1_texture.tif",
+			"metadata": "Objects/static/cover/cover_test_1_texture.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "1066" },
+				{ "key": "mipCount", "value": "1" },
+				{ "key": "width", "value": "1600" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Mesh",
 			"guid": "6bee6074-028b-6dce-4517-e8df49ebcd67",
 			"name": "fence_1",
 			"timestamp": 1691683441,
@@ -8123,6 +8254,130 @@
 				{
 					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
 					"usageCount": 5
+				},
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 }
+			]
+		},
+		{
+			"type": "Texture",
+			"guid": "82f109cd-8b5e-1b91-012a-30b8ff10657d",
+			"name": "cover_test_1_normal",
+			"timestamp": 1692274988,
+			"files": [ "Objects/static/test/cover_test_1_normal.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/test/cover_test_1_normal.tif",
+			"metadata": "Objects/static/test/cover_test_1_normal.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "1066" },
+				{ "key": "mipCount", "value": "1" },
+				{ "key": "width", "value": "1600" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "6d456ade-d51f-e3ad-c0ec-89537688d6fe",
+			"name": "cover_test_1_texture",
+			"timestamp": 1692276048,
+			"files": [ "Objects/static/test/cover_test_1_texture.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/static/test/cover_test_1_texture.tif",
+			"metadata": "Objects/static/test/cover_test_1_texture.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "1066" },
+				{ "key": "mipCount", "value": "1" },
+				{ "key": "width", "value": "1600" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Mesh",
+			"guid": "d4412dd8-cf37-1ea3-2976-6ce1b063a74a",
+			"name": "test_prob_1_mesh",
+			"timestamp": 1692275005,
+			"files": [ "Objects/static/test/test_prob_1_mesh.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/static/test/test_prob_1_mesh.fbx",
+			"metadata": "Objects/static/test/test_prob_1_mesh.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "12" },
+				{ "key": "vertexCount", "value": "24" }
+			],
+			"dependencies": [
+				{ "path": "Objects/static/test/test_prob_1_mesh.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "3023b321-ce66-e0ae-dd71-70935a914ce6",
+			"name": "test_prob_1_mesh",
+			"timestamp": 1692276305,
+			"files": [ "Objects/static/test/test_prob_1_mesh.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/static/test/test_prob_1_mesh.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "4" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/static/test/cover_test_1_texture.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "Objects/static/test/cover_test_1_normal.dds",
+					"usageCount": 1
+				},
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 2
+				}
+			]
+		},
+		{
+			"type": "Mesh",
+			"guid": "5867e2e7-418c-758d-e435-0fa29664fe81",
+			"name": "test_prob_2_mesh",
+			"timestamp": 1692276059,
+			"files": [ "Objects/static/test/test_prob_2_mesh.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/static/test/test_prob_2_mesh.fbx",
+			"metadata": "Objects/static/test/test_prob_2_mesh.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "44" },
+				{ "key": "vertexCount", "value": "64" }
+			],
+			"dependencies": [
+				{ "path": "Objects/static/test/test_prob_2_mesh.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Material",
+			"guid": "eb51a3e8-fb54-34ae-c115-2f06d47a70d5",
+			"name": "test_prob_2_mesh",
+			"timestamp": 1692276432,
+			"files": [ "Objects/static/test/test_prob_2_mesh.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/static/test/test_prob_2_mesh.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "3" }
+			],
+			"dependencies": [
+				{
+					"path": "Objects/static/test/cover_test_1_texture.dds",
+					"usageCount": 1
+				},
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 3
 				},
 				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 }
 			]

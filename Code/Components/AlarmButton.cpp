@@ -29,7 +29,7 @@ void AlarmButtonComponent::Initialize()
 	m_animationComp->SetCharacterFile("Objects/alarmButton/alarmButton.cdf");
 	m_animationComp->SetMannequinAnimationDatabaseFile("Animations/Mannequin/ADB/alarmButton.adb");
 	m_animationComp->SetControllerDefinitionFile("Animations/Mannequin/ADB/InteractablesControllerDefinition.xml");
-	m_animationComp->SetDefaultScopeContextName("FirstPersonCharacter");
+	m_animationComp->SetDefaultScopeContextName("ThirdPersonCharacter");
 	m_animationComp->SetDefaultFragmentName("Idle");
 	m_animationComp->SetAnimationDrivenMotion(true);
 	m_animationComp->LoadFromDisk();
@@ -44,7 +44,10 @@ void AlarmButtonComponent::Initialize()
 
 	m_pushButtonSound = CryAudio::StringToId("alarmButton_push_sound_1");
 
+	m_IdleFragmentId = m_animationComp->GetFragmentId("Idle");
 	m_useFragmentId = m_animationComp->GetFragmentId("Use");
+
+	m_useAction = new TAction<SAnimationContext>(30U, m_useFragmentId);
 
 	//physicalize button
 	SEntityPhysicalizeParams physParams;
@@ -93,6 +96,14 @@ void AlarmButtonComponent::ProcessEvent(const SEntityEvent& event)
 	}
 }
 
+void AlarmButtonComponent::UpdateAnimation()
+{
+	//FragmentID currentFragmentId;
+	//if (m_activeFragmentId != currentFragmentId) {
+		//m_
+	//}
+}
+
 void AlarmButtonComponent::TriggerAlarams()
 {
 	if (!m_alaramManager) {
@@ -112,7 +123,10 @@ void AlarmButtonComponent::TriggerAlarams()
 	}
 	*/
 	m_alaramManager->GetComponent<AlarmManagerComponent>()->SetEnabled(!m_alaramManager->GetComponent<AlarmManagerComponent>()->IsAlarmEnable());
-	m_animationComp->QueueFragmentWithId(m_useFragmentId);
+	m_animationComp->GetActionController()->Flush();
+	m_animationComp->QueueCustomFragment(*m_useAction);
 	m_audioComp->ExecuteTrigger(m_pushButtonSound);
+
+	m_animationComp->QueueFragmentWithId(m_IdleFragmentId);
 	m_interactableComp->Use(false);
 }

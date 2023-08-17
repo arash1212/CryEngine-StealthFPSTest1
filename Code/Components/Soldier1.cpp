@@ -218,12 +218,14 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 			//aim look 
 			if (m_targetEntity) {
+				m_animationComp->GetCharacter()->GetISkeletonPose()->GetAbsJointByID(10);
 				IAnimationPoseBlenderDir* animDir = m_animationComp->GetCharacter()->GetISkeletonPose()->GetIPoseBlenderLook();
 				//CryLog("rot y : %f", m_animationComp->GetCharacter()->GetISkeletonPose()->GetAbsJointByID(10).q.v.y);
 				//CryLog("ik number %i", m_animationComp->GetCharacter()->GetISkeletonPose()->SetHumanLimbIK(m_targetEntity->GetWorldPos(), "Spine01"));
 				if (animDir) {
 					animDir->SetTarget(m_targetEntity->GetWorldPos());
 					animDir->SetState(true);
+
 
 					SAnimationPoseModifierParams modifierParams;
 					animDir->Execute(modifierParams);
@@ -361,8 +363,8 @@ void Soldier1Component::Attack()
 			m_movePosition = m_lastTargetPosition->GetWorldPos();
 		}
 		else {
+			m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 			if (distanceTotarget > m_closeAttackDistance) {
-				m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
 
 				//fire weapon if target is visible
 				if (m_detectionComp->IsVisible(m_targetEntity) && CanUseWeapon()) {

@@ -105,15 +105,35 @@
 						"expandedItems": [
 							"Characters",
 							"Skeletons",
-							"Animations",
+							"Animations (objects/characters/soldier1/)",
 							"Compression (Animations/)",
 							"Compression (Animations/)|Compression Presets",
 							"Compression (Animations/)|DBA Table",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Idle",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Backward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Forward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Left",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Right",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Backward",
+							"Animations (objects/characters/soldier1/)|soldier_1_rifle_Aim_Run_Forward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Idle",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Left",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Right",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Cover_Sit",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Idle",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Walk_Backward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Walk_Forward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Walk_Right",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Hit_Reaction_1",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Hit_Reaction_2",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Kick",
 							"Skeletons|Objects",
-							"Characters|Objects"
+							"Characters|Objects",
+							"Characters|Objects|Characters",
+							"Characters|Objects|Characters|soldier1"
 						],
-						"selectedItems": [ ],
-						"currentItem": "",
+						"selectedItems": [ "Characters|Objects|Characters|soldier1|soldier_1.cdf" ],
+						"currentItem": "Characters|Objects|Characters|soldier1|soldier_1.cdf",
 						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
 						"sectionsVisible": [ 0 ]
 					}
@@ -132,7 +152,14 @@
 	"displayOptionsVisible": false,
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
-		"propertyTree": { "focusedRow": [ ], "selection": [ ], "expanded": [ ] },
+		"propertyTree": {
+			"focusedRow": [ 6, 10, 15, 2 ],
+			"selection": [ [ 6, 10, 15, 2 ] ],
+			"expanded": [
+				1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+				0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+			]
+		},
 		"outlineMode": "oneTree"
 	},
 	"blendSpacePreview": {
@@ -149,30 +176,30 @@
 		"palette": { "addWithSingleClick": false, "hotkeys": [ ] }
 	},
 	"recentCharacters": [
+		"Objects/Characters/soldier1/soldier_1.cdf",
 		"Objects/Weapons/glock/1p/pistol_glock.cdf",
-		"Objects/Weapons/ak47/3p/ak-47.cdf",
-		"Objects/Characters/soldier1/soldier_1.cdf"
+		"Objects/Weapons/ak47/3p/ak-47.cdf"
 	],
 	"windowGeometry": [
-		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 211, 0, 0, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0,
-		0, 0, 5, 211, 0, 0, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 211, 0, 0,
-		3, 19
+		1, 217, 208, 203, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 33, 0, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0, 0,
+		0, 0, 5, 33, 0, 0, 3, 10, 0, 0, 0, 0, 0, 0, 0, 0, 7, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 33, 0, 0,
+		3, 10
 	],
 	"windowState": [
-		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 2, 173, 252, 2, 0, 0, 0, 2, 251,
+		0, 0, 0, 255, 0, 0, 0, 0, 253, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 204, 0, 0, 2, 164, 252, 2, 0, 0, 0, 2, 251,
 		0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108, 0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45,
-		0, 48, 1, 0, 0, 0, 0, 0, 0, 2, 173, 0, 0, 0, 107, 0, 255, 255, 255, 251, 0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108,
+		0, 48, 1, 0, 0, 0, 0, 0, 0, 2, 164, 0, 0, 0, 107, 0, 255, 255, 255, 251, 0, 0, 0, 30, 0, 69, 0, 120, 0, 112, 0, 108,
 		0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45, 0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 118, 0,
-		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 240, 0, 0, 2, 173, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 69, 0, 0, 2, 164, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
 		0, 99, 0, 101, 0, 110, 0, 101, 0, 95, 0, 112, 0, 97, 0, 114, 0, 97, 0, 109, 0, 101, 0, 116, 0, 101, 0, 114, 0, 115, 1, 0,
-		0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
-		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 48, 0, 0, 2, 125, 0, 0, 0, 51, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
+		0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
+		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 54, 0, 0, 2, 110, 0, 0, 0, 81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
 		0, 108, 0, 101, 0, 110, 0, 100, 0, 95, 0, 115, 0, 112, 0, 97, 0, 99, 0, 101, 0, 95, 0, 112, 0, 114, 0, 101, 0, 118, 0, 105,
 		0, 101, 0, 119, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 223, 0, 255, 255, 255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105,
 		0, 109, 0, 95, 0, 101, 0, 118, 0, 101, 0, 110, 0, 116, 0, 95, 0, 112, 0, 114, 0, 101, 0, 115, 0, 101, 0, 116, 0, 115, 0, 0,
-		0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0, 0, 5, 212, 0, 0, 0, 97, 252, 1, 0, 0, 0,
-		1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99, 0, 107, 1, 0, 0, 0, 0, 0, 0, 5, 212, 0,
-		0, 1, 176, 0, 255, 255, 255, 0, 0, 3, 211, 0, 0, 2, 173, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252,
+		0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 85, 0, 255, 255, 255, 0, 0, 0, 3, 0, 0, 5, 34, 0, 0, 0, 97, 252, 1, 0, 0, 0,
+		1, 251, 0, 0, 0, 16, 0, 112, 0, 108, 0, 97, 0, 121, 0, 98, 0, 97, 0, 99, 0, 107, 1, 0, 0, 0, 0, 0, 0, 5, 34, 0,
+		0, 1, 176, 0, 255, 255, 255, 0, 0, 3, 5, 0, 0, 2, 164, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 8, 252,
 		0, 0, 0, 0
 	]
 }

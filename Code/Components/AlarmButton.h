@@ -32,7 +32,13 @@ private :
 
 	CryAudio::ControlId m_pushButtonSound;
 
+	FragmentID m_IdleFragmentId;
 	FragmentID m_useFragmentId;
+	FragmentID m_activeFragmentId;
+
+	IActionPtr m_useAction;
+
 private:
+	void UpdateAnimation();
 	void TriggerAlarams();
 };

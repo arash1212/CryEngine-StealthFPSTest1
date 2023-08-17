@@ -462,9 +462,9 @@ void PlayerComponent::InteractableCheckRayast()
 
 			//Debug
 			if (pd) {
-				pd->Begin("RaycastWeapon", true);
+				pd->Begin("RaycastPlayerInteractable", true);
 				//pd->AddText3D(hits[0].pt, 500, ColorF(0, 1, 0), 2, "Hit : %s", hitEntity->GetName());
-				pd->AddSphere(hits[0].pt, 0.05f, ColorF(0, 0, 1), 2);
+				//pd->AddSphere(hits[0].pt, 0.05f, ColorF(0, 0, 1), 2);
 			}
 
 			//return hitEntity if exist
