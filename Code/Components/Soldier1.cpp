@@ -83,6 +83,7 @@ void Soldier1Component::Initialize()
 
 	//health
 	m_healthComp = m_pEntity->GetOrCreateComponent<HealthComponent>();
+	m_healthComp->SetMaxHealth(30.f);
 
 	//info
 	m_info = m_pEntity->GetOrCreateComponent<ActorInfoComponent>();

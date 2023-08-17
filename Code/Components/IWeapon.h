@@ -4,6 +4,7 @@
 #include <DefaultComponents/Physics/CharacterControllerComponent.h>
 #include <DefaultComponents/Cameras/CameraComponent.h>
 #include <DefaultComponents/Geometry/StaticMeshComponent.h>
+#include <DefaultComponents/Effects/DecalComponent.h>
 
 static constexpr f32 WEAPON_DEFAULT_DAMAGE = 15.f;
 static constexpr f32 WEAPON_DEFAULT_TIME_BETWEEN_SHOTS = 0.1f;
@@ -124,8 +125,11 @@ protected:
 	virtual void InitShootSounds() = 0;
 	virtual bool IsSurfaceIdSkippable(int surfaceId);
 
+	void SpawnBloodDecalAt(ray_hit hit);
+
 public :
-	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error);
+	IEntity* Raycast(Vec3 from, Vec3 to, Vec3 error, ray_hit& outHit, IPhysicalEntity* pSkippedEntities[10]);
+	void CheckHit(Vec3 from, Vec3 to, Vec3 error);
 	virtual bool Fire(IEntity* target);
 	virtual void Sway(f32 mouseX, f32 mouseY);
 

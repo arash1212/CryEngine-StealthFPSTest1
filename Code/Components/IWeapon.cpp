@@ -8,6 +8,7 @@
 #include "IAIActor.h"
 #include "Soldier1.h"
 #include "Health.h"
+#include "CustomDecal.h"
 #include "GamePlugin.h"
 
 #include <Cry3DEngine/I3DEngine.h>
@@ -33,7 +34,7 @@ namespace
 }
 */
 
-IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
+IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error, ray_hit& outHit, IPhysicalEntity* pSkippedEntities[10])
 {
 	//apply error
 	Vec3 finalDir = Vec3(dir.x, dir.y, dir.z);
@@ -43,12 +44,12 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 		finalDir.z += error.z;
 	}
 
-	//9 yani az har material ba pierceability bishtar rad beshe
+	//9 yani az har material ba pierceability bishtar rad beshe //rwi_pierceability(9)
 	int flags = rwi_pierceability(9);
 	std::array<ray_hit, 4> hits;
-	static IPhysicalEntity* pSkippedEntities[10];
-	pSkippedEntities[0] = m_ownerEntity->GetPhysics();
-	pSkippedEntities[1] = m_pEntity->GetPhysics();
+	//static IPhysicalEntity* pSkippedEntities[10] = pSkippedEntities;
+	//pSkippedEntities[0] = m_ownerEntity->GetPhysics();
+	//pSkippedEntities[1] = m_pEntity->GetPhysics();
 
 	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
 	if (gEnv->pPhysicalWorld->RayWorldIntersection(from, finalDir * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 4, pSkippedEntities, 4)) {
@@ -62,8 +63,10 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 					pd->AddSphere(hits[i].pt, 0.05f, ColorF(1, 0, 0), 2);
 				}
 
-				CryLog("partId %i", hits[0].ipart);
+				//out hit
+				outHit = hits[i];
 
+				CryLog("partId %i", hits[i].ipart);
 				//return hitEntity if exist
 				IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[i].pCollider);
 				if (hitEntity) {
@@ -77,22 +80,8 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 						hits[i].pCollider->Action(&impulse);
 					}
 
-
-					//if hitEntity is an actor
-					if (hitEntity->GetComponent<Soldier1Component>() && hitEntity->GetComponent<ActorInfoComponent>()->GetFaction() != m_ownerEntity->GetComponent<ActorInfoComponent>()->GetFaction()) {
-						hitEntity->GetComponent<Soldier1Component>()->ReactToHit(m_pEntity);
-						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
-					}
-					//if hitEntity is player
-					else if (hitEntity->GetComponent<PlayerComponent>()) {
-						hitEntity->GetComponent<PlayerComponent>()->ReactToHit(m_pEntity);
-						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
-					}
-
-					//if hitEntity has healthComponent
-					else if (hitEntity->GetComponent<HealthComponent>() && hitEntity->GetComponent<ActorInfoComponent>() && hitEntity->GetComponent<ActorInfoComponent>()->GetFaction() != m_ownerEntity->GetComponent<ActorInfoComponent>()->GetFaction()) {
-						hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
-					}
+					//if (hits.size() > i) {
+					//}
 
 					return hitEntity;
 				}
@@ -104,6 +93,48 @@ IEntity* IWeaponComponent::Raycast(Vec3 from, Vec3 dir, Vec3 error)
 	}
 
 	return nullptr;
+}
+
+void IWeaponComponent::CheckHit(Vec3 from, Vec3 to, Vec3 error)
+{
+	bool bShouldCheckBack = false;
+
+	static IPhysicalEntity* pSkippedEntities[10];
+	pSkippedEntities[0] = m_ownerEntity->GetPhysics();
+	pSkippedEntities[1] = m_pEntity->GetPhysics();
+
+	ray_hit hit;
+	IEntity* hitEntity = Raycast(from, to, error, hit, pSkippedEntities);
+	//check hit entity
+	if (hitEntity) {
+		//if hitEntity is an actor
+		if (hitEntity->GetComponent<Soldier1Component>() && hitEntity->GetComponent<ActorInfoComponent>()->GetFaction() != m_ownerEntity->GetComponent<ActorInfoComponent>()->GetFaction()) {
+			hitEntity->GetComponent<Soldier1Component>()->ReactToHit(m_pEntity);
+			hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
+			bShouldCheckBack = true;
+		}
+		//if hitEntity is player
+		else if (hitEntity->GetComponent<PlayerComponent>()) {
+			hitEntity->GetComponent<PlayerComponent>()->ReactToHit(m_pEntity);
+			hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
+			bShouldCheckBack = true;
+		}
+		//if hitEntity has healthComponent
+		else if (hitEntity->GetComponent<HealthComponent>() && hitEntity->GetComponent<ActorInfoComponent>() && hitEntity->GetComponent<ActorInfoComponent>()->GetFaction() != m_ownerEntity->GetComponent<ActorInfoComponent>()->GetFaction()) {
+			hitEntity->GetComponent<HealthComponent>()->ApplyDamage(GetDamage());
+		}
+
+		//blood decal
+		if (bShouldCheckBack) {
+			ray_hit backHit;
+			pSkippedEntities[0] = hitEntity->GetPhysics();
+			Raycast(hit.pt, to, ZERO, backHit, pSkippedEntities);
+			if (backHit.pCollider) {
+				SpawnBloodDecalAt(backHit);
+			}
+			bShouldCheckBack = false;
+		}
+	}
 }
 
 bool IWeaponComponent::Fire(IEntity* target)
@@ -132,7 +163,7 @@ bool IWeaponComponent::Fire(IEntity* target)
 			AddKickBack(Vec3(0, -0.07f, -0.05f));
 
 			Vec3 shooterror = Vec3(GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()), GetShootError(shootAccuracyComp->GetShootError()));
-			Raycast(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shooterror);
+			CheckHit(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir(), shooterror);
 
 			//spawn bullet tracer
 			if (GetRandomInt(0, 10) % 2 == 0) {
@@ -159,7 +190,7 @@ bool IWeaponComponent::Fire(IEntity* target)
 
 			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
 
-			Raycast(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 5);
+			CheckHit(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 5);
 
 			if (GetRandomInt(0, 10) % 2 == 0) {
 				SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
@@ -438,4 +469,25 @@ bool IWeaponComponent::IsSurfaceIdSkippable(int surfaceId)
 	}
 
 	return false;
+}
+
+void IWeaponComponent::SpawnBloodDecalAt(ray_hit hit)
+{
+	if (hit.dist > 5) {
+		return;
+	}
+
+	Vec3 dir = hit.pt - m_ownerEntity->GetWorldPos();
+	SEntitySpawnParams params;
+	params.vPosition = hit.pt;
+	params.qRotation = Quat::CreateRotationVDir(dir);
+	IEntity* decalEntity = gEnv->pEntitySystem->SpawnEntity(params);
+
+	Cry::DefaultComponents::CDecalComponent* decal = decalEntity->CreateComponent<Cry::DefaultComponents::CDecalComponent>();
+
+	decal->SetTransformMatrix(Matrix34::Create(Vec3(1), IDENTITY, ZERO));
+	decal->SetMaterialFileName("Textures/decal/blood/1/blood_decal_material_1.mtl");
+	decal->EnableAutomaticSpawn(true);
+	decal->SetDepth(4.f);
+	decal->Spawn();
 }

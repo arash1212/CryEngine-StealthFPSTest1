@@ -325,7 +325,7 @@ Vec3 AIControllerComponent::FindCover(IEntity* target)
 
 	int32 count = gEnv->pAISystem->GetCoverSystem()->GetCover(m_pEntity->GetWorldPos(), 900.f, &eyes, 1, 0.9f, locations.data(), 80, 3);
 	SortLocationsByDistance(locations, count);
-	CryLog("count %i", count);
+	//CryLog("count %i", count);
 	for (int32 i = 0; i < count; i++) {
 		//int32 random = GetRandomInt(0, count);
 		if (IsCoverPointSafe(locations[i], target) && IsCoverUsable(locations[i], target) && isCoverAvailable(locations[i])) {

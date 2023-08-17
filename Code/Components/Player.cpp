@@ -7,6 +7,7 @@
 #include "Health.h"
 #include "ShootAccuracy.h"
 #include "ActorInfo.h"
+#include "Interactable.h"
 #include "GamePlugin.h"
 
 #include <FlashUI/FlashUIElement.h>
@@ -35,7 +36,7 @@ void PlayerComponent::Initialize()
 	m_characterControllerComp->Physicalize();
 
 	m_capsuleComp = m_pEntity->GetOrCreateComponent<Cry::DefaultComponents::CCapsulePrimitiveComponent>();
-	m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.1f, 1.1f), IDENTITY, Vec3(0, 0, 1.2f)));
+	m_capsuleComp->SetTransformMatrix(Matrix34::Create(Vec3(0.99f, 1.2f, 1.2f), IDENTITY, Vec3(0, 0, 1.2f)));
 
 	m_capsuleNormalHeight = m_capsuleComp->m_height;
 
@@ -120,6 +121,8 @@ void PlayerComponent::ProcessEvent(const SEntityEvent& event)
 		UpdateFOV();
 
 		UpdateHealthbar();
+
+		InteractableCheckRayast();
 
 		bCanStand = CanStand();
 
@@ -248,6 +251,18 @@ void PlayerComponent::InitInputs()
 		}
 	);
 	m_inputComp->BindAction("player", "crouch", eAID_KeyboardMouse, eKI_LCtrl);
+
+	m_inputComp->RegisterAction("player", "interact", [this](int activationMode, float value)
+		{
+			if (activationMode == eAAM_OnPress) {
+				if (m_currentInteractbleEntity) {
+					CryLog("used");
+					m_currentInteractbleEntity->GetComponent<InteractableComponent>()->Use(true);
+				}
+			}
+		}
+	);
+	m_inputComp->BindAction("player", "interact", eAID_KeyboardMouse, eKI_E);
 }
 
 void PlayerComponent::Move()
@@ -432,6 +447,48 @@ void PlayerComponent::UpdateHealthbar()
 	SUIArguments args;
 	args.AddArgument(m_health->GetHealth());
 	m_healthbarUIElement->CallFunction("SetHealth", args);
+}
+
+void PlayerComponent::InteractableCheckRayast()
+{
+	int flags = rwi_colltype_any | rwi_stop_at_pierceable;
+	std::array<ray_hit, 4> hits;
+	static IPhysicalEntity* pSkippedEntities[10];
+	pSkippedEntities[0] = m_pEntity->GetPhysics();
+
+	IPersistantDebug* pd = gEnv->pGameFramework->GetIPersistantDebug();
+	if (gEnv->pPhysicalWorld->RayWorldIntersection(m_cameraComp->GetCamera().GetPosition(), m_cameraComp->GetCamera().GetViewdir() * gEnv->p3DEngine->GetMaxViewDistance(), ent_all, flags, hits.data(), 4, pSkippedEntities, 4)) {
+		if (hits[0].pCollider) {
+
+			//Debug
+			if (pd) {
+				pd->Begin("RaycastWeapon", true);
+				//pd->AddText3D(hits[0].pt, 500, ColorF(0, 1, 0), 2, "Hit : %s", hitEntity->GetName());
+				pd->AddSphere(hits[0].pt, 0.05f, ColorF(0, 0, 1), 2);
+			}
+
+			//return hitEntity if exist
+			IEntity* hitEntity = gEnv->pEntitySystem->GetEntityFromPhysics(hits[0].pCollider);
+			if (hitEntity) {
+				if (hitEntity->GetComponent<InteractableComponent>()) {
+					m_currentInteractbleEntity = hitEntity;
+				}
+				else {
+					m_currentInteractbleEntity = nullptr;
+				}
+			}
+			else {
+				m_currentInteractbleEntity = nullptr;
+			}
+		}
+		else {
+			m_currentInteractbleEntity = nullptr;
+		}
+	}
+	else {
+		//CryLog("Weapon hit nothing");
+		m_currentInteractbleEntity = nullptr;
+	}
 }
 
 void PlayerComponent::ReactToHit(IEntity* attacker)

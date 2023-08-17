@@ -105,29 +105,15 @@
 						"expandedItems": [
 							"Characters",
 							"Skeletons",
-							"Animations (objects/weapons/glock/1p/)",
+							"Animations",
 							"Compression (Animations/)",
 							"Compression (Animations/)|Compression Presets",
 							"Compression (Animations/)|DBA Table",
-							"Animations (objects/weapons/glock/1p/)|pistol_glock_Fire",
-							"Animations (objects/weapons/glock/1p/)|pistol_glock_Idle",
-							"Animations (objects/weapons/glock/1p/)|pistol_glock_Run",
-							"Animations (objects/weapons/glock/1p/)|pistol_glock_Walk",
 							"Skeletons|Objects",
-							"Characters|Objects",
-							"Characters|Objects|Weapons",
-							"Characters|Objects|Weapons|glock",
-							"Characters|Objects|Weapons|glock|1p"
+							"Characters|Objects"
 						],
-						"selectedItems": [
-							"Characters|Objects|Weapons|glock|1p|pistol_glock.cdf",
-							"Characters|Objects|Weapons|glock|1p",
-							"Characters|Objects|Weapons|glock|1p",
-							"Characters|Objects|Weapons|glock|1p",
-							"Characters|Objects|Weapons|glock|1p",
-							"Characters|Objects|Weapons|glock|1p"
-						],
-						"currentItem": "Characters|Objects|Weapons|glock|1p|pistol_glock.cdf",
+						"selectedItems": [ ],
+						"currentItem": "",
 						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
 						"sectionsVisible": [ 0 ]
 					}
@@ -146,13 +132,7 @@
 	"displayOptionsVisible": false,
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
-		"propertyTree": {
-			"focusedRow": [ 6, 4, 7 ],
-			"selection": [ [ 6, 4, 7 ] ],
-			"expanded": [
-				1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1
-			]
-		},
+		"propertyTree": { "focusedRow": [ ], "selection": [ ], "expanded": [ ] },
 		"outlineMode": "oneTree"
 	},
 	"blendSpacePreview": {
@@ -186,7 +166,7 @@
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 240, 0, 0, 2, 173, 252, 2, 0, 0, 0, 4, 251, 0, 0, 0, 32, 0, 115,
 		0, 99, 0, 101, 0, 110, 0, 101, 0, 95, 0, 112, 0, 97, 0, 114, 0, 97, 0, 109, 0, 101, 0, 116, 0, 101, 0, 114, 0, 115, 1, 0,
 		0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 23, 0, 255, 255, 255, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114,
-		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 48, 0, 0, 2, 125, 0, 0, 0, 81, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
+		0, 116, 0, 105, 0, 101, 0, 115, 1, 0, 0, 0, 48, 0, 0, 2, 125, 0, 0, 0, 51, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98,
 		0, 108, 0, 101, 0, 110, 0, 100, 0, 95, 0, 115, 0, 112, 0, 97, 0, 99, 0, 101, 0, 95, 0, 112, 0, 114, 0, 101, 0, 118, 0, 105,
 		0, 101, 0, 119, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 223, 0, 255, 255, 255, 251, 0, 0, 0, 36, 0, 97, 0, 110, 0, 105,
 		0, 109, 0, 95, 0, 101, 0, 118, 0, 101, 0, 110, 0, 116, 0, 95, 0, 112, 0, 114, 0, 101, 0, 115, 0, 101, 0, 116, 0, 115, 0, 0,

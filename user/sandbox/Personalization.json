@@ -18,7 +18,11 @@
             "Objects/static",
             "Objects/static/fence",
             "Textures/terrain",
-            "Textures/terrain/mud1"
+            "Textures/terrain/mud1",
+            "Textures/decal",
+            "Textures/decal/blood",
+            "Textures/decal/blood/1",
+            "Objects/alarmbutton"
         ]
     },
     "CAssetPicker": {
@@ -175,7 +179,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Textures/terrain/mud1"
+                    "Textures/decal/blood/1"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -683,7 +687,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/effects/bullettracer"
+                    "Textures"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -718,6 +722,7 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/alarmbutton/alarmButton.cgf.cryasset",
             "Objects/effects/bullettracer/bullet_tracer_1.cgf.cryasset",
             "Objects/Characters/soldier1/soldier_1_Mesh.skin.cryasset",
             "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
@@ -726,8 +731,7 @@
             "Objects/Characters/soldier1/soldier1.cgf.cryasset",
             "Objects/alarm1/alarm_1.cgf.cryasset",
             "Objects/alaram1/alaram_1.cgf.cryasset",
-            "Objects/securitycamera/security-camera-base-1.cgf.cryasset",
-            "Objects/securitycamera/security-camera-1.cgf.cryasset"
+            "Objects/securitycamera/security-camera-base-1.cgf.cryasset"
         ]
     },
     "Import Skeleton": {
@@ -743,16 +747,16 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Textures/decal/blood/1/blood_decal_material_1.mtl.cryasset",
             "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
+            "textures/decal/blood/1/ak-47.mtl.cryasset",
+            "textures/decal/blood/1/blood_decal_1_material.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
             "Objects/static/fence/fence_o_1.mtl.cryasset",
             "Objects/static/fence/fence_1.mtl.cryasset",
             "Textures/terrain/mud1/terrain_material_mud_1.mtl.cryasset",
             "textures/terrain/mud1/terrain_material_mud_1.mtl.cryasset",
-            "%engine%/engineassets/materials/material_terrain_default.mtl.cryasset",
-            "%engine%/engineassets/materials/material_layers_default.mtl.cryasset",
-            "Objects/static/fence/fence.mtl.cryasset",
-            "Objects/alarm1/alarm_1.mtl.cryasset"
+            "%engine%/engineassets/materials/material_terrain_default.mtl.cryasset"
         ]
     }
 }

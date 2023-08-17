@@ -25,14 +25,14 @@ public:
 
 private:
 
-	Cry::DefaultComponents::CStaticMeshComponent* m_meshComp = nullptr;;
+	Cry::DefaultComponents::CStaticMeshComponent* m_meshComp = nullptr;
 	IEntityAudioComponent* m_audioComp = nullptr;
 
-	AIDetectionComponent* m_detectionComp = nullptr;;
+	AIDetectionComponent* m_detectionComp = nullptr;
 
-	IEntity* m_targetEntity = nullptr;;
+	IEntity* m_targetEntity = nullptr;
 
-	IEntity* m_alaramManager = nullptr;;
+	IEntity* m_alaramManager = nullptr;
 
 	//info
 	ActorInfoComponent* m_info = nullptr;

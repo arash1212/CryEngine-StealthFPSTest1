@@ -5427,8 +5427,8 @@
 			"type": "Animation",
 			"guid": "d5861a50-6837-d6bc-7dac-4037d73a76f0",
 			"name": "stepRotate_lft_180_3p",
-			"timestamp": 1652897361,
-			"files": [ "Animations/motusAnims/stepRotate/stepRotate_lft_180_3p.caf" ],
+			"timestamp": 132973673610360000,
+			"files": [ "animations/motusanims/steprotate/stepRotate_lft_180_3p.caf" ],
 			"workFiles": [ ],
 			"source": "",
 			"metadata": "Animations/motusAnims/stepRotate/stepRotate_lft_180_3p.caf.cryasset",
@@ -5967,7 +5967,7 @@
 			"type": "Level",
 			"guid": "984fcd77-e594-2b34-fbf5-414a47e0d684",
 			"name": "example",
-			"timestamp": 1691946255,
+			"timestamp": 1692261667,
 			"files": [ "Levels/example/example.level" ],
 			"workFiles": [ ],
 			"source": "",
@@ -6058,6 +6058,14 @@
 				},
 				{ "path": "%engine%/engineassets/textures/white.dds", "usageCount": 0 },
 				{
+					"path": "animations/mannequin/adb/interactablescontrollerdefinition.xml",
+					"usageCount": 0
+				},
+				{
+					"path": "animations/mannequin/adb/interactablesfragmentids.xml",
+					"usageCount": 0
+				},
+				{
 					"path": "animations/mannequin/adb/playerfragmentids.xml",
 					"usageCount": 0
 				},
@@ -6070,7 +6078,10 @@
 					"path": "animations/mannequin/adb/weaponcontrollerdefinition.xml",
 					"usageCount": 0
 				},
-				{ "path": "animations/motusanims/jog_bck_3p.caf", "usageCount": 0 },
+				{
+					"path": "animations/mannequin/adb/weaponfragmentids.xml",
+					"usageCount": 0
+				},
 				{
 					"path": "editor/resourcecache/objects/alarm1/tower_tower_shader_basecolor.dds",
 					"usageCount": 0
@@ -6096,7 +6107,15 @@
 					"usageCount": 0
 				},
 				{
-					"path": "editor/resourcecache/objects/effects/bullettracer/tracer_standard02.dds",
+					"path": "editor/resourcecache/objects/alarmbutton/material_basecolor.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/alarmbutton/material_normal.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/objects/effects/bullettracer/tracer_standard03.dds",
 					"usageCount": 0
 				},
 				{
@@ -6161,6 +6180,10 @@
 				},
 				{
 					"path": "editor/resourcecache/objects/weapons/glock/1p/pistol_glock_green_texture.dds",
+					"usageCount": 0
+				},
+				{
+					"path": "editor/resourcecache/textures/decal/blood/1/blood_decal_1.dds",
 					"usageCount": 0
 				},
 				{
@@ -6258,6 +6281,22 @@
 					"path": "objects/alarm1/tower_tower_shader_roughness.dds",
 					"usageCount": 0
 				},
+				{ "path": "objects/alarmbutton/alarmbutton.cdf", "usageCount": 0 },
+				{ "path": "objects/alarmbutton/alarmbutton.chr", "usageCount": 0 },
+				{ "path": "objects/alarmbutton/alarmbutton.mtl", "usageCount": 0 },
+				{
+					"path": "objects/alarmbutton/alarmbutton_defaultmaterial.skin",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarmbutton/alarmbutton_pushbutton.caf",
+					"usageCount": 0
+				},
+				{
+					"path": "objects/alarmbutton/material_basecolor.dds",
+					"usageCount": 0
+				},
+				{ "path": "objects/alarmbutton/material_normal.dds", "usageCount": 0 },
 				{
 					"path": "objects/characters/soldier1/soldier_1.cdf",
 					"usageCount": 0
@@ -6359,7 +6398,7 @@
 					"usageCount": 0
 				},
 				{
-					"path": "objects/effects/bullettracer/tracer_standard02.dds",
+					"path": "objects/effects/bullettracer/tracer_standard03.dds",
 					"usageCount": 0
 				},
 				{
@@ -6505,6 +6544,11 @@
 				},
 				{
 					"path": "textures/cubemaps/example/environmentprobe1_cm_diff.dds",
+					"usageCount": 0
+				},
+				{ "path": "textures/decal/blood/1/blood_decal_1.dds", "usageCount": 0 },
+				{
+					"path": "textures/decal/blood/1/blood_decal_material_1.mtl",
 					"usageCount": 0
 				},
 				{
@@ -6833,6 +6877,148 @@
 			"workFiles": [ ],
 			"source": "Objects/alarm1/tower_tower_shader_roughness.tif",
 			"metadata": "Objects/alarm1/tower_tower_shader_roughness.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Character",
+			"guid": "56409161-ac1c-a338-8a82-377cc5b5a85c",
+			"name": "alarmButton",
+			"timestamp": 1692257101,
+			"files": [ "Objects/alarmbutton/alarmButton.cdf" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/alarmbutton/alarmButton.cdf.cryasset",
+			"details": [ ],
+			"dependencies": [
+				{ "path": "Objects/alarmbutton/alarmButton.chr", "usageCount": 0 },
+				{
+					"path": "Objects/alarmbutton/alarmButton_defaultMaterial.skin",
+					"usageCount": 0
+				}
+			]
+		},
+		{
+			"type": "Mesh",
+			"guid": "08184ef6-62a7-85e3-a216-f5c056789c2e",
+			"name": "alarmbutton",
+			"timestamp": 1692257589,
+			"files": [ "Objects/alarmbutton/alarmbutton.cgf" ],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/alarmButton.fbx",
+			"metadata": "Objects/alarmbutton/alarmbutton.cgf.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "820" },
+				{ "key": "vertexCount", "value": "604" }
+			],
+			"dependencies": [
+				{ "path": "Objects/alarmbutton/alarmButton.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Skeleton",
+			"guid": "2ef9d604-62c5-60d2-ad36-280b7a422af9",
+			"name": "alarmButton",
+			"timestamp": 1692257067,
+			"files": [
+				"Objects/alarmbutton/alarmButton.chr",
+				"Objects/alarmbutton/alarmButton.chrparams"
+			],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/alarmButton.fbx",
+			"metadata": "Objects/alarmbutton/alarmButton.chr.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Material",
+			"guid": "27d454f8-3b2f-f15f-b710-dea135bc1a11",
+			"name": "alarmButton",
+			"timestamp": 1692257067,
+			"files": [ "Objects/alarmbutton/alarmButton.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Objects/alarmbutton/alarmButton.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "3" },
+				{ "key": "textureCount", "value": "4" }
+			],
+			"dependencies": [
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 2 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 2
+				},
+				{
+					"path": "Objects/alarmbutton/Material_baseColor.dds",
+					"usageCount": 1
+				},
+				{ "path": "Objects/alarmbutton/Material_normal.dds", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "SkinnedMesh",
+			"guid": "1728a85e-6aea-1eba-3049-2e20bacf332e",
+			"name": "alarmButton_defaultMaterial",
+			"timestamp": 1692257050,
+			"files": [ "Objects/alarmbutton/alarmButton_defaultMaterial.skin" ],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/alarmButton.fbx",
+			"metadata": "Objects/alarmbutton/alarmButton_defaultMaterial.skin.cryasset",
+			"details": [
+				{ "key": "16BitPrecision", "value": "false" },
+				{ "key": "bonesCount", "value": "3" },
+				{ "key": "materialCount", "value": "3" },
+				{ "key": "triangleCount", "value": "820" },
+				{ "key": "vertexCount", "value": "604" }
+			],
+			"dependencies": [
+				{ "path": "Objects/alarmbutton/alarmButton.mtl", "usageCount": 1 }
+			]
+		},
+		{
+			"type": "Animation",
+			"guid": "c0b079bc-702d-1ed6-7ff8-395929351970",
+			"name": "alarmButton_PushButton",
+			"timestamp": 1692257058,
+			"files": [ "Objects/alarmbutton/alarmButton_PushButton.caf" ],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/alarmButton.fbx",
+			"metadata": "Objects/alarmbutton/alarmButton_PushButton.caf.cryasset",
+			"details": [ ],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "7e277f81-68c6-e750-1c66-70054acd4900",
+			"name": "material_basecolor",
+			"timestamp": 1692257073,
+			"files": [ "Objects/alarmbutton/material_basecolor.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/material_basecolor.tif",
+			"metadata": "Objects/alarmbutton/material_basecolor.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "2048" },
+				{ "key": "mipCount", "value": "10" },
+				{ "key": "width", "value": "2048" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "e2dcea51-7db7-7516-3602-43252044fa98",
+			"name": "material_normal",
+			"timestamp": 1692257081,
+			"files": [ "Objects/alarmbutton/material_normal.dds" ],
+			"workFiles": [ ],
+			"source": "Objects/alarmbutton/material_normal.tif",
+			"metadata": "Objects/alarmbutton/material_normal.dds.cryasset",
 			"details": [
 				{ "key": "height", "value": "2048" },
 				{ "key": "mipCount", "value": "10" },
@@ -8555,6 +8741,49 @@
 				{ "key": "width", "value": "192" }
 			],
 			"dependencies": [ ]
+		},
+		{
+			"type": "Texture",
+			"guid": "38aad7a7-2586-9f4f-fa6c-ef3039f57103",
+			"name": "blood_decal_1",
+			"timestamp": 1692185670,
+			"files": [ "Textures/decal/blood/1/blood_decal_1.dds" ],
+			"workFiles": [ ],
+			"source": "Textures/decal/blood/1/blood_decal_1.tif",
+			"metadata": "Textures/decal/blood/1/blood_decal_1.dds.cryasset",
+			"details": [
+				{ "key": "height", "value": "512" },
+				{ "key": "mipCount", "value": "8" },
+				{ "key": "width", "value": "512" }
+			],
+			"dependencies": [ ]
+		},
+		{
+			"type": "Material",
+			"guid": "f07bbe9d-f12f-c579-cfd1-5a70b212b9fb",
+			"name": "blood_decal_material_1",
+			"timestamp": 1692215787,
+			"files": [ "Textures/decal/blood/1/blood_decal_material_1.mtl" ],
+			"workFiles": [ ],
+			"source": "",
+			"metadata": "Textures/decal/blood/1/blood_decal_material_1.mtl.cryasset",
+			"details": [
+				{ "key": "subMaterialCount", "value": "2" },
+				{ "key": "textureCount", "value": "5" }
+			],
+			"dependencies": [
+				{ "path": "Textures/decal/blood/1/blood_decal_1.dds", "usageCount": 1 },
+				{
+					"path": "Textures/decal/blood/1/ak47_normal_opengl.dds",
+					"usageCount": 1
+				},
+				{ "path": "Textures/decal/blood/1/ak47_height.dds", "usageCount": 1 },
+				{ "path": "%ENGINE%/EngineAssets/Textures/white.dds", "usageCount": 1 },
+				{
+					"path": "%ENGINE%/EngineAssets/Textures/white_ddn.dds",
+					"usageCount": 1
+				}
+			]
 		},
 		{
 			"type": "Texture",

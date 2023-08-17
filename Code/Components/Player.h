@@ -119,6 +119,8 @@ private:
 	f32 m_timeBetweenPlayingGettingHitSound = 0.4f;
 	f32 m_gettingHitSoundTimePassed = 0.4f;
 
+	//interactble
+	IEntity* m_currentInteractbleEntity = nullptr;
 
 private:
 	//
@@ -148,6 +150,9 @@ private:
 	void HideHealthbar();
 	void ShowHealthbar();
 	void UpdateHealthbar();
+
+	//interact
+	void InteractableCheckRayast();
 
 public:
 	Vec2 GetRotationDelta();
