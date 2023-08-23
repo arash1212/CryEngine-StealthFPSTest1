@@ -327,8 +327,8 @@ void IWeaponComponent::UpdateAnimation()
 
 void IWeaponComponent::Sway(f32 mouseX, f32 mouseY)
 {
-	mouseX *= -0.01f;
-	mouseY *= 0.004f;
+	mouseX *= -0.03f;
+	mouseY *= 0.012f;
 
 	Quat rotationX = Quat::CreateRotationX(mouseX);
 	Quat rotationY = Quat::CreateRotationY(mouseY);

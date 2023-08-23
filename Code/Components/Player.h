@@ -119,6 +119,10 @@ private:
 	f32 m_timeBetweenPlayingGettingHitSound = 0.4f;
 	f32 m_gettingHitSoundTimePassed = 0.4f;
 
+	//sway
+	float m_mouseX = 0.f;
+	float m_mouseY = 0.f;
+
 	//interactble
 	IEntity* m_currentInteractbleEntity = nullptr;
 

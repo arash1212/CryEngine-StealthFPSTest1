@@ -181,6 +181,7 @@ void PlayerComponent::InitInputs()
 
 	m_inputComp->RegisterAction("player", "mouseX", [this](int activationMode, float value)
 		{
+			m_mouseX = value;
 			m_rotationDelta.x = -value;
 		}
 	);
@@ -188,6 +189,7 @@ void PlayerComponent::InitInputs()
 
 	m_inputComp->RegisterAction("player", "mouseY", [this](int activationMode, float value)
 		{
+			m_mouseY = value;
 			m_rotationDelta.y = -value;
 		}
 	);
@@ -374,7 +376,7 @@ void PlayerComponent::UpdateCrosshair()
 
 Vec2 PlayerComponent::GetRotationDelta()
 {
-	return m_rotationDelta;
+	return Vec2(m_mouseX, m_mouseY);
 }
 
 void PlayerComponent::AddRecoil(Vec3 Amount)
