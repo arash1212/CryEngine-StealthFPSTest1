@@ -152,7 +152,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			//patrol
 			if (!bShouldCheckLastCameraReportedPos && !m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
 				if (m_detectionComp->GetDetectionState() < EDetectionState::CAUTIOUS) {
-					//m_movePosition = m_aiControllerComp->Patrol(m_patrolPathName);
+					m_movePosition = m_aiControllerComp->Patrol(m_patrolPathName);
 				}
 				else {
 					m_movePosition = m_pEntity->GetWorldPos();

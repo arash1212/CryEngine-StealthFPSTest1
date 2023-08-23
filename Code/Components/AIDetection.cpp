@@ -147,7 +147,7 @@ bool AIDetectionComponent::IsVisible(IEntity* target)
 				if (pd) {
 					pd->Begin("RaycastDetectionComp", true);
 					//pd->AddSphere(hits[0].pt, 0.2f, ColorF(1, 0, 0), 2);
-					pd->AddSphere(hits[0].pt, 0.3f, ColorF(0, 1, 0), 2);
+					//pd->AddSphere(hits[0].pt, 0.3f, ColorF(0, 1, 0), 2);
 					pd->AddLine(origin, hits[i].pt, ColorF(1, 0, 0), 1);
 				}
 

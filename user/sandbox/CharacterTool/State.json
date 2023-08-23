@@ -2,7 +2,7 @@
 	"system": {
 		"document": {
 			"playbackOptions": {
-				"loopAnimation": true,
+				"loopAnimation": false,
 				"restartOnAnimationSelection": true,
 				"playFromTheStart": false,
 				"firstFrameAtEndOfTimeline": false,
@@ -80,7 +80,7 @@
 					"bottomColor": { "r": 32, "g": 32, "b": 32, "a": 255 }
 				}
 			},
-			"playbackTime": 1.54617
+			"playbackTime": 0.26667
 		}
 	},
 	"dockWidgetManager": {
@@ -105,15 +105,47 @@
 						"expandedItems": [
 							"Characters",
 							"Skeletons",
-							"Animations",
+							"Animations (objects/characters/soldier1/)",
 							"Compression (Animations/)",
 							"Compression (Animations/)|Compression Presets",
 							"Compression (Animations/)|DBA Table",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Idle",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Backward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Forward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Left",
+							"Animations (objects/characters/soldier1/)|soldier_1_Normal_Walk_Right",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Fire",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Fire_2",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Aim_Down_001",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Aim_Forward_001",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Aim_Up",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Backward",
+							"Animations (objects/characters/soldier1/)|soldier_1_rifle_Aim_Run_Forward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Idle",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Left",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Aim_Run_Right",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Cover_Sit",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Idle",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Walk_Backward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Walk_Forward",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Crouch_Walk_Right",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Hit_Reaction_1",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Hit_Reaction_2",
+							"Animations (objects/characters/soldier1/)|soldier_1_Rifle_Kick",
 							"Skeletons|Objects",
-							"Characters|Objects"
+							"Characters|Objects",
+							"Characters|Objects|Characters",
+							"Characters|Objects|Characters|soldier1"
 						],
-						"selectedItems": [ ],
-						"currentItem": "",
+						"selectedItems": [
+							"Characters|Objects|Characters|soldier1|soldier_1.cdf",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1",
+							"Characters|Objects|Characters|soldier1"
+						],
+						"currentItem": "Characters|Objects|Characters|soldier1|soldier_1.cdf",
 						"sectionsHidden": [ 1, 2, 3, 4, 5 ],
 						"sectionsVisible": [ 0 ]
 					}
@@ -123,16 +155,22 @@
 	},
 	"displayPanel": {
 		"propertyTree": {
-			"focusedRow": [ 6 ],
-			"selection": [ [ 6 ] ],
-			"expanded": [ 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+			"focusedRow": [ 7, 0 ],
+			"selection": [ [ 7, 0 ] ],
+			"expanded": [
+				0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
+			]
 		}
 	},
 	"displayParameterSplittersWidths": [ 609, 223 ],
 	"displayOptionsVisible": true,
 	"playbackPanel": { "timeUnits": "seconds" },
 	"propertiesPanel": {
-		"propertyTree": { "focusedRow": [ ], "selection": [ ], "expanded": [ ] },
+		"propertyTree": {
+			"focusedRow": [ 6, 1 ],
+			"selection": [ [ 6, 1 ] ],
+			"expanded": [ 1, 1, 1, 1, 1, 1, 1, 0, 0, 1 ]
+		},
 		"outlineMode": "oneTree"
 	},
 	"blendSpacePreview": {
@@ -167,7 +205,7 @@
 		0, 111, 0, 114, 0, 101, 0, 114, 0, 80, 0, 97, 0, 110, 0, 101, 0, 108, 0, 45, 0, 48, 1, 0, 0, 0, 0, 0, 0, 3, 118, 0,
 		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 69, 0, 0, 2, 195, 252, 2, 0, 0, 0, 3, 251, 0, 0, 0, 32, 0, 115,
 		0, 99, 0, 101, 0, 110, 0, 101, 0, 95, 0, 112, 0, 97, 0, 114, 0, 97, 0, 109, 0, 101, 0, 116, 0, 101, 0, 114, 0, 115, 1, 0,
-		0, 0, 0, 0, 0, 0, 237, 0, 0, 0, 23, 0, 255, 255, 255, 252, 0, 0, 0, 243, 0, 0, 1, 208, 0, 0, 1, 3, 1, 0, 0, 35,
+		0, 0, 0, 0, 0, 1, 166, 0, 0, 0, 23, 0, 255, 255, 255, 252, 0, 0, 1, 172, 0, 0, 1, 23, 0, 0, 1, 3, 1, 0, 0, 35,
 		250, 0, 0, 0, 0, 1, 0, 0, 0, 2, 251, 0, 0, 0, 20, 0, 112, 0, 114, 0, 111, 0, 112, 0, 101, 0, 114, 0, 116, 0, 105, 0,
 		101, 0, 115, 1, 0, 0, 6, 51, 0, 0, 1, 69, 0, 0, 0, 152, 0, 255, 255, 255, 251, 0, 0, 0, 38, 0, 98, 0, 108, 0, 101, 0,
 		110, 0, 100, 0, 95, 0, 115, 0, 112, 0, 97, 0, 99, 0, 101, 0, 95, 0, 112, 0, 114, 0, 101, 0, 118, 0, 105, 0, 101, 0, 119, 1,
