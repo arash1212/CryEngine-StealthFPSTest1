@@ -77,6 +77,7 @@ private:
 	//animations
 	FragmentID m_idleFragmentId;
 	FragmentID m_cautiousFragmentId;
+	FragmentID m_runFragmentId;
 	FragmentID m_combatFragmentId;
 	FragmentID m_closeAttackFragmentId;
 	FragmentID m_activeFragmentId;
@@ -99,6 +100,7 @@ private:
 	f32 m_timeBetweenCheckingCover = 0.7f;
 	f32 m_checkingCoverTimePassed = 1.f;
 
+	bool bIsShooting = false;
 
 	//patrol
 	Schematyc::CSharedString m_patrolPathName = "aiPath-1";

@@ -30,7 +30,7 @@ private:
 	IEntity* m_currentTarget = nullptr;
 
 	f32 m_detectionHeight = 1.8f;
-	f32 m_targetNormalHeight = 0.0f;
+	f32 m_targetNormalHeight = 0.3f;
 	f32 m_targetCrouchHeight = 0.71f;
 
 	f32 m_maxDetectionAmount = DEFAULT_MAX_DETECTION_AMOUNT;

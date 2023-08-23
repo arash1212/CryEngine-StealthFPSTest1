@@ -63,6 +63,7 @@ void Soldier1Component::Initialize()
 	m_reactToHit1FragmentId = m_animationComp->GetFragmentId("ReactToHit1");
 	m_reactToHit2FragmentId = m_animationComp->GetFragmentId("ReactToHit2");
 	m_takeCoverSitFragmentId = m_animationComp->GetFragmentId("TakeCoverSit");
+	m_runFragmentId = m_animationComp->GetFragmentId("Run");
 
 	m_closeAttackAction = new TAction<SAnimationContext>(30U, m_closeAttackFragmentId);
 	m_reactToHit1Action = new TAction<SAnimationContext>(30U, m_reactToHit1FragmentId);
@@ -151,7 +152,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 			//patrol
 			if (!bShouldCheckLastCameraReportedPos && !m_detectionComp->IsTargetFound() && !m_patrolPathName.empty() && m_patrolPathName != "") {
 				if (m_detectionComp->GetDetectionState() < EDetectionState::CAUTIOUS) {
-					m_movePosition = m_aiControllerComp->Patrol(m_patrolPathName);
+					//m_movePosition = m_aiControllerComp->Patrol(m_patrolPathName);
 				}
 				else {
 					m_movePosition = m_pEntity->GetWorldPos();
@@ -218,6 +219,20 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 
 			//aim look 
 			if (m_targetEntity) {
+				Vec3 dir = m_targetEntity->GetWorldPos() - m_pEntity->GetWorldPos();
+				f32 dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
+				CryLog("target degree : %f ", RAD2DEG(crymath::acos(dot)));
+
+				//
+			//	ICharacterInstance* characterInstance = m_animationComp->GetCharacter();
+				//QuatT t = m_animationComp->GetCharacter()->GetISkeletonPose()->GetAbsJointByID(10);
+				//t.q = Quat::CreateRotationXYZ(Ang3(0, 0, 0));
+
+				//SAnimationPoseModifierParams params;
+			//	IAnimationPoseBlenderDir* poseBlender = m_animationComp->GetCharacter()->GetISkeletonPose()->GetIPoseBlenderLook();
+				//poseBlender->Execute(params);
+
+				/*
 				m_animationComp->GetCharacter()->GetISkeletonPose()->GetAbsJointByID(10);
 				IAnimationPoseBlenderDir* animDir = m_animationComp->GetCharacter()->GetISkeletonPose()->GetIPoseBlenderLook();
 				//CryLog("rot y : %f", m_animationComp->GetCharacter()->GetISkeletonPose()->GetAbsJointByID(10).q.v.y);
@@ -232,6 +247,7 @@ void Soldier1Component::ProcessEvent(const SEntityEvent& event)
 				}else{
 					//CryLog("blender null");
 				}
+				*/
 			}
 		}
 	//	}
@@ -289,6 +305,20 @@ void Soldier1Component::UpdateAnimation()
 	else if (m_stateComp->GetState() == EActorState::RUNNING) {
 		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TravelSpeed, 3.1f);
 	}
+
+	//todo :
+	if (m_targetEntity) {
+		Vec3 targetPos = m_targetEntity->GetWorldPos();
+		Vec3 currentPos = m_pEntity->GetWorldPos();
+		Vec3 dir = targetPos - currentPos;
+		f32 dot = m_pEntity->GetForwardDir().normalized().dot(dir.normalized());
+
+		int32 uInv = 1;
+		if (targetPos.z < currentPos.z) {
+			uInv = -1;
+		}
+		m_animationComp->SetMotionParameter(EMotionParamID::eMotionParamID_TurnAngle, RAD2DEG(crymath::acos(dot) * uInv));
+	}
 	
 
 	int32 inv = rightDot < 0 ? 1 : -1;
@@ -304,7 +334,12 @@ void Soldier1Component::UpdateAnimation()
 	}
 	else if (m_detectionComp->GetDetectionState() == EDetectionState::COMBAT) {
 	//	if (CanUseWeapon() || m_aiControllerComp->GetCharacterController()->IsWalking()) {
+		if (bIsShooting) {
 			currentFragmentId = m_combatFragmentId;
+		}
+		else {
+			currentFragmentId = m_runFragmentId;
+		}
 	//	}
 	//	else if (m_SittingInCoverTimePassed >= m_timeBetweenSittignInCover) {
 	//		currentFragmentId = m_takeCoverSitFragmentId;
@@ -352,6 +387,7 @@ void Soldier1Component::UpdateLastTargetPositionEntity()
 void Soldier1Component::Attack()
 {
 	if (!m_targetEntity) {
+		bIsShooting = false;
 		return;
 	}
 
@@ -362,12 +398,13 @@ void Soldier1Component::Attack()
 		if (distanceTotarget > m_maxAttackDistance || !m_detectionComp->IsTargetFound()) {
 			m_movePosition = m_lastTargetPosition->GetWorldPos();
 		}
-		else {
-			m_aiControllerComp->LookAt(m_lastTargetPosition->GetWorldPos());
+		else {//todo : last target pos
+			m_aiControllerComp->LookAt(m_targetEntity->GetWorldPos());
 			if (distanceTotarget > m_closeAttackDistance) {
 
 				//fire weapon if target is visible
 				if (m_detectionComp->IsVisible(m_targetEntity) && CanUseWeapon()) {
+					bIsShooting = true;
 					if (m_currentlySelectedWeapon->Fire(m_targetEntity)) {
 						m_SittingInCoverTimePassed = 0.f;
 
@@ -377,6 +414,9 @@ void Soldier1Component::Attack()
 							m_coolDownTimePassed = 0;
 						}
 					}
+				}
+				else {
+					bIsShooting = false;
 				}
 
 				//m_checkingCoverTimePassed > m_timeBetweenCheckingCover && ! 
@@ -413,6 +453,7 @@ void Soldier1Component::Attack()
 			}
 
 			else {
+				bIsShooting = false;
 				//close attack (kick)
 				f32 distanceToTarget = m_pEntity->GetWorldPos().GetDistance(m_targetEntity->GetWorldPos());
 				if (distanceToTarget <= 2 && m_detectionComp->IsVisible(m_targetEntity)) {
@@ -438,6 +479,9 @@ void Soldier1Component::Attack()
 		}
 
 
+	}
+	else {
+		bIsShooting = false;
 	}
 }
 

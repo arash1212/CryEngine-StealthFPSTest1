@@ -190,10 +190,10 @@ bool IWeaponComponent::Fire(IEntity* target)
 
 			Vec3 dir = targetPos - m_muzzleAttachment->GetAttWorldAbsolute().t;
 
-			CheckHit(m_pEntity->GetWorldPos() + p.normalized() * 1.3f, dir, shooterror * 5);
+			CheckHit(m_pEntity->GetWorldPos() + p.normalized() * 0.39f, dir, shooterror * 5);
 
 			if (GetRandomInt(0, 10) % 2 == 0) {
-				SpawnBulletTracer(shooterror, m_pEntity->GetWorldPos() + p.normalized() * 1.3f, Quat::CreateRotationVDir(dir.normalized()));
+				SpawnBulletTracer(ZERO, m_pEntity->GetWorldPos() + p.normalized() * 0.39f, Quat::CreateRotationVDir(dir.normalized()));
 			}
 		}
 

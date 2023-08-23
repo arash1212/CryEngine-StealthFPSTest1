@@ -236,7 +236,7 @@ Vec3 AIControllerComponent::GetRandomPointOnNavmesh(float MaxDistance, IEntity* 
 
 	//old
 	//Vec3 resultPos = closestTriangle.position.GetVec3();
-	
+
 	//new 
 	int32 max = resultPositions.size();
 	int32 min = 0;

@@ -9,8 +9,8 @@
  <VerticalSplitter Row0="-1"/>
  <HorizontalSplitter Col0="-1"/>
  <FragmentSplitter Row0="400"/>
- <FragmentPane Width="459" Height="646"/>
+ <FragmentPane Width="459" Height="645"/>
  <SubFoldersCheckbox Value="1"/>
  <EmptyFoldersCheckbox Value="1"/>
- <Window Width="1315" Height="719"/>
+ <Window Width="1315" Height="718"/>
 </MannequinLayout>

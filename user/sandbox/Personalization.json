@@ -24,7 +24,8 @@
             "Textures/decal/blood/1",
             "Objects/alarmbutton",
             "Objects/static/cover",
-            "Objects/static/test"
+            "Objects/static/test",
+            "Objects/tower"
         ]
     },
     "CAssetPicker": {
@@ -724,16 +725,16 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/tower/tower_1.cgf.cryasset",
+            "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/static/test/test_prob_2_mesh.cgf.cryasset",
             "Objects/static/test/test_prob_1_mesh.cgf.cryasset",
             "Objects/static/cover/cover_test_1_mesh.cgf.cryasset",
             "Objects/alarmbutton/alarmButton.cgf.cryasset",
             "Objects/effects/bullettracer/bullet_tracer_1.cgf.cryasset",
             "Objects/Characters/soldier1/soldier_1_Mesh.skin.cryasset",
-            "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/static/fence/fence_o_1.cgf.cryasset",
-            "Objects/static/fence/fence_1.cgf.cryasset",
-            "Objects/Characters/soldier1/soldier1.cgf.cryasset"
+            "Objects/static/fence/fence_1.cgf.cryasset"
         ]
     },
     "Import Skeleton": {
@@ -749,6 +750,7 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/tower/tower_1.mtl.cryasset",
             "Objects/static/test/test_prob_2_mesh.mtl.cryasset",
             "Objects/static/test/test_prob_1_mesh.mtl.cryasset",
             "Objects/static/cover/cover_test_1_mesh.mtl.cryasset",
@@ -757,8 +759,7 @@
             "textures/decal/blood/1/ak-47.mtl.cryasset",
             "textures/decal/blood/1/blood_decal_1_material.mtl.cryasset",
             "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
-            "Objects/static/fence/fence_o_1.mtl.cryasset",
-            "Objects/static/fence/fence_1.mtl.cryasset"
+            "Objects/static/fence/fence_o_1.mtl.cryasset"
         ]
     }
 }

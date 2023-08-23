@@ -1,0 +1,14 @@
+<AssetMetadata version="0" type="Mesh" guid="d57f7900-e03b-a861-9ab2-08c8fdee5fbc" source="tower_1.fbx">
+ <Files>
+  <File path="tmp_meshImporter_IvmAqB.cgf"/>
+ </Files>
+ <Details>
+  <Detail name="materialCount">6</Detail>
+  <Detail name="triangleCount">2732</Detail>
+  <Detail name="vertexCount">4528</Detail>
+  <Detail name="16BitPrecision">false</Detail>
+ </Details>
+ <Dependencies>
+  <Path usageCount="1">Objects/tower/tower_1.mtl</Path>
+ </Dependencies>
+</AssetMetadata>
