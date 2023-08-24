@@ -67,7 +67,7 @@ protected:
 	IActionPtr m_fireAction;
 
 	//sway
-	float m_swaySpeed = 1.5f;
+	float m_swaySpeed = 1.9f;
 	Quat m_defaultAnimationCompRotation = IDENTITY;
 	Vec3 m_defaultAnimationCompPosition = ZERO;
 

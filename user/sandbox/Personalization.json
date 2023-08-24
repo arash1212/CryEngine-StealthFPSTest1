@@ -1,6 +1,6 @@
 {
     "Asset Browser": {
-        "RecentImportPath": "C:/Users/Arash/Desktop/StealthFPS Assets/fence/textures/"
+        "RecentImportPath": "C:/Users/Arash/Desktop/StealthFPS Assets/Weapons/glock/1p/"
     },
     "AssetFolderModel": {
         "AddedFolders": [
@@ -182,7 +182,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Textures/decal/blood/1"
+                    "Objects/effects/muzzleflash"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -690,7 +690,7 @@
             "foldersSplitter": "AAAA/wAAAAEAAAACAAABAAAAAwAB/////wEAAAABAA==",
             "foldersView": {
                 "selected": [
-                    "Objects/static/cover"
+                    "%engine%"
                 ]
             },
             "mainViewSplitter": "AAAA/wAAAAEAAAACAAAAOgAAAQAB/////wEAAAABAA==",
@@ -712,7 +712,8 @@
             "/Animations/Mannequin/Preview",
             "/Objects/effects/muzzleflash",
             "/Animations",
-            "/Objects/Weapons/ak47/3p"
+            "/Objects/Weapons/ak47/3p",
+            "/Objects/static/test"
         ]
     },
     "Environment Editor": {
@@ -725,16 +726,16 @@
     },
     "Import Mesh": {
         "Recent Files": [
+            "Objects/effects/muzzleflash/muzzleflash2.cgf.cryasset",
+            "Objects/effects/muzzleflash/muzzleflash3.cgf.cryasset",
+            "Objects/effects/muzzleflash/muzzleflash1.cgf.cryasset",
             "Objects/tower/tower_1.cgf.cryasset",
             "Objects/Characters/soldier1/soldier_1.cgf.cryasset",
             "Objects/static/test/test_prob_2_mesh.cgf.cryasset",
             "Objects/static/test/test_prob_1_mesh.cgf.cryasset",
             "Objects/static/cover/cover_test_1_mesh.cgf.cryasset",
             "Objects/alarmbutton/alarmButton.cgf.cryasset",
-            "Objects/effects/bullettracer/bullet_tracer_1.cgf.cryasset",
-            "Objects/Characters/soldier1/soldier_1_Mesh.skin.cryasset",
-            "Objects/static/fence/fence_o_1.cgf.cryasset",
-            "Objects/static/fence/fence_1.cgf.cryasset"
+            "Objects/effects/bullettracer/bullet_tracer_1.cgf.cryasset"
         ]
     },
     "Import Skeleton": {
@@ -750,16 +751,16 @@
     },
     "Material Editor": {
         "Recent Files": [
+            "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
+            "Objects/effects/muzzleflash/muzzleflash3.mtl.cryasset",
+            "Objects/effects/muzzleflash/muzzleflash2.mtl.cryasset",
+            "Objects/effects/muzzleflash/muzzleflash1.mtl.cryasset",
+            "Textures/decal/blood/1/blood_decal_material_1.mtl.cryasset",
             "Objects/tower/tower_1.mtl.cryasset",
             "Objects/static/test/test_prob_2_mesh.mtl.cryasset",
             "Objects/static/test/test_prob_1_mesh.mtl.cryasset",
             "Objects/static/cover/cover_test_1_mesh.mtl.cryasset",
-            "Textures/decal/blood/1/blood_decal_material_1.mtl.cryasset",
-            "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset",
-            "textures/decal/blood/1/ak-47.mtl.cryasset",
-            "textures/decal/blood/1/blood_decal_1_material.mtl.cryasset",
-            "Objects/Weapons/glock/1p/pistol_glock.mtl.cryasset",
-            "Objects/static/fence/fence_o_1.mtl.cryasset"
+            "Objects/effects/bullettracer/bullet_tracer_1.mtl.cryasset"
         ]
     }
 }

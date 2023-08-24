@@ -327,8 +327,8 @@ void IWeaponComponent::UpdateAnimation()
 
 void IWeaponComponent::Sway(f32 mouseX, f32 mouseY)
 {
-	mouseX *= -0.03f;
-	mouseY *= 0.012f;
+	mouseX *= -0.01f;
+	mouseY *= 0.006f;
 
 	Quat rotationX = Quat::CreateRotationX(mouseX);
 	Quat rotationY = Quat::CreateRotationY(mouseY);
@@ -485,7 +485,7 @@ void IWeaponComponent::SpawnBloodDecalAt(ray_hit hit)
 
 	Cry::DefaultComponents::CDecalComponent* decal = decalEntity->CreateComponent<Cry::DefaultComponents::CDecalComponent>();
 
-	decal->SetTransformMatrix(Matrix34::Create(Vec3(1), IDENTITY, ZERO));
+	decal->SetTransformMatrix(Matrix34::Create(Vec3(0.3f), IDENTITY, ZERO));
 	decal->SetMaterialFileName("Textures/decal/blood/1/blood_decal_material_1.mtl");
 	decal->EnableAutomaticSpawn(true);
 	decal->SetDepth(4.f);
